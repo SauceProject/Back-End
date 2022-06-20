@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/ITI.Sauce/ITI.Sauce.MVC/obj/Debug/net6.0
+/ITI.Sauce/ITI.Sauce.MVC/obj
+/ITI.Sauce/.vs/ITI.Sauce/v17
