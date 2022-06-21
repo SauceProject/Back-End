@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Final project\Back\finalProjectViews\ITI.Sauce.Models\ITI.Sauce.Models\ITI.Sauce.Models.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -19,7 +19,8 @@ namespace ITI.Library.Repositories
             Set = dbContext.Set<T>();
         }
 
-        public IQueryable<T> Get(Expression<Func<T, bool>> filter = null, string orderBy = null, bool isAscending = false
+        public IQueryable<T> Get(Expression<Func<T, bool>> filter = null, 
+            string orderBy = null, bool isAscending = false
                     , int pageIndex = 1, int pageSize = 20
             , params string[] includProps)
         {

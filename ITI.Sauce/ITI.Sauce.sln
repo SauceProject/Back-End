@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Models", "..\..\Final project\Back\finalProjectViews\ITI.Sauce.Models\ITI.Sauce.Models\ITI.Sauce.Models.csproj", "{22F6B7CF-F7D1-486F-8EE4-BA98050DB9F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.sauce.cs", "ITI.sauce.cs\ITI.sauce.cs.csproj", "{C595517A-9BE6-46DC-B588-36084BDA2FA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.sauce.MVC", "ITI.sauce.cs\ITI.sauce.MVC.csproj", "{C595517A-9BE6-46DC-B588-36084BDA2FA6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Sauce.Repositorie", "ITI.Sauce.Repositorie\ITI.Sauce.Repositorie.csproj", "{D1956089-E755-4DCA-BE8D-F7586B594588}"
 EndProject

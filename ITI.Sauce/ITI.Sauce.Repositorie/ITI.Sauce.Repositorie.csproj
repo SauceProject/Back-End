@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Abp" Version="7.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\Final project\Back\finalProjectViews\ITI.Sauce.Models\ITI.Sauce.Models\ITI.Sauce.Models.csproj" />
+    <ProjectReference Include="..\ITI.Sauce.ViewModels\ITI.Sauce.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
