@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
-using ITI.Library.ViewModels.Shared;
 using ITI.Sauce.Models;
+using ITI.Sauce.ViewModels.Shared;
 using ITI.Sauce.ViewModels.Vendor;
 
-namespace ITI.Library.Repositories
+namespace ITI.Sauce.Repositories
 {
     public class VendorRepository
          : GeneralRepository<Vendor>
