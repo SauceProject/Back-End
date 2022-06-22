@@ -1,0 +1,20 @@
+﻿@using ITI.Sauce.ViewModels.Recipe
+@using ITI.Sauce.ViewModels.Shared;
+@model PaginingViewModel<List<RecipeViewModel>>;
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recipes</title>
+    </head>
+    <body>
+    <h1>Recipes</h1>
+    @foreach (var i in Model.Data)
+    {
+
+        <h2>Recipe: @i.NameEN</h2>
+        <p> Category: @i.CategoryName</p>
+            
+    }
+            
+    </body>
+</html>
