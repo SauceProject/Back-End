@@ -1,0 +1,13 @@
+﻿@using ITI.Sauce.ViewModels.Shared
+@using ITI.Sauce.ViewModel
+@model PaginingViewModel<List<UsersViewModel>>
+
+@foreach (var U in Model.Data)
+{
+	<h1>@U.UserName</h1>
+	<h2>@U.phone</h2>
+	<h3>@U.registerDate</h3>
+	<h4>@U.NameEN</h4>
+	<h4>@U.NameAR</h4>
+
+}
