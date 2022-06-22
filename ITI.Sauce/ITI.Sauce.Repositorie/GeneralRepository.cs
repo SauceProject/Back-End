@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ITI.Sauce.Models;
 
-namespace ITI.Library.Repositories
+namespace ITI.Sauce.Repositories
 {
     public class GeneralRepository<T> where T : class
     {
@@ -21,7 +21,7 @@ namespace ITI.Library.Repositories
 
         public IQueryable<T> Get(Expression<Func<T, bool>> filter = null, 
             string orderBy = null, bool isAscending = false
-                    , int pageIndex = 1, int pageSize = 20
+                    , int pageIndex = 1, int pageSize = 20 
             , params string[] includProps)
         {
             var query = Set.AsQueryable();

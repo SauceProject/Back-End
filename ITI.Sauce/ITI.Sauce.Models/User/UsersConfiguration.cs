@@ -21,8 +21,8 @@ namespace ITI.Sauce.Models
             builder.Property(U => U.phone).HasMaxLength(20).IsRequired();
             builder.Property(U => U.NameEN).HasMaxLength(200).IsRequired();
             builder.Property(U => U.NameAR).HasMaxLength(200).IsRequired();
-            builder.Property(U => U.registerDate).IsRequired();
-            builder.Property(U => U.IsDelete).IsRequired();
+            builder.Property(U => U.registerDate).HasDefaultValue(DateTime.Now);
+            builder.Property(U => U.IsDelete).HasDefaultValue(false);
 
 
 

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.Library.Repositories
+namespace ITI.Sauce.Repositories
 {
     public static class QueryableExtensions
     {
