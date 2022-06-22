@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
-using ITI.Sauce.ViewModels.Shared;
 using ITI.Sauce.Models;
+using ITI.Sauce.ViewModels.Shared;
 using ITI.Sauce.ViewModels.Vendor;
 
 namespace ITI.Sauce.Repositories
