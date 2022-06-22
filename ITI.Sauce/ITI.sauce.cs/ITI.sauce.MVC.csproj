@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\ITI.Sauce.Repositorie\ITI.Sauce.Repositorie.csproj" />
   </ItemGroup>
 

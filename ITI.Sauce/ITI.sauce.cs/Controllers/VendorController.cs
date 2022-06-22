@@ -12,17 +12,17 @@ namespace ITI.sauce.MVC.Controllers
         {
             this.pubRepo = new VendorRepository();
         }
-        public IActionResult Index(int id = 0,
-                string name = "", string phone = "",
+        public IActionResult Get(int id = 0,
+                string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
         {
             var data =
-            pubRepo.Get(id, name, phone, orderyBy,
+            pubRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
-        public ViewResult GetById(int id)
+        public IActionResult GetById(int id)
         {
             var data =
            pubRepo.Get(id);

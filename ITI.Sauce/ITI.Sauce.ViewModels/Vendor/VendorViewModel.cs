@@ -18,7 +18,6 @@ namespace ITI.Sauce.ViewModels.Vendor
         public string NameAR { get; set; }
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
-        public List<Vendor_MemberShip> Vendor_MemberShips { get; set; }
-        public List<Restaurant> Restaurants { get; set; }
+     
     }
 }

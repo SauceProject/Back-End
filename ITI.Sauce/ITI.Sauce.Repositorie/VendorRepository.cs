@@ -13,7 +13,8 @@ namespace ITI.Sauce.Repositories
     public class VendorRepository
          : GeneralRepository<Vendor>
     {
-        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0, string name = "", string phone = "",
+        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0, 
+            string nameEN = "",string nameAR="",string Email="", string phone = "",
                 string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
@@ -22,8 +23,12 @@ namespace ITI.Sauce.Repositories
             var oldFiler = filter;
             if (id > 0)
                 filter = filter.Or(V => V.ID == id);
-            if (!string.IsNullOrEmpty(name))
-                filter = filter.Or(V => V.NameEN.Contains(name));
+            if (!string.IsNullOrEmpty(nameEN))
+                filter = filter.Or(V => V.NameEN.Contains(nameEN));
+            if (!string.IsNullOrEmpty(nameAR))
+                filter = filter.Or(V => V.NameAR.Contains(nameAR));
+            if (!string.IsNullOrEmpty(Email))
+                filter = filter.Or(V => V.Email.Contains(Email));
             if (!string.IsNullOrEmpty(phone))
                 filter = filter.Or(V => V.phone.Any(i => i.Equals(phone)));
 
@@ -33,13 +38,17 @@ namespace ITI.Sauce.Repositories
                 );
 
             var result =
-            query.Select(i => new VendorViewModel
+            query.Select(V => new VendorViewModel
             {
-                ID = i.ID,
-                NameEN = i.NameEN,
-                Email  =i.Email,
-                IsDeleted = i.IsDeleted,
-                phone=i.phone,
+                ID = V.ID,
+                UserName=V.UserName,
+                Password=V.Password,
+                NameEN = V.NameEN,
+                NameAR=V.NameAR,
+                Email  =V.Email,
+                IsDeleted = V.IsDeleted,
+                phone = V.phone,
+                
             });
 
             PaginingViewModel<List<VendorViewModel>>
