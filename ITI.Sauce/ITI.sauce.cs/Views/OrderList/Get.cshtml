@@ -1,0 +1,15 @@
+﻿
+@using ITI.Sauce.ViewModels
+@using ITI.Sauce.ViewModels.OrderList
+@using ITI.Sauce.ViewModels.Shared
+@model PaginingViewModel<List<OrderListViewModel>>
+
+    @foreach(var o in Model.Data)
+{
+    <h1>@o.OrderListID</h1>
+    <h1>@o.OrderListQty</h1>
+   foreach(var id in Model.Data)
+    {
+        <h1>@o.OrderListQty</h1>
+    }
+}
