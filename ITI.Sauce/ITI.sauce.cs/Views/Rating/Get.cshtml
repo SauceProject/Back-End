@@ -1,0 +1,14 @@
+﻿
+
+@using ITI.Sauce.ViewModels.Shared
+@using ITI.Sauce.ViewModels
+@using ITI.Sauce.ViewModels.Rating
+@model PaginingViewModel<List<RatingViewModel>>
+
+
+@foreach(var V in Model.Data)
+{
+    <h1>@V.RatingID</h1>
+    <h1>@V.RatingValue</h1>
+
+}

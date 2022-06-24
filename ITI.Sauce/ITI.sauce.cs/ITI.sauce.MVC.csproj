@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Content\Images\" />
+    <Folder Include="Content\lib\" />
     <Folder Include="Views\Vendor\" />
   </ItemGroup>
 

@@ -1,0 +1,114 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!---------------STATISTICS------------------->
+        <div class="stat">
+          <h2 class="head">Restaurant Overview</h2>
+          <hr />
+          <div class="flexbox">
+            <div class="stat-card one">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.UserCount</p>
+              <p>Users</p>
+            </div>
+
+            <div class="stat-card two">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.VendorCount</p>
+              <p>Vendors</p>
+            </div>
+
+            <div class="stat-card three">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.RecipeCount</p>
+              <p>Recipes</p>
+            </div>
+          </div>
+        </div>
+
+        <!--ORDERS LIST-->
+        <div class="head-order">
+          <h2>Order List</h2>
+          <span>27-5-2022</span>
+        </div>
+        <div class="orders">
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+        </div>
+
+        <!------------POPULAR DISHES------------->
+        <div class="top-section">
+          <h2 class="head">Popular Dishes</h2>
+          <hr />
+          <div class="flexbox">
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+            </div>
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+            </div>
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>4.8 <i class="fa-solid fa-star"></i></h4>
+            </div>
+          </div>
+        </div>
+
+        <!------------Top Reviews------------->
+        <div class="top-section">
+          <h2 class="head">Top Reviews</h2>
+          <hr />
+          <div class="flexbox">
+            <div class="card">
+              <div class="user-info"><img src="~/Content/Images/user.jpg"><h3>User Name</h3></div>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                voluptate facere vero eos fuga nesciunt quis commodi beatae
+                sequi modi provident sapiente mollitia veniam tempora
+                repudiandae maxime, hic rem rerum.
+              </p>
+            </div>
+
+            <div class="card">
+                <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
+              <h4>4 <i class="fa-solid fa-star"></i></h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                voluptate facere vero eos fuga nesciunt quis commodi beatae
+                sequi modi provident sapiente mollitia veniam tempora
+                repudiandae maxime, hic rem rerum.
+              </p>
+            </div>
+
+            <div class="card">
+                <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                voluptate facere vero eos fuga nesciunt quis commodi beatae
+                sequi modi provident sapiente mollitia veniam tempora
+                repudiandae maxime, hic rem rerum.
+              </p>
+            </div>
+          </div>
+        </div>

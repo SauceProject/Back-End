@@ -1,0 +1,62 @@
+﻿
+using ITI.Sauce.Models;
+using ITI.Sauce.Repositories;
+using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Abp.Linq.Expressions;
+using ITI.Sauce.ViewModels.OrderList;
+
+namespace ITI.Sauce.Repositorie
+{
+    public class OrderListRepository : GeneralRepository<OrderList>
+    {
+        public PaginingViewModel<List<OrderListViewModel>> Get(int ID = 0, string orderBy = null
+            ,int OrderListQty=0, bool isAscending = false
+            , int pageIndex = 1, int pageSize = 20)
+
+        {
+
+            var filter = PredicateBuilder.New<OrderList>();
+            var oldFiler = filter;
+            if (ID > 0)
+                filter = filter.Or(o => o.OrderListID == ID);
+            if (OrderListQty > 0)
+                filter = filter.Or(o => o.OrderListQty == OrderListQty);
+
+
+
+            if (filter == oldFiler)
+                filter = null;
+            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
+
+
+            var result =
+            query.Select(i => new OrderListViewModel
+            {
+                OrderListID = i.OrderListID,
+                OrderListQty=i.OrderListID,
+
+
+            });
+
+            PaginingViewModel<List<OrderListViewModel>>
+               finalResult = new PaginingViewModel<List<OrderListViewModel>>()
+               {
+                   PageIndex = pageIndex,
+                   PageSize = pageSize,
+                   Count = base.GetList().Count(),
+                   Data = result.ToList()
+               };
+
+
+            return finalResult;
+        }
+
+    }
+}
