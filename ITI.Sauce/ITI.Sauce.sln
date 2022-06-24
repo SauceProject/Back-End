@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.sauce.MVC", "ITI.sauce.cs\ITI.sauce.MVC.csproj", "{C595517A-9BE6-46DC-B588-36084BDA2FA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Repositorie", "ITI.Sauce.Repositorie\ITI.Sauce.Repositorie.csproj", "{D1956089-E755-4DCA-BE8D-F7586B594588}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Repository", "ITI.Sauce.Repositorie\ITI.Sauce.Repository.csproj", "{D1956089-E755-4DCA-BE8D-F7586B594588}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.ViewModels", "ITI.Sauce.ViewModels\ITI.Sauce.ViewModels.csproj", "{6014BB8B-F88D-4EA5-AD6C-2B86CEE3C785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Sauce.Models", "ITI.Sauce.Models\ITI.Sauce.Models.csproj", "{C5F9918A-3761-4A17-A688-179869B85DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Models", "ITI.Sauce.Models\ITI.Sauce.Models.csproj", "{C5F9918A-3761-4A17-A688-179869B85DCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

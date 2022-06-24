@@ -1,0 +1,12 @@
+﻿@using ITI.Sauce.ViewModels
+@using ITI.Sauce.ViewModels.Shared
+
+@Model PeginingViewModel<List<CategortViewModel>>
+
+    @foreach(var c in Model.Data)
+
+    {
+        <h1>@c.ID</h1>
+        <h1>@c.NameEN</h1>
+        <h1>@c.NameAR</h1>
+    }

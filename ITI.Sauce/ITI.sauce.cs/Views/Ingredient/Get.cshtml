@@ -1,0 +1,14 @@
+﻿@using ITI.Sauce.ViewModels
+@using ITI.Sauce.ViewModels.Ingredient
+@using ITI.Sauce.ViewModels.Shared
+
+@model PaginingViewModel<List<IngredientViewModel>>
+
+    @foreach(var I in Model.Data)
+
+    {
+    <h1>@I.ID</h1>
+    <h1>@I.NameEN</h1>
+    <h1>@I.NameAR</h1>
+    <h1>@I.ImageUrl</h1>
+    }
