@@ -1,0 +1,43 @@
+﻿@using ITI.Sauce.ViewModels.Restaurant
+@using ITI.Sauce.ViewModels.Shared
+@using ITI.Sauce.ViewModel
+@model PaginingViewModel<List<RestaurantViewModel>>
+
+	@{
+		Layout = "_Layout";
+	}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="~/Content/CSS/User.css"/>
+
+</head>
+<body>
+
+<h2>Restaurant</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>IsDeleted</th>
+    <th>RegisterDate</th>
+    <th>NameAr</th>
+
+  </tr>
+	@foreach (var U in Model.Data)
+{
+	<tr>
+	<td>@U.NameEN</td>
+	<td>@U.IsDeleted</td>
+	<td>@U.RegisterDate</td>
+	<td>@U.NameAR</td>
+
+	</tr>
+
+}
+
+
+	</table>
+
+</body>
+</html>

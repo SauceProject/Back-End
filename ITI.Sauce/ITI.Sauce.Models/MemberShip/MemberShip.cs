@@ -10,6 +10,8 @@ namespace ITI.Sauce.Models
     {
         public int ID { get; set; }
         public string Type { get; set; }
+        public string TypeEn { get; set; }
+        public string TypeAr { get; set; }
         public int OrderNum { get; set; }
         public float Price { get; set; }
         public List<Vendor_MemberShip> Vendor_MemberShips { get; set; }

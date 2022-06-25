@@ -48,8 +48,7 @@ namespace ITI.Sauce.Repositorie
                 phone = i.phone,
                 registerDate = i.registerDate,
                 NameEN = i.NameEN,
-                NameAR = i.NameAR,
-                IsDelete = i.IsDelete 
+               
 
             });
 

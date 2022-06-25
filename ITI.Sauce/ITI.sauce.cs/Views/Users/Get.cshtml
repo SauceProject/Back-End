@@ -2,12 +2,44 @@
 @using ITI.Sauce.ViewModel
 @model PaginingViewModel<List<UsersViewModel>>
 
-@foreach (var U in Model.Data)
-{
-	<h1>@U.UserName</h1>
-	<h2>@U.phone</h2>
-	<h3>@U.registerDate</h3>
-	<h4>@U.NameEN</h4>
-	<h4>@U.NameAR</h4>
+	@{
+		Layout = "_Layout";
+	}
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="~/Content/CSS/User.css"/>
 
+</head>
+<body>
+
+<h2>Users</h2>
+
+<table>
+  <tr>
+    <th>UserName</th>
+    <th>Phone</th>
+    <th>RegisterDate</th>
+    <th>NameEn</th>
+
+  </tr>
+   
+   @foreach (var U in Model.Data)
+  
+{
+	<tr>
+	
+	<td>@U.UserName</td>
+	<td>@U.phone</td>
+	<td>@U.registerDate</td>
+	<td>@U.NameEN</td>
+ </tr>
 }
+ 
+  
+</table>
+
+</body>
+</html>
+
+
