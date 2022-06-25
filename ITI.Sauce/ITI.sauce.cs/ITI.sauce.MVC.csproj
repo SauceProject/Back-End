@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ITI.Sauce.Repositorie\ITI.Sauce.Repositorie.csproj" />
+    <ProjectReference Include="..\ITI.Sauce.Repositorie\ITI.Sauce.Repository.csproj" />
   </ItemGroup>
 
 </Project>
