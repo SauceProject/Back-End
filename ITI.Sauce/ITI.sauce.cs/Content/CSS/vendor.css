@@ -158,6 +158,14 @@ li p {
     .stat-card h3 {
         font-size: 4rem;
     }
+.stat-card a {
+    text-decoration:none;
+    color:white
+}
+.stat-card a:hover {
+    text-decoration:underline;
+    
+}
 
 .one {
     background-color: orange;
@@ -169,6 +177,9 @@ li p {
 
 .three {
     background-color: blue;
+}
+.four{
+    background-color: gray;
 }
 /******* ORDERS ********/
 .head-order {
@@ -202,6 +213,7 @@ li p {
 .top-section {
     margin-top: 4rem;
     margin-bottom: 4rem;
+    text-align:center;
 }
 
 hr {
@@ -235,6 +247,22 @@ hr {
     .card i {
         color: rgb(243, 199, 6);
     }
+.seeMore {
+    text-decoration: none;
+    color: #F6EE99;
+    margin-top: 1rem;
+    font-weight: bold;
+    background-color: #143444;
+    padding: 0.5rem;
+    display: inline-block
+}
+    .seeMore:hover {
+        background-color: white;
+        color: #143444;
+        border:#143444 1px solid;
+        transition:all 0.5s;
+    }
+
 /***************Reviews*******************/
 .user-info {
     display: flex;
