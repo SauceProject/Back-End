@@ -2,8 +2,7 @@
 
 @using ITI.Sauce.ViewModels.Shared
 @using ITI.Sauce.ViewModels
-@using ITI.Sauce.ViewModels.Vendor
-@model PaginingViewModel<List<VendorViewModel>>
+@model IPagedList<VendorViewModel>
  <!DOCTYPE html>
 <html>
 <head>
@@ -40,20 +39,37 @@ tr:nth-child(even) {
 
 <table>
   <tr>
-    <th>NameEN</th>
+   <th>NameEN</th>
     <th>NameAr</th>
     <th>Phone</th>
-    <th>Email</th>
+    <th>UserName</th>
   </tr>
-    @foreach(var V in Model.Data)
+    @foreach(var V in Model)
 {  
   <tr>
-    <td>@V.NameEN</td>
+     <td>@V.NameEN</td>
     <td>@V.NameAR</td>
     <td>@V.phone</td>
-    <td>@V.Email</td>
+    <td>@V.UserName</td>
   </tr>
     }
 </table>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+    <a asp-action="Add" asp-controller="Vendor">Add</a>
+</div>
 </body>
 </html>

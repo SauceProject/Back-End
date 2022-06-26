@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
 
+
 namespace ITI.Sauce.ViewModels
+
 {
     public static partial class VendorExtentions
     {
-        public static VendorViewModel ToViewModel(this Vendor model)
-        {
 
-            return new VendorViewModel
+
+        public static Vendor ToModel(this VendorEditViewModel model)
+        {
+            return new Vendor
             {
                 ID = model.ID,
                 UserName = model.UserName,
@@ -24,7 +28,7 @@ namespace ITI.Sauce.ViewModels
             };
         }
     }
-    public class VendorViewModel
+    public class VendorEditViewModel
     {
         public int ID { get; set; }
         public string UserName { get; set; }
@@ -33,8 +37,5 @@ namespace ITI.Sauce.ViewModels
         public string phone { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
-        public DateTime registerDate { get; set; }
-        public bool IsDeleted { get; set; }
-     
     }
 }

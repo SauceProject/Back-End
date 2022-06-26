@@ -9,10 +9,12 @@ namespace ITI.sauce.MVC.Controllers
     {
         MemberShipRepository MemberShipeRepo;
         public MemberShipController()
-        { 
-     this.MemberShipeRepo = new MemberShipRepository();
+        {
+            DBContext dBContext = new DBContext();
+
+            this.MemberShipeRepo = new MemberShipRepository(dBContext);
         }
-public ViewResult Get(int id = 0, string Type = "", float Price = 0, string TypeEn = "", string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
+        public ViewResult Get(int id = 0, string Type = "", float Price = 0, string TypeEn = "", string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                          int pageSize = 20)
         {
             var ResultData =

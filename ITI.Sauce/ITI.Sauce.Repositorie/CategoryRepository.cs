@@ -14,6 +14,10 @@ namespace ITI.Sauce.Repositorie
 {
     public class CategoryRepository : GeneralRepository<Category>
     {
+        public CategoryRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<CategoryViewModel>> Get(int ID = 0, string orderBy = null, bool isAscending = false,
             string NameEN = "", string NameAR = "", int pageIndex = 1, int pageSize = 20)
 

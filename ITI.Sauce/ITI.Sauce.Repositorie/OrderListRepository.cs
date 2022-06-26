@@ -16,6 +16,10 @@ namespace ITI.Sauce.Repositorie
 {
     public class OrderListRepository : GeneralRepository<OrderList>
     {
+        public OrderListRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<OrderListViewModel>> Get(int ID = 0, string orderBy = null
             ,int OrderListQty=0, bool isAscending = false
             , int pageIndex = 1, int pageSize = 20)

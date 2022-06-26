@@ -18,9 +18,11 @@ namespace ITI.sauce.MVC.Controllers
     {
         CategoryRepository cateRepo;
 
-        public CategoryController ()
+        public CategoryController()
         {
-            this.cateRepo = new CategoryRepository ();
+            DBContext dBContext = new DBContext();
+
+            this.cateRepo = new CategoryRepository(dBContext);
         }
 
         public ViewResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",

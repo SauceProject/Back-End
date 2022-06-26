@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ITI.Sauce.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace ITI.Sauce.Repositories
 {
@@ -13,9 +14,9 @@ namespace ITI.Sauce.Repositories
     {
         private readonly DBContext dbContext;
         private DbSet<T> Set;
-        public GeneralRepository()
+        public GeneralRepository(DBContext _Context)
         {
-            dbContext = new DBContext();
+            dbContext = _Context;
             Set = dbContext.Set<T>();
         }
 
@@ -48,5 +49,12 @@ namespace ITI.Sauce.Repositories
         {
             return Set.AsQueryable().Where(e => e.Equals(ID));
         }
+
+        public EntityEntry<T> Add(T entity) =>
+             Set.Add(entity);
+        public EntityEntry<T> Update(T entity) =>
+             Set.Update(entity);
+        public EntityEntry<T> Remove(T entity) =>
+            Set.Remove(entity);
     }
 }

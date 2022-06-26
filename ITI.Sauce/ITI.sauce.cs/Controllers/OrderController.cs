@@ -17,7 +17,9 @@ namespace ITI.sauce.MVC.Controllers
 
         public OrderController()
         {
-            this.ordRepo = new OrderRepository();
+            DBContext dBContext = new DBContext();
+
+            this.ordRepo = new OrderRepository(dBContext);
         }
         public ViewResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
             string NameAR = "", DateTime? registerDate = null,int pageIndex = 1, int pageSize = 20)

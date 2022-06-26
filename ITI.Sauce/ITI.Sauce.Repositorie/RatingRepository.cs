@@ -13,6 +13,10 @@ namespace ITI.Sauce.Repositories
     public class RatingRepository
          : GeneralRepository<Rating>
     {
+        public RatingRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<RatingViewModel>> Get(int id = 0,
                     int RatingValue=0,
                 string orderby = "", bool isAscending = false, int pageIndex = 1,

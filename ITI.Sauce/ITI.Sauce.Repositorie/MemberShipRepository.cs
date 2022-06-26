@@ -14,6 +14,10 @@ namespace ITI.Sauce.Repository
 {
     public class MemberShipRepository : GeneralRepository<MemberShip>
     {
+        public MemberShipRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, string Type="", float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                          int pageSize = 20)
         {
