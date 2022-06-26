@@ -3,13 +3,41 @@
 @using ITI.Sauce.ViewModels.OrderList
 @using ITI.Sauce.ViewModels.Shared
 @model PaginingViewModel<List<OrderListViewModel>>
-
-    @foreach(var o in Model.Data)
-{
-    <h1>@o.OrderListID</h1>
-    <h1>@o.OrderListQty</h1>
-   foreach(var id in Model.Data)
-    {
-        <h1>@o.OrderListQty</h1>
-    }
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h2>OrderList Table</h2>
+<table>
+  <tr>
+    <th>OrderListID</th>
+    <th>OrderListQty</th>
+  </tr>
+    @foreach(var V in Model.Data)
+{  
+  <tr>
+    <td>@V.OrderListID</td>
+    <td>@V.OrderListQty</td>
+  </tr>
+    }
+</table>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ITI.Sauce.Repositories;
+using Microsoft.AspNetCore.Mvc;
 
 using ITI.Sauce.Repositorie;
 using ITI.Sauce.Repository;
@@ -6,8 +7,11 @@ using ITI.Sauce.Repository;
 namespace ITI.sauce.MVC.Controllers
 {
     public class RestaurantController : Controller
-
     {
+        RestaurantRepository pubRepo;
+
+        public RestaurantController()
+        {
         RestaurantRepository ResRepo;
         public RestaurantController ()
         {

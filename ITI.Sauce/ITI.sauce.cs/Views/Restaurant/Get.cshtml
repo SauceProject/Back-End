@@ -6,11 +6,21 @@
 	@{
 		Layout = "_Layout";
 	}
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
 <link rel="stylesheet" href="~/Content/CSS/User.css"/>
 
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
 </head>
 <body>
 
@@ -25,19 +35,19 @@
 
   </tr>
 	@foreach (var U in Model.Data)
-{
-	<tr>
+{  
+  <tr>
 	<td>@U.NameEN</td>
 	<td>@U.IsDeleted</td>
 	<td>@U.RegisterDate</td>
 	<td>@U.NameAR</td>
 
-	</tr>
+  </tr>
 
-}
+    }
 
 
-	</table>
+</table>
 
 </body>
 </html>

@@ -1,7 +1,9 @@
 ﻿@{
     Layout = "_Layout";
 }
-
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/vendor.css" />
+}
 <!---------------STATISTICS------------------->
         <div class="stat">
           <h2 class="head">Restaurant Overview</h2>
@@ -10,19 +12,25 @@
             <div class="stat-card one">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.UserCount</p>
-              <p>Users</p>
+              <a href="#">Users</a>
             </div>
 
             <div class="stat-card two">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.VendorCount</p>
-              <p>Vendors</p>
+              <a href="#">Vendors</a>
             </div>
 
             <div class="stat-card three">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <p>Recipes</p>
+              <a href="#">Recipes</a>
+            </div>
+
+            <div class="stat-card four">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.ReataurantCount</p>
+              <a href="#">Restaurants</a>
             </div>
           </div>
         </div>
@@ -71,6 +79,32 @@
               <h4>4.8 <i class="fa-solid fa-star"></i></h4>
             </div>
           </div>
+          <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
+        </div>
+
+        <!------------POPULAR RESTAURANTS------------->
+        <div class="top-section">
+          <h2 class="head">Popular Restaurants</h2>
+          <hr />
+          <div class="flexbox">
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+            </div>
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>5 <i class="fa-solid fa-star"></i></h4>
+            </div>
+            <div class="card">
+              <img src="~/Content/Images/food.jpg" alt="food" />
+              <h3>Title Lorem, ipsum dolor.</h3>
+              <h4>4.8 <i class="fa-solid fa-star"></i></h4>
+            </div>
+          </div>
+            
+            <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
         </div>
 
         <!------------Top Reviews------------->
@@ -111,4 +145,5 @@
               </p>
             </div>
           </div>
+          <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
         </div>

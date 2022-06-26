@@ -4,18 +4,45 @@
 @using ITI.Sauce.ViewModels
 @using ITI.Sauce.ViewModels.Vendor
 @model PaginingViewModel<List<VendorViewModel>>
-
-
-@foreach(var V in Model.Data)
-{
-    <h1>@V.NameEN</h1>
-    <h1>@V.NameAR</h1>
-    <h1>@V.phone</h1>
-    <h1>@V.Email</h1>
-
-
-    foreach(var id in Model.Data)
-    {
-        <h1>@V.ID</h1>
-    }
+ <!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<h2>Vendor Table</h2>
+<table>
+  <tr>
+    <th>NameEN</th>
+    <th>NameAr</th>
+    <th>Phone</th>
+    <th>Email</th>
+  </tr>
+    @foreach(var V in Model.Data)
+{  
+  <tr>
+    <td>@V.NameEN</td>
+    <td>@V.NameAR</td>
+    <td>@V.phone</td>
+    <td>@V.Email</td>
+  </tr>
+    }
+</table>
+</body>
+</html>
