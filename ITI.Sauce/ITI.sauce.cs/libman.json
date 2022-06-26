@@ -9,6 +9,10 @@
     {
       "library": "font-awesome@6.1.1",
       "destination": "Content/lib/font-awesome/"
+    },
+    {
+      "library": "twitter-bootstrap@5.1.3",
+      "destination": "lib/twitter-bootstrap/"
     }
   ]
 }

@@ -1,12 +1,43 @@
 ﻿@using ITI.Sauce.ViewModels
 @using ITI.Sauce.ViewModels.Shared
+@using ITI.Sauce.ViewModels.Category
 
-@Model PeginingViewModel<List<CategortViewModel>>
+@model  PaginingViewModel<List<CategoryViewModel>>
 
-    @foreach(var c in Model.Data)
+@{
+    Layout = "_Layout";
+}
 
-    {
-        <h1>@c.ID</h1>
-        <h1>@c.NameEN</h1>
-        <h1>@c.NameAR</h1>
-    }
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="~/Content/CSS/Category.css"/>
+</head>
+<body>
+
+<h2>Category</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>NameEN</th>
+    <th>NameAR</th>
+
+  </tr>
+  <tr>
+
+      
+        @foreach (var c in Model.Data)
+
+        {
+            <td>@c.ID</td>
+            <td>@c.NameEN</td>
+            <td>@c.NameAR</td>
+        }
+</tr>
+
+
+</table>
+
+</body>
+</html>

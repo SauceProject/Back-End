@@ -4,11 +4,43 @@
 
 @model PaginingViewModel<List<IngredientViewModel>>
 
-    @foreach(var I in Model.Data)
 
-    {
-    <h1>@I.ID</h1>
-    <h1>@I.NameEN</h1>
-    <h1>@I.NameAR</h1>
-    <h1>@I.ImageUrl</h1>
-    }
+@{
+
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/Content/CSS/Ingredient.css" />
+</head>
+<body>
+
+    <h2>Ingredient</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>NameEN</th>
+            <th>NameAR</th>
+            <th>ImageUrl</th>
+        </tr>
+        <tr>
+            
+@foreach (var I in Model.Data)
+
+{
+    <td>@I.ID</td>
+    <td>@I.NameEN</td>
+    <td>@I.NameAR</td>
+    <td>@I.ImageUrl</td>
+}
+
+        </tr>
+
+    </table>
+
+</body>
+</html>
+
