@@ -7,7 +7,6 @@ using ITI.Sauce.Models;
 using ITI.Sauce.Repositories;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
-using ITI.Sauce.ViewModels.Ingredient;
 using Abp.Linq.Expressions;
 
 namespace ITI.Sauce.Repositorie
@@ -53,6 +52,12 @@ namespace ITI.Sauce.Repositorie
 
 
             return finalResult;
+        }
+
+        public IngredientViewModel Add(IngredientEditViewModel model)
+        {
+            Ingredient ingredient = model.ToModel();
+            return base.Add(ingredient).Entity.ToViewModel();
         }
     }
 

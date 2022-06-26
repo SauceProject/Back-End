@@ -7,7 +7,7 @@ using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.Repositories;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Category;
+
 using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repositorie
@@ -53,6 +53,12 @@ namespace ITI.Sauce.Repositorie
             return finalResult;
 
 
+        }
+
+        public CategoryViewModel Add (CategoryEditViewModel model)
+        {
+            Category category = model.ToModel();
+            return base.Add(category).Entity.ToViewModel();
         }
 
     }

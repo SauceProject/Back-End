@@ -1,31 +1,27 @@
-﻿using ITI.Sauce.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ITI.Sauce.Models;
 
 namespace ITI.Sauce.ViewModels
 {
     public static partial class CategoryExtensions
     {
-        public static CategoryViewModel ToViewModel(this Category model)
+        public static Category ToModel (this CategoryEditViewModel model )
         {
-            return new CategoryViewModel
+            return new Category
             {
-               
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
             };
         }
     }
 
-
-    public class CategoryViewModel
+    public class CategoryEditViewModel
     {
-        public int ID { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
-
     }
 }

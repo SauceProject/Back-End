@@ -14,15 +14,15 @@ namespace ITI.Sauce.Repository
 {
     public class MemberShipRepository : GeneralRepository<MemberShip>
     {
-        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, string Type="", float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
-                         int pageSize = 20)
+        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, float Price = 0 ,
+            string TypeEn="",string TypeAr = "", string orderby = "ID",
+            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+                        
         {
             var filter = PredicateBuilder.New<MemberShip>();
             var oldFiler = filter;
             if (id > 0)
                 filter.Or(U => U.ID == id);
-            if (!string.IsNullOrEmpty(Type))
-                filter.Or(U => U.Type.Contains(Type));
             if (Price > 0)
                 filter = filter.Or(r => r.Price <= Price);
             if (!string.IsNullOrEmpty(TypeEn))
@@ -36,7 +36,7 @@ namespace ITI.Sauce.Repository
             var result = query.Select(i => new MemberShipViewModel
             {
                 ID = i.ID,
-                Type = i.Type,
+                
                 TypeEn = i.TypeEn,
                 TypeAr = i.TypeAr,
                 Price = i.Price,
