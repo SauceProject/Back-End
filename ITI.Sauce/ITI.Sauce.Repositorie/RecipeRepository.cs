@@ -13,6 +13,10 @@ namespace ITI.Sauce.Repositorie
 {
     public class RecipeRepository : GeneralRepository<Recipe>
     {
+        public RecipeRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<RecipeViewModel>> Get ( 
             string NameAr=null, string NameEN=null,string orderBy=null,
             bool isAscending = false, float Price=0,DateTime? rdate=null , string category=null ,

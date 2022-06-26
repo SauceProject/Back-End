@@ -1,4 +1,5 @@
-﻿using ITI.Sauce.Repositorie;
+﻿using ITI.Sauce.Models;
+using ITI.Sauce.Repositorie;
 using ITI.Sauce.Repositories;
 using ITI.Sauce.Repository;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ namespace ITI.sauce.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        DBContext dBContext = new DBContext();
         public RecipeRepository RecRepo;
         public UserRepository UserRepo;
         public VendorRepository VendorRepo;
@@ -14,10 +16,10 @@ namespace ITI.sauce.MVC.Controllers
 
         public HomeController()
         {
-            RecRepo=new RecipeRepository();
-            UserRepo=new UserRepository();
-            VendorRepo = new VendorRepository();
-            RestaurantRepo=new RestaurantRepository();
+            RecRepo=new RecipeRepository(dBContext);
+            UserRepo=new UserRepository(dBContext);
+            VendorRepo = new VendorRepository(dBContext);
+            RestaurantRepo=new RestaurantRepository(dBContext);
         }
 
         public IActionResult Index()

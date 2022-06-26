@@ -15,6 +15,10 @@ namespace ITI.Sauce.Repositorie
 {
     public class OrderRepository : GeneralRepository<Order>
     {
+        public OrderRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<OrderViewModel>> Get(int ID = 0, string orderBy = null
             , bool isAscending = false, string NameEN = "",
             string NameAR = "", DateTime? registerDate =null 

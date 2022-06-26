@@ -9,7 +9,9 @@ namespace ITI.sauce.MVC.Controllers
         private RecipeRepository RecipeRepo;
         public RecipeController()
         {
-            RecipeRepo = new RecipeRepository();
+            DBContext dBContext = new DBContext();
+
+            RecipeRepo = new RecipeRepository(dBContext);
         }
         public ViewResult Get(string NameAr = null, string NameEN = null,
             string orderBy = null,

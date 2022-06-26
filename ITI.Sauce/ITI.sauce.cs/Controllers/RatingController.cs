@@ -1,4 +1,5 @@
-﻿using ITI.Sauce.Repositories;
+﻿using ITI.Sauce.Models;
+using ITI.Sauce.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers
@@ -9,7 +10,9 @@ namespace ITI.sauce.MVC.Controllers
 
         public RatingController()
         {
-            this.pubRepo = new RatingRepository();
+            DBContext dBContext = new DBContext();
+
+            this.pubRepo = new RatingRepository(dBContext);
         }
         public IActionResult Get(int id = 0, int RatingValue = 0,
                 string orderyBy = "", bool isAscending = false,

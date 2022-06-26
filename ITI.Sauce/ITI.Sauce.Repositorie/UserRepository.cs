@@ -15,6 +15,10 @@ namespace ITI.Sauce.Repositorie
 {
    public class UserRepository : GeneralRepository<Users>
     {
+        public UserRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<UsersViewModel>> Get(int id = 0, string UserName = "", string Email = "", string phone = "", DateTime? registerDate = null,  string NameEn = "" , string NameAr = "" , string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {

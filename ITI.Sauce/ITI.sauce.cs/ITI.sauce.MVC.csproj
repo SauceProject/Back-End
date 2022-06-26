@@ -10,7 +10,6 @@
   <ItemGroup>
     <Folder Include="Content\Images\" />
     <Folder Include="Content\lib\" />
-    <Folder Include="Views\Vendor\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +22,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
   <ItemGroup>

@@ -21,10 +21,18 @@ namespace ITI.sauce.MVC.Controllers
         private readonly IngredientRepository IngrRepo;
         private readonly UnitOfWork UnitOfWork;
 
+<<<<<<< HEAD
         public IngredientController(IngredientRepository _ingrRepo, UnitOfWork _unitOfWork)
         {
             IngrRepo = _ingrRepo;
             UnitOfWork = _unitOfWork;
+=======
+        public IngredientController()
+        {
+            DBContext dBContext = new DBContext();
+
+            this.ingrRepo = new IngredientRepository(dBContext);
+>>>>>>> 783921fa5e0bed8b700af798c7f20caf4a815bea
         }
 
 
