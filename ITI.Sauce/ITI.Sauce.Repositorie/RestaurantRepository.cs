@@ -24,9 +24,11 @@ namespace ITI.Sauce.Repository
         {
 
             var filter = PredicateBuilder.New<Restaurant>();
-            var oldFiler = filter;
+            var oldFiler = ;
             if (id > 0)
-                filter.Or(U => U.ID == id);
+                filter.Or(U => U.IfilterD == id);
+            if (vendorID > 0)
+                filter.Or(U => U.Vendor_ID == vendorID);
             if (WorkTime != null)
                 filter.Or(d => d.WorkTime <= WorkTime);
             if (!string.IsNullOrEmpty(NameEn))
