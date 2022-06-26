@@ -3,26 +3,12 @@
 @using ITI.Sauce.ViewModel
 @model PaginingViewModel<List<RestaurantViewModel>>
 
-	@{
-		Layout = "_Layout";
-	}
- <!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="~/Content/CSS/User.css"/>
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/Restaurant.css" />
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<body>
+
 
 <h2>Restaurant</h2>
 
@@ -49,5 +35,3 @@ tr:nth-child(even) {
 
 </table>
 
-</body>
-</html>

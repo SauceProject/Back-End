@@ -37,15 +37,7 @@ namespace ITI.Sauce.Repository
                 filter = null;
             var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize
                 );
-            var result = query.Select(i => new RestaurantViewModel
-            {
-                ID = i.ID,
-                WorkTime = i.WorkTime,
-                NameEN = i.NameEN,
-                NameAR = i.NameAR,
-                RegisterDate = i.RegisterDate,
-                IsDeleted = i.IsDeleted
-
+          
             var result =
             query.Select(V => new RestaurantViewModel
             {

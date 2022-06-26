@@ -8,10 +8,7 @@ namespace ITI.sauce.MVC.Controllers
 {
     public class RestaurantController : Controller
     {
-        RestaurantRepository pubRepo;
-
-        public RestaurantController()
-        {
+       
         RestaurantRepository ResRepo;
         public RestaurantController ()
         {

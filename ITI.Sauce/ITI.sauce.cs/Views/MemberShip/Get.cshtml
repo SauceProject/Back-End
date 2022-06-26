@@ -1,0 +1,45 @@
+﻿
+@using ITI.Sauce.ViewModels
+@using ITI.Sauce.ViewModels.Shared;
+
+
+@model PaginingViewModel<List<MemberShipViewModel>>
+
+	
+@section StyleSection
+{
+<link rel="stylesheet" href="~/Content/CSS/MemberShip.css"/> 
+
+
+}
+
+
+<h2>MeberShip</h2>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>price</th>
+    <th>TypeAr</th>
+  
+
+  </tr>
+   
+   @foreach (var M in Model.Data)
+  
+{
+	<tr>
+	
+	<td>@M.Type</td>
+	<td>@M.Price</td>
+	<td>@M.TypeAr</td>
+	
+ </tr>
+}
+ 
+  
+</table>
+
+
+
+

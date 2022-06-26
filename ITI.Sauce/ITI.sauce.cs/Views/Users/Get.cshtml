@@ -2,16 +2,12 @@
 @using ITI.Sauce.ViewModel
 @model PaginingViewModel<List<UsersViewModel>>
 
-	@{
-		Layout = "_Layout";
-	}
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="~/Content/CSS/User.css"/>
+	
 
-</head>
-<body>
+	@section StyleSection{
+<link rel="stylesheet" href="~/Content/CSS/User.css"/>
+	}
+
 
 <h2>Users</h2>
 
@@ -39,7 +35,6 @@
   
 </table>
 
-</body>
-</html>
+
 
 
