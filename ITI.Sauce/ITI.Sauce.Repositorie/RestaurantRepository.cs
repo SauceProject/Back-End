@@ -16,13 +16,15 @@ namespace ITI.Sauce.Repository
 {
     public class RestaurantRepository : GeneralRepository<Restaurant>
     {
-        public PaginingViewModel<List<RestaurantViewModel>> Get(int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public PaginingViewModel<List<RestaurantViewModel>> Get(int vendorID=0,int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
 
             var filter = PredicateBuilder.New<Restaurant>();
             var oldFiler = filter;
             if (id > 0)
                 filter.Or(U => U.ID == id);
+            if (vendorID > 0)
+                filter.Or(U => U.Vendor_ID == vendorID);
             if (WorkTime != null)
                 filter.Or(d => d.WorkTime <= WorkTime);
             if (!string.IsNullOrEmpty(NameEn))

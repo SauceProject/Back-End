@@ -20,5 +20,10 @@ public ViewResult Get(int id = 0, string Type = "", float Price = 0, string Type
             return View(ResultData);
         }
 
+        public ViewResult GetVendorMemperShip(int vendorId = 0)
+        {
+            return View();
+        }
+
     }
 }
