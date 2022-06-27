@@ -47,9 +47,14 @@ namespace ITI.sauce.MVC.Controllers
         [HttpPost]
         public IActionResult Add(VendorEditViewModel model)
         {
-            pubRepo.Add(model);
-            UnitOfWork.save();
-            return RedirectToAction("Search");
+            if (ModelState.IsValid == true)
+            {
+                pubRepo.Add(model);
+                UnitOfWork.save();
+                return RedirectToAction("Search");
+            }
+            else
+                return View();
         }
     }
 }
