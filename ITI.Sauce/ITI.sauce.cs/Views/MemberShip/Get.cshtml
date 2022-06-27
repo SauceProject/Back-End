@@ -1,6 +1,6 @@
 ﻿
 @using ITI.Sauce.ViewModels
-@using ITI.Sauce.ViewModels.Shared;
+
 
 
 @model PaginingViewModel<List<MemberShipViewModel>>
@@ -18,11 +18,10 @@
 
 <table>
   <tr>
-    <th>Type</th>
-    <th>price</th>
-    <th>TypeAr</th>
-  
 
+    <th>price</th>
+    <th>TypeEn</th>
+    <th>TypeAr</th>
   </tr>
    
    @foreach (var M in Model.Data)
@@ -30,11 +29,11 @@
 {
 	<tr>
 	
-	<td>@M.Type</td>
-	<td>@M.Price</td>
-	<td>@M.TypeAr</td>
 	
- </tr>
+	<td>@M.Price</td>
+	<td>@M.TypeEn</td>
+	<td>@M.TypeAr</td>
+   </tr>
 }
  
   

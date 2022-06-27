@@ -1,8 +1,6 @@
 ﻿
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Abp.Linq.Expressions;
-using ITI.Sauce.ViewModels.OrderList;
 
-namespace ITI.Sauce.Repositorie
+namespace ITI.Sauce.Repository
 {
     public class OrderListRepository : GeneralRepository<OrderList>
     {

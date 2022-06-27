@@ -3,30 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.Models;
-using ITI.Sauce.ViewModel;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Shared;
 using Abp.Linq.Expressions;
 
 namespace ITI.Sauce.Repository
 {
     public class MemberShipRepository : GeneralRepository<MemberShip>
     {
-<<<<<<< HEAD
-        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, float Price = 0 ,
-            string TypeEn="",string TypeAr = "", string orderby = "ID",
-            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
-                        
-=======
         public MemberShipRepository(DBContext _Context) : base(_Context)
         {
 
         }
+
+
+       
         public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, string Type="", float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                          int pageSize = 20)
->>>>>>> 783921fa5e0bed8b700af798c7f20caf4a815bea
         {
             var filter = PredicateBuilder.New<MemberShip>();
             var oldFiler = filter;

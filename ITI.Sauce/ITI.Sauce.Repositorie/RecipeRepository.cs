@@ -1,15 +1,13 @@
 ﻿using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
-using ITI.Sauce.ViewModels.Recipe;
-using ITI.Sauce.ViewModels.Shared;
+using ITI.Sauce.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.Sauce.Repositorie
+namespace ITI.Sauce.Repository
 {
     public class RecipeRepository : GeneralRepository<Recipe>
     {

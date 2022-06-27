@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ITI.Sauce.Models;
 using Microsoft.AspNetCore.Mvc;
-using ITI.Sauce.Repositorie;
+using ITI.Sauce.Repository;
 
 namespace ITI.sauce.MVC.Controllers
 {

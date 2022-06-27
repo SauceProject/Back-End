@@ -1,5 +1,5 @@
 ﻿using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
+using ITI.Sauce.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers

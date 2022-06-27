@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
 
-namespace ITI.Sauce.ViewModel
+namespace ITI.Sauce.ViewModels
 {
     public class UsersViewModel
     {

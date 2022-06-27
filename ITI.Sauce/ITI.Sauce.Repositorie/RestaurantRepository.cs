@@ -5,10 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
-using ITI.Sauce.ViewModel;
-using ITI.Sauce.ViewModels.Restaurant;
-using ITI.Sauce.ViewModels.Shared;
+using ITI.Sauce.ViewModels;
 
 
 
@@ -20,17 +17,18 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<RestaurantViewModel>> Get(int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public PaginingViewModel<List<RestaurantViewModel>> Get(int Vendor_ID = 0, int id = 0, DateTime? WorkTime = null,  string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
 
             var filter = PredicateBuilder.New<Restaurant>();
-            var oldFiler = ;
+            var oldFiler = filter;
             if (id > 0)
-                filter.Or(U => U.IfilterD == id);
-            if (vendorID > 0)
-                filter.Or(U => U.Vendor_ID == vendorID);
+                filter.Or(U => U.ID == id);
             if (WorkTime != null)
                 filter.Or(d => d.WorkTime <= WorkTime);
+            if (Vendor_ID > 0)
+                filter.Or(U => U.Vendor_ID == Vendor_ID);
+            
             if (!string.IsNullOrEmpty(NameEn))
                 filter = filter.Or(NEn => NEn.NameEN.Contains(NameEn));
             if (!string.IsNullOrEmpty(NameAr))

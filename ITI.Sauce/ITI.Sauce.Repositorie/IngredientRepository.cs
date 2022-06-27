@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Shared;
 using Abp.Linq.Expressions;
 
-namespace ITI.Sauce.Repositorie
+namespace ITI.Sauce.Repository
 {
     public class IngredientRepository : GeneralRepository<Ingredient>
     {

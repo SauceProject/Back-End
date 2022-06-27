@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.sauce.MVC", "ITI.sauce.cs\ITI.sauce.MVC.csproj", "{C595517A-9BE6-46DC-B588-36084BDA2FA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.MVC", "ITI.sauce.cs\ITI.Sauce.MVC.csproj", "{C595517A-9BE6-46DC-B588-36084BDA2FA6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Repository", "ITI.Sauce.Repositorie\ITI.Sauce.Repository.csproj", "{D1956089-E755-4DCA-BE8D-F7586B594588}"
 EndProject

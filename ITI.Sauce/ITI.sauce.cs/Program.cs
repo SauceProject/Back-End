@@ -1,15 +1,7 @@
 ﻿
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositorie;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.Repository;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using ITI.Sauce.Repositorie;
-using ITI.Sauce.Repository;
-using ITI.Sauce.ViewModels;
-using ITI.Sauce.Models;
 
 
 public class Program

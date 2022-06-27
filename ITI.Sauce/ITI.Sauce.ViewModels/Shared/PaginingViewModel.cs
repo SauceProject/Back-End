@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.Sauce.ViewModels.Shared
+namespace ITI.Sauce.ViewModels
 {
     public class PaginingViewModel<T>
     {

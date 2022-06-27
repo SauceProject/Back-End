@@ -7,11 +7,10 @@ using Abp.Extensions;
 using Abp.Linq.Expressions;
 using Castle.Core.Internal;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
-using ITI.Sauce.ViewModel;
-using ITI.Sauce.ViewModels.Shared;
+using ITI.Sauce.ViewModels;
 
-namespace ITI.Sauce.Repositorie
+
+namespace ITI.Sauce.Repository
 {
    public class UserRepository : GeneralRepository<Users>
     {

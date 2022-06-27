@@ -1,5 +1,4 @@
 ﻿using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +47,7 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Add(VendorEditViewModel model)
         {
             pubRepo.Add(model);
-            UnitOfWork.save();
+            UnitOfWork.Save();
             return RedirectToAction("Search");
         }
     }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.Sauce.ViewModels.Recipe
+namespace ITI.Sauce.ViewModels
 {
     public class RecipeViewModel
     {

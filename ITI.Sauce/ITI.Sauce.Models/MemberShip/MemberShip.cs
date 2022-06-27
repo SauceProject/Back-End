@@ -9,6 +9,7 @@ namespace ITI.Sauce.Models
     public class MemberShip
     {
         public int ID { get; set; }
+        public string Type { get; set; }
         public string TypeEn { get; set; }
         public string TypeAr { get; set; }
         public int OrderNum { get; set; }

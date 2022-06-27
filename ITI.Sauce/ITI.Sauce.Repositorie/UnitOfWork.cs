@@ -14,7 +14,7 @@ namespace ITI.Sauce.Repository
         {
             context = _Context;
         }
-        public void save()
+        public void Save()
         {
             context.SaveChanges();
         }

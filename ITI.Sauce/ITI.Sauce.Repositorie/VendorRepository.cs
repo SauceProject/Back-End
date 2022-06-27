@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Shared;
 
 using X.PagedList;
 
-namespace ITI.Sauce.Repositories
+namespace ITI.Sauce.Repository
 {
     public class VendorRepository
          : GeneralRepository<Vendor>

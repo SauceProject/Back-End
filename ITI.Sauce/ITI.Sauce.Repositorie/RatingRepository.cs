@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
-using ITI.Sauce.ViewModels.Rating;
-using ITI.Sauce.ViewModels.Shared;
-
-namespace ITI.Sauce.Repositories
+using ITI.Sauce.ViewModels;
+namespace ITI.Sauce.Repository
 {
     public class RatingRepository
          : GeneralRepository<Rating>
