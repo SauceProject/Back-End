@@ -8,31 +8,10 @@
  <!DOCTYPE html>
 <html>
 <head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
-}
-
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
+    <link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
 </head>
 <body>
 <h2>Vendor Table</h2>
-
-
-
-
-
 <table>
   <tr>
    <th>NameEN</th>
@@ -63,6 +42,7 @@ tr:nth-child(even) {
         PageClasses = new[] { "page-link" },
         })
     </div>
+    <div>
     <script>
         $(document).ready(function() {
             $('ul.pagination > li.disabled > a').addClass('page-link');

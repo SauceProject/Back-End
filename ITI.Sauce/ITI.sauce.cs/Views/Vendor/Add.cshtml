@@ -1,60 +1,40 @@
-﻿<!DOCTYPE html>
+﻿@using ITI.Sauce.ViewModels
+@model VendorEditViewModel
+
+
+<!DOCTYPE html>
 <html>
-<style>
-input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-</style>
+    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
 <body>
 
-<h3>Using CSS to style an HTML Form</h3>
+<h3>Add to Vendor Table</h3>
 
 <div>
   <form method="post" asp-action="Add" asp-controller="Vendor">
-    <label for="fname"> NameEN</label>
-    <input type="text" id="fname" name="NameEN">
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+    <br />
+    <label asp-for="phone"> phone</label>
+    <input  asp-for="phone">
+    <span asp-validation-for="phone" style="color:red"></span>
+    <br />
+    <label asp-for="Password"> Password</label>
+    <input  asp-for="Password">
+    <span asp-validation-for="Password" style="color:red"></span>
+    <br />
+     <label asp-for="UserName"> UserName</label>
+    <input  asp-for="UserName">
+    <span asp-validation-for="UserName" style="color:red"></span>
+    <br />
+    <label asp-for="Email"> Email</label>
+    <input  asp-for="Email">
+    <span asp-validation-for="Email" style="color:red"></span>
 
-    <label for="lname">NameAr</label>
-    <input type="text" id="lname" name="NameAr">
-
-     <label for="Phone"> Phone</label>
-    <input type="Phone" id="Phone" name="Phone">
-
-     <label for="password">Password</label>
-    <input type="password" id="password" name="password">
-
-    <label for="Email">UserName</label>
-    <input type="Email" id="UserName" name="UserName">
-
-    <label for="Email">Email</label>
-    <input type="Email" id="Email" name="Email">
 
     <input type="submit" value="Submit">
   </form>

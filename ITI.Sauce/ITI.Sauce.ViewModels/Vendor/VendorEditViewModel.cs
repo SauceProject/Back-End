@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
-
+using System.ComponentModel.DataAnnotations;
 
 namespace ITI.Sauce.ViewModels
 
@@ -30,12 +30,19 @@ namespace ITI.Sauce.ViewModels
     }
     public class VendorEditViewModel
     {
+        [Required]
         public int ID { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string phone { get; set; }
+        [Required]
         public string NameEN { get; set; }
+        [Required]
         public string NameAR { get; set; }
     }
 }
