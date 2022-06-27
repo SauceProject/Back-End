@@ -49,7 +49,7 @@ namespace ITI.sauce.MVC.Controllers
             if (ModelState.IsValid == true)
             {
                 pubRepo.Add(model);
-                UnitOfWork.save();
+                UnitOfWork.Save();
                 return RedirectToAction("Search");
             }
             else
