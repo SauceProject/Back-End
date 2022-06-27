@@ -9,12 +9,6 @@ public class Program
     public static int Main()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Services.AddScoped(typeof(CategoryRepository));
-        builder.Services.AddScoped(typeof(IngredientRepository));
-
-
-        builder.Services.AddScoped(typeof(UnitOfWork));
-        builder.Services.AddScoped(typeof(DBContext));
         builder.Services.AddControllersWithViews();
         builder.Services.AddScoped(typeof(VendorRepository));
         builder.Services.AddScoped(typeof(UserRepository));

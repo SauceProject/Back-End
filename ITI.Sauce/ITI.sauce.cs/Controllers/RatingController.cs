@@ -1,18 +1,25 @@
 ﻿using ITI.Sauce.Models;
 using ITI.Sauce.Repository;
+using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers
 {
     public class RatingController : Controller
     {
-        RatingRepository pubRepo;
+        private readonly RatingRepository pubRepo;
+        private readonly UnitOfWork UnitOfWork;
+        private readonly RatingRepository RatepRepo;
 
-        public RatingController()
+
+        public RatingController(RatingRepository _vendorRepo, UnitOfWork _unitOfWork
+            , RatingRepository _RatepRepo)
         {
             DBContext dBContext = new DBContext();
-
-            this.pubRepo = new RatingRepository(dBContext);
+            this.pubRepo = _vendorRepo;
+            UnitOfWork = _unitOfWork;
+            RatepRepo = _RatepRepo;
         }
         public IActionResult Get(int id = 0, int RatingValue = 0,
                 string orderyBy = "", bool isAscending = false,
@@ -28,6 +35,30 @@ namespace ITI.sauce.MVC.Controllers
             var data =
            pubRepo.Get(id);
             return View(data);
+        }
+        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        {
+            var Data = pubRepo.Search(pageIndex, pageSize);
+            return View("Get", Data);
+        }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            List<TextValueViewModel> Values = RatepRepo.GetRecipeID();
+            ViewBag.Rating = Values;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(RatingEditViewModel model)
+        {
+            if (ModelState.IsValid == true)
+            {
+                pubRepo.Add(model);
+                UnitOfWork.Save();
+                return RedirectToAction("Search");
+            }
+            else
+                return View();
         }
     }
 }

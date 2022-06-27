@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
+using X.PagedList;
+
 namespace ITI.Sauce.Repository
 {
     public class RatingRepository
@@ -16,7 +19,7 @@ namespace ITI.Sauce.Repository
 
         }
         public PaginingViewModel<List<RatingViewModel>> Get(int id = 0,
-                    int RatingValue=0,
+                    int RatingValue = 0,
                 string orderby = "", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
@@ -25,7 +28,7 @@ namespace ITI.Sauce.Repository
             var oldFiler = filter;
             if (id > 0)
                 filter = filter.Or(V => V.RatingID == id);
-            
+
 
             if (filter == oldFiler)
                 filter = null;
@@ -35,11 +38,8 @@ namespace ITI.Sauce.Repository
             var result =
             query.Select(V => new RatingViewModel
             {
-                RatingID=V.RatingID,
-                RatingValue=V.RatingValue
-                
-                
-
+                RatingID = V.RatingID,
+                RatingValue = V.RatingValue
             });
 
             PaginingViewModel<List<RatingViewModel>>
@@ -54,5 +54,27 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
         }
+        public IPagedList<RatingViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                    =>
+    GetList().Select(V => new RatingViewModel
+    {
+        RatingID = V.RatingID,
+        Comment = V.Comment,
+        RatingValue = V.RatingValue,
+
+    }).ToPagedList(pageIndex, pageSize);
+
+        public RatingViewModel Add(RatingEditViewModel model)
+        {
+            Rating Rating = model.ToModel();
+            return base.Add(Rating).Entity.ToViewModel();
+        }
+
+        public List<TextValueViewModel> GetRecipeID()=>
+            GetList().Select(i => new TextValueViewModel
+            {
+                Value = i.RecipeID
+            }).ToList();
+        
     }
 }
