@@ -18,7 +18,7 @@ namespace ITI.Sauce.Repository
 
 
        
-        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, string Type="", float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
+        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                          int pageSize = 20)
         {
             var filter = PredicateBuilder.New<MemberShip>();
