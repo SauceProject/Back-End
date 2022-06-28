@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
 using Abp.Linq.Expressions;
+using X.PagedList;
+using static ITI.Sauce.ViewModels.MemberShipExtentions;
 
 namespace ITI.Sauce.Repository
 {
@@ -55,6 +57,22 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
 
+        }
+        public IPagedList<MemberShipViewModel> Search(int pageIndex = 1, int pageSize = 2)
+               =>
+GetList().Select(i => new MemberShipViewModel
+{
+    ID = i.ID,
+
+    TypeEn = i.TypeEn,
+    TypeAr = i.TypeAr,
+    Price = i.Price,
+
+}).ToPagedList(pageIndex, pageSize);
+        public MemberShipViewModel Add(MemberShipEditViewModel model)
+        {
+           MemberShip memberShip = model.ToModel();
+            return base.Add(memberShip).Entity.ToViewModel();
         }
     }
 }

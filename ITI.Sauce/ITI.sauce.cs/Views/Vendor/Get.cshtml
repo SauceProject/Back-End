@@ -5,13 +5,13 @@
 
 
 @model IPagedList<VendorViewModel>
- <!DOCTYPE html>
-<html>
-<head>
+
+    @section StyleSection{
     <link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
-</head>
-<body>
+    }
+
 <h2>Vendor Table</h2>
+    <a asp-action="Add" asp-controller="Vendor" id="btnAdd">Add</a>
 <table>
   <tr>
    <th>NameEN</th>
@@ -48,7 +48,5 @@
             $('ul.pagination > li.disabled > a').addClass('page-link');
         });
     </script>
-    <a asp-action="Add" asp-controller="Vendor">Add</a>
 </div>
-</body>
-</html>
+

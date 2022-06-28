@@ -1,0 +1,47 @@
+﻿@using ITI.Sauce.ViewModels
+@model RatingEditViewModel
+
+
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+<body>
+
+<h3>Add to Rating Table</h3>
+
+<div>
+  <form method="post" asp-action="Add" asp-controller="Rating">
+      <label asp-for="RecipeID"> RecipeID</label>
+    <select>
+        @foreach(var i in ViewBag.Rating)
+                {
+                    <option selected>Choose Option</option>
+                    <option>@i.Value</option>
+                }
+                   
+            </select>
+     <br />
+    <span asp-validation-for="RecipeID" style="color:red"></span>
+     <br />
+     <label asp-for="UserID"> UserID</label>
+    <input  asp-for="UserID">
+     <br />
+    <span asp-validation-for="UserID" style="color:red"></span>
+    <label asp-for="Comment"> Comment</label>
+    <input  asp-for="Comment">
+    <span asp-validation-for="Comment" style="color:red"></span>
+    <br />
+     <label asp-for="RatingValue"> RatingValue</label>
+    <input  asp-for="RatingValue">
+    <span asp-validation-for="RatingValue" style="color:red"></span>
+    <br />
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+
+

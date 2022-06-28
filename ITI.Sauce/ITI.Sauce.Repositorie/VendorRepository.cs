@@ -19,8 +19,8 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0, 
-            string nameEN = "",string nameAR="",string Email="", string phone = "",
+        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0,
+            string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
@@ -47,14 +47,14 @@ namespace ITI.Sauce.Repository
             query.Select(V => new VendorViewModel
             {
                 ID = V.ID,
-                UserName=V.UserName,
-                Password=V.Password,
+                UserName = V.UserName,
+                Password = V.Password,
                 NameEN = V.NameEN,
-                NameAR=V.NameAR,
-                Email  =V.Email,
+                NameAR = V.NameAR,
+                Email = V.Email,
                 IsDeleted = V.IsDeleted,
                 phone = V.phone,
-                
+
             });
 
             PaginingViewModel<List<VendorViewModel>>
@@ -70,7 +70,7 @@ namespace ITI.Sauce.Repository
             return finalResult;
         }
         public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
-=>
+                    =>
     GetList().Select(V => new VendorViewModel
     {
         ID = V.ID,
