@@ -1,0 +1,34 @@
+﻿@using ITI.Sauce.ViewModels
+@model MemberShipViewModel
+
+
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+}
+
+<h3>Add to MemberShip Table</h3>
+
+<div>
+  <form method="post" asp-action="Add" asp-controller="MemberShip">
+    <label asp-for="OrderNum"> OrderNum</label>
+    <input  asp-for="OrderNum">
+    <span asp-validation-for="OrderNum" style="color:red"></span>
+    <br />
+    <label asp-for="Price"> Price</label>
+    <input  asp-for="Price">
+    <br />
+     <label asp-for="TypeEn"> TypeEn</label>
+    <input  asp-for="TypeEn">
+    <span asp-validation-for="TypeEn" style="color:red"></span>
+    <br />
+    <label asp-for="TypeAr"> TypeAr</label>
+    <input  asp-for="TypeAr">
+    <span asp-validation-for="TypeAr" style="color:red"></span>
+  
+    
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
