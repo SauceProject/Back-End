@@ -13,6 +13,10 @@
     {
       "library": "twitter-bootstrap@5.1.3",
       "destination": "lib/twitter-bootstrap/"
+    },
+    {
+      "library": "jquery-ajax-unobtrusive@3.2.6",
+      "destination": "lib/jquery-ajax-unobtrusive/"
     }
   ]
 }

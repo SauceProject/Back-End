@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
-
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace ITI.Sauce.ViewModels
@@ -17,7 +18,7 @@ namespace ITI.Sauce.ViewModels
             {
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
-                ImageUrl = model.ImageUrl,
+                ImageUrl= model.ImageUrl,
             };
         }
     }
@@ -28,5 +29,8 @@ namespace ITI.Sauce.ViewModels
         public string NameAR { get; set; }
 
         public string ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
+
+
     }
 }

@@ -23,13 +23,6 @@ namespace ITI.sauce.MVC.Controllers
             IngrRepo = _ingrRepo;
             UnitOfWork = _unitOfWork;
         }
-        //public IngredientController()
-        //{
-        //    DBContext dBContext = new DBContext();
-
-        //    this.IngrRepo = new IngredientRepository(dBContext);
-        //}
-
 
         public ViewResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
             string NameAR = "", string ImageUrl = "", int pageIndex = 1, int pageSize = 20)
@@ -49,10 +42,29 @@ namespace ITI.sauce.MVC.Controllers
         [HttpPost]
         public IActionResult Add(IngredientEditViewModel model)
         {
-            IngrRepo.Add(model);
-            UnitOfWork.Save();
-            return RedirectToAction("Get");
-        }
+            string? bookUploadUrl = "/Content/Uploads/Ingredient/";
+            
+                string newFileName = Guid.NewGuid().ToString() + model.Image.FileName;
+                model.ImageUrl=bookUploadUrl + newFileName;
 
+                FileStream fs = new FileStream(Path.Combine
+                    (
+                        Directory.GetCurrentDirectory(),
+                        "Content",
+                       "Uploads", "Ingradient"
+                    ), FileMode.Create);
+
+                fs.CopyTo(fs);
+                fs.Position = 0;
+            
+                IngrRepo.Add(model);
+                UnitOfWork.Save();
+                return RedirectToAction("Get");
+
+
+
+        }
     }
 }
+
+

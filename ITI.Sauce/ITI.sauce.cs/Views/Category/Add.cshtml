@@ -3,14 +3,23 @@
 
 @model CategoryEditViewModel
 
-<form method="post" asp-action = "Add" asp-controller="Category" >
+
+
+
+<form data-ajax="true"  method="post" asp-action = "Add" asp-controller="Category" >
     
-    <div class="form-group">
-        <label>NameEN</label>
-        <input name = "NameEN" type="text" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>NameAR</label>
-        <input name = "NameAR" type="text" class="form-control" />
-    </div>
+     <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+
+
+
+    <input type="submit" value="Submit">
+
+
+
 </form>
