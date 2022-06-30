@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
-
-
+using X.PagedList;
 
 namespace ITI.Sauce.Repository
 {
@@ -17,7 +16,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<RestaurantViewModel>> Get(int Vendor_ID,  int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public PaginingViewModel<List<RestaurantViewModel>> Get(int Vendor_ID, int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
 
             var filter = PredicateBuilder.New<Restaurant>();
@@ -25,7 +24,7 @@ namespace ITI.Sauce.Repository
             if (id > 0)
                 filter = filter.Or(U => U.ID == id);
             if (Vendor_ID > 0)
-                filter= filter.Or(U => U.Vendor_ID == Vendor_ID);
+                filter = filter.Or(U => U.Vendor_ID == Vendor_ID);
             if (WorkTime != null)
                 filter = filter.Or(d => d.WorkTime <= WorkTime);
             if (!string.IsNullOrEmpty(NameEn))
@@ -34,13 +33,13 @@ namespace ITI.Sauce.Repository
                 filter = filter.Or(NAR => NAR.NameAR.Contains(NameAr));
             if (registerDate != null)
                 filter.Or(d => d.RegisterDate <= registerDate);
-            if(isDeleted != false)
+            if (isDeleted != false)
                 filter = filter.Or(d => d.IsDeleted == isDeleted);
             if (filter == oldFiler)
                 filter = null;
             var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize
                 );
-          
+
             var result =
             query.Select(V => new RestaurantViewModel
             {
@@ -63,8 +62,23 @@ namespace ITI.Sauce.Repository
                 };
             return finalResult;
 
+        }
 
-            return finalResult;
+            public IPagedList<RestaurantViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                       =>
+       GetList().Select(V => new RestaurantViewModel
+       {
+           ID = V.ID,
+           WorkTime = V.WorkTime,
+           NameEN = V.NameEN,
+           NameAR = V.NameAR,
+           RegisterDate = V.RegisterDate,
+           IsDeleted = V.IsDeleted,
+       }).ToPagedList(pageIndex, pageSize);
+        public RestaurantViewModel Add(RestaurantEditViewModel model)
+        {
+            Restaurant restaurant = model.ToModel();
+            return base.Add(restaurant).Entity.ToViewModel();
         }
     }
 }

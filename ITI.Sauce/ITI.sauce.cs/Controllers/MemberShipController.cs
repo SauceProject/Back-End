@@ -25,7 +25,7 @@ namespace ITI.sauce.MVC.Controllers
             return View(ResultData);
         }
 
-        public ViewResult GetVendorMemperShip(int VendorId = 0)
+        public IActionResult GetVendorMemperShip(int VendorId = 0)
         {
             return View();
         }
