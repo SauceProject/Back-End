@@ -36,6 +36,6 @@ namespace ITI.Sauce.ViewModels
         [Required]
         public int RecipeID { get; set; }
         [Required]
-        public int UserID { get; set; }
+        public string UserID { get; set; }
     }
 }

@@ -8,16 +8,14 @@ namespace ITI.sauce.MVC.Controllers
 {
     public class RatingController : Controller
     {
-        private readonly RatingRepository pubRepo;
         private readonly UnitOfWork UnitOfWork;
         private readonly RatingRepository RatepRepo;
 
 
-        public RatingController(RatingRepository _vendorRepo, UnitOfWork _unitOfWork
+        public RatingController( UnitOfWork _unitOfWork
             , RatingRepository _RatepRepo)
         {
             DBContext dBContext = new DBContext();
-            this.pubRepo = _vendorRepo;
             UnitOfWork = _unitOfWork;
             RatepRepo = _RatepRepo;
         }
@@ -26,19 +24,19 @@ namespace ITI.sauce.MVC.Controllers
                 int pageIndex = 1, int pageSize = 20)
         {
             var data =
-            pubRepo.Get(id, RatingValue,orderyBy,
+            RatepRepo.Get(id, RatingValue,orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
         public IActionResult GetById(int id)
         {
             var data =
-           pubRepo.Get(id);
+           RatepRepo.Get(id);
             return View(data);
         }
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
-            var Data = pubRepo.Search(pageIndex, pageSize);
+            var Data = RatepRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
         [HttpGet]
@@ -53,7 +51,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                pubRepo.Add(model);
+                RatepRepo.Add(model);
                 UnitOfWork.Save();
                 return RedirectToAction("Search");
             }

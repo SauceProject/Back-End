@@ -3,22 +3,34 @@
 @model IngredientEditViewModel
 
 
+<div>
+    <form data-ajax="true" method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Ingredient">
 
-<form method="post" asp-action = "Add" asp-controller="Category"  >
-    
-    <div class="form-group">
-        <label>NameEN</label>
-        <input name = "NameEN" type="text" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>NameAR</label>
-        <input name = "NameAR" type="text" class="form-control" />
-    </div>
-    <div class="form-group">
-        <label>ImageUrl</label>
-        <input name = "Image" type="url" class="form-control" />
-    </div>
+        <label asp-for="NameEN"> Name In English </label>
+        <input asp-for="NameEN">
+        <span asp-validation-for="NameEN" style="color:red"></span>
+        <br />
+        <label asp-for="NameAR"> Name In Arabic </label>
+        <input asp-for="NameAR">
+        <span asp-validation-for="NameAR" style="color:red"></span>
+        <br />
 
-</form>
+        <div class="form-group">
+            <label asp-for="Image"></label>
+            <div class="custom-file">
+                <input asp-for="Image" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile"></label>
+            </div>
+        </div>
+
+
+        <br />
+        <input type="submit" value="Add">
+
+
+    </form>
+
+
+
 
 

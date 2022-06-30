@@ -18,26 +18,35 @@
 
     <h2>Ingredient</h2>
 
+
+
     <table>
         <tr>
             <th>ID</th>
-            <th>NameEN</th>
-            <th>NameAR</th>
-            <th>ImageUrl</th>
-        </tr>
-        <tr>
-            
-@foreach (var I in Model.Data)
-
-{
-    <td>@I.ID</td>
-    <td>@I.NameEN</td>
-    <td>@I.NameAR</td>
-    <td>@I.ImageUrl</td>
-}
-
+            <th>Name In English</th>
+            <th> Name In Arabic</th>
+            <th>Image</th>
+            <th>Update Ingredient</th>
         </tr>
 
+
+        @foreach (var I in Model.Data)
+
+        {
+            <tr>
+                <td>@I.ID</td>
+                <td>@I.NameEN</td>
+                <td>@I.NameAR</td>
+                <td> <img src="@I.ImageUrl" width="100 px" height="100 px">   </td>
+                <td><a asp-action="Update" asp-controller="Ingredient" asp-route-Id="@I.ID"> Update </a></td>
+
+
+
+
+            </tr>
+
+
+        }
     </table>
 
 </body>

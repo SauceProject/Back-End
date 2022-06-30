@@ -51,10 +51,23 @@ namespace ITI.Sauce.Repository
         {
             return Set.AsQueryable();
         }
-        public IQueryable<T> GetByID(int ID)
+
+
+
+        //Get By ID => Back ID From Database
+        public T? GetByID(Expression<Func<T, bool>> filter = null, int ID=0)
         {
-            return Set.AsQueryable().Where(e => e.Equals(ID));
+            var query = Set.AsQueryable();
+            if (filter != null)
+                query = query.Where(filter);
+            return query.FirstOrDefault();
         }
+
+
+
+
+
+
 
 
         public EntityEntry<T> Add(T entity) =>

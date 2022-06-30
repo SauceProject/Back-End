@@ -13,10 +13,12 @@ namespace ITI.sauce.MVC.Controllers
         public VendorRepository VendorRepo;
         public RestaurantRepository RestaurantRepo;
 
-        public HomeController()
+        public HomeController(UserRepository _UserRepository)
         {
             RecRepo=new RecipeRepository(dBContext);
-            UserRepo=new UserRepository(dBContext);
+
+
+            UserRepo= _UserRepository;
             VendorRepo = new VendorRepository(dBContext);
             RestaurantRepo=new RestaurantRepository(dBContext);
         }

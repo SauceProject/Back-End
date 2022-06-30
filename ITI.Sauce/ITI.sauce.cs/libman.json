@@ -1,18 +1,22 @@
 {
   "version": "1.0",
   "defaultProvider": "cdnjs",
-  "libraries": [
-    {
-      "library": "fontawesome-iconpicker@3.2.0",
-      "destination": "Content/fontawesome-iconpicker/"
-    },
-    {
-      "library": "font-awesome@6.1.1",
-      "destination": "Content/lib/font-awesome/"
-    },
-    {
-      "library": "twitter-bootstrap@5.1.3",
-      "destination": "lib/twitter-bootstrap/"
-    }
-  ]
+    "libraries": [
+        {
+            "library": "fontawesome-iconpicker@3.2.0",
+            "destination": "Content/fontawesome-iconpicker/"
+        },
+        {
+            "library": "font-awesome@6.1.1",
+            "destination": "Content/lib/font-awesome/"
+        },
+        {
+            "library": "twitter-bootstrap@5.1.3",
+            "destination": "lib/twitter-bootstrap/"
+        },
+        {
+            "library": "jquery-ajax-unobtrusive@3.2.6",
+            "destination": "Content/lib/jquery-ajax-unobtrusive/"
+        }
+    ]
 }

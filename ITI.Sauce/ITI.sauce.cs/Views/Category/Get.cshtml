@@ -1,7 +1,7 @@
 ﻿@using ITI.Sauce.ViewModels
 
 
-@model  PaginingViewModel<List<CategoryViewModel>>
+@model PaginingViewModel<List<CategoryViewModel>>
 
 @{
     Layout = "_Layout";
@@ -10,33 +10,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="~/Content/CSS/Category.css"/>
+    <link rel="stylesheet" href="~/Content/CSS/Category.css" />
 </head>
 <body>
 
-<h2>Category</h2>
+    <h2>Category</h2>
 
-<table>
-  <tr>
-    <th>ID</th>
-    <th>NameEN</th>
-    <th>NameAR</th>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th> Name In English </th>
+            <th> Name In Arabic </th>
+            <th>Recipe Infromation</th>
+            <th>Update Category</th>
 
-  </tr>
-  <tr>
+        </tr>
 
-      
         @foreach (var c in Model.Data)
-
         {
-            <td>@c.ID</td>
-            <td>@c.NameEN</td>
-            <td>@c.NameAR</td>
+            <tr>
+                <td>@c.ID</td>
+                <td>@c.NameEN</td>
+                <td>@c.NameAR</td>
+                <td><a asp-action="Get" asp-controller="Recipe" asp-route-ID="@c.ID"> Recipe </a></td>
+                <td><a asp-action="Update" asp-controller="Category" asp-route-Id="@c.ID"> Update </a></td>
+
+            </tr>
         }
-</tr>
-
-
-</table>
-
+    </table>
 </body>
 </html>

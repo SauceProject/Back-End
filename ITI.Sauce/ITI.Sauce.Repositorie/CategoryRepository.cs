@@ -62,5 +62,52 @@ namespace ITI.Sauce.Repository
             return base.Add(category).Entity.ToViewModel();
         }
 
+
+
+
+
+
+
+
+  
+
+        public CategoryViewModel Update(CategoryEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Category>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            
+
+            return Result.ToViewModel();
+
+
+        }
+        public CategoryViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<Category>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(c => c.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
+        }
     }
 }
