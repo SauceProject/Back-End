@@ -14,7 +14,7 @@
      
   </head>
   <body>
-    <aside>
+    <aside id="side">
       <ul class="sidebar">
         <li>
           <a href="#" class="logo"><i class="fas fa-utensils"></i>Sauce</a>
@@ -29,7 +29,7 @@
 
     <main>
       <nav>
-        <i class="fa-solid fa-bars menu-icn "></i>
+        <i class="fa-solid fa-bars menu-icn " onclick="Menu()"></i>
         <input type="text" placeholder="Search..." />
         <i class="fa-solid fa-bell nav-icn"></i>
         <i class="fa-solid fa-envelope nav-icn"></i>
@@ -43,5 +43,6 @@
             @RenderBody();
         </section>
       </main>
+      <script src="~/Content/JS/vendor.js"></script>
   </body>
 </html>
