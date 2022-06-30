@@ -25,19 +25,18 @@
             <th>NameAR</th>
             <th>ImageUrl</th>
         </tr>
-        <tr>
+        
             
 @foreach (var I in Model.Data)
 
 {
+    <tr>
     <td>@I.ID</td>
     <td>@I.NameEN</td>
     <td>@I.NameAR</td>
-    <td>@I.ImageUrl</td>
+    <td> <img src="@I.ImageUrl"> </td>
+    </tr>
 }
-
-        </tr>
-
     </table>
 
 </body>

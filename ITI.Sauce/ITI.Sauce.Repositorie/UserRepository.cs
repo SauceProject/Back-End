@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Extensions;
 using Abp.Linq.Expressions;
-using Castle.Core.Internal;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
+using X.PagedList;
 using Microsoft.AspNetCore.Identity;
 
 namespace ITI.Sauce.Repository
@@ -83,5 +83,26 @@ namespace ITI.Sauce.Repository
         
         
 
+
+     
+
+        public IPagedList<UsersViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                   =>
+   GetList().Select(i => new UsersViewModel
+   {
+       ID = i.ID,
+       UserName = i.UserName,
+       Email = i.Email,
+       Password = i.Password,
+       phone = i.phone,
+       registerDate = i.registerDate,
+       NameEN = i.NameEN,
+       IsDelete = i.IsDelete
+   }).ToPagedList(pageIndex, pageSize);
+        public UsersViewModel Add(UsersEditViewModel model)
+        {
+            Users Users = model.ToModel();
+            return base.Add(Users).Entity.ToViewModel();
+        }
     }
 }

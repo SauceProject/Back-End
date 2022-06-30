@@ -21,18 +21,16 @@
     <th>ID</th>
     <th>NameEN</th>
     <th>NameAR</th>
-
+    <th>Actions</th>
   </tr>
   <tr>
-
-      
-        @foreach (var c in Model.Data)
-
-        {
-            <td>@c.ID</td>
-            <td>@c.NameEN</td>
-            <td>@c.NameAR</td>
-        }
+@foreach (var c in Model.Data)
+ {
+<td>@c.ID</td>
+<td>@c.NameEN</td>
+<td>@c.NameAR</td>
+ <td><a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@c.ID">Recipe</a></td>
+ }
 </tr>
 
 

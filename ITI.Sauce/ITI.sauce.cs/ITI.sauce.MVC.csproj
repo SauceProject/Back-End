@@ -10,6 +10,7 @@
   <ItemGroup>
     <Folder Include="Content\Images\" />
     <Folder Include="Content\lib\" />
+    <Folder Include="Content\Uploads\Ingredient\" />
   </ItemGroup>
 
   <ItemGroup>
