@@ -13,10 +13,24 @@ namespace ITI.Sauce.ViewModels
         {
             return new IngredientViewModel
             {
-
+                ID = model.ID,
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 ImageUrl = model.ImageUrl
+            };
+        }
+
+        public static IngredientEditViewModel ToEditViewModel(this IngredientViewModel model)
+        {
+
+
+            return new IngredientEditViewModel()
+            {
+
+                ID = model.ID,
+                NameEN = model.NameEN,
+                NameAR = model.NameAR,
+                ImageUrl = model.ImageUrl,
             };
         }
     }
@@ -30,4 +44,5 @@ namespace ITI.Sauce.ViewModels
 
 
     }
+
 }

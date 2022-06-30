@@ -21,15 +21,6 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
-        //CategoryRepository cateRepo;
-
-        //public CategoryController()
-        //{
-        //    DBContext dBContext = new DBContext();
-
-        //    this.CateRepo = new CategoryRepository(dBContext);
-
-        //}
 
         public ViewResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",
             string NameAR = "",int pageIndex = 1 , int pageSize = 20 )
@@ -51,6 +42,33 @@ namespace ITI.sauce.MVC.Controllers
             CateRepo.Add(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
+        }
+
+
+
+
+
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            var Results = CateRepo.GetOne(Id);
+
+            return View(Results.ToEditViewModel());
+
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Update(CategoryEditViewModel model, int ID = 0)
+        {
+            CateRepo.Update(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
         }
     }
     

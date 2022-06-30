@@ -10,11 +10,11 @@
   <ItemGroup>
     <Folder Include="Content\Images\" />
     <Folder Include="Content\lib\" />
-    <Folder Include="Content\Uploads\Ingredient\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITI.Sauce.Repositorie\ITI.Sauce.Repository.csproj" />
+    <ProjectReference Include="..\ITI.Sauce.ViewModels\ITI.Sauce.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

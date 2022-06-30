@@ -1,0 +1,34 @@
+﻿@using ITI.Sauce.ViewModels
+
+
+@model CategoryEditViewModel
+
+
+
+<h1>Edit Category</h1>
+
+<form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="Category" >
+
+
+    <div style="display:none">
+      
+       <input name="@Model.ID" type="text" class="form-group" value="@Model.ID"/>
+   </div>
+
+   <div class="form-group">
+       <label>NameEN</label>
+       <input name="NameEN" type="text" class="form-group" value="@Model.NameEN"/>
+   </div>
+    <div class="form-group">
+       <label>NameAR</label>
+       <input name="NameAR" type="text" class="form-group" value="@Model.NameAR" />
+   </div>
+
+   
+    <div class="form-group">
+       <input type="submit" class="form-group"/>
+   </div>
+
+
+
+</form>

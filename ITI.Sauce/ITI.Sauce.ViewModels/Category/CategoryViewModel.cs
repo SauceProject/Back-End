@@ -13,11 +13,27 @@ namespace ITI.Sauce.ViewModels
         {
             return new CategoryViewModel
             {
-               
+                ID = model.ID,
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
             };
         }
+
+        public static CategoryEditViewModel ToEditViewModel(this CategoryViewModel model)
+        {
+
+
+            return new CategoryEditViewModel()
+            {
+
+                ID = model.ID,
+                NameEN = model.NameEN,
+                NameAR = model.NameAR,
+                
+            };
+        }
+
+
     }
 
 

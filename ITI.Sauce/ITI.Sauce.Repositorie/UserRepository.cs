@@ -8,8 +8,9 @@ using Abp.Linq.Expressions;
 
 using X.PagedList;
 using Microsoft.AspNetCore.Identity;
-using ITI.Sauce.Models;
+
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.Models;
 
 namespace ITI.Sauce.Repository
 {

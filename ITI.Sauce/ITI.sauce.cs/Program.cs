@@ -10,6 +10,7 @@ public class Program
     public static int Main()
     {
         var builder = WebApplication.CreateBuilder();
+        builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
         builder.Services.AddControllersWithViews();
         builder.Services.AddIdentity<Users,IdentityRole>().
             AddEntityFrameworkStores<DBContext>();

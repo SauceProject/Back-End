@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using ITI.Sauce.Repository;
-using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
+using ITI.Sauce.ViewModels;
 
 namespace ITI.sauce.MVC.Controllers
 {

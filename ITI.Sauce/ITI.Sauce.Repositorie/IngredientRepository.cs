@@ -61,6 +61,52 @@ namespace ITI.Sauce.Repository
             Ingredient ingredient = model.ToModel();
             return base.Add(ingredient).Entity.ToViewModel();
         }
+
+
+
+
+
+
+
+        public IngredientViewModel Update(IngredientEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Ingredient>();
+            var old = filterd;
+
+            filterd = filterd.Or(i => i.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            Result.ImageUrl = model.ImageUrl;
+
+            return Result.ToViewModel();
+
+
+        }
+        public IngredientViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<Ingredient>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
+        }
+
     }
 
 }
