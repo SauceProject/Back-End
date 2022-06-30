@@ -3,16 +3,19 @@
 
 
 
-@model PaginingViewModel<List<RestaurantViewModel>>
+@model PagedList<RestaurantViewModel>
 
 
 @section StyleSection{
     <link rel="stylesheet" href="~/Content/CSS/Restaurant.css" />
+<link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
+
 }
 
 
 
-<h2>Restaurant</h2>
+<h2>Restaurants</h2>
+    <a asp-action="Add" asp-controller="Restaurant" id="btnAdd">Add</a>
 
 <table>
   <tr>
@@ -22,7 +25,7 @@
     <th>NameAr</th>
 
   </tr>
-	@foreach (var U in Model.Data)
+	@foreach (var U in Model)
 {  
   <tr>
 	<td>@U.NameEN</td>
@@ -36,4 +39,20 @@
 
 
 </table>
-
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+</div>

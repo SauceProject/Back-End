@@ -1,0 +1,37 @@
+﻿@using ITI.Sauce.ViewModels
+@model RestaurantEditViewModel
+
+
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
+}
+<h3>Add to Restaurants Table</h3>
+<div>
+  <form method="post" asp-action="Add" asp-controller="Restaurant">
+    <label asp-for="WorkTime "> WorkTime </label>
+    <input  asp-for="WorkTime ">
+    <span asp-validation-for="WorkTime " style="color:red"></span>
+    <br />
+     <label asp-for="Vendor_ID"> Vendor_ID</label>
+    <input  asp-for="Vendor_ID">
+    <span asp-validation-for="Vendor_ID" style="color:red"></span>
+    <br />
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+    <br />
+    <label asp-for="RegisterDate"> RegisterDate</label>
+    <input  asp-for="RegisterDate">
+     <br />
+    <label asp-for="IsDeleted"> IsDeleted</label>
+    <input  asp-for="IsDeleted">
+    
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
