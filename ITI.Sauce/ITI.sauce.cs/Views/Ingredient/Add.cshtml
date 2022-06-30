@@ -4,13 +4,13 @@
 
 
 <div>
-    <form data-ajax="true"    method="post"enctype="multipart/form-data" asp-action="Add" asp-controller="Ingredient">
+    <form data-ajax="true" method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Ingredient">
 
-        <label asp-for="NameEN"> NameEN</label>
+        <label asp-for="NameEN"> Name In English </label>
         <input asp-for="NameEN">
         <span asp-validation-for="NameEN" style="color:red"></span>
         <br />
-        <label asp-for="NameAR"> NameAR</label>
+        <label asp-for="NameAR"> Name In Arabic </label>
         <input asp-for="NameAR">
         <span asp-validation-for="NameAR" style="color:red"></span>
         <br />
@@ -25,7 +25,7 @@
 
 
         <br />
-        <input type="submit" value="Submit">
+        <input type="submit" value="Add">
 
 
     </form>

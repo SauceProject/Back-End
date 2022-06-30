@@ -16,15 +16,17 @@ namespace ITI.Sauce.ViewModels
         {
             return new Ingredient
             {
+                ID = model.ID,
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
-                ImageUrl= model.ImageUrl,
+                ImageUrl = model.ImageUrl,
             };
         }
     }
 
     public class IngredientEditViewModel
     {
+        public int ID { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
 

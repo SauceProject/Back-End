@@ -1,23 +1,22 @@
-﻿
-@using ITI.Sauce.ViewModels
+﻿@using ITI.Sauce.ViewModels
 
 @model CategoryEditViewModel
 
 
 
 
-<form data-ajax="true"  method="post" asp-action = "Add" asp-controller="Category" >
-    
-     <label asp-for="NameEN"> NameEN</label>
-    <input  asp-for="NameEN">
+<form data-ajax="true" method="post" asp-action="Add" asp-controller="Category">
+
+    <label asp-for="NameEN"> Name In English</label>
+    <input asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
     <br />
-     <label asp-for="NameAR"> NameAR</label>
-    <input  asp-for="NameAR">
+    <label asp-for="NameAR"> Name In Arabic</label>
+    <input asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
 
 
-
+    <br> 
     <input type="submit" value="Submit">
 
 

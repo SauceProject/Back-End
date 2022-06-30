@@ -1,0 +1,40 @@
+﻿@using ITI.Sauce.ViewModels
+
+
+@model IngredientEditViewModel
+
+
+
+<h1>Edit Ingredient</h1>
+
+<form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="Ingredient" >
+
+    <div style="display:none">
+      
+       <input name="@Model.ID" type="text" class="form-group" value="@Model.ID"/>
+   </div>
+    
+
+   <div class="form-group">
+       <label>NameEN</label>
+       <input name="NameEN" type="text" class="form-group" value="@Model.NameEN"/>
+   </div>
+    <div class="form-group">
+       <label>NameAR</label>
+       <input name="NameAR" type="text" class="form-group" value="@Model.NameAR" />
+   </div>
+
+      <div class="form-group">
+    <label for="exampleFormControlFile1">Example file input</label>
+    <input type="file" asp-for="Image" class="form-control-file" id="exampleFormControlFile1" multiple value="@Model.ImageUrl">
+  </div>
+
+
+   
+    <div class="form-group">
+       <input type="submit" class="form-group"/>
+   </div>
+
+
+
+</form>
