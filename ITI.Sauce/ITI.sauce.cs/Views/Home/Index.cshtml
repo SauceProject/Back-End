@@ -4,6 +4,7 @@
 @section StyleSection{
     <link rel="stylesheet"   href="~/Content/CSS/vendor.css" />
 }
+
 <!---------------STATISTICS------------------->
         <div class="stat">
           <h2 class="head">Restaurant Overview</h2>
@@ -12,25 +13,25 @@
             <div class="stat-card one">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.UserCount</p>
-              <a href="#">Users</a>
+              <a asp-action="search" asp-controller="Users">Users</a>
             </div>
 
             <div class="stat-card two">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.VendorCount</p>
-              <a href="#">Vendors</a>
+              <a asp-action="search" asp-controller="Vendor">Vendors</a>
             </div>
 
             <div class="stat-card three">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <a href="#">Recipes</a>
+              <a asp-action="Get" asp-controller="Recipe">Recipes</a>
             </div>
 
             <div class="stat-card four">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.ReataurantCount</p>
-              <a href="#">Restaurants</a>
+              <a asp-action="Get" asp-controller="Restaurant">Restaurants</a>
             </div>
           </div>
         </div>
@@ -57,6 +58,9 @@
             <p>Price 15$</p>
           </div>
         </div>
+        <a  asp-action="SignUp" asp-controller="Users">SignUp</a>
+        <a  asp-action="SignIn" asp-controller="Users">SignIn</a>
+
 
         <!------------POPULAR DISHES------------->
         <div class="top-section">

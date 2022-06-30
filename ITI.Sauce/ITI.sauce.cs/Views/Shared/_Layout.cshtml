@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using ITI.Sauce.Models
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> _SignInManager
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,15 +12,15 @@
       rel="stylesheet"
       href="~/Content/lib/font-awesome/css/all.css"
     />
-   
-     @RenderSection("StyleSection")
-     
+    <link rel="stylesheet" href="~/Content/CSS/vendor.css" />
+
+     @RenderSection("StyleSection",false)
   </head>
   <body>
     <aside id="side">
       <ul class="sidebar">
         <li>
-          <a href="#" class="logo"><i class="fas fa-utensils"></i>Sauce</a>
+          <a asp-action="Index" asp-controller="Home" class="logo"><i class="fas fa-utensils"></i>Sauce</a>
           
         </li>
         <li><a href="#">View Orders </a></li>
@@ -36,13 +39,23 @@
         <a href="./vendor_profile.html">
           <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
         </a>
-        <span id="restaurant-name">Vendor</span>
+        @if(_SignInManager.IsSignedIn(User))
+        {
+            <div>
+         <span id="restaurant-name">@User.Identity.Name </span>|
+        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span>
+        </div>
+        }
+        
       </nav>
 
         <section class="container">
-            @RenderBody();
+            @RenderBody()
         </section>
       </main>
       <script src="~/Content/JS/vendor.js"></script>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+
   </body>
 </html>

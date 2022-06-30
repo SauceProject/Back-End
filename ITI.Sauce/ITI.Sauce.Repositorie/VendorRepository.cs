@@ -5,16 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
-using ITI.Sauce.ViewModels.Shared;
-using ITI.Sauce.ViewModels.Vendor;
+using ITI.Sauce.ViewModels;
 
-namespace ITI.Sauce.Repositories
+using X.PagedList;
+
+namespace ITI.Sauce.Repository
 {
     public class VendorRepository
          : GeneralRepository<Vendor>
     {
-        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0, 
-            string nameEN = "",string nameAR="",string Email="", string phone = "",
+        public VendorRepository(DBContext _Context)
+            : base(_Context)
+        {
+
+        }
+        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0,
+            string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
@@ -41,14 +47,14 @@ namespace ITI.Sauce.Repositories
             query.Select(V => new VendorViewModel
             {
                 ID = V.ID,
-                UserName=V.UserName,
-                Password=V.Password,
+                UserName = V.UserName,
+                Password = V.Password,
                 NameEN = V.NameEN,
-                NameAR=V.NameAR,
-                Email  =V.Email,
+                NameAR = V.NameAR,
+                Email = V.Email,
                 IsDeleted = V.IsDeleted,
                 phone = V.phone,
-                
+
             });
 
             PaginingViewModel<List<VendorViewModel>>
@@ -62,6 +68,26 @@ namespace ITI.Sauce.Repositories
 
 
             return finalResult;
+        }
+        public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                    =>
+    GetList().Select(V => new VendorViewModel
+    {
+        ID = V.ID,
+        UserName = V.UserName,
+        Password = V.Password,
+        NameEN = V.NameEN,
+        NameAR = V.NameAR,
+        Email = V.Email,
+        IsDeleted = V.IsDeleted,
+        phone = V.phone,
+
+    }).ToPagedList(pageIndex, pageSize);
+
+        public VendorViewModel Add(VendorEditViewModel model)
+        {
+            Vendor Vendor = model.ToModel();
+            return base.Add(Vendor).Entity.ToViewModel();
         }
     }
 }

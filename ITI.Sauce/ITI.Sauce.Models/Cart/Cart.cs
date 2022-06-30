@@ -9,7 +9,7 @@ namespace ITI.Sauce.Models
     public class Cart
     {
         public int ID { get; set; }
-        public int Users_ID { get; set; }
+        public string UserID { get; set; }
         public int Qty { get; set; }
         public int Recipe_ID { get; set; }
         public Recipe Recipe { get; set; }

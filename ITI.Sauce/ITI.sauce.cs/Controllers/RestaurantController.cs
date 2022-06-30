@@ -1,31 +1,26 @@
-﻿using ITI.Sauce.Repositories;
+﻿using ITI.Sauce.Repository;
 using Microsoft.AspNetCore.Mvc;
+
+using ITI.Sauce.Models;
 
 namespace ITI.sauce.MVC.Controllers
 {
     public class RestaurantController : Controller
     {
-        RestaurantRepository pubRepo;
-
+       
+        RestaurantRepository ResRepo;
         public RestaurantController()
         {
-            this.pubRepo = new RestaurantRepository();
+            DBContext dBContext = new DBContext();
+
+            this.ResRepo = new RestaurantRepository(dBContext);
         }
-        public IActionResult Get(int id = 0,
-            string nameEN = "", string nameAR = "",
-                string orderby = "ID", bool isAscending = false, int pageIndex = 1,
-                        int pageSize = 20)
+        public ViewResult Get(int vendorID = 0,int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
-            var data =
-            pubRepo.Get(id, nameEN, nameAR, orderby,
-                isAscending, pageIndex, pageSize);
-            return View(data);
+            var Resultdata =
+                ResRepo .Get (vendorID,id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
+            return View(Resultdata);
         }
-        public IActionResult GetById(int id)
-        {
-            var data =
-           pubRepo.Get(id);
-            return View(data);
-        }
+
     }
 }

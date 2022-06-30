@@ -1,13 +1,62 @@
-﻿@using ITI.Sauce.ViewModels.Shared
-@using ITI.Sauce.ViewModel
-@model PaginingViewModel<List<UsersViewModel>>
+﻿
+@using ITI.Sauce.ViewModels
 
-@foreach (var U in Model.Data)
+
+
+@model IPagedList<UsersViewModel>
+
+
+	
+
+	@section StyleSection{
+<link rel="stylesheet" href="~/Content/CSS/User.css"/>
+<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
+	}
+
+
+<h2>Users</h2>
+    <a asp-action="Add" asp-controller="Users" id="btnAdd">Add</a>
+
+<table>
+  <tr>
+    <th>UserName</th>
+    <th>Phone</th>
+    <th>RegisterDate</th>
+    <th>NameEn</th>
+
+  </tr>
+   
+   @foreach (var U in Model)
+  
 {
-	<h1>@U.UserName</h1>
-	<h2>@U.phone</h2>
-	<h3>@U.registerDate</h3>
-	<h4>@U.NameEN</h4>
-	<h4>@U.NameAR</h4>
-
+	<tr>
+	
+	<td>@U.UserName</td>
+	<td>@U.phone</td>
+	<td>@U.registerDate</td>
+	<td>@U.NameEN</td>
+ </tr>
 }
+  
+</table>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+</div>
+
+
+
+

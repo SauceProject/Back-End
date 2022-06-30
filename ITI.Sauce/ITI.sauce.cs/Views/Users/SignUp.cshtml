@@ -1,0 +1,87 @@
+﻿
+@using ITI.Sauce.ViewModels
+@model UserEditViewModel
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    input[type=text],[type=email],[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+
+      
+}
+#btnAdd {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:right;
+}
+
+
+</style>
+</head>
+<body>
+
+  <div>
+<form asp-action="SignUp" asp-controller="Users" method="post">
+    <h1>Register</h1>
+    <p>Please fill in this form to Register an account.</p>
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+    <hr>
+
+
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+
+    <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+
+    <label asp-for="phone"> phone</label>
+    <input  asp-for="phone">
+    <span asp-validation-for="phone" style="color:red"></span>
+
+    <label asp-for="Email"> Email</label>
+    <input  asp-for="Email">
+    <span asp-validation-for="Email" style="color:red"></span>
+
+    <label asp-for="Password"> Password</label>
+    <input  asp-for="Password">
+    <span asp-validation-for="Password" style="color:red"></span>
+    
+
+    <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
+    <input  asp-for="ConfirnmPassword">
+    <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
+    
+
+    <button id="btnAdd" type="submit" value="Register">Register</button>
+</form>
+  </div>
+
+</body>
+</html>

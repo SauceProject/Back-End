@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Shared;
-using ITI.Sauce.ViewModels.Ingredient;
 using Abp.Linq.Expressions;
 
-namespace ITI.Sauce.Repositorie
+namespace ITI.Sauce.Repository
 {
     public class IngredientRepository : GeneralRepository<Ingredient>
     {
+        public IngredientRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<IngredientViewModel>> Get (int ID =0,string orderBy = null, 
             bool isAscending = false , string NameEN = "",
             string NameAR = "", string ImageUrl="" , int pageIndex=1, int pageSize= 20)
@@ -54,6 +55,58 @@ namespace ITI.Sauce.Repositorie
 
             return finalResult;
         }
+
+        public IngredientViewModel Add(IngredientEditViewModel model)
+        {
+            Ingredient ingredient = model.ToModel();
+            return base.Add(ingredient).Entity.ToViewModel();
+        }
+
+
+
+
+
+
+
+        public IngredientViewModel Update(IngredientEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Ingredient>();
+            var old = filterd;
+
+            filterd = filterd.Or(i => i.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            Result.ImageUrl = model.ImageUrl;
+
+            return Result.ToViewModel();
+
+
+        }
+        public IngredientViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<Ingredient>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
+        }
+
     }
 
 }

@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ITI.Sauce.Models;
 using Microsoft.AspNetCore.Mvc;
-using ITI.Sauce.Repositorie;
+using ITI.Sauce.Repository;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -17,7 +17,9 @@ namespace ITI.sauce.MVC.Controllers
 
         public OrderController()
         {
-            this.ordRepo = new OrderRepository();
+            DBContext dBContext = new DBContext();
+
+            this.ordRepo = new OrderRepository(dBContext);
         }
         public ViewResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
             string NameAR = "", DateTime? registerDate = null,int pageIndex = 1, int pageSize = 20)

@@ -1,0 +1,62 @@
+﻿
+@using ITI.Sauce.ViewModels
+
+
+
+@model IPagedList<MemberShipViewModel>
+
+	
+@section StyleSection
+{
+<link rel="stylesheet" href="~/Content/CSS/MemberShip.css"/> 
+<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
+
+
+}
+
+
+<h2>MeberShip</h2>
+    <a asp-action="Add" asp-controller="MemberShip" id="btnAdd">Add</a>
+
+<table>
+  <tr>
+
+    <th>price</th>
+    <th>TypeEn</th>
+    <th>TypeAr</th>
+  </tr>
+   
+   @foreach (var M in Model)
+  
+{
+	<tr>
+	
+	
+	<td>@M.Price</td>
+	<td>@M.TypeEn</td>
+	<td>@M.TypeAr</td>
+   </tr>
+}
+  
+</table>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+</div>
+
+
+
+

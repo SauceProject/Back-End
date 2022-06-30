@@ -1,50 +1,39 @@
-﻿@using ITI.Sauce.ViewModels.Restaurant
-@using ITI.Sauce.ViewModels.Shared
-@using ITI.Sauce.ViewModel
+﻿
+@using ITI.Sauce.ViewModels
+
+
+
 @model PaginingViewModel<List<RestaurantViewModel>>
 
 
-
-
- <!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/Restaurant.css" />
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-</style>
-</head>
-<body>
-<h2>Restaurant Table</h2>
+
+<h2>Restaurant</h2>
+
 <table>
   <tr>
-    <th>NameEN</th>
-    <th>NameAr</th>
+    <th>Name</th>
+    <th>IsDeleted</th>
     <th>RegisterDate</th>
-    <th>WorkTime</th>
+    <th>NameAr</th>
+
   </tr>
-    @foreach(var V in Model.Data)
+	@foreach (var U in Model.Data)
 {  
   <tr>
-    <td>@V.NameEN</td>
-    <td>@V.NameAR</td>
-    <td>@V.RegisterDate</td>
-    <td>@V.WorkTime</td>
+	<td>@U.NameEN</td>
+	<td>@U.IsDeleted</td>
+	<td>@U.RegisterDate</td>
+	<td>@U.NameAR</td>
+
   </tr>
+
     }
+
+
 </table>
-</body>
-</html>
+

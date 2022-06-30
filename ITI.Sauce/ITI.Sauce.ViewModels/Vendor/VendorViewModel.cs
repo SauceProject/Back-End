@@ -5,8 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
 
-namespace ITI.Sauce.ViewModels.Vendor
+namespace ITI.Sauce.ViewModels
 {
+    public static partial class VendorExtentions
+    {
+        public static VendorViewModel ToViewModel(this Vendor model)
+        {
+
+            return new VendorViewModel
+            {
+                ID = model.ID,
+                UserName = model.UserName,
+                Password = model.Password,
+                NameEN = model.NameEN,
+                NameAR = model.NameAR,
+                Email = model.Email,
+                phone = model.phone,
+            };
+        }
+    }
     public class VendorViewModel
     {
         public int ID { get; set; }

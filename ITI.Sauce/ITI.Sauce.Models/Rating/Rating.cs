@@ -12,7 +12,7 @@ namespace ITI.Sauce.Models
         public string Comment { get; set;}
         public int RatingValue { get; set; }
         public int RecipeID { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public Recipe Recipe { get; set; }
         public Users User { get; set; }
 

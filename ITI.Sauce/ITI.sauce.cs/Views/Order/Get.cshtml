@@ -1,13 +1,29 @@
 ﻿
 @using ITI.Sauce.ViewModels
-@using ITI.Sauce.ViewModels.Shared
+
+
 @model PaginingViewModel<List<OrderViewModel>>
 
-    @foreach(var o in Model.Data)
-{
-    <h1>@o.ID</h1>
-    <h1>@o.NameEN</h1>
-    <h1>@o.NameAR</h1>
-    <h1>@o.registerDate</h1>
 
+<link rel="stylesheet" href="~/Content/CSS/Order.css"/>
+<h2>Order</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>NameEN</th>
+    <th>NameAR</th>
+    <th>Register Date</th>
+  </tr>
+  <tr>
+          @foreach(var o in Model.Data)
+{
+    <td>@o.ID</td>
+    <td>@o.NameEN</td>
+    <td>@o.NameAR</td>
+    <td>@o.registerDate</td>
 }
+  </tr>
+  
+</table>
+

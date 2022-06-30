@@ -14,7 +14,9 @@ namespace ITI.Sauce.Models
             builder.ToTable("MemberShip");
             builder.HasKey(ms => ms.ID);
             builder.Property(ms => ms.ID).ValueGeneratedOnAdd();
-            builder.Property(ms => ms.Type).HasMaxLength(300).IsRequired();
+            
+            builder.Property(ms => ms.TypeEn).HasMaxLength(300).IsRequired();
+            builder.Property(ms => ms.TypeAr).HasMaxLength(300).IsRequired();
             builder.Property(ms => ms.OrderNum).IsRequired();
             builder.Property(ms => ms.Price).IsRequired();
         }

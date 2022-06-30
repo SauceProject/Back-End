@@ -1,18 +1,22 @@
 ﻿using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
-using ITI.Sauce.Repositories;
-using ITI.Sauce.ViewModels.Recipe;
+using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using X.PagedList;
 
-namespace ITI.Sauce.Repositorie
+namespace ITI.Sauce.Repository
 {
     public class RecipeRepository : GeneralRepository<Recipe>
     {
+        public RecipeRepository(DBContext _Context) : base(_Context)
+        {
+
+        }
         public PaginingViewModel<List<RecipeViewModel>> Get ( 
             string NameAr=null, string NameEN=null,string orderBy=null,
             bool isAscending = false, float Price=0,DateTime? rdate=null , string category=null ,
@@ -52,8 +56,16 @@ namespace ITI.Sauce.Repositorie
             query.Select(i => new RecipeViewModel
             {
                 ID = i.ID,
+                CategoryID = i.CategoryID,
+                Details = i.Details,
+                GoodFor = i.GoodFor,
+                ImageUrl = i.ImageUrl,
+                IsDeleted = i.IsDeleted,
+                NameAR = i.NameAR,
                 NameEN = i.NameEN,
-                CategoryName=i.Category.NameEN
+                Price = i.Price,
+                RegisterDate = i.RegisterDate,
+                VideoUrl = i.VideoUrl,
             });
 
             PaginingViewModel<List<RecipeViewModel>>
@@ -67,7 +79,35 @@ namespace ITI.Sauce.Repositorie
             return finalResult;
 
         }
-        
+        public IPagedList<RecipeViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                 =>
+ GetList().Select(V => new RecipeViewModel
+ {
+     ID = V.ID,
+     CategoryID = V.CategoryID,
+     Details = V.Details,
+     GoodFor = V.GoodFor,
+     ImageUrl = V.ImageUrl,
+     IsDeleted = V.IsDeleted,
+     NameAR = V.NameAR,
+     NameEN = V.NameEN,
+     Price = V.Price,
+     RegisterDate = V.RegisterDate,
+     VideoUrl = V.VideoUrl,
+
+ }).ToPagedList(pageIndex, pageSize);
+
+        public RecipeViewModel Add(RecipeEditViewModel model)
+        {
+            Recipe Recipe = model.ToModel();
+            return base.Add(Recipe).Entity.ToViewModel();
+        }
+
+        public List<TextValueViewModel> GetCategoryID() =>
+           GetList().Select(i => new TextValueViewModel
+           {
+               Value = i.CategoryID
+           }).ToList();
 
     }
 }

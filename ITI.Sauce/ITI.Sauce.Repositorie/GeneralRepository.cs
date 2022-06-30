@@ -6,16 +6,23 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ITI.Sauce.Models;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using ITI.Sauce.Repository;
 
-namespace ITI.Sauce.Repositories
+namespace ITI.Sauce.Repository
 {
     public class GeneralRepository<T> where T : class
     {
         private readonly DBContext dbContext;
         private DbSet<T> Set;
-        public GeneralRepository()
+
+        private readonly UnitOfWork unitOfWork;
+        
+
+        public GeneralRepository(DBContext _Context)
+
         {
-            dbContext = new DBContext();
+            dbContext = _Context;
             Set = dbContext.Set<T>();
         }
 
@@ -44,9 +51,31 @@ namespace ITI.Sauce.Repositories
         {
             return Set.AsQueryable();
         }
-        public IQueryable<T> GetByID(int ID)
+
+
+
+        //Get By ID => Back ID From Database
+        public T? GetByID(Expression<Func<T, bool>> filter = null, int ID=0)
         {
-            return Set.AsQueryable().Where(e => e.Equals(ID));
+            var query = Set.AsQueryable();
+            if (filter != null)
+                query = query.Where(filter);
+            return query.FirstOrDefault();
         }
+
+
+
+
+
+
+
+
+        public EntityEntry<T> Add(T entity) =>
+             Set.Add(entity);
+        public EntityEntry<T> Update(T entity) =>
+             Set.Update(entity);
+        public EntityEntry<T> Remove(T entity) =>
+            Set.Remove(entity);
+
     }
 }

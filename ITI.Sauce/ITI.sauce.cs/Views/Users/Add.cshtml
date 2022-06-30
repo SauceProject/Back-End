@@ -1,0 +1,41 @@
+﻿@using ITI.Sauce.ViewModels
+@model UserEditViewModel
+
+
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+}
+
+<h3>Add to Users Table</h3>
+
+<div>
+  <form method="post" asp-action="Add" asp-controller="Users">
+   
+    <br />
+   
+    <br />
+     <label asp-for="Email"> Email</label>
+    <input  asp-for="Email">
+    <span asp-validation-for="Email" style="color:red"></span>
+    <br />
+    <label asp-for="phone"> phone</label>
+    <input  asp-for="phone">
+    <span asp-validation-for="phone" style="color:red"></span>
+    <br />
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+    <br />
+     <label asp-for="Password"> Password</label>
+    <input  asp-for="Password">
+    
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
