@@ -12,8 +12,6 @@ namespace ITI.Sauce.ViewModels
 {
     public static partial class VendorExtentions
     {
-
-
         public static Vendor ToModel(this VendorEditViewModel model)
         {
             return new Vendor

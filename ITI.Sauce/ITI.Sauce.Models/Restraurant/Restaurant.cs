@@ -15,6 +15,7 @@ namespace ITI.Sauce.Models
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImageUrl { get; set; }
         public Vendor Vendor { get; set; }
         public List<Location> Locations { get; set; }
         public List<Restaurant_Phones> Restaurant_Phones{ get; set; }

@@ -15,7 +15,7 @@ namespace ITI.Sauce.Models
             builder.ToTable("Rating");
             builder.HasKey(R=>R.RatingID);
             builder.Property(R => R.RatingID).ValueGeneratedOnAdd();
-            builder.Property(R => R.Comment).HasMaxLength(500);
+            builder.Property(R => R.Comment).HasMaxLength(450);
             builder.Property(R => R.RatingValue).IsRequired();
             builder.Property(R => R.RecipeID).IsRequired();
             builder.Property(R => R.UserID).IsRequired();

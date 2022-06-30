@@ -9,7 +9,7 @@ namespace ITI.Sauce.Models
     public class Fav
     {
         public int ID { get; set; }
-        public int Users_ID { get; set; }
+        public string UserID { get; set; }
         public int Recipe_ID { get; set; }
 
         public Users User { get; set; }   

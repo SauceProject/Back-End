@@ -1,0 +1,65 @@
+﻿@using ITI.Sauce.ViewModels
+@model RecipeEditViewModel
+
+
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+<body>
+
+<h3>Add to Recipe Table</h3>
+
+<div>
+  <form method="post" asp-action="Add" asp-controller="Recipe">
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+    <label asp-for="CategoryID"> CategoryID</label>
+    <select>
+        @foreach(var i in ViewBag.Recipe)
+                {
+                    <option selected>Choose Option</option>
+                    <option>@i.Value</option>
+                }
+                   
+            </select>
+    <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+    <br />
+    <label asp-for="ImageUrl"> ImageUrl</label>
+    <input  asp-for="ImageUrl">
+    <span asp-validation-for="ImageUrl" style="color:red"></span>
+    <br />
+    <label asp-for="VideoUrl"> VideoUrl</label>
+    <input  asp-for="VideoUrl">
+    <span asp-validation-for="VideoUrl" style="color:red"></span>
+    <br />
+    <label asp-for="Details"> Details</label>
+    <input  asp-for="Details">
+    <span asp-validation-for="Details" style="color:red"></span>
+    <br />
+    <label asp-for="GoodFor"> GoodFor</label>
+    <input  asp-for="GoodFor">
+    <span asp-validation-for="GoodFor" style="color:red"></span>
+    <br />
+     <label asp-for="Price"> Price</label>
+    <input  asp-for="Price">
+    <span asp-validation-for="Price" style="color:red"></span>
+    <br />
+    <label asp-for="RegisterDate"> RegisterDate</label>
+    <input  asp-for="RegisterDate">
+    <span asp-validation-for="RegisterDate" style="color:red"></span>
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>
+
+</body>
+</html>
+
+

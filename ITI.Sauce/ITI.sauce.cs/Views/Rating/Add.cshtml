@@ -10,7 +10,7 @@
 <h3>Add to Rating Table</h3>
 
 <div>
-  <form method="post" asp-action="Add" asp-controller="Rating">
+  <form data-ajax="true" method="post" asp-action="Add" asp-controller="Rating">
       <label asp-for="RecipeID"> RecipeID</label>
     <select>
         @foreach(var i in ViewBag.Rating)

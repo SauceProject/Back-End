@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ITI.Sauce.Models
 {
-    public class DBContext : DbContext
+    public class DBContext : IdentityDbContext<Users>
     {
         #region DbSets
         public DbSet<Recipe> Recipes { get; set; }
@@ -25,7 +27,6 @@ namespace ITI.Sauce.Models
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Restaurant_Phones> Restaurant_Phones { get; set; }
-        public DbSet<Users> Users { get; set; }
         public DbSet<UserOrder> UserOrders { get; set; }
         #endregion
 
@@ -45,7 +46,6 @@ namespace ITI.Sauce.Models
             
             new CartConfiguration().Configure(modelBuilder.Entity<Cart>());
             new FavConfiguration().Configure(modelBuilder.Entity<Fav>());
-            new UsersConfiguration().Configure(modelBuilder.Entity<Users>());
 
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
             new OrderListConfiguration().Configure(modelBuilder.Entity<OrderList>());

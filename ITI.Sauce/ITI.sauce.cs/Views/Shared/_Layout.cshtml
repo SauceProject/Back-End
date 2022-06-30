@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using ITI.Sauce.Models
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> _SignInManager
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -36,15 +39,22 @@
         <a href="./vendor_profile.html">
           <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
         </a>
-        <span id="restaurant-name">Vendor</span>
+        @if(_SignInManager.IsSignedIn(User))
+        {
+            <div>
+         <span id="restaurant-name">@User.Identity.Name </span>|
+        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span>
+        </div>
+        }
+        
       </nav>
 
         <section class="container">
             @RenderBody()
         </section>
       </main>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
 
-      
-    <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
   </body>
 </html>
