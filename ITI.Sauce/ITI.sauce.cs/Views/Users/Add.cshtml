@@ -1,5 +1,5 @@
 ﻿@using ITI.Sauce.ViewModels
-@model UsersEditViewModel
+@model UserEditViewModel
 
 
 @section StyleSection{
@@ -10,12 +10,9 @@
 
 <div>
   <form method="post" asp-action="Add" asp-controller="Users">
-    <label asp-for="UserName"> UserName</label>
-    <input  asp-for="UserName">
-    <span asp-validation-for="UserName" style="color:red"></span>
+   
     <br />
-    <label asp-for="Password"> Password</label>
-    <input  asp-for="Password">
+   
     <br />
      <label asp-for="Email"> Email</label>
     <input  asp-for="Email">
@@ -33,11 +30,8 @@
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
     <br />
-    <label asp-for="registerDate"> RegisterDate</label>
-    <input  asp-for="registerDate">
-     <br />
-    <label asp-for="IsDelete"> IsDelete</label>
-    <input  asp-for="IsDelete">
+     <label asp-for="Password"> Password</label>
+    <input  asp-for="Password">
     
 
 

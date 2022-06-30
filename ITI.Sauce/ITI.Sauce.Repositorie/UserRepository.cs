@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Extensions;
 using Abp.Linq.Expressions;
-using ITI.Sauce.Models;
-using ITI.Sauce.ViewModels;
+
 using X.PagedList;
 using Microsoft.AspNetCore.Identity;
+using ITI.Sauce.Models;
+using ITI.Sauce.ViewModels;
 
 namespace ITI.Sauce.Repository
 {
@@ -90,16 +91,16 @@ namespace ITI.Sauce.Repository
                    =>
    GetList().Select(i => new UsersViewModel
    {
-       ID = i.ID,
+       ID = i.Id,
        UserName = i.UserName,
        Email = i.Email,
-       Password = i.Password,
-       phone = i.phone,
+       Password = i.PasswordHash,
+       phone = i.PhoneNumber,
        registerDate = i.registerDate,
        NameEN = i.NameEN,
        IsDelete = i.IsDelete
    }).ToPagedList(pageIndex, pageSize);
-        public UsersViewModel Add(UsersEditViewModel model)
+        public UsersViewModel Add(UserEditViewModel model)
         {
             Users Users = model.ToModel();
             return base.Add(Users).Entity.ToViewModel();

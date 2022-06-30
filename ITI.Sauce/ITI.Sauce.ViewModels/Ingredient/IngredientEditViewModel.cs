@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
-using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-
+using Microsoft.AspNetCore.Http;
 
 namespace ITI.Sauce.ViewModels
 {
