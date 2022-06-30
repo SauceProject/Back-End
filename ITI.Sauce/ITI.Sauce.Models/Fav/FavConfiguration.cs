@@ -15,7 +15,7 @@ namespace ITI.Sauce.Models
             builder.ToTable("Fav");
             builder.HasKey(F => F.ID);
             builder.Property(F => F.ID).ValueGeneratedOnAdd();
-            builder.Property(F => F.Users_ID).HasMaxLength(50).IsRequired();
+            builder.Property(F => F.UserID).HasMaxLength(450).IsRequired();
             builder.Property(F => F.Recipe_ID).HasMaxLength(50).IsRequired();
 
 

@@ -1,23 +1,68 @@
 ﻿@using ITI.Sauce.ViewModels
 
-
-
-
-@model PaginingViewModel<List<RecipeViewModel>>;
+@model IPagedList<RecipeViewModel>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Recipes</title>
+         <link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
+    <style>
+        #btnAdd {
+    width: 7%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cu rsor: pointer;
+    text-decoration:none;
+    float:right;
+}
+    </style>
     </head>
     <body>
-    <h1>Recipes</h1>
-    @foreach (var i in Model.Data)
-    {
-
-        <h2>Recipe: @i.NameEN</h2>
-        <p> Category: @i.CategoryName</p>
-            
+    <h2>Recipe Table</h2>
+    <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
+<table>
+  <tr>
+   <th>NameEN</th>
+    <th>NameAr</th>
+    <th>Price</th>
+    <th>GoodFor</th>
+    <th>Actions</th>
+  </tr>
+    @foreach(var V in Model)
+{  
+  <tr>
+     <td>@V.NameEN</td>
+    <td>@V.NameAR</td>
+    <td>@V.Price</td>
+    <td>@V.GoodFor</td>
+    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
+    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a></td>
+  </tr>
     }
+</table>
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+</div>
+
+
+    
             
     </body>
 </html>

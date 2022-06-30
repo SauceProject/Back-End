@@ -19,6 +19,7 @@ namespace ITI.Sauce.Models
             builder.Property(r => r.Vendor_ID).IsRequired();
             builder.Property(r => r.NameEN).IsRequired().HasMaxLength(300);
             builder.Property(r => r.NameAR).IsRequired().HasMaxLength(300);
+            builder.Property(r => r.ImageUrl).IsRequired().HasMaxLength(300);
             builder.Property(r => r.RegisterDate).HasDefaultValue(DateTime.Now);
             builder.Property(r => r.IsDeleted).HasDefaultValue(false);
 

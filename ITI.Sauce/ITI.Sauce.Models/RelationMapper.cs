@@ -30,14 +30,14 @@ namespace ITI.Sauce.Models
             modelBuilder.Entity<Fav>()
                .HasOne(U => U.User)
                .WithMany(F => F.favs)
-               .HasForeignKey(U => U.Users_ID)
+               .HasForeignKey(U => U.UserID)
                .OnDelete(DeleteBehavior.Cascade)
                .IsRequired();
             /*User - Cart*/
             modelBuilder.Entity<Cart>()
                .HasOne(U => U.User)
                .WithMany(C => C.Carts)
-               .HasForeignKey(U => U.Users_ID)
+               .HasForeignKey(U => U.UserID)
                .OnDelete(DeleteBehavior.Cascade)
                .IsRequired();
 

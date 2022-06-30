@@ -7,9 +7,23 @@ using ITI.Sauce.Models;
 
 namespace ITI.Sauce.ViewModels
 {
+    public static partial class UserExtentions
+    {
+        public static UsersViewModel ToViewModel(this Users model)
+        {
+
+            return new UsersViewModel
+            {
+                NameEN=model.NameEN,
+                NameAR=model.NameAR,
+                Email=model.Email,
+                UserName=model.Email,
+            };
+        }
+    }
     public class UsersViewModel
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }

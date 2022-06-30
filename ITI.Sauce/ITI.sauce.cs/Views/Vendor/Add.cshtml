@@ -10,7 +10,7 @@
 <h3>Add to Vendor Table</h3>
 
 <div>
-  <form method="post" asp-action="Add" asp-controller="Vendor">
+  <form data-ajax="true" method="post" asp-action="Add" asp-controller="Vendor">
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
@@ -39,7 +39,7 @@
     <input type="submit" value="Submit">
   </form>
 </div>
-
+    
 </body>
 </html>
 
