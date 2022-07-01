@@ -10,19 +10,21 @@ namespace ITI.sauce.MVC.Controllers
     {
         private readonly RecipeRepository RecipeRepo;
         private readonly UnitOfWork UnitOfWork;
-        public RecipeController(RecipeRepository _RecipeRepo, UnitOfWork _unitOfWork)
+        private readonly VendorRepository VendorRepo;
+        public RecipeController(RecipeRepository _RecipeRepo, UnitOfWork _unitOfWork, VendorRepository _VendorRepo)
         {
             DBContext dBContext = new DBContext();
             this.RecipeRepo = _RecipeRepo;
             UnitOfWork = _unitOfWork;
+            VendorRepo = _VendorRepo;
         }
         public ViewResult Get(string NameAr = null, string NameEN = null,
-            string orderBy = null,
+            string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20)
         {
             var data = RecipeRepo.Get(
-                NameAr, NameEN, orderBy, 
+                NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
                 isAscending,Price, rdate, category,pageIndex,pageSize);
             return View(data);
         }
@@ -41,14 +43,25 @@ namespace ITI.sauce.MVC.Controllers
         [HttpPost]
         public IActionResult Add(RecipeEditViewModel model)
         {
-            if (ModelState.IsValid == true)
-            {
-                RecipeRepo.Add(model);
-                UnitOfWork.Save();
-                return RedirectToAction("Search");
-            }
-            else
-                return View();
+
+            string? bookUploadUrl = "/Content/Uploads/Recipe/";
+
+            string newFileName = Guid.NewGuid().ToString() + model.Image.FileName;
+            model.ImageUrl = bookUploadUrl + newFileName;
+
+            FileStream fs = new FileStream(Path.Combine
+                (
+                    Directory.GetCurrentDirectory(),
+                    "Content",
+                   "Uploads", "Recipe", newFileName
+                ), FileMode.Create);
+
+            model.Image.CopyTo(fs);
+            fs.Position = 0;
+
+            RecipeRepo.Add(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
         }
     }
 }

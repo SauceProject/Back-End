@@ -1,6 +1,6 @@
 ﻿@using ITI.Sauce.ViewModels
 
-@model IPagedList<RecipeViewModel>
+@model PaginingViewModel<List<RecipeViewModel>>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,19 +31,22 @@
     <th>GoodFor</th>
     <th>Actions</th>
   </tr>
-    @foreach(var V in Model)
+    @foreach(var V in Model.Data)
 {  
   <tr>
      <td>@V.NameEN</td>
+   
     <td>@V.NameAR</td>
     <td>@V.Price</td>
     <td>@V.GoodFor</td>
+    <td> <img src="@V.ImageUrl" width="100 px" height="100 px">   </td>
+
     <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
     <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a></td>
   </tr>
     }
 </table>
-<div>
+@*<div>
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions
         {
@@ -60,7 +63,7 @@
         });
     </script>
 </div>
-
+*@
 
     
             

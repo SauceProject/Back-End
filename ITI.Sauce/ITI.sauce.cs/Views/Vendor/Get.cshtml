@@ -27,8 +27,10 @@
     <td>@V.NameAR</td>
     <td>@V.phone</td>
     <td>@V.ID --- @V.Email</td>
-    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
-    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a></td>
+    <td><a asp-action="Search" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
+    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a>
+    <a asp-action="Get" asp-controller="Ingredient" asp-route-vendorID="@V.ID">Ingredient</a>
+    </td>
   </tr>
     }
 </table>

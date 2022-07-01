@@ -19,11 +19,33 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 RegisterDate = model.RegisterDate,
-                IsDeleted = model.IsDeleted
+                IsDeleted = model.IsDeleted,
+                ImageUrl = model.ImageUrl,
             };
         }
+
+        public static RestaurantEditViewModel ToEditViewModel(this RestaurantViewModel model)
+        {
+
+
+            return new RestaurantEditViewModel()
+            {
+
+                WorkTime = model.WorkTime,
+                Vendor_ID = model.Vendor_ID,
+                NameEN = model.NameEN,
+                NameAR = model.NameAR,
+                RegisterDate = model.RegisterDate,
+                IsDeleted = model.IsDeleted,
+                ImageUrl = model.ImageUrl,
+            };
+        }
+
     }
-        public class RestaurantViewModel
+
+
+
+    public class RestaurantViewModel
     {
         public int ID { get; set; }
         public DateTime WorkTime { get; set; }
@@ -32,5 +54,6 @@ namespace ITI.Sauce.ViewModels
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

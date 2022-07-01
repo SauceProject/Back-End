@@ -10,20 +10,23 @@
 <h3>Add to Recipe Table</h3>
 
 <div>
-  <form method="post" asp-action="Add" asp-controller="Recipe">
+  <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Recipe">
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
     <br />
+    
+    
     <label asp-for="CategoryID"> CategoryID</label>
-    <select>
+    <input  asp-for="CategoryID">
+   @* <select>
         @foreach(var i in ViewBag.Recipe)
                 {
                     <option selected>Choose Option</option>
                     <option>@i.Value</option>
                 }
                    
-            </select>
+            </select>*@
     <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
     <br />
      <label asp-for="NameAR"> NameAR</label>
@@ -53,6 +56,13 @@
     <label asp-for="RegisterDate"> RegisterDate</label>
     <input  asp-for="RegisterDate">
     <span asp-validation-for="RegisterDate" style="color:red"></span>
+
+    <div class="form-group">
+            <label asp-for="Image"></label>
+                <input asp-for="Image" class="custom-file-input" id="customFile">
+                 <span asp-validation-for="Image" style="color:red"></span>
+      
+        </div>
 
 
     <input type="submit" value="Submit">

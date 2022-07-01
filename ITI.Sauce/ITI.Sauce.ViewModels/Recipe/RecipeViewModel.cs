@@ -18,12 +18,12 @@ namespace ITI.Sauce.ViewModels
                 CategoryID=model.CategoryID,
                 Details=model.Details,
                 GoodFor=model.GoodFor,
-                ImageUrl=model.ImageUrl,
                 IsDeleted=model.IsDeleted,
                 NameAR=model.NameAR,
                 NameEN=model.NameEN,
                 Price=model.Price,
                 RegisterDate=model.RegisterDate,
+                ImageUrl=model.ImageUrl,
                 VideoUrl=model.VideoUrl,
             };
         }

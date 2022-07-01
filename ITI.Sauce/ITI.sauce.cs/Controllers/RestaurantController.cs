@@ -41,14 +41,24 @@ namespace ITI.sauce.MVC.Controllers
         [HttpPost]
         public IActionResult Add(RestaurantEditViewModel model)
         {
-            if (ModelState.IsValid == true)
-            {
-                ResRepo.Add(model);
-                UnitOfWork.Save();
-                return RedirectToAction("Search");
-            }
-            else
-                return View();
+            string? bookUploadUrl = "/Content/Uploads/Resturant/";
+
+            string newFileName = Guid.NewGuid().ToString() + model.Image.FileName;
+            model.ImageUrl = bookUploadUrl + newFileName;
+
+            FileStream fs = new FileStream(Path.Combine
+                (
+                    Directory.GetCurrentDirectory(),
+                    "Content",
+                   "Uploads", "Resturant", newFileName
+                ), FileMode.Create);
+
+            model.Image.CopyTo(fs);
+            fs.Position = 0;
+
+            ResRepo.Add(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
         }
     }
 }
