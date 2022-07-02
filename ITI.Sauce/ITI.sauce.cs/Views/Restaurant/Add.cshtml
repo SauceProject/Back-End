@@ -7,7 +7,7 @@
 }
 <h3>Add to Restaurants Table</h3>
 <div>
-  <form method="post" asp-action="Add" asp-controller="Restaurant">
+  <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Restaurant">
     <label asp-for="WorkTime "> WorkTime </label>
     <input  asp-for="WorkTime ">
     <span asp-validation-for="WorkTime " style="color:red"></span>
@@ -27,8 +27,20 @@
     <label asp-for="RegisterDate"> RegisterDate</label>
     <input  asp-for="RegisterDate">
      <br />
+    <div class="form-group">
+            <label asp-for="Image"></label>
+            <div class="custom-file">
+                <input asp-for="Image" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile"></label>
+            </div>
+        </div>
+               
+          
+        
+        <br />
     <label asp-for="IsDeleted"> IsDeleted</label>
     <input  asp-for="IsDeleted">
+
     
 
 

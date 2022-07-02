@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ITI.Sauce.ViewModels
 {
@@ -20,7 +21,8 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 RegisterDate = model.RegisterDate,
-                IsDeleted = model.IsDeleted
+                IsDeleted = model.IsDeleted,
+                ImageUrl = model.ImageUrl,
             };
         }
     }
@@ -38,5 +40,7 @@ namespace ITI.Sauce.ViewModels
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImageUrl { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

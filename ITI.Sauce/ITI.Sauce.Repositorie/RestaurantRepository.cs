@@ -75,6 +75,7 @@ namespace ITI.Sauce.Repository
            RegisterDate = V.RegisterDate,
            IsDeleted = V.IsDeleted,
        }).ToPagedList(pageIndex, pageSize);
+
         public RestaurantViewModel Add(RestaurantEditViewModel model)
         {
             Restaurant restaurant = model.ToModel();

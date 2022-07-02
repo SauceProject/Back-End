@@ -18,7 +18,7 @@ namespace ITI.Sauce.Repository
 
         }
         public PaginingViewModel<List<RecipeViewModel>> Get ( 
-            string NameAr=null, string NameEN=null,string orderBy=null,
+            string NameAr=null, string NameEN=null,string orderBy=null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price=0,DateTime? rdate=null , string category=null ,
             int pageIndex=1,int pageSize=20
             )
@@ -46,6 +46,11 @@ namespace ITI.Sauce.Repository
             {
                 filter = filter.Or(r => r.Category.NameEN == category);
             }
+            if (!string.IsNullOrEmpty(ImageUrl))
+                filter = filter.Or(I => I.ImageUrl.Contains(ImageUrl));
+
+            if (!string.IsNullOrEmpty(VideoUrl))
+                filter = filter.Or(I => I.ImageUrl.Contains(VideoUrl));
             if (filter == oldFilter)
             {
                 filter = null;
@@ -59,12 +64,12 @@ namespace ITI.Sauce.Repository
                 CategoryID = i.CategoryID,
                 Details = i.Details,
                 GoodFor = i.GoodFor,
-                ImageUrl = i.ImageUrl,
                 IsDeleted = i.IsDeleted,
                 NameAR = i.NameAR,
                 NameEN = i.NameEN,
                 Price = i.Price,
                 RegisterDate = i.RegisterDate,
+                ImageUrl = i.ImageUrl,
                 VideoUrl = i.VideoUrl,
             });
 
@@ -87,12 +92,12 @@ namespace ITI.Sauce.Repository
      CategoryID = V.CategoryID,
      Details = V.Details,
      GoodFor = V.GoodFor,
-     ImageUrl = V.ImageUrl,
      IsDeleted = V.IsDeleted,
      NameAR = V.NameAR,
      NameEN = V.NameEN,
      Price = V.Price,
      RegisterDate = V.RegisterDate,
+     ImageUrl = V.ImageUrl,
      VideoUrl = V.VideoUrl,
 
  }).ToPagedList(pageIndex, pageSize);
@@ -102,11 +107,12 @@ namespace ITI.Sauce.Repository
             Recipe Recipe = model.ToModel();
             return base.Add(Recipe).Entity.ToViewModel();
         }
+       
 
         public List<TextValueViewModel> GetCategoryID() =>
            GetList().Select(i => new TextValueViewModel
            {
-               Value = i.CategoryID
+               Value = i.CategoryID 
            }).ToList();
 
     }

@@ -9,5 +9,6 @@ namespace ITI.Sauce.ViewModels.Shared
     public class TextValueViewModel
     {
         public int Value { get; set; }
+        public string Text { get; set; }
     }
 }
