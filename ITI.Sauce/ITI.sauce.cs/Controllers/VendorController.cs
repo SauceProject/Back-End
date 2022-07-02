@@ -63,5 +63,26 @@ namespace ITI.sauce.MVC.Controllers
             else
                 return View();
         }
+
+
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            var Results = pubRepo.GetOne(Id);
+            return View(Results.ToEditViewModel());
+        }
+
+
+
+        [HttpPost]
+        public IActionResult Update(VendorEditViewModel model, int ID = 0)
+        {
+
+            pubRepo.Update(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+
+        }
+
     }
 }

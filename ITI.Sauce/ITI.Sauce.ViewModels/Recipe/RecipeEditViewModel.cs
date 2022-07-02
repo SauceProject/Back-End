@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace ITI.Sauce.ViewModels
 
 {
-    public static partial class VendorExtentions
+    public static partial class RecipeExtentions
     {
+
 
 
         public static Recipe ToModel(this RecipeEditViewModel model)
@@ -22,12 +24,12 @@ namespace ITI.Sauce.ViewModels
                 CategoryID = model.CategoryID,
                 Details = model.Details,
                 GoodFor = model.GoodFor,
-                ImageUrl = model.ImageUrl,
                 IsDeleted = model.IsDeleted,
                 NameAR = model.NameAR,
                 NameEN = model.NameEN,
                 Price = model.Price,
                 RegisterDate = model.RegisterDate,
+                ImageUrl = model.ImageUrl,
                 VideoUrl = model.VideoUrl,
             };
         }
@@ -56,5 +58,7 @@ namespace ITI.Sauce.ViewModels
         public DateTime RegisterDate { get; set; }
         [Required]
         public bool IsDeleted { get; set; }
+       
+        public IFormFile? Image { get; set; }
     }
 }

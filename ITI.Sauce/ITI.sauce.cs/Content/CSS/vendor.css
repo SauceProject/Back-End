@@ -12,7 +12,11 @@ body {
     grid-template-columns: 1fr 5fr;
     grid-template-rows: 1fr;
     height: 100vh;
-    /* gap:1rem */
+    
+}
+.bodyClass {
+    display: grid;
+    grid-template-columns: 1fr;
 }
 
 .head {
@@ -281,5 +285,35 @@ hr {
     transform: scale(1.2);
     transition: transform 0.5s;
 }
+.display {
+    display: none;
+}
+/**Responsive**/
+@media (max-width:900px) {
+    aside {
+        display: none;
+    }
 
+    body {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
 
+    .flexbox {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .orders {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-card {
+        width: 70%;
+    }
+
+    .card {
+        width: 70%
+    }
+}

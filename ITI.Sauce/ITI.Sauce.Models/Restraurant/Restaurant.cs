@@ -19,5 +19,6 @@ namespace ITI.Sauce.Models
         public Vendor Vendor { get; set; }
         public List<Location> Locations { get; set; }
         public List<Restaurant_Phones> Restaurant_Phones{ get; set; }
+        public List<Recipe> Recipes { get; set; }
     }
 }

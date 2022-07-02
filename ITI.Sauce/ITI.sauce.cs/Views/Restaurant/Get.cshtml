@@ -3,7 +3,7 @@
 
 
 
-@model PagedList<RestaurantViewModel>
+@model PaginingViewModel<List<RestaurantViewModel>>
 
 
 @section StyleSection{
@@ -23,15 +23,18 @@
     <th>IsDeleted</th>
     <th>RegisterDate</th>
     <th>NameAr</th>
+    <th>Image</th>
+
 
   </tr>
-	@foreach (var U in Model)
+	@foreach (var U in Model.Data)
 {  
   <tr>
 	<td>@U.NameEN</td>
 	<td>@U.IsDeleted</td>
 	<td>@U.RegisterDate</td>
 	<td>@U.NameAR</td>
+    <td> <img src="@U.ImageUrl" width="100 px" height="100 px">   </td>
 
   </tr>
 
@@ -39,7 +42,8 @@
 
 
 </table>
-<div>
+
+@*<div>
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions
         {
@@ -55,4 +59,4 @@
             $('ul.pagination > li.disabled > a').addClass('page-link');
         });
     </script>
-</div>
+</div>*@
