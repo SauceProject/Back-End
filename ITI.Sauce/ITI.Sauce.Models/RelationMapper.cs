@@ -124,6 +124,10 @@ namespace ITI.Sauce.Models
                 .WithMany(r => r.Orders).HasForeignKey(o => o.Recipe_ID)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
+            /*Recipe - Resturant*/
+            modelBuilder.Entity<Recipe>().HasOne(r => r.Restaurant)
+                .WithMany(c => c.Recipes).HasForeignKey(r => r.ResturantID)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
 

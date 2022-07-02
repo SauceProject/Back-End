@@ -19,14 +19,14 @@ namespace ITI.Sauce.Repository
         }
 
 
-       
-        public PaginingViewModel<List<MemberShipViewModel>> Get(int id = 0, float Price = 0 , string TypeEn="",string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
+
+        public PaginingViewModel<List<MemberShipViewModel>> Get(int ID = 0, float Price = 0, string TypeEn = "", string TypeAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                          int pageSize = 20)
         {
             var filter = PredicateBuilder.New<MemberShip>();
             var oldFiler = filter;
-            if (id > 0)
-                filter.Or(U => U.ID == id);
+            if (ID > 0)
+                filter.Or(U => U.ID == ID);
             if (Price > 0)
                 filter = filter.Or(r => r.Price <= Price);
             if (!string.IsNullOrEmpty(TypeEn))
@@ -40,7 +40,7 @@ namespace ITI.Sauce.Repository
             var result = query.Select(i => new MemberShipViewModel
             {
                 ID = i.ID,
-                
+
                 TypeEn = i.TypeEn,
                 TypeAr = i.TypeAr,
                 Price = i.Price,
@@ -58,21 +58,76 @@ namespace ITI.Sauce.Repository
             return finalResult;
 
         }
-        public IPagedList<MemberShipViewModel> Search(int pageIndex = 1, int pageSize = 2)
-               =>
-GetList().Select(i => new MemberShipViewModel
-{
-    ID = i.ID,
+        public IPagedList<MemberShipViewModel> Search(int pageIndex = 1, int pageSize = 2)=>
+               
+                   GetList().Select(i => new MemberShipViewModel
+                   {
+                       ID = i.ID,
+                       TypeEn = i.TypeEn,
+                       TypeAr = i.TypeAr,
+                       Price = i.Price,
 
-    TypeEn = i.TypeEn,
-    TypeAr = i.TypeAr,
-    Price = i.Price,
+                   }).ToPagedList(pageIndex, pageSize);
 
-}).ToPagedList(pageIndex, pageSize);
+
+
+
         public MemberShipViewModel Add(MemberShipEditViewModel model)
         {
-           MemberShip memberShip = model.ToModel();
+            MemberShip memberShip = model.ToModel();
             return base.Add(memberShip).Entity.ToViewModel();
+        }
+
+
+
+
+
+
+
+
+
+
+        public MemberShipViewModel Update(MemberShipEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<MemberShip>();
+            var old = filterd;
+
+            filterd = filterd.Or(i => i.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+
+            Result.ID = model.ID;
+            Result.TypeEn = model.TypeEn;
+            Result.TypeAr = model.TypeAr;
+            Result.Price = model.Price;
+
+
+            return Result.ToViewModel();
+
+
+        }
+        public MemberShipViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<MemberShip>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
         }
     }
 }
+

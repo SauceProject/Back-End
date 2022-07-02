@@ -1,11 +1,5 @@
-﻿
-
-
-
-@using ITI.Sauce.ViewModels
-
-@model IngredientEditViewModel
-
+﻿@using ITI.Sauce.ViewModels
+@model RatingEditViewModel
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,34 +55,34 @@ div {
 <body>
 
   <div>
-<form data-ajax="true"  asp-action="Add" asp-controller="Ingredient" method="post">
-    <h1>Category</h1>
-    <p>Please Choose Your Category.</p>
+<form data-ajax="true"  asp-action="Update" asp-controller="Rating  " method="post">
+    <h1>Update MemberShip</h1>
+
+   @*  <div style="display:none">
+      
+       <input name="@Model.RatingID" type="text" class="form-group" value="@Model.RatingID"/>
+   </div>
+
+    *@
+    
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
 
-    <label asp-for="NameEN"> English Name </label>
-    <input  asp-for="NameEN">
-    <span asp-validation-for="NameEN" style="color:red"></span>
+    <label asp-for="RatingValue"> Rating Value </label>
+    <input  asp-for="RatingValue">
+    <span asp-validation-for="RatingValue" style="color:red"></span>
 
-
-
-    <label asp-for="NameAR"> Arabic Name </label>
-    <input  asp-for="NameAR">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-
-
-    <label asp-for="Image"></label>
     <br />
-     <input asp-for="Image" class="custom-file-input" id="customFile">
 
+ <button asp-action="Get" asp-controller="Rating" id="btnAdd" type="Update" value="Rating">Update Rating</button>
 
-    <button id="btnAdd" type="Add" value="Ingredient">Add</button>
+    
 </form>
   </div>
 
 </body>
 </html>
+
 
 
 

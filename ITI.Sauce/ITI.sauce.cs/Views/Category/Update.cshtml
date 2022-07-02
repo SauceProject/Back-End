@@ -5,30 +5,86 @@
 
 
 
-<h1>Edit Category</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    input[type=text],[type=email],[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
-<form method="post" enctype="multipart/form-data" asp-action="Update" asp-controller="Category" >
 
 
-    <div style="display:none">
+div {
+    border-radius: 5px;
+    padding: 20px;
+
       
-       <input name="@Model.ID" type="text" class="form-group" value="@Model.ID"/>
-   </div>
+}
+#btnAdd {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:right;
+}
 
-   <div class="form-group">
-       <label>NameEN</label>
-       <input name="NameEN" type="text" class="form-group" value="@Model.NameEN"/>
-   </div>
-    <div class="form-group">
-       <label>NameAR</label>
-       <input name="NameAR" type="text" class="form-group" value="@Model.NameAR" />
-   </div>
+#customFile{
+    width: 22%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:left;
+}
 
-   
-    <div class="form-group">
-       <input type="submit" class="form-group"/>
-   </div>
+</style>
+</head>
+<body>
+
+  <div>
+<form data-ajax="true"  asp-action="Update" asp-controller="Category" method="post">
+    <h1>Update Category</h1>
+    
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+    <hr>
+
+    <label asp-for="NameEN"> English Name </label>
+    <input  asp-for="NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
 
 
 
+    <label asp-for="NameAR"> Arabic Name </label>
+    <input  asp-for="NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+
+
+    >
+
+
+
+    <button id="btnAdd" type="Update" value="Category">Update</button>
 </form>
+  </div>
+
+</body>
+</html>
+

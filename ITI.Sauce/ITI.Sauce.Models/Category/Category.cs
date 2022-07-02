@@ -11,6 +11,8 @@ namespace ITI.Sauce.Models
         public int ID { get; set; }
         public string NameEN {get; set; }
         public string NameAR { get; set; }
+
+        public bool IsDeleted { get; set; }
         public List<Recipe> Recipes { get; set; }
 
     }

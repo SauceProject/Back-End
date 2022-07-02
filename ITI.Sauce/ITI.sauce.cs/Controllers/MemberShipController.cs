@@ -54,6 +54,33 @@ namespace ITI.sauce.MVC.Controllers
                 return View();
         }
 
-        
+
+
+
+
+        [HttpGet]
+        public IActionResult Update(int ID)
+        {
+            var Results = MemberShipeRepo.GetOne(ID);
+
+            return View(Results.ToEditViewModel());
+
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Update(MemberShipEditViewModel model, int ID = 0)
+        {
+            MemberShipeRepo.Update(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
+        }
     }
+
 }
+

@@ -2,6 +2,7 @@
 using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers
@@ -17,6 +18,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
             VendorRepo = _VendorRepo;
         }
+        [Authorize(Roles = "Admin,User,Vendor")]
         public ViewResult Get(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
@@ -27,20 +29,24 @@ namespace ITI.sauce.MVC.Controllers
                 isAscending,Price, rdate, category,pageIndex,pageSize);
             return View(data);
         }
+        [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = RecipeRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
+        [Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(string? returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;  
             List<TextValueViewModel> Values = RecipeRepo.GetCategoryID();
             ViewBag.Recipe = Values;
             return View();
         }
+        [Authorize(Roles = "Admin,Vendor")]
         [HttpPost]
-        public IActionResult Add(RecipeEditViewModel model)
+        public IActionResult Add(RecipeEditViewModel model , string? returnUrl = null)
         {
 
             string? bookUploadUrl = "/Content/Uploads/Recipe/";

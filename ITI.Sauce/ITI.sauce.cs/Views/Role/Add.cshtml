@@ -1,0 +1,36 @@
+﻿@using ITI.Sauce.ViewModels
+@model RoleEditViewModel
+
+
+	@section StyleSection{
+<link rel="stylesheet" href="~/Content/CSS/SighnUp.css"/>
+    }
+    @if(ViewBag.Success == true)
+{
+    <p style="color:green">You Successfully Added Role  </p>
+     
+}
+
+  <div>
+<form asp-action="Add" asp-controller="Role" method="post">
+    <h1>Register</h1>
+    <p>Please fill in this form to Register an account.</p>
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+    <hr>
+
+
+    <label asp-for="ID"> ID</label>
+    <input  asp-for="ID">
+    <span asp-validation-for="ID" style="color:red"></span>
+    <br />
+    <label asp-for="Name"> Name</label>
+    <input  asp-for="Name">
+    <span asp-validation-for="Name" style="color:red"></span>
+
+    
+    
+
+    <button id="btnAdd" type="submit" value="Register">AddRole</button>
+</form>
+  </div>
+

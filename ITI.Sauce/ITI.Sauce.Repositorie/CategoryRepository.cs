@@ -29,9 +29,18 @@ namespace ITI.Sauce.Repository
                 filter = filter.Or(c => c.NameAR.Contains(NameAR));
 
 
+
+
+            filter = filter.Or(c => c.IsDeleted == false);
+
+
+
+
+
             if (filter == oldFiler)
                 filter = null;
             var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
+                
 
             var result =
                 query.Select(i => new CategoryViewModel
@@ -106,6 +115,26 @@ namespace ITI.Sauce.Repository
 
             return query.ToViewModel();
 
+
+
+        }
+
+
+
+        public CategoryViewModel Remove(CategoryEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Category>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+
+            var Result = base.GetByID(filterd);
+
+            Result.IsDeleted = true;
+
+            return Result.ToViewModel();
 
 
         }

@@ -87,18 +87,10 @@ namespace ITI.sauce.MVC.Controllers
         {
             //get from data
             string Uploade = "/Content/Uploads/Ingredient/";
-
-            
-
-
             string NewFileName = Guid.NewGuid().ToString() + model.Image.FileName;
             model.ImageUrl = Uploade + NewFileName;
-
-
             FileStream fs = new FileStream(Path.Combine(
                 Directory.GetCurrentDirectory(), "Content", "Uploads", "Ingredient", NewFileName
-
-
             ), FileMode.Create);
 
             model.Image.CopyTo(fs);

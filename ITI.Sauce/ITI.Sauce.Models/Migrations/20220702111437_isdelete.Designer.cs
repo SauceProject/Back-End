@@ -4,6 +4,7 @@ using ITI.Sauce.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Sauce.Models.Migrations
 {
     [DbContext(typeof(DBContext))]
-    partial class DBContextModelSnapshot : ModelSnapshot
+    [Migration("20220702111437_isdelete")]
+    partial class isdelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -315,10 +317,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 14, 36, 2, 788, DateTimeKind.Local).AddTicks(9247));
-
-                    b.Property<int?>("ResturantID")
-                        .HasColumnType("int");
+                        .HasDefaultValue(new DateTime(2022, 7, 2, 13, 14, 37, 441, DateTimeKind.Local).AddTicks(2833));
 
                     b.Property<string>("VideoUrl")
                         .IsRequired()
@@ -327,8 +326,6 @@ namespace ITI.Sauce.Models.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("ResturantID");
 
                     b.ToTable("Recipe", (string)null);
                 });
@@ -387,7 +384,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 14, 36, 2, 791, DateTimeKind.Local).AddTicks(4785));
+                        .HasDefaultValue(new DateTime(2022, 7, 2, 13, 14, 37, 443, DateTimeKind.Local).AddTicks(387));
 
                     b.Property<int>("Vendor_ID")
                         .HasColumnType("int");
@@ -555,7 +552,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("registerDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 14, 36, 2, 790, DateTimeKind.Local).AddTicks(8145));
+                        .HasDefaultValue(new DateTime(2022, 7, 2, 13, 14, 37, 442, DateTimeKind.Local).AddTicks(2695));
 
                     b.HasKey("ID");
 
@@ -816,14 +813,7 @@ namespace ITI.Sauce.Models.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ITI.Sauce.Models.Restaurant", "Restaurant")
-                        .WithMany("Recipes")
-                        .HasForeignKey("ResturantID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.Navigation("Category");
-
-                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.RecipeIngredient", b =>
@@ -994,8 +984,6 @@ namespace ITI.Sauce.Models.Migrations
             modelBuilder.Entity("ITI.Sauce.Models.Restaurant", b =>
                 {
                     b.Navigation("Locations");
-
-                    b.Navigation("Recipes");
 
                     b.Navigation("Restaurant_Phones");
                 });

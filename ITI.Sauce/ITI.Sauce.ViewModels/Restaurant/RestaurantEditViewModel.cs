@@ -15,6 +15,7 @@ namespace ITI.Sauce.ViewModels
         {
             return new Restaurant
             {
+                ID = model.ID,  
                 WorkTime = model.WorkTime,
                 Vendor_ID = model.Vendor_ID,
                 NameEN = model.NameEN,

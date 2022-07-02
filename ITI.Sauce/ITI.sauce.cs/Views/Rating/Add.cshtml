@@ -2,46 +2,103 @@
 @model RatingEditViewModel
 
 
+
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        input[type=text], [type=email], [type=password], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+
+
+        div {
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        #btnAdd {
+            width: 100%;
+            background-color: #143444;
+            color: #F6EE99;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            float: right;
+        }
+
+    </style>
+</head>
 <body>
 
-<h3>Add to Rating Table</h3>
 
-<div>
-  <form data-ajax="true" method="post" asp-action="Add" asp-controller="Rating">
-      <label asp-for="RecipeID"> RecipeID</label>
-    <select>
-        @foreach(var i in ViewBag.Rating)
+
+    <div>
+        <form data-ajax="true" asp-action="Add" asp-controller="Rating" method="post">
+            <h1>Rating</h1>
+             <hr>
+            <div asp-validation-summary="ModelOnly" style="color:red"></div>
+            
+            <p>Please Choose Rating.</p>
+            <br />
+
+            <label asp-for="RecipeID"> Recipe ID</label>
+            
+           
+            <select>
+                @foreach (var i in ViewBag.Rating)
                 {
                     <option selected>Choose Option</option>
                     <option>@i.Value</option>
                 }
-                   
+
             </select>
-     <br />
-    <span asp-validation-for="RecipeID" style="color:red"></span>
-     <br />
-     <label asp-for="UserID"> UserID</label>
-    <input  asp-for="UserID">
-     <br />
-    <span asp-validation-for="UserID" style="color:red"></span>
-    <label asp-for="Comment"> Comment</label>
-    <input  asp-for="Comment">
-    <span asp-validation-for="Comment" style="color:red"></span>
-    <br />
-     <label asp-for="RatingValue"> RatingValue</label>
-    <input  asp-for="RatingValue">
-    <span asp-validation-for="RatingValue" style="color:red"></span>
-    <br />
+           
+           
+           
+
+            <label asp-for="UserID">  User ID </label>
+            <input asp-for="UserID">
+            <span asp-validation-for="UserID" style="color:red"></span>
 
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+            <br />
+
+            <label asp-for="Comment"> Comment </label>
+            <input asp-for="Comment">
+            <span asp-validation-for="Comment" style="color:red"></span>
+            <br />
+
+            <label asp-for="RatingValue"> Rating Value </label>
+            <input asp-for="RatingValue">
+            <span asp-validation-for="RatingValue" style="color:red"></span>
+
+
+            <br />
+
+
+            <button id="btnAdd" type="Add" value="Rating">Add</button>
+        </form>
+    </div>
 
 </body>
 </html>
+
+
+
+
+
 
 

@@ -23,6 +23,26 @@ namespace ITI.Sauce.ViewModels
                 
             };
         }
+        public static RatingEditViewModel ToEditViewModel(this RatingViewModel model)
+        {
+
+
+            return new RatingEditViewModel()
+            {
+
+                RatingID = model.RatingID,
+                Comment = model.Comment,
+                RatingValue = model.RatingValue,
+                RecipeID = model.RecipeID,
+                UserID = model.UserID,
+
+
+            };
+        }
+
+
+
+
     }
     public class RatingViewModel
     {

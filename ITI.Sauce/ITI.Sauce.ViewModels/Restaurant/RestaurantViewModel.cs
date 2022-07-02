@@ -14,6 +14,7 @@ namespace ITI.Sauce.ViewModels
         {
             return new RestaurantViewModel
             {
+                ID = model.ID,
                 WorkTime = model.WorkTime,
                 Vendor_ID = model.Vendor_ID,
                 NameEN = model.NameEN,
@@ -40,6 +41,9 @@ namespace ITI.Sauce.ViewModels
                 ImageUrl = model.ImageUrl,
             };
         }
+
+
+
 
     }
 

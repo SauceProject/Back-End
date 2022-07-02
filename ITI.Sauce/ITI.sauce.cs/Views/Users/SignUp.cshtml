@@ -3,47 +3,10 @@
 @model UserEditViewModel
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-    input[type=text],[type=email],[type=password], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
+	@section StyleSection{
+<link rel="stylesheet" href="~/Content/CSS/SighnUp.css"/>
+    }
 
-
-
-div {
-    border-radius: 5px;
-    padding: 20px;
-
-      
-}
-#btnAdd {
-    width: 100%;
-    background-color: #143444;
-    color: #F6EE99;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-decoration:none;
-    float:right;
-}
-
-
-</style>
-</head>
-<body>
 
   <div>
 <form asp-action="SignUp" asp-controller="Users" method="post">
@@ -77,11 +40,13 @@ div {
     <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
     <input  asp-for="ConfirnmPassword">
     <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
+
+      
+    <select asp-for="Role" asp-items="@ViewBag.Roles"  ></select>
+      
     
 
     <button id="btnAdd" type="submit" value="Register">Register</button>
 </form>
   </div>
 
-</body>
-</html>

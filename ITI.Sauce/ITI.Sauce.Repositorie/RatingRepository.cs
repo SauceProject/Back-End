@@ -70,11 +70,56 @@ namespace ITI.Sauce.Repository
             return base.Add(Rating).Entity.ToViewModel();
         }
 
-        public List<TextValueViewModel> GetRecipeID()=>
+        public List<TextValueViewModel> GetRecipeID() =>
             GetList().Select(i => new TextValueViewModel
             {
                 Value = i.RecipeID
             }).ToList();
-        
+
+
+
+
+
+        public RatingViewModel Update(RatingEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Rating>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.RatingID == model.RatingID);
+
+            var Result = base.GetByID(filterd);
+            Result.Comment = model.Comment;
+            Result.RatingValue = model.RatingValue;
+
+
+            return Result.ToViewModel();
+
+
+        }
+        public RatingViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<Rating>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(c => c.RatingID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
+
+
+
+        }
     }
 }

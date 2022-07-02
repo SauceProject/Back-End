@@ -20,21 +20,23 @@
 
 <table>
   <tr>
-
-    <th>price</th>
+    <th>ID</th>
+    <th>Price</th>
     <th>TypeEn</th>
     <th>TypeAr</th>
+    <th>Update</th>
+
   </tr>
    
    @foreach (var M in Model)
   
 {
 	<tr>
-	
-	
+	<td>@M.ID</td>
 	<td>@M.Price</td>
 	<td>@M.TypeEn</td>
 	<td>@M.TypeAr</td>
+    <td><a asp-action="Update" asp-controller="MemberShip" asp-route-ID="@M.ID">Update</a></td>
    </tr>
 }
   

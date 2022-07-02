@@ -44,6 +44,7 @@ tr:nth-child(even) {
     <a asp-action="Add" asp-controller="Rating" id="btnAdd">Add</a>
 <table>
   <tr>
+
     <th>RatingID</th>
     <th>RatingValue</th>
   </tr>
@@ -52,6 +53,8 @@ tr:nth-child(even) {
   <tr>
     <td>@V.RatingID</td>
     <td>@V.RatingValue</td>
+    <td><a asp-action="Update" asp-controller="Rating" asp-route-ID="@V.RatingID">Update</a></td>
+
 
   </tr>
     }

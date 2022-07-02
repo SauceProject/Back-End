@@ -1,34 +1,94 @@
-﻿@using ITI.Sauce.ViewModels
+﻿
+@using ITI.Sauce.ViewModels
 @model MemberShipEditViewModel
 
 
-@section StyleSection{
-    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    input[type=text],[type=email],[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-<h3>Add to MemberShip Table</h3>
 
-<div>
-  <form method="post" asp-action="Add" asp-controller="MemberShip">
-    <label asp-for="OrderNum"> OrderNum</label>
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+
+      
+}
+#btnAdd {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:right;
+}
+
+#customFile{
+    width: 22%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:left;
+}
+
+</style>
+</head>
+<body>
+
+  <div>
+<form data-ajax="true"  asp-action="Add" asp-controller="MemberShip" method="post">
+    <h1>Add to MemberShip Table</h1>
+    <br />
+    <p>Please Choose Your MemberShip.</p>
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+    <hr>
+
+    <label asp-for="OrderNum"> Order Number </label>
     <input  asp-for="OrderNum">
     <span asp-validation-for="OrderNum" style="color:red"></span>
-    <br />
-    <label asp-for="Price"> Price</label>
+
+
+
+    <label asp-for="Price"> Price </label>
     <input  asp-for="Price">
-    <br />
-     <label asp-for="TypeEn"> TypeEn</label>
+    <span asp-validation-for="Price" style="color:red"></span>
+
+    <label asp-for="TypeEn"> English Type </label>
     <input  asp-for="TypeEn">
     <span asp-validation-for="TypeEn" style="color:red"></span>
-    <br />
-    <label asp-for="TypeAr"> TypeAr</label>
+
+    <label asp-for="TypeAr"> Arabic Type </label>
     <input  asp-for="TypeAr">
     <span asp-validation-for="TypeAr" style="color:red"></span>
-  
-    
 
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+    <button id="btnAdd" type="Submit" value="MemberShip">Submit</button>
+</form>
+  </div>
+
+</body>
+</html>
+
 
