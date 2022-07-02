@@ -42,25 +42,6 @@ namespace ITI.Sauce.ViewModels
             };
         }
 
-        public static RestaurantEditViewModel ToEditViewModel(this RestaurantViewModel model)
-        {
-
-
-            return new RestaurantEditViewModel()
-            {
-
-                ID = model.ID,
-                WorkTime = model.WorkTime,
-                Vendor_ID = model.Vendor_ID,
-                NameEN = model.NameEN,
-                NameAR = model.NameAR,
-                RegisterDate = model.RegisterDate,
-                IsDeleted = model.IsDeleted,
-
-
-            };
-        }
-
 
 
 

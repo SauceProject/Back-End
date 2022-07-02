@@ -55,11 +55,14 @@ namespace ITI.sauce.MVC.Controllers
                         = await UserRepo.SignUp(model);
                 if (!result.Succeeded)
                 {
+                    ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+    .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
                     foreach (var error in result.Errors)
                         ModelState.AddModelError("", error.Description);
                 }
                 else
                 {
+
                     return RedirectToAction("SignIn", "Users");
                 }
             }
