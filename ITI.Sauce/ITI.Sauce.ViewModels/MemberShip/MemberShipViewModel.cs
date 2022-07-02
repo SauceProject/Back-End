@@ -14,20 +14,44 @@ namespace ITI.Sauce.ViewModels
         {
             return new MemberShipViewModel
             {
-               OrderNum = model.OrderNum,
-                Price = model.Price,
+                ID = model.ID,
                 TypeEn = model.TypeEn,
-                TypeAr = model.TypeAr
+                TypeAr = model.TypeAr,
+                OrderNum = model.OrderNum,
+                Price = model.Price,
+                
+              
 
             };
         }
+
+        public static MemberShipEditViewModel ToEditViewModel(this MemberShipViewModel model)
+        {
+
+
+            return new MemberShipEditViewModel()
+            {
+                ID = model.ID,
+                TypeEn = model.TypeEn,
+                TypeAr = model.TypeAr,
+                OrderNum = model.OrderNum,
+                Price = model.Price,
+            };
+        }
+
+
+
+
+
+
+
     }
         public class MemberShipViewModel
     {
          
         public int ID { get; set; }
-        public string TypeEn { get; set; }
-        public string TypeAr { get; set; }
+        public string? TypeEn { get; set; }
+        public string? TypeAr { get; set; }
         public int OrderNum { get; set; }
         public float Price { get; set; }
        

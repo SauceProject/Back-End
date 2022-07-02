@@ -14,9 +14,9 @@ namespace ITI.Sauce.ViewModels
             return new Category
             {
                 ID = model.ID,
-                
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
+                IsDeleted = model.IsDeleted,
             };
         }
     }
@@ -26,5 +26,8 @@ namespace ITI.Sauce.ViewModels
         public int ID { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
+        public bool IsDeleted { get; set; }
+
+
     }
 }

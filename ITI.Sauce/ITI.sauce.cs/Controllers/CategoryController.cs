@@ -39,9 +39,17 @@ namespace ITI.sauce.MVC.Controllers
         [HttpPost]
         public IActionResult Add (CategoryEditViewModel model)
         {
-            CateRepo.Add(model);
-            UnitOfWork.Save();
-            return RedirectToAction("Get");
+            if (ModelState.IsValid)
+            {
+                CateRepo.Add(model);
+                UnitOfWork.Save();
+                return RedirectToAction("Get");
+            }
+            else
+            {
+                return View();
+            }
+           
         }
 
 
@@ -68,6 +76,21 @@ namespace ITI.sauce.MVC.Controllers
             CateRepo.Update(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
+
+        }
+
+
+
+
+
+
+        [HttpGet]
+        public IActionResult Remove(CategoryEditViewModel model, int ID)
+        {
+            var res = CateRepo.Remove(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
 
         }
     }

@@ -20,6 +20,8 @@ public class Program
         builder.Services.AddScoped(typeof(RecipeRepository));
         builder.Services.AddScoped(typeof(RatingRepository));
         builder.Services.AddScoped(typeof(OrderRepository));
+        builder.Services.AddScoped(typeof(MemberShipRepository));   
+
         builder.Services.AddScoped(typeof(OrderListRepository));
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));

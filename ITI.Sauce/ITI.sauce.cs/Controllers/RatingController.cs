@@ -58,5 +58,42 @@ namespace ITI.sauce.MVC.Controllers
             else
                 return View();
         }
+
+
+
+
+
+
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            var Results = RatepRepo.GetOne(Id);
+
+            return View(Results.ToEditViewModel());
+
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Update(RatingEditViewModel model, int ID = 0)
+        {
+            RatepRepo.Update(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
+        }
+
+
+
+
+
+
+
+
+
     }
 }

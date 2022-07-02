@@ -1,10 +1,7 @@
-﻿
+﻿@using ITI.Sauce.ViewModels
 
 
-
-@using ITI.Sauce.ViewModels
-
-@model IngredientEditViewModel
+@model MemberShipEditViewModel
 
 <!DOCTYPE html>
 <html>
@@ -61,34 +58,47 @@ div {
 <body>
 
   <div>
-<form data-ajax="true"  asp-action="Add" asp-controller="Ingredient" method="post">
-    <h1>Category</h1>
-    <p>Please Choose Your Category.</p>
+<form data-ajax="true"  asp-action="Update" asp-controller="MemberShip" method="post">
+    <h1>Update MemberShip</h1>
+    
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
 
-    <label asp-for="NameEN"> English Name </label>
-    <input  asp-for="NameEN">
-    <span asp-validation-for="NameEN" style="color:red"></span>
+    <label asp-for="Price"> Price </label>
+    <input  asp-for="Price">
+    <span asp-validation-for="Price" style="color:red"></span>
 
-
-
-    <label asp-for="NameAR"> Arabic Name </label>
-    <input  asp-for="NameAR">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-
-
-    <label asp-for="Image"></label>
     <br />
-     <input asp-for="Image" class="custom-file-input" id="customFile">
+
+    <label asp-for="TypeEn"> English Type </label>
+    <input  asp-for="TypeEn">
+    <span asp-validation-for="TypeEn" style="color:red"></span>
+    <br />
 
 
-    <button id="btnAdd" type="Add" value="Ingredient">Add</button>
+    <label asp-for="TypeEn"> English Type </label>
+    <input  asp-for="TypeEn">
+    <span asp-validation-for="TypeEn" style="color:red"></span>
+
+    <br />
+    <label asp-for="TypeAr"> Arabic Type </label>
+    <input  asp-for="TypeAr">
+    <span asp-validation-for="TypeAr" style="color:red"></span>
+
+    
+    <br />
+
+    <button asp-action="Search" asp-controller="MemberShip" id="btnAdd" type="Update" value="MemberShip">Update MemberShip</button>
 </form>
   </div>
 
 </body>
 </html>
+
+
+
+
+
 
 
 

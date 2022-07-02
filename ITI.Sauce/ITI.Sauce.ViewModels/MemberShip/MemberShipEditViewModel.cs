@@ -14,6 +14,8 @@ namespace ITI.Sauce.ViewModels
         {
             return new MemberShip
             {
+                ID = model.ID,
+
                 OrderNum = model.OrderNum,
                 Price = model.Price,
                 TypeEn = model.TypeEn,
@@ -22,19 +24,20 @@ namespace ITI.Sauce.ViewModels
 
         }
     }
-        public class MemberShipEditViewModel
-        {
+    public class MemberShipEditViewModel
+    {
+        [Required]
+        public int ID { get; set; }
+        [Required]
+        public string TypeEn { get; set; }
+        [Required]
+        public string TypeAr { get; set; }
+        [Required]
+        public int OrderNum { get; set; }
+        [Required]
+        public float Price { get; set; }
 
-            [Required]
-            public string TypeEn { get; set; }
-            [Required]
-            public string TypeAr { get; set; }
-            [Required]
-            public int OrderNum { get; set; }
-            [Required]
-            public float Price { get; set; }
 
-
-        }
     }
+}
 

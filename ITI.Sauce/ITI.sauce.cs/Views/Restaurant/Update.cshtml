@@ -1,10 +1,5 @@
-﻿
-
-
-
-@using ITI.Sauce.ViewModels
-
-@model IngredientEditViewModel
+﻿@using ITI.Sauce.ViewModels
+@model RestaurantViewModel
 
 <!DOCTYPE html>
 <html>
@@ -61,34 +56,64 @@ div {
 <body>
 
   <div>
-<form data-ajax="true"  asp-action="Add" asp-controller="Ingredient" method="post">
-    <h1>Category</h1>
-    <p>Please Choose Your Category.</p>
+<form data-ajax="true"  asp-action="Update" asp-controller="Restaurant" method="post">
+    <h1>Update MemberShip</h1>
+
+   @*  <div style="display:none">
+      
+       <input name="@Model.RatingID" type="text" class="form-group" value="@Model.RatingID"/>
+   </div>
+
+    *@
+    
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
+    <br />
 
-    <label asp-for="NameEN"> English Name </label>
+    <label asp-for="WorkTime"> Work Time </label>
+    <input  asp-for="WorkTime">
+    <span asp-validation-for="WorkTime" style="color:red"></span>
+
+    <br />
+
+     <label asp-for="Vendor_ID"> Vendor_ID  </label>
+    <input  asp-for="Vendor_ID">
+    <span asp-validation-for="Vendor_ID" style="color:red"></span>
+
+    <br />
+
+     <label asp-for="NameEN"> English Name </label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
 
+    <br />
 
 
-    <label asp-for="NameAR"> Arabic Name </label>
+     <label asp-for="NameAR">Arabic Name </label>
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
+     <br />
 
 
-    <label asp-for="Image"></label>
+     <label asp-for="IsDeleted">Is Deleted </label>
+    <input  asp-for="IsDeleted">
+    <span asp-validation-for="IsDeleted" style="color:red"></span>
+     <br />
+
+
+     <label asp-for="RegisterDate">Register Date </label>
+    <input  asp-for="RegisterDate">
+    <span asp-validation-for="RegisterDate" style="color:red"></span>
+
+ 
+    
     <br />
-     <input asp-for="Image" class="custom-file-input" id="customFile">
 
 
-    <button id="btnAdd" type="Add" value="Ingredient">Add</button>
+
+    <button id="btnAdd" type="Update" value="Restaurant">Update</button>
 </form>
   </div>
 
 </body>
 </html>
-
-
-

@@ -80,5 +80,40 @@ namespace ITI.Sauce.Repository
             Restaurant restaurant = model.ToModel();
             return base.Add(restaurant).Entity.ToViewModel();
         }
+
+
+
+
+
+
+
+        public RestaurantViewModel Update(RestaurantEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Restaurant>();
+            var old = filterd;
+            filterd = filterd.Or(V => V.ID == model.ID);
+            var Result = base.GetByID(filterd);
+            Result.ID = model.ID;
+            Result.WorkTime = model.WorkTime;
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            Result.RegisterDate = model.RegisterDate;
+            Result.IsDeleted = model.IsDeleted;
+            return Result.ToViewModel();
+        }
+        public RestaurantViewModel GetOne(int _ID = 0)
+        {
+            var filterd = PredicateBuilder.New<Restaurant>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(V => V.ID == _ID);
+            if (old == filterd)
+                filterd = null;
+            var query = base.GetByID(filterd);
+            return query.ToViewModel();
+
+        }
+
     }
 }

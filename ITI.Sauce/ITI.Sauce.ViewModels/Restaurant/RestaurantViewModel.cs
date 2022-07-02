@@ -14,6 +14,7 @@ namespace ITI.Sauce.ViewModels
         {
             return new RestaurantViewModel
             {
+                ID = model.ID,
                 WorkTime = model.WorkTime,
                 Vendor_ID = model.Vendor_ID,
                 NameEN = model.NameEN,
@@ -22,6 +23,29 @@ namespace ITI.Sauce.ViewModels
                 IsDeleted = model.IsDeleted
             };
         }
+
+        public static RestaurantEditViewModel ToEditViewModel(this RestaurantViewModel model)
+        {
+
+
+            return new RestaurantEditViewModel()
+            {
+
+                ID = model.ID,
+                WorkTime = model.WorkTime,
+                Vendor_ID = model.Vendor_ID,
+                NameEN = model.NameEN,
+                NameAR = model.NameAR,
+                RegisterDate = model.RegisterDate,
+                IsDeleted = model.IsDeleted,
+
+
+            };
+        }
+
+
+
+
     }
         public class RestaurantViewModel
     {

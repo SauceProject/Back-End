@@ -55,7 +55,7 @@ namespace ITI.Sauce.Repository
 
 
         //Get By ID => Back ID From Database
-        public T? GetByID(Expression<Func<T, bool>> filter = null, int ID=0)
+        public T? GetByID(Expression<Func<T, bool>> filter = null, int ID = 0)
         {
             var query = Set.AsQueryable();
             if (filter != null)

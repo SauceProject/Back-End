@@ -18,6 +18,8 @@ namespace ITI.Sauce.Models
             builder.Property(c => c.ID).IsRequired();
             builder.Property(c => c.NameEN).IsRequired().HasMaxLength(50);
             builder.Property(c => c.NameAR).IsRequired().HasMaxLength(50);
+            builder.Property(c => c.IsDeleted).IsRequired();
+
 
 
         }

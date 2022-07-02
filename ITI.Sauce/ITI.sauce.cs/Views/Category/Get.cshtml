@@ -23,6 +23,8 @@
             <th> Name In Arabic </th>
             <th>Recipe Infromation</th>
             <th>Update Category</th>
+            <th>Remove Category</th>
+
 
         </tr>
 
@@ -34,6 +36,8 @@
                 <td>@c.NameAR</td>
                 <td><a asp-action="Get" asp-controller="Recipe" asp-route-ID="@c.ID"> Recipe </a></td>
                 <td><a asp-action="Update" asp-controller="Category" asp-route-Id="@c.ID"> Update </a></td>
+
+                <td><a asp-controller="Category" asp-action="Remove"   asp-route-id="@c.ID" >Remove</a></td>
 
             </tr>
         }
