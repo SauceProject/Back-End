@@ -12,6 +12,8 @@
 
 <h2>Vendor Table</h2>
     <a asp-action="Add" asp-controller="Vendor" id="btnAdd">Add</a>
+  
+
 <table>
   <tr>
    <th>NameEN</th>
@@ -23,6 +25,7 @@
     @foreach(var V in Model)
 {  
   <tr>
+
      <td>@V.NameEN</td>
     <td>@V.NameAR</td>
     <td>@V.phone</td>
@@ -30,6 +33,7 @@
     <td><a asp-action="Search" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
     <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a>
     <a asp-action="Get" asp-controller="Ingredient" asp-route-vendorID="@V.ID">Ingredient</a>
+   <a asp-action="Update" asp-controller="Vendor" asp-route-Id="@V.ID"> Update </a>
     </td>
   </tr>
     }

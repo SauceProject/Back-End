@@ -89,5 +89,55 @@ namespace ITI.Sauce.Repository
             Vendor Vendor = model.ToModel();
             return base.Add(Vendor).Entity.ToViewModel();
         }
+
+
+        public VendorViewModel Update(VendorEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Vendor>();
+            var old = filterd;
+
+            filterd = filterd.Or(i => i.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+            Result.ID = model.ID;
+            Result.UserName = model.UserName;
+            Result.Password = model.Password;
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            Result.Email = model.Email;
+            Result.phone = model.phone;
+
+            return Result.ToViewModel();
+
+
+        }
+        public VendorViewModel GetOne(int _ID = 0)
+        {
+
+
+
+            var filterd = PredicateBuilder.New<Vendor>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+
+
+            return query.ToViewModel();
+
+
+
+        }
+
+
+
+
+
     }
+
 }
