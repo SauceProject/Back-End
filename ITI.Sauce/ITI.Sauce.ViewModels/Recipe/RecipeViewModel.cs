@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,6 +39,7 @@ namespace ITI.Sauce.ViewModels
         public int GoodFor { get; set; }
         public float Price { get; set; }
         public string NameEN { get; set; }
+
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
