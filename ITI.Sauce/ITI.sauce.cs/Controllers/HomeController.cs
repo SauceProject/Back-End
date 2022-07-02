@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Models;
 
 using ITI.Sauce.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers
@@ -22,7 +23,6 @@ namespace ITI.sauce.MVC.Controllers
             VendorRepo = new VendorRepository(dBContext);
             RestaurantRepo=new RestaurantRepository(dBContext);
         }
-
         public IActionResult Index()
         {
             ViewBag.RecipeCount=RecRepo.GetList().Count();

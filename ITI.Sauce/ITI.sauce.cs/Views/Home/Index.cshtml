@@ -1,4 +1,5 @@
 ﻿
+
 <!---------------STATISTICS------------------->
         <div class="stat">
           <h2 class="head">Restaurant Overview</h2>
@@ -13,19 +14,20 @@
             <div class="stat-card two">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.VendorCount</p>
-              <a asp-action="search" asp-controller="Vendor">Vendors</a>
+              <a asp-action="search" asp-controller="Vendor" >Vendors</a>
             </div>
 
             <div class="stat-card three">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <a asp-action="Get" asp-controller="Recipe">Recipes</a>
+              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@ViewBag.ID">Recipes</a>
             </div>
 
             <div class="stat-card four">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.ReataurantCount</p>
-              <a asp-action="search" asp-controller="Restaurant">Restaurants</a>
+    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID="@ViewBag.ID">Restaurant</a>
+
             </div>
           </div>
         </div>

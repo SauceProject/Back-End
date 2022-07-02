@@ -1,5 +1,6 @@
 ﻿
 using ITI.Sauce.Models;
+using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.FileProviders;
@@ -23,8 +24,11 @@ public class Program
         builder.Services.AddScoped(typeof(OrderListRepository));
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
+        builder.Services.AddScoped(typeof(RoleRepository));
         builder.Services.AddScoped(typeof(DBContext));
         builder.Services.AddScoped(typeof(UnitOfWork));
+        builder.Services.AddScoped<IUserClaimsPrincipalFactory<Users>, UserClaimsFactory>();
+
         builder.Services.ConfigureApplicationCookie(Option =>
         {
             Option.LoginPath = "/User/SignIn";
@@ -42,6 +46,7 @@ public class Program
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapDefaultControllerRoute();
+
         app.Run();
         return 0;
     }

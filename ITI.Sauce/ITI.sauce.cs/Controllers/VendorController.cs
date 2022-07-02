@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Models;
 using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ITI.sauce.MVC.Controllers
@@ -17,6 +18,8 @@ namespace ITI.sauce.MVC.Controllers
             this.pubRepo = _vendorRepo;
             UnitOfWork = _unitOfWork;
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Get(int id = 0,
                 string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
@@ -33,16 +36,21 @@ namespace ITI.sauce.MVC.Controllers
            pubRepo.Get(id);
             return View(data);
         }
+
+        [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = pubRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Add(VendorEditViewModel model)
         {

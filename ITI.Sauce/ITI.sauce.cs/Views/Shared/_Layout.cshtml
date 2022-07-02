@@ -36,7 +36,7 @@
         <input type="text" placeholder="Search..." />
         <i class="fa-solid fa-bell nav-icn"></i>
         <i class="fa-solid fa-envelope nav-icn"></i>
-        <a href="./vendor_profile.html">
+        <a asp-action="SignUp" asp-controller="Users">
           <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
         </a>
         @if(_SignInManager.IsSignedIn(User))

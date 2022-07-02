@@ -73,9 +73,14 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
         }
-        public async Task<IdentityResult> SignUp(UserEditViewModel model) =>
-             await userManger.CreateAsync(model.ToModel(), model.Password);
+        public async Task<IdentityResult> SignUp(UserEditViewModel model)
+        {
+            Users User = model.ToModel();
+           var result =  await userManger.CreateAsync(User, model.Password);
+        result = await userManger.AddToRoleAsync(User, model.Role);
+            return result;
 
+        }
         public async Task<SignInResult> SignIn(UserLoginViewModel model) =>
             await SignInManger.PasswordSignInAsync(model.Email, model.Password,
                 model.RemmeberMe, false);
