@@ -22,7 +22,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             
             this.UserRepo = _UserRepo;
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             UnitOfWork = _unitOfWork;
             RoleRepository = _RoleRepository;
         }

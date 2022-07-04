@@ -28,13 +28,7 @@ namespace ITI.Sauce.Repository
             if (!string.IsNullOrEmpty(NameAR))
                 filter = filter.Or(c => c.NameAR.Contains(NameAR));
 
-
-
-
             filter = filter.Or(c => c.IsDeleted == false);
-
-
-
 
 
             if (filter == oldFiler)

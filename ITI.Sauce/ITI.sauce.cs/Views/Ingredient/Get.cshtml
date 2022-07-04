@@ -27,6 +27,9 @@
             <th> Name In Arabic</th>
             <th>Image</th>
             <th>Update Ingredient</th>
+            <th>Remove Ingredient</th>
+
+
         </tr>
 
 
@@ -39,6 +42,8 @@
                 <td>@I.NameAR</td>
                 <td> <img src="@I.ImageUrl" width="100 px" height="100 px">   </td>
                 <td><a asp-action="Update" asp-controller="Ingredient" asp-route-Id="@I.ID"> Update </a></td>
+                <td><a asp-controller="Ingredient" asp-action="Remove"   asp-route-id="@I.ID" >Remove</a></td>
+
 
 
 

@@ -10,6 +10,6 @@ namespace ITI.Sauce.Models
     {
         public int Restaurant_ID { get; set; }
         public string Restaurant_phone { get; set; }
-        public Restaurant Restaurants { get; set; }
+        public virtual Restaurant Restaurants { get; set; }
     }
 }

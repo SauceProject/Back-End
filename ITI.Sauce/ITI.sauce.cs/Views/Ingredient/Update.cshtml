@@ -59,8 +59,8 @@ div {
 <body>
 
   <div>
-<form data-ajax="true"  asp-action="Update" asp-controller="Ingredient" method="post">
-    <h1>Update Category</h1>
+<form data-ajax="true"  asp-action="Update" asp-controller="Ingredient" method="post" enctype="multipart/form-data">
+    <h1>Update Ingredient</h1>
     
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
@@ -85,7 +85,7 @@ div {
 
 
 
-    <button id="btnAdd" type="Update" value="Ingredient">Update</button>
+    <button id="btnAdd" type="submit" value="Ingredient">Update</button>
 </form>
   </div>
 

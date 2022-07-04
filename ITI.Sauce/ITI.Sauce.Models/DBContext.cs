@@ -12,6 +12,9 @@ namespace ITI.Sauce.Models
     public class DBContext : IdentityDbContext<Users>
     {
         #region DbSets
+        public DBContext(DbContextOptions options) : base (options)
+        { }
+
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -31,11 +34,11 @@ namespace ITI.Sauce.Models
         #endregion
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog= Sauce; Integrated Security=True;");
-            base.OnConfiguring(optionsBuilder);
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(@"Data Source=.\SQLEXPRESS; Initial Catalog= Sauce; Integrated Security=True;");
+        //    base.OnConfiguring(optionsBuilder);
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             #region Configurations
@@ -63,5 +66,7 @@ namespace ITI.Sauce.Models
             RelationMapper.Mapper(modelBuilder);
             base.OnModelCreating(modelBuilder);
         }
+
+         
     }
 }

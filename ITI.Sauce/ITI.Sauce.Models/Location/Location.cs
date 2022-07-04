@@ -12,7 +12,7 @@ namespace ITI.Sauce.Models
         public string Location_Name { get; set; }
         public string LocationEN { get; set; }
         public string LocationAR { get; set; }
-        public Restaurant Restaurants { get; set; }
+        public virtual Restaurant Restaurants { get; set; }
 
     }
 }

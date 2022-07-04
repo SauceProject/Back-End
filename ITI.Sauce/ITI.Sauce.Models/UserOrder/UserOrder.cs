@@ -10,8 +10,8 @@ namespace ITI.Sauce.Models
     {
         public string UserID { get; set; }
         public int OrderID { get; set; }
-        public Users User { get; set; }
-        public Order Order { get; set; }
+        public virtual Users User { get; set; }
+        public virtual Order Order { get; set; }
 
 
     }

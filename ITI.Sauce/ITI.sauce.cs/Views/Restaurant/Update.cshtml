@@ -56,7 +56,7 @@ div {
 <body>
 
   <div>
-<form data-ajax="true"  asp-action="Update" asp-controller="Restaurant" method="post">
+<form data-ajax="true"  asp-action="Update" asp-controller="Restaurant" method="post" enctype="multipart/form-data">
     <h1>Update MemberShip</h1>
 
    @*  <div style="display:none">
@@ -111,7 +111,7 @@ div {
 
 
 
-    <button id="btnAdd" type="Update" value="Restaurant">Update</button>
+    <button id="btnAdd" type="submit" value="Restaurant">Update</button>
 </form>
   </div>
 

@@ -3,6 +3,7 @@ using ITI.Sauce.Models;
 using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 
 
@@ -13,7 +14,7 @@ public class Program
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
         builder.Services.AddControllersWithViews();
-        builder.Services.AddIdentity<Users,IdentityRole>().
+        builder.Services.AddIdentity<Users, IdentityRole>().
             AddEntityFrameworkStores<DBContext>();
         builder.Services.AddScoped(typeof(VendorRepository));
         builder.Services.AddScoped(typeof(UserRepository));
@@ -21,7 +22,14 @@ public class Program
         builder.Services.AddScoped(typeof(RecipeRepository));
         builder.Services.AddScoped(typeof(RatingRepository));
         builder.Services.AddScoped(typeof(OrderRepository));
-        builder.Services.AddScoped(typeof(MemberShipRepository));   
+        builder.Services.AddScoped(typeof(MemberShipRepository));
+
+
+        builder.Services.AddDbContext<DBContext>(i =>
+        {
+            i.UseLazyLoadingProxies().UseSqlServer
+          (builder.Configuration.GetConnectionString("SauceDB"));
+        });
 
         builder.Services.AddScoped(typeof(OrderListRepository));
         builder.Services.AddScoped(typeof(IngredientRepository));
@@ -36,11 +44,11 @@ public class Program
             Option.LoginPath = "/User/SignIn";
         });
         var app = builder.Build();
-        app.UseStaticFiles(new StaticFileOptions() 
-        { 
-            FileProvider= new PhysicalFileProvider
-            ( 
-            Path.Combine(Directory.GetCurrentDirectory(),"Content")
+        app.UseStaticFiles(new StaticFileOptions()
+        {
+            FileProvider = new PhysicalFileProvider
+            (
+            Path.Combine(Directory.GetCurrentDirectory(), "Content")
             ),
             RequestPath = "/Content"
         }

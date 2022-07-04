@@ -13,6 +13,6 @@ namespace ITI.Sauce.Models
         public string TypeAr { get; set; }
         public int OrderNum { get; set; }
         public float Price { get; set; }
-        public List<Vendor_MemberShip> Vendor_MemberShips { get; set; }
+        public virtual List<Vendor_MemberShip> Vendor_MemberShips { get; set; }
     }
 }

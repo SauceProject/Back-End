@@ -116,5 +116,27 @@ namespace ITI.Sauce.Repository
 
         }
 
+
+
+
+
+        public RestaurantViewModel Remove(RestaurantEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Restaurant>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+
+            var Result = base.GetByID(filterd);
+
+            Result.IsDeleted = true;
+
+            return Result.ToViewModel();
+
+
+        }
+
     }
 }

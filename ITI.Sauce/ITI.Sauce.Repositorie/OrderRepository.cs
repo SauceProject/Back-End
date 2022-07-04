@@ -6,8 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Abp.Linq.Expressions;
+
 
 namespace ITI.Sauce.Repository
 {
@@ -46,7 +46,7 @@ namespace ITI.Sauce.Repository
                 ID = i.ID,
                 NameEN = i.NameEN,
                 NameAR = i.NameAR,
-                registerDate = i.registerDate.ToLongTimeString(),
+                registerDate = i.registerDate,
 
             });
 
@@ -62,6 +62,7 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
         }
-        
+
+
     }
 }

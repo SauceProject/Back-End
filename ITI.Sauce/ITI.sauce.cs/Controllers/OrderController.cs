@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ITI.Sauce.Models;
 using Microsoft.AspNetCore.Mvc;
 using ITI.Sauce.Repository;
+using ITI.Sauce.ViewModels;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -15,11 +16,9 @@ namespace ITI.sauce.MVC.Controllers
     {
         OrderRepository ordRepo;
 
-        public OrderController()
+        public OrderController(OrderRepository _ordRepo)
         {
-            DBContext dBContext = new DBContext();
-
-            this.ordRepo = new OrderRepository(dBContext);
+            ordRepo = _ordRepo;
         }
         public ViewResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
             string NameAR = "", DateTime? registerDate = null,int pageIndex = 1, int pageSize = 20)
@@ -29,5 +28,7 @@ namespace ITI.sauce.MVC.Controllers
                 ordRepo.Get(ID, orderBy,isAscending, NameEN, NameAR, registerDate, pageIndex, pageSize);
             return View(data);
         }
+
+
     }
 }

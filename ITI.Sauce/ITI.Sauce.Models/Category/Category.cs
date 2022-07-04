@@ -13,7 +13,7 @@ namespace ITI.Sauce.Models
         public string NameAR { get; set; }
 
         public bool IsDeleted { get; set; }
-        public List<Recipe> Recipes { get; set; }
+        public virtual List<Recipe> Recipes { get; set; }
 
     }
 }

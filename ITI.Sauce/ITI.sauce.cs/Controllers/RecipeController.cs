@@ -14,7 +14,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly VendorRepository VendorRepo;
         public RecipeController(RecipeRepository _RecipeRepo, UnitOfWork _unitOfWork, VendorRepository _VendorRepo)
         {
-            DBContext dBContext = new DBContext();
+           // DBContext dBContext = new DBContext();
             this.RecipeRepo = _RecipeRepo;
             UnitOfWork = _unitOfWork;
             VendorRepo = _VendorRepo;
