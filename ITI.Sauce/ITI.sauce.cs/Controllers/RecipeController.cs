@@ -14,7 +14,6 @@ namespace ITI.sauce.MVC.Controllers
         private readonly VendorRepository VendorRepo;
         public RecipeController(RecipeRepository _RecipeRepo, UnitOfWork _unitOfWork, VendorRepository _VendorRepo)
         {
-           // DBContext dBContext = new DBContext();
             this.RecipeRepo = _RecipeRepo;
             UnitOfWork = _unitOfWork;
             VendorRepo = _VendorRepo;
@@ -69,5 +68,25 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork.Save();
             return RedirectToAction("Get");
         }
+
+       
+
+        [HttpGet]
+        public IActionResult Update(int ID)
+        {
+            var recipe = RecipeRepo.GetOne(ID);
+            ViewBag.CurrentRecipe = recipe;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Update(RecipeEditViewModel model, int ID)
+        {
+            
+            RecipeRepo.Update(model, ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+           
+        }
+
     }
 }

@@ -13,9 +13,10 @@ namespace ITI.Sauce.Repository
 {
     public class RecipeRepository : GeneralRepository<Recipe>
     {
+        
         public RecipeRepository(DBContext _Context) : base(_Context)
         {
-
+            
         }
         public PaginingViewModel<List<RecipeViewModel>> Get ( 
             string NameAr=null, string NameEN=null,string orderBy=null, string ImageUrl = "", string VideoUrl = "",
@@ -114,6 +115,42 @@ namespace ITI.Sauce.Repository
            {
                Value = i.CategoryID 
            }).ToList();
+
+        public RecipeViewModel GetOne(int _ID = 0)
+        {
+            var filterd = PredicateBuilder.New<Recipe>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd,_ID);
+            return query.ToViewModel();
+        }
+
+        public RecipeViewModel Update(RecipeEditViewModel model, int ID)
+        {
+
+            var filterd = PredicateBuilder.New<Recipe>();
+            var old = filterd;
+            if (ID > 0)
+                filterd = filterd.Or(i => i.ID == ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var recipe = base.GetByID(filterd);
+         
+            recipe.NameAR = model.NameAR;
+            recipe.NameEN = model.NameEN;
+            recipe.GoodFor = model.GoodFor;
+            recipe.Price = model.Price;
+
+            return base.Update(recipe).Entity.ToViewModel();
+
+        }
 
     }
 }
