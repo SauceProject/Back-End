@@ -1,49 +1,102 @@
 ﻿@using ITI.Sauce.ViewModels
 @model RestaurantEditViewModel
 
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        input[type=text], [type=email], [type=password], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
 
-@section StyleSection{
-    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
-}
-<h3>Add to Restaurants Table</h3>
-<div>
-  <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Restaurant">
-    <label asp-for="WorkTime "> WorkTime </label>
-    <input  asp-for="WorkTime ">
-    <span asp-validation-for="WorkTime " style="color:red"></span>
-    <br />
-     <label asp-for="Vendor_ID"> Vendor_ID</label>
-    <input  asp-for="Vendor_ID">
-    <span asp-validation-for="Vendor_ID" style="color:red"></span>
-    <br />
-    <label asp-for="NameEN"> NameEN</label>
-    <input  asp-for="NameEN">
-    <span asp-validation-for="NameEN" style="color:red"></span>
-    <br />
-     <label asp-for="NameAR"> NameAR</label>
-    <input  asp-for="NameAR">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-    <br />
-    <label asp-for="RegisterDate"> RegisterDate</label>
-    <input  asp-for="RegisterDate">
-     <br />
-    <div class="form-group">
+
+
+        div {
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        #btnAdd {
+            width: 100%;
+            background-color: #143444;
+            color: #F6EE99;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            float: right;
+        }
+
+        #customFile {
+            width: 22%;
+            background-color: #143444;
+            color: #F6EE99;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            float: left;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+
+    @section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css" />
+    }
+    <h3>Add to Restaurants Table</h3>
+    <div>
+        <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Restaurant">
+            <label asp-for="WorkTime "> WorkTime </label>
+            <input asp-for="WorkTime ">
+            <span asp-validation-for="WorkTime " style="color:red"></span>
+            <br >
+            <label asp-for="Vendor_ID"> Vendor_ID</label>
+            <input asp-for="Vendor_ID">
+            <span asp-validation-for="Vendor_ID" style="color:red"></span>
+            <br >
+            <label asp-for="NameEN"> NameEN</label>
+            <input asp-for="NameEN">
+            <span asp-validation-for="NameEN" style="color:red"></span>
+            <br >
+            <label asp-for="NameAR"> NameAR</label>
+            <input asp-for="NameAR">
+            <span asp-validation-for="NameAR" style="color:red"></span>
+            <br >
+            <label asp-for="RegisterDate"> RegisterDate</label>
+            <br >
+            <input asp-for="RegisterDate">
+            <br >
             <label asp-for="Image"></label>
-            <div class="custom-file">
-                <input asp-for="Image" class="custom-file-input" id="customFile">
-                <label class="custom-file-label" for="customFile"></label>
-            </div>
-        </div>
-               
-          
-        
-        <br />
-    <label asp-for="IsDeleted"> IsDeleted</label>
-    <input  asp-for="IsDeleted">
+            <br >
+            <input asp-for="Image" class="custom-file-input" id="customFile" type="file">
 
-    
+            <br >
+           
+             <label asp-for="IsDeleted"> IsDeleted</label>
+            <input asp-for="IsDeleted">
+            
+           
 
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+</body>
+</html>

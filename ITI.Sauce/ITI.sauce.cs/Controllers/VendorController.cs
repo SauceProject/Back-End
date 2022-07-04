@@ -14,7 +14,7 @@ namespace ITI.sauce.MVC.Controllers
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork)
         {
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             this.pubRepo = _vendorRepo;
             UnitOfWork = _unitOfWork;
         }
@@ -44,12 +44,13 @@ namespace ITI.sauce.MVC.Controllers
             return View("Get", Data);
         }
 
-       // [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
+
         //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Add(VendorEditViewModel model)

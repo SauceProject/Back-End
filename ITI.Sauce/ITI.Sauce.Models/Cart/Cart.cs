@@ -12,8 +12,8 @@ namespace ITI.Sauce.Models
         public string UserID { get; set; }
         public int Qty { get; set; }
         public int Recipe_ID { get; set; }
-        public Recipe Recipe { get; set; }
-        public Users User { get; set; }
+        public virtual Recipe Recipe { get; set; }
+        public virtual Users User { get; set; }
 
 
     }

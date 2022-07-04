@@ -11,7 +11,7 @@ namespace ITI.Sauce.Models
         public int OrderListID { get; set; }
         public int OrderListQty { get; set; }
         public int OrderID { get; set; }
-        public Order Order { get; set; }
+        public virtual Order Order { get; set; }
 
     }
 }

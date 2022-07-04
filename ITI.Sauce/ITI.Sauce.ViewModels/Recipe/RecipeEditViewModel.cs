@@ -47,12 +47,15 @@ namespace ITI.Sauce.ViewModels
         [Required]
         public string Details { get; set; }
         [Required]
+        [Display(Name = "Good For")]
         public int GoodFor { get; set; }
         [Required]
         public float Price { get; set; }
         [Required]
+        [Display(Name ="Name In English")]
         public string NameEN { get; set; }
         [Required]
+        [Display(Name = "Name In Arabic")]
         public string NameAR { get; set; }
         [Required]
         public DateTime RegisterDate { get; set; }

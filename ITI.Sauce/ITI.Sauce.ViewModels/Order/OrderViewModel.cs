@@ -50,5 +50,6 @@ namespace ITI.Sauce.ViewModels
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
     }
+
 }
 

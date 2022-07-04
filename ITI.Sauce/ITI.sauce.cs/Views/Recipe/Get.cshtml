@@ -18,6 +18,10 @@
     text-decoration:none;
     float:right;
 }
+td{
+    width:30%;
+    text-align:center;
+}
     </style>
     </head>
     <body>
@@ -25,10 +29,11 @@
     <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
 <table>
   <tr>
-   <th>NameEN</th>
-    <th>NameAr</th>
+   <th >Name In English</th>
+    <th>Name In Arabic </th>
     <th>Price</th>
-    <th>GoodFor</th>
+    <th>Good For</th>
+    <th>Image</th>
     <th>Actions</th>
   </tr>
     @foreach(var V in Model.Data)
@@ -40,9 +45,9 @@
     <td>@V.Price</td>
     <td>@V.GoodFor</td>
     <td> <img src="@V.ImageUrl" width="100 px" height="100 px">   </td>
+    <td>Update | Remove</td>
 
     <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
-    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a></td>
   </tr>
     }
 </table>
