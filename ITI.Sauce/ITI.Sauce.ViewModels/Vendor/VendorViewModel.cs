@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
 
+
 namespace ITI.Sauce.ViewModels
 {
     public static partial class VendorExtentions
@@ -21,6 +22,8 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.NameAR,
                 Email = model.Email,
                 phone = model.phone,
+               
+
             };
         }
 
@@ -38,6 +41,8 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.NameAR,
                 Email = model.Email,
                 phone = model.phone,
+                IsDeleted = model.IsDeleted,
+
             };
         }
 

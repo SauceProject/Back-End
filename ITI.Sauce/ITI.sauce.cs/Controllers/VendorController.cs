@@ -19,7 +19,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Get(int id = 0,
                 string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
@@ -37,20 +37,20 @@ namespace ITI.sauce.MVC.Controllers
             return View(data);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = pubRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
 
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Add(VendorEditViewModel model)
         {
@@ -81,6 +81,16 @@ namespace ITI.sauce.MVC.Controllers
             pubRepo.Update(model);
             UnitOfWork.Save();
             return RedirectToAction("Search");
+
+        }
+
+        [HttpGet]
+        public IActionResult Remove(VendorEditViewModel model, int ID)
+        {
+            var res = pubRepo.Remove(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+
 
         }
 

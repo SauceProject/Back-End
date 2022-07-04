@@ -114,9 +114,6 @@ namespace ITI.Sauce.Repository
         }
         public VendorViewModel GetOne(int _ID = 0)
         {
-
-
-
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
             if (_ID > 0)
@@ -126,10 +123,23 @@ namespace ITI.Sauce.Repository
                 filterd = null;
 
             var query = base.GetByID(filterd);
-
-
             return query.ToViewModel();
+        }
 
+        public VendorViewModel Remove(VendorEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Vendor>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+
+            var Result = base.GetByID(filterd);
+
+            Result.IsDeleted = true;
+
+            return Result.ToViewModel();
 
 
         }
