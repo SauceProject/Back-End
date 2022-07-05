@@ -32,7 +32,7 @@ namespace ITI.Sauce.ViewModels
     public class RecipeViewModel
     {
         public int ID { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public string VideoUrl { get; set; }
         public int CategoryID { get; set; }
         public string Details { get; set; }
@@ -43,5 +43,6 @@ namespace ITI.Sauce.ViewModels
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string RestaurantName { get; set; }
     }
 }

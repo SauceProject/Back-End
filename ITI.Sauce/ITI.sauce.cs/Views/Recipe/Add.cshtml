@@ -4,40 +4,44 @@
 
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" href="~/Content/CSS/AddVendorToDB.css"/>
+    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
 <body>
 
 <h3>Add to Recipe Table</h3>
 
 <div>
   <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Recipe">
-    <label asp-for="NameEN"> NameEN</label>
+    <label asp-for="NameEN"> Name In English</label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
     <br />
-    
-    
-    <label asp-for="CategoryID"> CategoryID</label>
-    <input  asp-for="CategoryID">
-   @* <select>
-        @foreach(var i in ViewBag.Recipe)
-                {
-                    <option selected>Choose Option</option>
-                    <option>@i.Value</option>
-                }
-                   
-            </select>*@
-    <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
-    <br />
-     <label asp-for="NameAR"> NameAR</label>
+    <label asp-for="NameAR"> Name In Arabic</label>
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
     <br />
-    <label asp-for="ImageUrl"> ImageUrl</label>
+    
+    <label asp-for="CategoryID"> Category </label>
+    <select asp-for="CategoryID" asp-items="@ViewBag.Categories">
+        <option selected>Choose an option</option>                 
+    </select>
+    <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+
+    <label asp-for="RestaurantID"> Restaurant </label>
+    <select asp-for="RestaurantID" asp-items="@ViewBag.Restaurants">
+        <option selected>Choose an option</option>                 
+    </select>
+
+    <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     
+
+   @* <label asp-for="ImageUrl"> ImageUrl</label>
     <input  asp-for="ImageUrl">
     <span asp-validation-for="ImageUrl" style="color:red"></span>
-    <br />
-    <label asp-for="VideoUrl"> VideoUrl</label>
+    <br />*@
+
+    <label asp-for="VideoUrl"> Video Url</label>
     <input  asp-for="VideoUrl">
     <span asp-validation-for="VideoUrl" style="color:red"></span>
     <br />
@@ -45,7 +49,7 @@
     <input  asp-for="Details">
     <span asp-validation-for="Details" style="color:red"></span>
     <br />
-    <label asp-for="GoodFor"> GoodFor</label>
+    <label asp-for="GoodFor"> Good For</label>
     <input  asp-for="GoodFor">
     <span asp-validation-for="GoodFor" style="color:red"></span>
     <br />
@@ -53,11 +57,11 @@
     <input  asp-for="Price">
     <span asp-validation-for="Price" style="color:red"></span>
     <br />
-    <label asp-for="RegisterDate"> RegisterDate</label>
+    <label asp-for="RegisterDate"> Register Date</label>
     <input  asp-for="RegisterDate">
     <span asp-validation-for="RegisterDate" style="color:red"></span>
 
-    <div class="form-group">
+    <div>
             <label asp-for="Image"></label>
                 <input asp-for="Image" class="custom-file-input" id="customFile">
                  <span asp-validation-for="Image" style="color:red"></span>
@@ -65,7 +69,7 @@
         </div>
 
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Add">
   </form>
 </div>
 

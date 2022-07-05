@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 using X.PagedList;
 
 namespace ITI.Sauce.Repository
@@ -82,6 +83,12 @@ namespace ITI.Sauce.Repository
             return base.Add(restaurant).Entity.ToViewModel();
         }
 
+        public List<TextValueViewModel> GetCRestaurantDropDown() =>
+          GetList().Select(i => new TextValueViewModel
+          {
+              Value = i.ID,
+              Text = i.NameEN
+          }).ToList();
 
 
 

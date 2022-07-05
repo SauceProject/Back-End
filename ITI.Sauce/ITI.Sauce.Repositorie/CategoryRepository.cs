@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -71,15 +72,6 @@ namespace ITI.Sauce.Repository
             return base.Add(category).Entity.ToViewModel();
         }
 
-
-
-
-
-
-
-
-  
-
         public CategoryViewModel Update(CategoryEditViewModel model)
         {
 
@@ -138,5 +130,11 @@ namespace ITI.Sauce.Repository
 
 
         }
+        public List<TextValueViewModel> GetCategoriesDropDown() =>
+          GetList().Select(i => new TextValueViewModel
+          {
+              Value = i.ID,
+              Text = i.NameEN
+          }).ToList();
     }
 }
