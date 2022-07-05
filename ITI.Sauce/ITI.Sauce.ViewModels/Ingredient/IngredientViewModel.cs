@@ -17,6 +17,7 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 ImageUrl = model.ImageUrl
+
             };
         }
 
@@ -31,6 +32,8 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 ImageUrl = model.ImageUrl,
+                IsDeleted = model.IsDeleted,
+
             };
         }
     }
@@ -41,6 +44,8 @@ namespace ITI.Sauce.ViewModels
         public string NameEN { get; set; }
         public string NameAR { get; set; }
         public string ImageUrl { get; set; }
+        public bool IsDeleted { get; set; }
+
 
 
     }

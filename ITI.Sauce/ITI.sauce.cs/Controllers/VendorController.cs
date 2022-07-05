@@ -14,14 +14,14 @@ namespace ITI.sauce.MVC.Controllers
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork)
         {
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             this.pubRepo = _vendorRepo;
             UnitOfWork = _unitOfWork;
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult Get(int id = 0,
-                string nameEN = "", string nameAR = "", string Email = "", string phone = "",
+        //[Authorize(Roles = "Admin")]
+        public IActionResult Get(string id = "",
+                string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
         {
@@ -30,14 +30,14 @@ namespace ITI.sauce.MVC.Controllers
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
-        public IActionResult GetById(int id)
+        public IActionResult GetById(string id)
         {
             var data =
            pubRepo.Get(id);
             return View(data);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = pubRepo.Search(pageIndex, pageSize);
@@ -53,7 +53,8 @@ namespace ITI.sauce.MVC.Controllers
         {
             return View();
         }
-        [Authorize(Roles = "Admin")]
+
+        //[Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Add(VendorEditViewModel model)
         {
@@ -69,7 +70,7 @@ namespace ITI.sauce.MVC.Controllers
 
 
         [HttpGet]
-        public IActionResult Update(int Id)
+        public IActionResult Update(string Id)
         {
             var Results = pubRepo.GetOne(Id);
             return View(Results.ToEditViewModel());
@@ -83,6 +84,16 @@ namespace ITI.sauce.MVC.Controllers
             pubRepo.Update(model);
             UnitOfWork.Save();
             return RedirectToAction("Search");
+
+        }
+
+        [HttpGet]
+        public IActionResult Remove(VendorEditViewModel model, int ID)
+        {
+            var res = pubRepo.Remove(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+
 
         }
 

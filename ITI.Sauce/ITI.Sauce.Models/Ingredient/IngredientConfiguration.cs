@@ -18,6 +18,8 @@ namespace ITI.Sauce.Models
             builder.Property(i => i.NameEN).IsRequired().HasMaxLength(50);
             builder.Property(i => i.NameAR).IsRequired().HasMaxLength(50);
             builder.Property(i => i.ImageUrl).IsRequired();
+            builder.Property(i => i.IsDeleted).IsRequired();
+
         }
     }
 }

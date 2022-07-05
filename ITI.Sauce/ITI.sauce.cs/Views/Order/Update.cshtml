@@ -1,0 +1,36 @@
+﻿@*@using ITI.Sauce.ViewModels
+
+
+@model OrderEditViewModel
+
+@section StyleSection{
+    <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
+}
+
+<h1>Edit Order</h1>
+
+<div>
+<form data-ajax="true"  asp-action="Update" asp-controller="Order" method="post">
+      
+    <label asp-for="NameEN"> NameEN</label>
+    <input  asp-for="NameEN"  value="@Model.NameEN">
+    <span asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+     <label asp-for="NameAR"> NameAR</label>
+    <input  asp-for="NameAR" value="@Model.NameAR">
+    <span asp-validation-for="NameAR" style="color:red"></span>
+    <br />
+    <label asp-for="IsDeleted"> IsDeleted</label>
+    <input  asp-for="IsDeleted" value="@Model.IsDeleted">
+    <span asp-validation-for="IsDeleted" style="color:red"></span>
+    <br />
+    <label asp-for="registerDate"> registerDate</label>
+    <input  asp-for="registerDate" value="@Model.registerDate">
+    <span asp-validation-for="Password" style="color:red"></span>
+    <br />
+    
+
+
+    <input type="submit" value="Submit">
+  </form>
+</div>*@

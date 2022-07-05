@@ -47,12 +47,15 @@ namespace ITI.Sauce.ViewModels
         [Required]
         public string Details { get; set; }
         [Required]
+        [Display(Name = "Good For")]
         public int GoodFor { get; set; }
         [Required]
         public float Price { get; set; }
         [Required]
+        [Display(Name ="Name In English")]
         public string NameEN { get; set; }
         [Required]
+        [Display(Name = "Name In Arabic")]
         public string NameAR { get; set; }
         [Required]
         public DateTime RegisterDate { get; set; }
@@ -60,5 +63,7 @@ namespace ITI.Sauce.ViewModels
         public bool IsDeleted { get; set; }
        
         public IFormFile? Image { get; set; }
+        public Restaurant? Restaurant { get; set; }
+        public int RestaurantID { get; set; }
     }
 }

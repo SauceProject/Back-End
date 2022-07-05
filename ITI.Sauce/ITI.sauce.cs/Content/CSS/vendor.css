@@ -24,7 +24,7 @@ body {
     text-align: center;
 }
 /**********/
-.logo {
+.mylogo {
     color: #F6EE99;
     font-size: 3rem;
     font-weight: bolder;
@@ -36,22 +36,22 @@ aside {
     grid-row: 1/-1;
 }
 
-.sidebar {
+.mysidebar {
     list-style-type: none;
     margin-top: 1rem;
 }
 
-    .sidebar a {
+    .mysidebar a {
         color: #F6EE99;
         text-decoration: none;
     }
 
-        .sidebar a:hover {
+        .mysidebar a:hover {
             color: white;
             font-weight: bold;
         }
 
-    .sidebar li {
+    .mysidebar li {
         padding: 1rem;
         cursor: pointer;
     }
@@ -98,7 +98,7 @@ main {
     background-color: #edede3;
 }
 
-.container {
+.mycontainer {
     width: 90%;
     margin: 0 auto;
 }
@@ -118,7 +118,7 @@ main {
     gap: 1rem
 }
 
-.container li {
+.mycontainer li {
     display: flex;
     justify-content: space-between;
 }

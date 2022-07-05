@@ -12,7 +12,7 @@ namespace ITI.Sauce.Models
         public int IngredientID { get; set; }
         public int Qty { get; set; }
         public string Type { get; set; }
-        public Recipe Recipe { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public virtual Recipe Recipe { get; set; }
+        public virtual Ingredient Ingredient { get; set; }
     }
 }

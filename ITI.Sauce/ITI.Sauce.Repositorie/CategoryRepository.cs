@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -28,13 +29,7 @@ namespace ITI.Sauce.Repository
             if (!string.IsNullOrEmpty(NameAR))
                 filter = filter.Or(c => c.NameAR.Contains(NameAR));
 
-
-
-
             filter = filter.Or(c => c.IsDeleted == false);
-
-
-
 
 
             if (filter == oldFiler)
@@ -70,15 +65,6 @@ namespace ITI.Sauce.Repository
             Category category = model.ToModel();
             return base.Add(category).Entity.ToViewModel();
         }
-
-
-
-
-
-
-
-
-  
 
         public CategoryViewModel Update(CategoryEditViewModel model)
         {
@@ -138,5 +124,11 @@ namespace ITI.Sauce.Repository
 
 
         }
+        public List<TextValueViewModel> GetCategoriesDropDown() =>
+          GetList().Select(i => new TextValueViewModel
+          {
+              Value = i.ID,
+              Text = i.NameEN
+          }).ToList();
     }
 }

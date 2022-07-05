@@ -15,31 +15,31 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UnitOfWork UnitOfWork;
         public RestaurantController(RestaurantRepository _RepoRes, UnitOfWork _unitOfWork)
         {
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             this.ResRepo = _RepoRes;
             UnitOfWork = _unitOfWork;
         }
-        [Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(int vendorID = 0,int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        //[Authorize(Roles = "Admin,User,Vendor")]
+        public IActionResult Get(string vendorID = "",int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
             var Resultdata =
                 ResRepo .Get (vendorID,id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
             return View(Resultdata);
         }
-        [Authorize(Roles = "Admin,Vendor")]
+        //[Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = ResRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-        [Authorize(Roles = "Admin,Vendor")]
+        //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
         public IActionResult Add()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin,Vendor")]
+        //[Authorize(Roles = "Admin,Vendor")]
         [HttpPost]
         public IActionResult Add(RestaurantEditViewModel model)
         {
@@ -61,6 +61,46 @@ namespace ITI.sauce.MVC.Controllers
             ResRepo.Add(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
+        }
+
+
+
+
+
+        [HttpGet]
+        public IActionResult Update(int Id)
+        {
+            var Results = ResRepo.GetOne(Id);
+
+            return View(Results.ToEditViewModel());
+
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public IActionResult Update(RestaurantEditViewModel model, int ID = 0)
+        {
+            ResRepo.Update(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
+        }
+
+
+
+
+        [HttpGet]
+        public IActionResult Remove(RestaurantEditViewModel model, int ID)
+        {
+            var res = ResRepo.Remove(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
+
         }
     }
 }

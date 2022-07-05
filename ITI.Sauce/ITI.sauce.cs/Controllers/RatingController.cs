@@ -15,7 +15,7 @@ namespace ITI.sauce.MVC.Controllers
         public RatingController( UnitOfWork _unitOfWork
             , RatingRepository _RatepRepo)
         {
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             UnitOfWork = _unitOfWork;
             RatepRepo = _RatepRepo;
         }

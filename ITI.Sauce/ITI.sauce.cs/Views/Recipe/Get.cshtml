@@ -1,48 +1,38 @@
 ﻿@using ITI.Sauce.ViewModels
 
-@model IPagedList<RecipeViewModel>
-<!DOCTYPE html>
-<html>
-    <head>
-         <link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
-    <style>
-        #btnAdd {
-    width: 7%;
-    background-color: #143444;
-    color: #F6EE99;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 4px;
-    cu rsor: pointer;
-    text-decoration:none;
-    float:right;
-}
-    </style>
-    </head>
-    <body>
+@model PaginingViewModel<List<RecipeViewModel>>
+@section StyleSection{
+}     <link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
+
+        <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
+        
     <h2>Recipe Table</h2>
-    <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
-<table>
+    
+<table class="table">
   <tr>
-   <th>NameEN</th>
-    <th>NameAr</th>
-    <th>Price</th>
-    <th>GoodFor</th>
-    <th>Actions</th>
+   <th scope="col">Name In English</th>
+    <th scope="col">Name In Arabic </th>
+    <th scope="col">Price</th>
+    <th scope="col">Good For</th>
+    <th scope="col">Image</th>
+    <th scope="col">Category</th>
+    <th scope="col">Restaurant</th>
+    <th  scope="col">Actions</th>
   </tr>
     @foreach(var V in Model)
 {  
   <tr>
-     <td>@V.NameEN</td>
+     <td scope="row">@V.NameEN</td>
    
     <td>@V.NameAR</td>
     <td>@V.Price</td>
     <td>@V.GoodFor</td>
     <td> <img src="@V.ImageUrl" width="100 px" height="100 px">   </td>
+    <td>@V.CategoryID</td>
+    <td>@V.RestaurantName</td>
 
-    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
-    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a></td>
+    <td> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID">Update </a> | Remove</td>
+
   </tr>
     }
 </table>
@@ -67,5 +57,3 @@
 
     
             
-    </body>
-</html>

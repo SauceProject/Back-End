@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vendor Dashboard</title>
+    <title>Admin Dashboard</title>
   
     <link
       rel="stylesheet"
@@ -18,15 +18,22 @@
   </head>
   <body>
     <aside id="side">
-      <ul class="sidebar">
+      <ul class="mysidebar">
         <li>
-          <a asp-action="Index" asp-controller="Home" class="logo"><i class="fas fa-utensils"></i>Sauce</a>
+          <a asp-action="Index" asp-controller="Home" class="mylogo"><i class="fas fa-utensils"></i>Sauce</a>
           
         </li>
-        <li><a href="#">View Orders </a></li>
-        <li><a href="#">Add Recipes </a></li>
-        <li><a href="#">View Recipes </a></li>
-        <li><a href="#">View Reviews </a></li>
+        <li><a asp-action="Add" asp-controller="Recipe">Add Recipes </a></li>
+        <li><a asp-action="Get" asp-controller="Recipe">View Recipes </a></li>
+        <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
+        <li><a asp-action="Get" asp-controller="Users">View Users </a></li>
+        <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
+        <li><a asp-action="Get" asp-controller="Vendor">View Vendors </a></li>
+
+        <li><a asp-action="Search" asp-controller="Rating">View Reviews </a></li>
+        <li><a asp-action="Get" asp-controller="Order">View Orders </a></li>
+
+
       </ul>
     </aside>
 
@@ -49,7 +56,7 @@
         
       </nav>
 
-        <section class="container">
+        <section class="mycontainer">
             @RenderBody()
         </section>
       </main>

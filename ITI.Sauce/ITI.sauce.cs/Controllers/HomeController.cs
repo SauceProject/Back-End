@@ -8,20 +8,20 @@ namespace ITI.sauce.MVC.Controllers
 {
     public class HomeController : Controller
     {
-        DBContext dBContext = new DBContext();
+
+        
         public RecipeRepository RecRepo;
         public UserRepository UserRepo;
         public VendorRepository VendorRepo;
         public RestaurantRepository RestaurantRepo;
 
-        public HomeController(UserRepository _UserRepository)
+        public HomeController(UserRepository _UserRepository, RecipeRepository _RecRepo, VendorRepository _VendorRepo
+            , RestaurantRepository _RestaurantRepo)
         {
-            RecRepo=new RecipeRepository(dBContext);
-
-
+            RecRepo= _RecRepo;
             UserRepo= _UserRepository;
-            VendorRepo = new VendorRepository(dBContext);
-            RestaurantRepo=new RestaurantRepository(dBContext);
+            VendorRepo = _VendorRepo;
+            RestaurantRepo = _RestaurantRepo;
         }
         [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Index()

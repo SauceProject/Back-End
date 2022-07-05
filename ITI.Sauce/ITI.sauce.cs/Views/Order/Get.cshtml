@@ -7,6 +7,8 @@
 
 <link rel="stylesheet" href="~/Content/CSS/Order.css"/>
 <h2>Order</h2>
+    <a asp-action="Add" asp-controller="Order" id="btnAdd">Add</a>
+
 
 <table>
   <tr>
@@ -26,4 +28,23 @@
   </tr>
   
 </table>
+@*<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+        new X.PagedList.Web.Common.PagedListRenderOptions
+        {
+        DisplayItemSliceAndTotal = true,
+        ContainerDivClasses = new[] { "navigation" },
+        LiElementClasses = new[] { "page-item" },
+        PageClasses = new[] { "page-link" },
+        })
+    </div>
+    <div>
+    <script>
+        $(document).ready(function() {
+            $('ul.pagination > li.disabled > a').addClass('page-link');
+        });
+    </script>
+</div>
+*@
+
 

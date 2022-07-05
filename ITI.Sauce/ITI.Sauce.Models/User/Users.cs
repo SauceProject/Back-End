@@ -14,10 +14,11 @@ namespace ITI.Sauce.Models
         public string NameAR { get; set; }
         public DateTime registerDate { get; set; }
         public bool IsDelete { get; set; }
-        public List<Fav> favs { get; set; }
-        public List<Cart> Carts { get; set; }
-        public List<UserOrder> UserOrders { get; set; }
-        public List<Rating> Ratings { get; set; }
-      
+        public virtual Vendor Vendor { get; set; }
+
+        public virtual List<Fav> favs { get; set; }
+        public virtual List<Cart> Carts { get; set; }
+        public virtual List<UserOrder> UserOrders { get; set; }
+        public virtual List<Rating> Ratings { get; set; }
     }
 }

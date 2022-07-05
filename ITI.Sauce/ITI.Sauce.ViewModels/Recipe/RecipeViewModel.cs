@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,15 +32,17 @@ namespace ITI.Sauce.ViewModels
     public class RecipeViewModel
     {
         public int ID { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public string VideoUrl { get; set; }
         public int CategoryID { get; set; }
         public string Details { get; set; }
         public int GoodFor { get; set; }
         public float Price { get; set; }
         public string NameEN { get; set; }
+
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
+        public string RestaurantName { get; set; }
     }
 }

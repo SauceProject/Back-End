@@ -17,19 +17,20 @@ namespace ITI.Sauce.ViewModels
             return new Vendor
             {
                 ID = model.ID,
-                UserName = model.UserName,
-                Password = model.Password,
-                NameEN = model.NameEN,
-                NameAR = model.NameAR,
-                Email = model.Email,
-                phone = model.phone,
+                //UserName = model.UserName,
+                //Password = model.Password,
+                //NameEN = model.NameEN,
+                //NameAR = model.NameAR,
+                //Email = model.Email,
+                //phone = model.phone,
+                IsDeleted=model.IsDeleted,
             };
         }
     }
     public class VendorEditViewModel
     {
         [Required]
-        public int ID { get; set; }
+        public string ID { get; set; }
         [Required]
         public string UserName { get; set; }
         [Required]
@@ -42,5 +43,6 @@ namespace ITI.Sauce.ViewModels
         public string NameEN { get; set; }
         [Required]
         public string NameAR { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -1,0 +1,67 @@
+﻿@using ITI.Sauce.ViewModels
+@{
+    Layout = "_Layout";
+}
+@section StyleSection {
+    <link rel = "stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
+}
+@model RecipeEditViewModel
+<h1>Edit Recipe</h1>
+<form method="post"  enctype="multipart/form-data" asp-action="Update" asp-controller="Recipe" >
+    
+
+   <div >
+       <label asp-for="NameEN"></label>
+       <input asp-for="NameEN" type="text" class="form-control" value="@ViewBag.CurrentRecipe.NameEN"/>
+   </div>
+    <div >
+       <label asp-for="NameAR"></label>
+       <input asp-for="NameAR" type="text"  value="@ViewBag.CurrentRecipe.NameAR" />
+   </div>
+
+   <div>
+       <label asp-for="GoodFor"></label>
+       <input asp-for="GoodFor" type="number"  value="@ViewBag.CurrentRecipe.GoodFor" />
+   </div>
+   <div >
+       <label asp-for="Price"></label>
+       <input asp-for="Price" type="number"  value="@ViewBag.CurrentRecipe.Price" />
+   </div>
+   <br />
+    <div >
+    <label asp-for="CategoryID"> Category </label>
+    <select asp-for="CategoryID" asp-items="@ViewBag.Categories">
+        <option selected>Choose an option</option>                 
+    </select>
+    </div>
+    <span data-ajax="true" asp-validation-for="NameEN" style="color:red"></span>
+    <br />
+
+    <div >
+    <label asp-for="RestaurantID"> Restaurant </label>
+    <select asp-for="RestaurantID" asp-items="@ViewBag.Restaurants">
+        <option selected>Choose an option</option>                 
+    </select>
+    </div>
+    <div>
+    <label asp-for="Details"> Details</label>
+    <input  asp-for="Details">
+    <span asp-validation-for="Details" style="color:red"></span>
+    </div>
+    <br />
+    <div >
+    <label asp-for="Image">Recipe Image</label>
+    <input type="file" asp-for="Image" value="@ViewBag.CurrentRecipe.ImageUrl">
+    </div>
+    <div> 
+        <img src="@ViewBag.CurrentRecipe.ImageUrl" alt="@ViewBag.CurrentRecipe.NameEN"/>
+    </div>
+
+  
+    <div >
+       <input type="submit"  value="Update" asp-action="Update" asp-controller="Recipe"/>
+   </div>
+
+
+
+</form>
