@@ -3,7 +3,7 @@
 
 
 
-@model PaginingViewModel<List<RestaurantViewModel>>
+@model IPagedList<RestaurantViewModel>
 
 
 @section StyleSection{
@@ -27,7 +27,7 @@
 
 
   </tr>
-	@foreach (var U in Model.Data)
+	@foreach (var U in Model)
 {  
   <tr>
 	<td>@U.NameEN</td>

@@ -1,4 +1,15 @@
-﻿@{
+﻿@using ITI.Sauce.Models
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> _SignInManager
+
+
+@{var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+var userId = claim.Value;    
+}
+
+
+@{
     Layout = "_Layout";
 }
 @section StyleSection{
@@ -7,7 +18,11 @@
 
 
 <!---------------STATISTICS------------------->
-        <div class="stat">
+
+
+@if(this.User.HasClaim(c => c.Value=="Admin")) 
+{
+   <div class="stat">
           <h2 class="head">Restaurant Overview</h2>
           <hr />
           <div class="flexbox">
@@ -23,20 +38,22 @@
               <a asp-action="search" asp-controller="Vendor" >Vendors</a>
             </div>
 
-            <div class="stat-card three">
+            
+           </div>
+        </div>
+    }
+             <div class="stat-card three">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@ViewBag.ID">Recipes</a>
-            </div>
-
+              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
+            </div> 
             <div class="stat-card four">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.ReataurantCount</p>
-    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID="@ViewBag.ID">Restaurant</a>
+    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
             </div>
-          </div>
-        </div>
+
 
         <!--ORDERS LIST-->
         <div class="head-order">

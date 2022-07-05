@@ -21,7 +21,7 @@ namespace ITI.sauce.MVC.Controllers
 
         [Authorize(Roles = "Admin")]
         public IActionResult Get(int id = 0,
-                string nameEN = "", string nameAR="", string Email = "",string phone = "",
+                string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
         {
@@ -43,6 +43,9 @@ namespace ITI.sauce.MVC.Controllers
             var Data = pubRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
+  
+   
+
 
         [Authorize(Roles = "Admin")]
         [HttpGet]
@@ -71,7 +74,6 @@ namespace ITI.sauce.MVC.Controllers
             var Results = pubRepo.GetOne(Id);
             return View(Results.ToEditViewModel());
         }
-
 
 
         [HttpPost]

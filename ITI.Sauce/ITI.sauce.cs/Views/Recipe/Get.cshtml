@@ -1,6 +1,6 @@
 ﻿@using ITI.Sauce.ViewModels
 
-@model PaginingViewModel<List<RecipeViewModel>>
+@model IPagedList<RecipeViewModel>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,7 +31,7 @@
     <th>GoodFor</th>
     <th>Actions</th>
   </tr>
-    @foreach(var V in Model.Data)
+    @foreach(var V in Model)
 {  
   <tr>
      <td>@V.NameEN</td>

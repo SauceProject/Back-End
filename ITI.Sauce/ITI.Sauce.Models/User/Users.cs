@@ -18,5 +18,6 @@ namespace ITI.Sauce.Models
         public List<Cart> Carts { get; set; }
         public List<UserOrder> UserOrders { get; set; }
         public List<Rating> Ratings { get; set; }
+      
     }
 }

@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Content\Images\" />
     <Folder Include="Content\lib\" />
     <Folder Include="Content\Uploads\Recipe\" />
     <Folder Include="Content\Uploads\Resturant\" />

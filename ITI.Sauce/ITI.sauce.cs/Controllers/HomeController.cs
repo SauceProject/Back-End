@@ -23,6 +23,7 @@ namespace ITI.sauce.MVC.Controllers
             VendorRepo = new VendorRepository(dBContext);
             RestaurantRepo=new RestaurantRepository(dBContext);
         }
+        [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Index()
         {
             ViewBag.RecipeCount=RecRepo.GetList().Count();
