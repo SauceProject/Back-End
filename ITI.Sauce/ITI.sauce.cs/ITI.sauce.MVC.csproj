@@ -12,6 +12,7 @@
     <Folder Include="Content\lib\" />
     <Folder Include="Content\Uploads\Recipe\" />
     <Folder Include="Content\Uploads\Resturant\" />
+    <Folder Include="Controllers\API\" />
   </ItemGroup>
 
   <ItemGroup>
