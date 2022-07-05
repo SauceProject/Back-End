@@ -85,5 +85,15 @@ namespace ITI.sauce.MVC.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Remove(VendorEditViewModel model, int ID)
+        {
+            var res = pubRepo.Remove(model);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+
+
+        }
+
     }
 }

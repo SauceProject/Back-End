@@ -16,7 +16,7 @@
     },
     {
       "library": "twitter-bootstrap@5.1.3",
-      "destination": "lib/twitter-bootstrap/"
+      "destination": "Content/lib/twitter-bootstrap/"
     }
   ]
 }

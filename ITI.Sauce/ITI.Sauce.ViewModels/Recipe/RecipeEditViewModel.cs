@@ -63,5 +63,7 @@ namespace ITI.Sauce.ViewModels
         public bool IsDeleted { get; set; }
        
         public IFormFile? Image { get; set; }
+        public Restaurant? Restaurant { get; set; }
+        public int RestaurantID { get; set; }
     }
 }

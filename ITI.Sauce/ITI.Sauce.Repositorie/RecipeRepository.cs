@@ -72,6 +72,7 @@ namespace ITI.Sauce.Repository
                 RegisterDate = i.RegisterDate,
                 ImageUrl = i.ImageUrl,
                 VideoUrl = i.VideoUrl,
+                RestaurantName= i.Restaurant.NameEN
             });
 
             PaginingViewModel<List<RecipeViewModel>>
@@ -110,11 +111,7 @@ namespace ITI.Sauce.Repository
         }
        
 
-        public List<TextValueViewModel> GetCategoryID() =>
-           GetList().Select(i => new TextValueViewModel
-           {
-               Value = i.CategoryID 
-           }).ToList();
+       
 
         public RecipeViewModel GetOne(int _ID = 0)
         {
@@ -142,15 +139,26 @@ namespace ITI.Sauce.Repository
                 filterd = null;
 
             var recipe = base.GetByID(filterd);
-         
+
             recipe.NameAR = model.NameAR;
             recipe.NameEN = model.NameEN;
             recipe.GoodFor = model.GoodFor;
             recipe.Price = model.Price;
+            recipe.ImageUrl = model.ImageUrl;
+            recipe.ResturantID = model.RestaurantID;
+            recipe.CategoryID = model.CategoryID;
+            recipe.Details = model.Details;
+
+            //recipe = model.ToModel();
 
             return base.Update(recipe).Entity.ToViewModel();
 
         }
+
+        //public RecipeViewModel Remove ()
+        //{
+
+        //}
 
     }
 }

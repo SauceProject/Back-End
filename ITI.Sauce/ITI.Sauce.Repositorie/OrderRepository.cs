@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 
+using X.PagedList;
 
 namespace ITI.Sauce.Repository
 {
@@ -46,7 +47,8 @@ namespace ITI.Sauce.Repository
                 ID = i.ID,
                 NameEN = i.NameEN,
                 NameAR = i.NameAR,
-                registerDate = i.registerDate,
+                IsDeleted=i.IsDeleted,
+                registerDate=i.registerDate,
 
             });
 
@@ -63,6 +65,76 @@ namespace ITI.Sauce.Repository
             return finalResult;
         }
 
+        public IPagedList<OrderViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                   =>
+   GetList().Select(V => new OrderViewModel
+   {
+       ID = V.ID,
+       NameEN = V.NameEN,
+       NameAR = V.NameAR,
+       IsDeleted = V.IsDeleted,
+       registerDate = V.registerDate,
+
+   }).ToPagedList(pageIndex, pageSize);
+
+        public OrderViewModel Add(OrderEditViewModel model)
+        {
+            Order Order = model.ToModel();
+            return base.Add(Order).Entity.ToViewModel();
+        }
+
+
+        public OrderViewModel Update(OrderEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Order>();
+            var old = filterd;
+
+            filterd = filterd.Or(i => i.ID == model.ID);
+
+            var Result = base.GetByID(filterd);
+            Result.ID = model.ID;
+            Result.NameEN = model.NameEN;
+            Result.NameAR = model.NameAR;
+            Result.IsDeleted=model.IsDeleted;
+            Result.registerDate= model.registerDate;
+           
+
+            return Result.ToViewModel();
+
+
+        }
+        public OrderViewModel GetOne(int _ID = 0)
+        {
+            var filterd = PredicateBuilder.New<Order>();
+            var old = filterd;
+            if (_ID > 0)
+                filterd = filterd.Or(i => i.ID == _ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var query = base.GetByID(filterd);
+            return query.ToViewModel();
+        }
+
+        public OrderViewModel Remove(OrderEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Order>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+
+            var Result = base.GetByID(filterd);
+
+            Result.IsDeleted = true;
+
+            return Result.ToViewModel();
+
+
+        }
 
     }
 }
