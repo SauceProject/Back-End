@@ -19,7 +19,7 @@ namespace ITI.sauce.MVC.Controllers
 
         public OrderController(OrderRepository _ordRepo, UnitOfWork _unitOfWork)
         {
-            DBContext dBContext = new DBContext();
+           // DBContext dBContext = new DBContext();
             ordRepo = _ordRepo;
             UnitOfWork = _unitOfWork;
         }

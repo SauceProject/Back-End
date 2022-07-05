@@ -1,4 +1,4 @@
-﻿@using ITI.Sauce.ViewModels
+﻿@*@using ITI.Sauce.ViewModels
 
 
 @model OrderEditViewModel
@@ -10,7 +10,7 @@
 <h1>Edit Order</h1>
 
 <div>
-  <form data-ajax="true" method="post" asp-action="Update" asp-controller="Order">
+<form data-ajax="true"  asp-action="Update" asp-controller="Order" method="post">
       
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN"  value="@Model.NameEN">
@@ -33,4 +33,4 @@
 
     <input type="submit" value="Submit">
   </form>
-</div>
+</div>*@

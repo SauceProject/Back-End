@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Sauce.Models.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220628170832_identity")]
-    partial class identity
+    [Migration("20220705150123_Updaetee")]
+    partial class Updaetee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,8 +42,8 @@ namespace ITI.Sauce.Models.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
@@ -61,6 +61,9 @@ namespace ITI.Sauce.Models.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NameAR")
                         .IsRequired()
@@ -91,8 +94,8 @@ namespace ITI.Sauce.Models.Migrations
 
                     b.Property<string>("UserID")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
@@ -114,6 +117,9 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("NameAR")
                         .IsRequired()
@@ -250,8 +256,8 @@ namespace ITI.Sauce.Models.Migrations
 
                     b.Property<string>("Comment")
                         .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("RatingValue")
                         .HasColumnType("int");
@@ -314,7 +320,10 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 6, 28, 19, 8, 32, 5, DateTimeKind.Local).AddTicks(9994));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 17, 1, 23, 32, DateTimeKind.Local).AddTicks(6299));
+
+                    b.Property<int?>("ResturantID")
+                        .HasColumnType("int");
 
                     b.Property<string>("VideoUrl")
                         .IsRequired()
@@ -323,6 +332,8 @@ namespace ITI.Sauce.Models.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CategoryID");
+
+                    b.HasIndex("ResturantID");
 
                     b.ToTable("Recipe", (string)null);
                 });
@@ -358,6 +369,11 @@ namespace ITI.Sauce.Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
@@ -376,10 +392,11 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 6, 28, 19, 8, 32, 8, DateTimeKind.Local).AddTicks(1962));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 17, 1, 23, 36, DateTimeKind.Local).AddTicks(451));
 
-                    b.Property<int>("Vendor_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Vendor_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("WorkTime")
                         .HasColumnType("datetime2");
@@ -500,51 +517,18 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Vendor", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("NameAR")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("NameEN")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("phone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("registerDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 6, 28, 19, 8, 32, 7, DateTimeKind.Local).AddTicks(5863));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 17, 1, 23, 35, DateTimeKind.Local).AddTicks(2883));
 
                     b.HasKey("ID");
 
@@ -553,8 +537,8 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Vendor_MemberShip", b =>
                 {
-                    b.Property<int>("Vendor_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Vendor_ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MemberShip_ID")
                         .HasColumnType("int");
@@ -805,7 +789,14 @@ namespace ITI.Sauce.Models.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ITI.Sauce.Models.Restaurant", "Restaurant")
+                        .WithMany("Recipes")
+                        .HasForeignKey("ResturantID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Category");
+
+                    b.Navigation("Restaurant");
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.RecipeIngredient", b =>
@@ -864,6 +855,17 @@ namespace ITI.Sauce.Models.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("ITI.Sauce.Models.Vendor", b =>
+                {
+                    b.HasOne("ITI.Sauce.Models.Users", "User")
+                        .WithOne("Vendor")
+                        .HasForeignKey("ITI.Sauce.Models.Vendor", "ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -977,6 +979,8 @@ namespace ITI.Sauce.Models.Migrations
                 {
                     b.Navigation("Locations");
 
+                    b.Navigation("Recipes");
+
                     b.Navigation("Restaurant_Phones");
                 });
 
@@ -987,6 +991,9 @@ namespace ITI.Sauce.Models.Migrations
                     b.Navigation("Ratings");
 
                     b.Navigation("UserOrders");
+
+                    b.Navigation("Vendor")
+                        .IsRequired();
 
                     b.Navigation("favs");
                 });

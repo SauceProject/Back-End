@@ -20,7 +20,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         //[Authorize(Roles = "Admin")]
-        public IActionResult Get(int id = 0,
+        public IActionResult Get(string id = "",
                 string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
@@ -30,7 +30,7 @@ namespace ITI.sauce.MVC.Controllers
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
-        public IActionResult GetById(int id)
+        public IActionResult GetById(string id)
         {
             var data =
            pubRepo.Get(id);
@@ -67,7 +67,7 @@ namespace ITI.sauce.MVC.Controllers
 
 
         [HttpGet]
-        public IActionResult Update(int Id)
+        public IActionResult Update(string Id)
         {
             var Results = pubRepo.GetOne(Id);
             return View(Results.ToEditViewModel());
