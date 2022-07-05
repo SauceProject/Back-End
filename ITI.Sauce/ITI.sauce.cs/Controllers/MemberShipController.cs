@@ -12,7 +12,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UnitOfWork UnitOfWork;
         public MemberShipController(MemberShipRepository _RepoMemberShip, UnitOfWork _unitOfWork)
         {
-            DBContext dBContext = new DBContext();
+            //DBContext dBContext = new DBContext();
             this.MemberShipeRepo = _RepoMemberShip;
             UnitOfWork = _unitOfWork;
         }

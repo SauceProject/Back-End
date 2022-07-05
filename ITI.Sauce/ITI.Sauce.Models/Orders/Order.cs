@@ -14,9 +14,9 @@ namespace ITI.Sauce.Models
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
         public int Recipe_ID { get; set; }
-        public List <OrderList> orderLists { get; set; }
-        public Recipe Recipe { get; set; }
-        public List<UserOrder> UserOrders { get; set; }
+        public virtual List <OrderList> orderLists { get; set; }
+        public virtual Recipe Recipe { get; set; }
+        public virtual List<UserOrder> UserOrders { get; set; }
 
 
     }

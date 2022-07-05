@@ -12,7 +12,7 @@ namespace ITI.Sauce.Models
         public int MemberShip_ID { get; set; }
         public int NumberOfOrders { get; set; }
         public bool IsValid { get; set; }
-        public Vendor Vendor { get; set; }
-        public MemberShip MemberShip { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        public virtual MemberShip MemberShip { get; set; }
     }
 }

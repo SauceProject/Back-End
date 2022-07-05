@@ -17,7 +17,7 @@ namespace ITI.Sauce.Repository
         }
         public PaginingViewModel<List<IngredientViewModel>> Get (int ID =0,string orderBy = null, 
             bool isAscending = false , string NameEN = "",
-            string NameAR = "", string ImageUrl="" , int pageIndex=1, int pageSize= 20)
+            string NameAR = "", string ImageUrl="" ,int pageIndex=1, int pageSize= 20)
         {
             var filter = PredicateBuilder.New<Ingredient>();
             var oldFiler = filter;
@@ -29,8 +29,16 @@ namespace ITI.Sauce.Repository
                 filter = filter.Or(I => I.NameAR.Contains (NameAR));
             if(!string.IsNullOrEmpty(ImageUrl))
                 filter = filter.Or(I => I.ImageUrl.Contains(ImageUrl));
+            filter = filter.Or(I => I.IsDeleted == false);
+
             if (filter == oldFiler)
                 filter = null;
+
+
+
+
+
+
             var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
 
             var result =
@@ -103,6 +111,27 @@ namespace ITI.Sauce.Repository
 
             return query.ToViewModel();
 
+
+
+        }
+
+
+
+
+        public IngredientViewModel Remove(IngredientEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Ingredient>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.ID == model.ID);
+
+
+            var Result = base.GetByID(filterd);
+
+            Result.IsDeleted = true;
+
+            return Result.ToViewModel();
 
 
         }

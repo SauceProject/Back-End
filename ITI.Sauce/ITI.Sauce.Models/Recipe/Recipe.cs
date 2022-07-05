@@ -19,14 +19,14 @@ namespace ITI.Sauce.Models
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
-        public Category Category { get; set; }
-        public List<RecipeIngredient> RecipeIngredients { get; set; }
-        public List<Fav> Favs { get; set; }
-        public List<Cart> Carts { get; set; }
-        public List<Rating> Ratings { get; set; }
-        public List<Order> Orders { get; set; }
-        public int? ResturantID { get; set; }
-        public Restaurant Restaurant { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual List<RecipeIngredient> RecipeIngredients { get; set; }
+        public virtual List<Fav> Favs { get; set; }
+        public virtual List<Cart> Carts { get; set; }
+        public virtual List<Rating> Ratings { get; set; }
+        public virtual List<Order> Orders { get; set; }
+        public virtual int? ResturantID { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
 
 
     }

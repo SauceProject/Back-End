@@ -16,9 +16,9 @@ namespace ITI.Sauce.Models
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
         public string ImageUrl { get; set; }
-        public Vendor Vendor { get; set; }
-        public List<Location> Locations { get; set; }
-        public List<Restaurant_Phones> Restaurant_Phones{ get; set; }
-        public List<Recipe> Recipes { get; set; }
+        public virtual Vendor Vendor { get; set; }
+        public virtual List<Location> Locations { get; set; }
+        public virtual List<Restaurant_Phones> Restaurant_Phones{ get; set; }
+        public virtual List<Recipe> Recipes { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.NameAR,
                 Email = model.Email,
                 phone = model.phone,
+                IsDeleted=model.IsDeleted,
             };
         }
     }
@@ -42,5 +43,6 @@ namespace ITI.Sauce.ViewModels
         public string NameEN { get; set; }
         [Required]
         public string NameAR { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

@@ -15,11 +15,9 @@ namespace ITI.sauce.MVC.Controllers
     {
         OrderListRepository ordRepo;
 
-        public OrderListController()
+        public OrderListController(OrderListRepository _ordRepo)
         {
-            DBContext dBContext = new DBContext();
-
-            this.ordRepo = new OrderListRepository(dBContext);
+            ordRepo = _ordRepo;
         }
         public ViewResult Get(int ID = 0, string orderBy = null
             , int OrderListQty = 0, bool isAscending = false

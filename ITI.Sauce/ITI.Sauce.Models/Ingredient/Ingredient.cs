@@ -12,7 +12,9 @@ namespace ITI.Sauce.Models
         public string NameEN { get; set; }
         public string NameAR { get; set; }
         public string ImageUrl { get; set; }
-        public List<RecipeIngredient> RecipeIngredients { get; set; }
+        public bool IsDeleted { get; set; }
+
+        public virtual List<RecipeIngredient> RecipeIngredients { get; set; }
 
 
     }
