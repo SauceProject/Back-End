@@ -2,38 +2,112 @@
 @using ITI.Sauce.ViewModels
 @model OrderEditViewModel
 
+<!DOCTYPE html>
+<html>
+<head>
+    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    input[type=text],[type=email],[type=password], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+
+div {
+    border-radius: 5px;
+    padding: 20px;
+
+      
+}
+#btnAdd {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:right;
+}
+
+#customFile{
+    width: 22%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration:none;
+    float:left;
+}
+
+</style>
+</head>
+<body>
 
 @section StyleSection{
     <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
 }
 
-<h3>Add to Order Table</h3>
 
 <div>
-  <form data-ajax="true" method="post" asp-action="Add" asp-controller="Order">
-    <label asp-for="NameEN"> NameEN</label>
+<form data-ajax="true" enctype="multipart/form-data" asp-action="Add" asp-controller="Order" method="post"  >
+    <h1>Order</h1>
+    <p>Please Choose Your Order.</p>
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+    <hr>
+
+    <label asp-for="NameEN"> English Name </label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
-    <br />
-     <label asp-for="NameAR"> NameAR</label>
+
+
+
+    <label asp-for="NameAR"> Arabic Name </label>
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
-    <br />
-    <br />
-    <label asp-for="registerDate"> registerDate</label>
+
+
+     <label asp-for="registerDate">Register Date</label>
     <input  asp-for="registerDate">
     <span asp-validation-for="registerDate" style="color:red"></span>
-    <br />
-     <br />
-    <label asp-for="IsDeleted"> IsDeleted</label>
+
+
+
+     <label asp-for="IsDeleted"> Is Deleted  </label>
     <input  asp-for="IsDeleted">
     <span asp-validation-for="IsDeleted" style="color:red"></span>
+
+
     
+    <input id="btnAdd" type="submit" value="Add">
+</form>
+  </div>
+
+  </body>
+</html>
 
 
-    <input type="submit" value="Submit">
-  </form>
-</div>
+
+
+
+
+
+
+
+
+
 
 
 
