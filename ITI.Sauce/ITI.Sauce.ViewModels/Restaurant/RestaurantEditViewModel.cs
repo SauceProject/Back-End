@@ -33,7 +33,7 @@ namespace ITI.Sauce.ViewModels
         [Required]
         public DateTime WorkTime { get; set; }
         [Required]
-        public int Vendor_ID { get; set; }
+        public string Vendor_ID { get; set; }
         [Required]
         public string NameEN { get; set; }
         [Required]

@@ -129,6 +129,11 @@ namespace ITI.Sauce.Models
                 .WithMany(c => c.Recipes).HasForeignKey(r => r.ResturantID)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            /*Vendoe - User*/
+            modelBuilder.Entity<Vendor>().HasOne(r => r.User)
+                .WithOne(c => c.Vendor).HasForeignKey<Vendor> (r => r.ID)
+                .OnDelete(DeleteBehavior.Cascade);
+
 
 
         }

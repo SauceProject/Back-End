@@ -9,7 +9,7 @@ namespace ITI.sauce.MVC.Controllers
     public class HomeController : Controller
     {
 
-       // DBContext dBContext = new DBContext();
+        
         public RecipeRepository RecRepo;
         public UserRepository UserRepo;
         public VendorRepository VendorRepo;
@@ -23,6 +23,7 @@ namespace ITI.sauce.MVC.Controllers
             VendorRepo = _VendorRepo;
             RestaurantRepo = _RestaurantRepo;
         }
+        [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Index()
         {
             ViewBag.RecipeCount=RecRepo.GetList().Count();

@@ -8,11 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Content\Images\" />
+    <Compile Remove="Controllers\API\**" />
+    <Content Remove="Controllers\API\**" />
+    <EmbeddedResource Remove="Controllers\API\**" />
+    <EntityDeploy Remove="Controllers\API\**" />
+    <None Remove="Controllers\API\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Content\lib\" />
     <Folder Include="Content\Uploads\Recipe\" />
     <Folder Include="Content\Uploads\Resturant\" />
-    <Folder Include="Controllers\API\" />
   </ItemGroup>
 
   <ItemGroup>

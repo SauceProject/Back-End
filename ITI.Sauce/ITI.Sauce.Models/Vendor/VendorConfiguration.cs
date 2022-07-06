@@ -13,13 +13,13 @@ namespace ITI.Sauce.Models
         {
             builder.ToTable("Vendor");
             builder.HasKey(v => v.ID);
-            builder.Property(v => v.ID).ValueGeneratedOnAdd();
-            builder.Property(v => v.UserName).HasMaxLength(500).IsRequired();
-            builder.Property(v => v.Password).HasMaxLength(50).IsRequired();
-            builder.Property(v => v.Email).HasMaxLength(50).IsRequired();
-            builder.Property(v => v.phone).HasMaxLength(50).IsRequired();
-            builder.Property(v => v.NameEN).HasMaxLength(500).IsRequired();
-            builder.Property(v => v.NameAR).HasMaxLength(500).IsRequired();
+            
+            //builder.Property(v => v.UserName).HasMaxLength(500).IsRequired();
+            //builder.Property(v => v.Password).HasMaxLength(50).IsRequired();
+            //builder.Property(v => v.Email).HasMaxLength(50).IsRequired();
+            //builder.Property(v => v.phone).HasMaxLength(50).IsRequired();
+            //builder.Property(v => v.NameEN).HasMaxLength(500).IsRequired();
+            //builder.Property(v => v.NameAR).HasMaxLength(500).IsRequired();
             builder.Property(v => v.registerDate).HasDefaultValue(DateTime.Now);
             builder.Property(v => v.IsDeleted).HasDefaultValue(false);
 

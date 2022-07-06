@@ -1,4 +1,4 @@
-﻿@using ITI.Sauce.ViewModels
+﻿@*@using ITI.Sauce.ViewModels
 
 @model PaginingViewModel<List<RecipeViewModel>>
 @section StyleSection{
@@ -19,7 +19,7 @@
     <th scope="col">Restaurant</th>
     <th  scope="col">Actions</th>
   </tr>
-    @foreach(var V in Model.Data)
+    @foreach(var V in Model)
 {  
   <tr>
      <td scope="row">@V.NameEN</td>
@@ -56,4 +56,4 @@
 *@
 
     
-            
+          

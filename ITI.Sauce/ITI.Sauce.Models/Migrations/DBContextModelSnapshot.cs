@@ -318,7 +318,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 21, 31, 53, 467, DateTimeKind.Local).AddTicks(2280));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 21, 4, 3, 92, DateTimeKind.Local).AddTicks(4331));
 
                     b.Property<int?>("ResturantID")
                         .HasColumnType("int");
@@ -390,10 +390,11 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 21, 31, 53, 470, DateTimeKind.Local).AddTicks(3435));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 21, 4, 3, 95, DateTimeKind.Local).AddTicks(4354));
 
-                    b.Property<int>("Vendor_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Vendor_ID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("WorkTime")
                         .HasColumnType("datetime2");
@@ -514,51 +515,18 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Vendor", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("NameAR")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("NameEN")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("phone")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("registerDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 2, 21, 31, 53, 469, DateTimeKind.Local).AddTicks(9441));
+                        .HasDefaultValue(new DateTime(2022, 7, 5, 21, 4, 3, 94, DateTimeKind.Local).AddTicks(4963));
 
                     b.HasKey("ID");
 
@@ -567,8 +535,8 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Vendor_MemberShip", b =>
                 {
-                    b.Property<int>("Vendor_ID")
-                        .HasColumnType("int");
+                    b.Property<string>("Vendor_ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("MemberShip_ID")
                         .HasColumnType("int");
@@ -889,6 +857,17 @@ namespace ITI.Sauce.Models.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ITI.Sauce.Models.Vendor", b =>
+                {
+                    b.HasOne("ITI.Sauce.Models.Users", "User")
+                        .WithOne("Vendor")
+                        .HasForeignKey("ITI.Sauce.Models.Vendor", "ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("ITI.Sauce.Models.Vendor_MemberShip", b =>
                 {
                     b.HasOne("ITI.Sauce.Models.MemberShip", "MemberShip")
@@ -1010,6 +989,9 @@ namespace ITI.Sauce.Models.Migrations
                     b.Navigation("Ratings");
 
                     b.Navigation("UserOrders");
+
+                    b.Navigation("Vendor")
+                        .IsRequired();
 
                     b.Navigation("favs");
                 });

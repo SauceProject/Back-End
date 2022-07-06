@@ -19,7 +19,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<VendorViewModel>> Get(int id = 0,
+        public PaginingViewModel<List<VendorViewModel>> Get(string id = "",
             string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
@@ -27,16 +27,16 @@ namespace ITI.Sauce.Repository
 
             var filter = PredicateBuilder.New<Vendor>();
             var oldFiler = filter;
-            if (id > 0)
+            if (!string.IsNullOrEmpty(id))
                 filter = filter.Or(V => V.ID == id);
             if (!string.IsNullOrEmpty(nameEN))
-                filter = filter.Or(V => V.NameEN.Contains(nameEN));
+                filter = filter.Or(V => V.User.NameEN.Contains(nameEN));
             if (!string.IsNullOrEmpty(nameAR))
-                filter = filter.Or(V => V.NameAR.Contains(nameAR));
+                filter = filter.Or(V => V.User.NameAR.Contains(nameAR));
             if (!string.IsNullOrEmpty(Email))
-                filter = filter.Or(V => V.Email.Contains(Email));
+                filter = filter.Or(V => V.User.Email.Contains(Email));
             if (!string.IsNullOrEmpty(phone))
-                filter = filter.Or(V => V.phone.Any(i => i.Equals(phone)));
+                filter = filter.Or(V => V.User.PhoneNumber.Any(i => i.Equals(phone)));
 
             if (filter == oldFiler)
                 filter = null;
@@ -47,13 +47,13 @@ namespace ITI.Sauce.Repository
             query.Select(V => new VendorViewModel
             {
                 ID = V.ID,
-                UserName = V.UserName,
-                Password = V.Password,
-                NameEN = V.NameEN,
-                NameAR = V.NameAR,
-                Email = V.Email,
+                UserName = V.User.UserName,
+               
+                NameEN = V.User.NameEN,
+                NameAR = V.User.NameAR,
+                Email = V.User.Email,
                 IsDeleted = V.IsDeleted,
-                phone = V.phone,
+                phone = V.User.PhoneNumber,
 
             });
 
@@ -74,13 +74,13 @@ namespace ITI.Sauce.Repository
     GetList().Select(V => new VendorViewModel
     {
         ID = V.ID,
-        UserName = V.UserName,
-        Password = V.Password,
-        NameEN = V.NameEN,
-        NameAR = V.NameAR,
-        Email = V.Email,
+        UserName = V.User.UserName,
+
+        NameEN = V.User.NameEN,
+        NameAR = V.User.NameAR,
+        Email = V.User.Email,
         IsDeleted = V.IsDeleted,
-        phone = V.phone,
+        phone = V.User.PhoneNumber,
 
     }).ToPagedList(pageIndex, pageSize);
 
@@ -102,22 +102,22 @@ namespace ITI.Sauce.Repository
 
             var Result = base.GetByID(filterd);
             Result.ID = model.ID;
-            Result.UserName = model.UserName;
-            Result.Password = model.Password;
-            Result.NameEN = model.NameEN;
-            Result.NameAR = model.NameAR;
-            Result.Email = model.Email;
-            Result.phone = model.phone;
+            Result.User.UserName = model.UserName;
+            
+            Result.User.NameEN = model.NameEN;
+            Result.User.NameAR = model.NameAR;
+            Result.User.Email = model.Email;
+            Result.User.PhoneNumber = model.phone;
 
             return Result.ToViewModel();
 
 
         }
-        public VendorViewModel GetOne(int _ID = 0)
+        public VendorViewModel GetOne(string _ID = "")
         {
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
-            if (_ID > 0)
+            if (!string.IsNullOrEmpty(_ID))
                 filterd = filterd.Or(i => i.ID == _ID);
 
             if (old == filterd)

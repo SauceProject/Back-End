@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ITI.Sauce.Models.Migrations
 {
-    public partial class identity : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,8 @@ namespace ITI.Sauce.Models.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameEN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                    NameAR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -74,7 +75,8 @@ namespace ITI.Sauce.Models.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameEN = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -95,26 +97,6 @@ namespace ITI.Sauce.Models.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MemberShip", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Vendor",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    phone = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    NameEN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 6, 28, 19, 8, 32, 7, DateTimeKind.Local).AddTicks(5863)),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vendor", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -224,30 +206,21 @@ namespace ITI.Sauce.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recipe",
+                name: "Vendor",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: false),
-                    Details = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
-                    GoodFor = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    NameEN = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 6, 28, 19, 8, 32, 5, DateTimeKind.Local).AddTicks(9994)),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 94, DateTimeKind.Local).AddTicks(4963)),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recipe", x => x.ID);
+                    table.PrimaryKey("PK_Vendor", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Recipe_Category_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Category",
-                        principalColumn: "ID",
+                        name: "FK_Vendor_AspNetUsers_ID",
+                        column: x => x.ID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -258,11 +231,12 @@ namespace ITI.Sauce.Models.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     WorkTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Vendor_ID = table.Column<int>(type: "int", nullable: false),
+                    Vendor_ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NameEN = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 6, 28, 19, 8, 32, 8, DateTimeKind.Local).AddTicks(1962)),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 95, DateTimeKind.Local).AddTicks(4354)),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -279,7 +253,7 @@ namespace ITI.Sauce.Models.Migrations
                 name: "Vendor_MemberShip",
                 columns: table => new
                 {
-                    Vendor_ID = table.Column<int>(type: "int", nullable: false),
+                    Vendor_ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MemberShip_ID = table.Column<int>(type: "int", nullable: false),
                     NumberOfOrders = table.Column<int>(type: "int", nullable: false),
                     IsValid = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
@@ -297,136 +271,6 @@ namespace ITI.Sauce.Models.Migrations
                         name: "FK_Vendor_MemberShip_Vendor_Vendor_ID",
                         column: x => x.Vendor_ID,
                         principalTable: "Vendor",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cart",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 50, nullable: false),
-                    Qty = table.Column<int>(type: "int", maxLength: 50, nullable: false),
-                    Recipe_ID = table.Column<int>(type: "int", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cart", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Cart_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Cart_Recipe_Recipe_ID",
-                        column: x => x.Recipe_ID,
-                        principalTable: "Recipe",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Fav",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 50, nullable: false),
-                    Recipe_ID = table.Column<int>(type: "int", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Fav", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Fav_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Fav_Recipe_Recipe_ID",
-                        column: x => x.Recipe_ID,
-                        principalTable: "Recipe",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Order",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NameEN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Recipe_ID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Order", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Order_Recipe_Recipe_ID",
-                        column: x => x.Recipe_ID,
-                        principalTable: "Recipe",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rating",
-                columns: table => new
-                {
-                    RatingID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Comment = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    RatingValue = table.Column<int>(type: "int", nullable: false),
-                    RecipeID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Rating", x => x.RatingID);
-                    table.ForeignKey(
-                        name: "FK_Rating_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rating_Recipe_RecipeID",
-                        column: x => x.RecipeID,
-                        principalTable: "Recipe",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "RecipeIngredient",
-                columns: table => new
-                {
-                    RecipeID = table.Column<int>(type: "int", nullable: false),
-                    IngredientID = table.Column<int>(type: "int", nullable: false),
-                    Qty = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RecipeIngredient", x => new { x.RecipeID, x.IngredientID });
-                    table.ForeignKey(
-                        name: "FK_RecipeIngredient_Ingredient_IngredientID",
-                        column: x => x.IngredientID,
-                        principalTable: "Ingredient",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RecipeIngredient_Recipe_RecipeID",
-                        column: x => x.RecipeID,
-                        principalTable: "Recipe",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -452,6 +296,41 @@ namespace ITI.Sauce.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Recipe",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VideoUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CategoryID = table.Column<int>(type: "int", nullable: false),
+                    Details = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    GoodFor = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    NameEN = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 92, DateTimeKind.Local).AddTicks(4331)),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    ResturantID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipe", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Recipe_Category_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "Category",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Recipe_Restaurant_ResturantID",
+                        column: x => x.ResturantID,
+                        principalTable: "Restaurant",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Restaurant_Phones",
                 columns: table => new
                 {
@@ -465,6 +344,136 @@ namespace ITI.Sauce.Models.Migrations
                         name: "FK_Restaurant_Phones_Restaurant_Restaurant_ID",
                         column: x => x.Restaurant_ID,
                         principalTable: "Restaurant",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Cart",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    Qty = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    Recipe_ID = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Cart", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Cart_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Cart_Recipe_Recipe_ID",
+                        column: x => x.Recipe_ID,
+                        principalTable: "Recipe",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Fav",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    Recipe_ID = table.Column<int>(type: "int", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Fav", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Fav_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Fav_Recipe_Recipe_ID",
+                        column: x => x.Recipe_ID,
+                        principalTable: "Recipe",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameEN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    NameAR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Recipe_ID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Order_Recipe_Recipe_ID",
+                        column: x => x.Recipe_ID,
+                        principalTable: "Recipe",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Rating",
+                columns: table => new
+                {
+                    RatingID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Comment = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
+                    RatingValue = table.Column<int>(type: "int", nullable: false),
+                    RecipeID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rating", x => x.RatingID);
+                    table.ForeignKey(
+                        name: "FK_Rating_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rating_Recipe_RecipeID",
+                        column: x => x.RecipeID,
+                        principalTable: "Recipe",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RecipeIngredient",
+                columns: table => new
+                {
+                    RecipeID = table.Column<int>(type: "int", nullable: false),
+                    IngredientID = table.Column<int>(type: "int", nullable: false),
+                    Qty = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RecipeIngredient", x => new { x.RecipeID, x.IngredientID });
+                    table.ForeignKey(
+                        name: "FK_RecipeIngredient_Ingredient_IngredientID",
+                        column: x => x.IngredientID,
+                        principalTable: "Ingredient",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RecipeIngredient_Recipe_RecipeID",
+                        column: x => x.RecipeID,
+                        principalTable: "Recipe",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -598,6 +607,11 @@ namespace ITI.Sauce.Models.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Recipe_ResturantID",
+                table: "Recipe",
+                column: "ResturantID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RecipeIngredient_IngredientID",
                 table: "RecipeIngredient",
                 column: "IngredientID");
@@ -669,25 +683,25 @@ namespace ITI.Sauce.Models.Migrations
                 name: "Ingredient");
 
             migrationBuilder.DropTable(
-                name: "Restaurant");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
                 name: "MemberShip");
 
             migrationBuilder.DropTable(
-                name: "Vendor");
-
-            migrationBuilder.DropTable(
                 name: "Recipe");
 
             migrationBuilder.DropTable(
                 name: "Category");
+
+            migrationBuilder.DropTable(
+                name: "Restaurant");
+
+            migrationBuilder.DropTable(
+                name: "Vendor");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

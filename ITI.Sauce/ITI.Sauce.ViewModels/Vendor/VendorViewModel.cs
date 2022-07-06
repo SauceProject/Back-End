@@ -16,12 +16,12 @@ namespace ITI.Sauce.ViewModels
             return new VendorViewModel
             {
                 ID = model.ID,
-                UserName = model.UserName,
-                Password = model.Password,
-                NameEN = model.NameEN,
-                NameAR = model.NameAR,
-                Email = model.Email,
-                phone = model.phone,
+                UserName = model.User.UserName,
+                
+                NameEN = model.User.NameEN,
+                NameAR = model.User.NameAR,
+                Email = model.User.Email,
+                phone = model.User.PhoneNumber,
                
 
             };
@@ -50,7 +50,7 @@ namespace ITI.Sauce.ViewModels
     }
     public class VendorViewModel
     {
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
