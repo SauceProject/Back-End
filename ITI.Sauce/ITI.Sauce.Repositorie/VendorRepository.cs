@@ -86,6 +86,7 @@ namespace ITI.Sauce.Repository
 
         public VendorViewModel Add(VendorEditViewModel model)
         {
+            /////
             Vendor Vendor = model.ToModel();
             return base.Add(Vendor).Entity.ToViewModel();
         }
