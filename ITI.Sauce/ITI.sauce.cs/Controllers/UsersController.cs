@@ -6,6 +6,7 @@ using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -138,6 +139,29 @@ namespace ITI.sauce.MVC.Controllers
             }
             else
                 return View();
+        }
+
+        [HttpGet]
+        public IActionResult ChangePassword()
+        {
+            ViewBag.IsSuccess = false;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePasswardViewModel model)
+        {
+            model.Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+         var result =   await UserRepo.ChangePassward(model);
+            {
+                if(result.Succeeded)
+                {
+                    ModelState.Clear();
+                    ViewBag.IsSuccess = true;
+                }
+
+            }
+            return View();
         }
     }
 

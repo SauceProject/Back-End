@@ -111,5 +111,12 @@ namespace ITI.Sauce.Repository
             Users Users = model.ToModel();
             return base.Add(Users).Entity.ToViewModel();
         }
+
+     public async Task<IdentityResult> ChangePassward(ChangePasswardViewModel model)
+        {
+            Users users = await userManger.FindByIdAsync(model.Id);
+         var result =  await userManger.ChangePasswordAsync(users, model.CurrentPassword, model.NewPassword);
+            return result;
+        }
     }
 }

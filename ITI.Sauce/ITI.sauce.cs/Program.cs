@@ -41,7 +41,7 @@ public class Program
 
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/Users/SignIn";
+            Option.LoginPath = "/Users/SignUp";
         });
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()

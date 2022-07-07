@@ -1,6 +1,14 @@
 ﻿@using ITI.Sauce.Models
 @using Microsoft.AspNetCore.Identity;
 @inject SignInManager<Users> _SignInManager
+
+   
+     
+@{var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+var userId = claim.Value;    
+}     
+        
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,19 +27,25 @@
   <body>
     <aside id="side">
       <ul class="mysidebar">
+       
         <li>
           <a asp-action="Index" asp-controller="Home" class="mylogo"><i class="fas fa-utensils"></i>Sauce</a>
-          
+      
         </li>
-        <li><a asp-action="Add" asp-controller="Recipe">Add Recipes </a></li>
-        <li><a asp-action="Get" asp-controller="Recipe">View Recipes </a></li>
+        <li><a asp-action="Add" asp-controller="Recipe" asp-route-vendorID="@userId">Add Recipes </a></li>
+        <li><a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
+        <li><a asp-action="Search" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
+        <li><a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
+       
+     
+        @if(this.User.HasClaim(c => c.Value=="Admin")) 
+{
         <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
         <li><a asp-action="Get" asp-controller="Users">View Users </a></li>
         <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
         <li><a asp-action="Get" asp-controller="Vendor">View Vendors </a></li>
-
-        <li><a asp-action="Search" asp-controller="Rating">View Reviews </a></li>
-        <li><a asp-action="Get" asp-controller="Order">View Orders </a></li>
+}
+        
 
 
       </ul>
@@ -50,7 +64,9 @@
         {
             <div>
          <span id="restaurant-name">@User.Identity.Name </span>|
-        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span>
+        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span> |
+        <span><a asp-action="ChangePassword" asp-controller="Users">ChangePassword</a></span> |
+
         </div>
         }
         
