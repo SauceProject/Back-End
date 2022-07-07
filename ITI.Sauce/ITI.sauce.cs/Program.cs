@@ -38,7 +38,13 @@ public class Program
         builder.Services.AddScoped(typeof(DBContext));
         builder.Services.AddScoped(typeof(UnitOfWork));
         builder.Services.AddScoped<IUserClaimsPrincipalFactory<Users>, UserClaimsFactory>();
-
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+        });
         builder.Services.ConfigureApplicationCookie(Option =>
         {
             Option.LoginPath = "/Users/SignIn";
