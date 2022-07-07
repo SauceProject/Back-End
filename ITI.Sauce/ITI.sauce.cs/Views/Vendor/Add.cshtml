@@ -1,5 +1,6 @@
-﻿@using ITI.Sauce.ViewModels
-@model VendorEditViewModel
+﻿
+@using ITI.Sauce.ViewModels
+@model UserEditViewModel
 
 
 @section StyleSection{
@@ -18,24 +19,31 @@
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
     <br />
-    <label asp-for="phone"> phone</label>
-    <input  asp-for="phone">
-    <span asp-validation-for="phone" style="color:red"></span>
-    <br />
+ 
     <label asp-for="Password"> Password</label>
     <input  asp-for="Password">
     <span asp-validation-for="Password" style="color:red"></span>
     <br />
+    <label asp-for="ConfirnmPassword"> Confirnm Password</label>
+    <input  asp-for="ConfirnmPassword">
+    <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
+   @* <br />
      <label asp-for="UserName"> UserName</label>
     <input  asp-for="UserName">
-    <span asp-validation-for="UserName" style="color:red"></span>
+    <span asp-validation-for="UserName" style="color:red"></span>*@
+    <br />
+     <label asp-for="phone"> Phone Number</label>
+    <input  asp-for="phone">
+    <span asp-validation-for="phone" style="color:red"></span>
     <br />
     <label asp-for="Email"> Email</label>
     <input  asp-for="Email">
     <span asp-validation-for="Email" style="color:red"></span>
 
+    <input  hidden asp-for="Role">
 
-    <input type="submit" value="Submit">
+
+    <input type="submit" value="Add">
   </form>
 </div>
 

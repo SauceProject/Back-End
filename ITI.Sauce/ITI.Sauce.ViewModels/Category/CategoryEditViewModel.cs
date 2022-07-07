@@ -24,8 +24,8 @@ namespace ITI.Sauce.ViewModels
     public class CategoryEditViewModel
     {
         public int ID { get; set; }
-        public string NameEN { get; set; }
-        public string NameAR { get; set; }
+        public string? NameEN { get; set; }
+        public string? NameAR { get; set; }
         public bool IsDeleted { get; set; }
 
 

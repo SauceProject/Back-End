@@ -34,13 +34,8 @@ namespace ITI.Sauce.ViewModels
             return new VendorEditViewModel()
             {
 
-                ID = model.ID,
-                UserName = model.UserName,
-                Password = model.Password,
-                NameEN = model.NameEN,
-                NameAR = model.NameAR,
-                Email = model.Email,
-                phone = model.phone,
+                Id = model.ID,
+                
                 IsDeleted = model.IsDeleted,
 
             };

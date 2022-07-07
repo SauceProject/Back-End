@@ -133,6 +133,20 @@ namespace ITI.sauce.MVC.Controllers
             return RedirectToAction("Get");
            
         }
+        public IActionResult Remove(RecipeEditViewModel model, int ID)
+        {
+            RecipeRepo.Remove(model,ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+
+
+        }
+        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID)
+        {
+            RecipeRepo.AcceptRecipe(model, ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+        }
 
     }
 }

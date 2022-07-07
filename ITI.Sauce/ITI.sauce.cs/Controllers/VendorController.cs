@@ -8,42 +8,44 @@ namespace ITI.sauce.MVC.Controllers
 {
     public class VendorController : Controller
     {
-        private readonly VendorRepository pubRepo;
+        private readonly VendorRepository vendorRepo;
+        private readonly UserRepository userRepo;
         private readonly UnitOfWork UnitOfWork;
 
 
-        public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork)
+        public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
+            UserRepository _userRepo)
         {
             //DBContext dBContext = new DBContext();
-            this.pubRepo = _vendorRepo;
+            this.vendorRepo = _vendorRepo;
+            this.userRepo = _userRepo;
             UnitOfWork = _unitOfWork;
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Get(string id = "",
                 string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
         {
             var data =
-            pubRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
+            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
-        public IActionResult GetById(string id)
+        public IActionResult Details(string id)
         {
-            var data =
-           pubRepo.Get(id);
+            var data = vendorRepo.Get(id);
             return View(data);
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
-            var Data = pubRepo.Search(pageIndex, pageSize);
+            var Data = vendorRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-  
+        
    
 
 
@@ -51,18 +53,26 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new UserEditViewModel { Role="Vendor"});
         }
 
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult Add(VendorEditViewModel model)
+        public async Task< IActionResult> Add(UserEditViewModel model)
         {
             if (ModelState.IsValid == true)
             {
-                pubRepo.Add(model);
-                UnitOfWork.Save();
-                return RedirectToAction("Search");
+                var result= await userRepo.SignUpForVendor(model);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                    UnitOfWork.Save();
+                    return RedirectToAction("Search");
+                }
+                else {
+                    return View();
+                }
+
             }
             else
                 return View();
@@ -72,7 +82,7 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Update(string Id)
         {
-            var Results = pubRepo.GetOne(Id);
+            var Results = vendorRepo.GetOne(Id);
             return View(Results.ToEditViewModel());
         }
 
@@ -81,7 +91,7 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Update(VendorEditViewModel model, int ID = 0)
         {
 
-            pubRepo.Update(model);
+            vendorRepo.Update(model);
             UnitOfWork.Save();
             return RedirectToAction("Search");
 
@@ -90,7 +100,7 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Remove(VendorEditViewModel model, int ID)
         {
-            var res = pubRepo.Remove(model);
+            var res = vendorRepo.Remove(model);
             UnitOfWork.Save();
             return RedirectToAction("Search");
 

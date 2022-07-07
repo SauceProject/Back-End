@@ -86,6 +86,7 @@ namespace ITI.Sauce.Repository
 
         public VendorViewModel Add(VendorEditViewModel model)
         {
+            /////
             Vendor Vendor = model.ToModel();
             return base.Add(Vendor).Entity.ToViewModel();
         }
@@ -97,17 +98,15 @@ namespace ITI.Sauce.Repository
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
 
-            filterd = filterd.Or(i => i.ID == model.ID);
+            filterd = filterd.Or(i => i.ID == model.Id);
 
             var Result = base.GetByID(filterd);
-            Result.ID = model.ID;
+            
             Result.User.UserName = model.UserName;
             
             Result.User.NameEN = model.NameEN;
             Result.User.NameAR = model.NameAR;
             Result.User.Email = model.Email;
-            Result.User.PhoneNumber = model.phone;
-
             return Result.ToViewModel();
 
 
@@ -132,7 +131,7 @@ namespace ITI.Sauce.Repository
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
 
-            filterd = filterd.Or(c => c.ID == model.ID);
+            filterd = filterd.Or(c => c.ID == model.Id);
 
 
             var Result = base.GetByID(filterd);
