@@ -53,6 +53,7 @@ namespace ITI.sauce.MVC.Controllers
             {
                 IdentityResult result
                         = await UserRepo.SignUp(model);
+                
                 if (!result.Succeeded)
                 {
                     ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
@@ -62,7 +63,10 @@ namespace ITI.sauce.MVC.Controllers
                 }
                 else
                 {
-
+                    if (model.Role == "Vendor")
+                    {
+                        //vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                    }
                     return RedirectToAction("SignIn", "Users");
                 }
             }

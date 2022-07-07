@@ -53,19 +53,26 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new UserEditViewModel { Role="Vendor"});
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public IActionResult Add(UserEditViewModel model)
+        public async Task< IActionResult> Add(UserEditViewModel model)
         {
             if (ModelState.IsValid == true)
             {
-                var VendorEditView= userRepo.Add(model).ToVendorEditViewModel();
-                vendorRepo.Add(VendorEditView);
-                UnitOfWork.Save();
-                return RedirectToAction("Search");
+                var result= await userRepo.SignUpForVendor(model);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                    UnitOfWork.Save();
+                    return RedirectToAction("Search");
+                }
+                else {
+                    return View();
+                }
+
             }
             else
                 return View();
