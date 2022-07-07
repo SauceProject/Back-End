@@ -172,5 +172,22 @@ namespace ITI.Sauce.Repository
 
         }
 
+        public RecipeViewModel AcceptRecipe(RecipeEditViewModel model, int ID)
+        {
+            var filterd = PredicateBuilder.New<Recipe>();
+            var old = filterd;
+            if (ID > 0)
+                filterd = filterd.Or(i => i.ID == ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var recipe = base.GetByID(filterd);
+            recipe.IsDeleted = false;
+
+            return base.Update(recipe).Entity.ToViewModel();
+
+        }
+
     }
 }

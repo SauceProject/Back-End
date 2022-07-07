@@ -16,33 +16,31 @@ namespace ITI.Sauce.ViewModels
         {
             return new Vendor
             {
-                ID = model.ID,
-                //UserName = model.UserName,
-                //Password = model.Password,
-                //NameEN = model.NameEN,
-                //NameAR = model.NameAR,
-                //Email = model.Email,
-                //phone = model.phone,
-                IsDeleted=model.IsDeleted,
+                ID=model.Id,
+                
+                registerDate=model.registerDate,
+                
             };
         }
     }
     public class VendorEditViewModel
     {
-        [Required]
-        public string ID { get; set; }
-        [Required]
-        public string UserName { get; set; }
-        [Required]
-        public string Password { get; set; }
-        [Required]
-        public string Email { get; set; }
-        [Required]
-        public string phone { get; set; }
-        [Required]
-        public string NameEN { get; set; }
-        [Required]
-        public string NameAR { get; set; }
+        public List<string>? Phones;
+        public string? Id { get; set; }
+        public string? UserName { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirnmPassword { get; set; }
+
+        public string? NameEN { get; set; }
+        
+        public string? NameAR { get; set; }
+
+        public string? Role { get; set; }
+        public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
+        public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }
+        public virtual List<Restaurant>? Restaurants { get; set; }
+
     }
 }

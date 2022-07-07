@@ -141,6 +141,12 @@ namespace ITI.sauce.MVC.Controllers
 
 
         }
+        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID)
+        {
+            RecipeRepo.AcceptRecipe(model, ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
+        }
 
     }
 }
