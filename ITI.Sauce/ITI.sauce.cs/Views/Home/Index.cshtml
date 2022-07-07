@@ -45,7 +45,7 @@ var userId = claim.Value;
              <div class="stat-card three">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
+              <a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
             </div> 
             <div class="stat-card four">
               <h3><i class="fa-solid fa-chart-line"></i></h3>

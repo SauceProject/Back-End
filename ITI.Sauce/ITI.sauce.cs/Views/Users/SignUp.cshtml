@@ -2,15 +2,22 @@
 @using ITI.Sauce.ViewModels
 @model UserEditViewModel
 
-
-	@section StyleSection{
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>	
 <link rel="stylesheet" href="~/Content/CSS/SighnUp.css"/>
-    }
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-
+</head>
+<body>
   <div>
 <form asp-action="SignUp" asp-controller="Users" method="post">
     <h1>Register</h1>
+    <a  asp-action="SignIn" asp-controller="Users">SignIn</a>
     <p>Please fill in this form to Register an account.</p>
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
@@ -49,4 +56,10 @@
     <button id="btnAdd" type="submit" value="Register">Register</button>
 </form>
   </div>
+
+  <script src="~/Content/JS/vendor.js"></script>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
 

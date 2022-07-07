@@ -1,0 +1,56 @@
+﻿section{
+   display:  flex;
+   gap:10%;
+   width: 90%;
+   margin: 5% auto;
+  
+}
+.profile {
+   
+    background-color: #fff;
+    padding: 2rem;
+    box-shadow: 2px 2px 8px #c1b9b9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:4%;
+    color:#143444;
+    width: 50%;
+}
+.profile p {
+    color: gray;
+}
+
+.profileimg{
+    width: 10rem;
+    border-radius: 50%;
+}
+.data{
+    box-shadow: 2px 2px 8px #c1b9b9;
+    width: 50%;
+
+}
+.data ul {
+    list-style-type: none;
+    padding: 1rem;
+}
+.data li {
+    padding: 0.5rem;
+    margin: 1rem;
+}
+.data h3 {
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 0.4rem;
+    display: inline-block;
+    margin-bottom: 1rem;
+
+}
+.edit-btn{
+    background-color: #143444;
+    color:#F6EE99;
+    width: 7rem;
+    height: 2rem;
+    font-size: 1.5rem;
+    border: 1px solid #143444;
+}

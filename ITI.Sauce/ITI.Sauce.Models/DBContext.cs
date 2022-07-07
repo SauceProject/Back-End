@@ -61,10 +61,11 @@ namespace ITI.Sauce.Models
             new RestaurantConfiguration().Configure(modelBuilder.Entity<Restaurant>());
             new Restaurant_PhonesConfiguration().Configure(modelBuilder.Entity<Restaurant_Phones>());
             new LocationConfiguration().Configure(modelBuilder.Entity<Location>());
+            modelBuilder.RoleData();
             #endregion
-
             RelationMapper.Mapper(modelBuilder);
             base.OnModelCreating(modelBuilder);
+            
         }
 
          
