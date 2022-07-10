@@ -27,13 +27,13 @@ namespace ITI.Sauce.Repository
         IConfiguration configuration;
         public UserRepository(DBContext _Context,
             UserManager<Users> _userManger, SignInManager<Users> _SignInManger , EmailServices _EmailServices, IConfiguration _Configuration) : base(_Context)
-            UserManager<Users> _userManger, SignInManager<Users> _SignInManger, IConfiguration _configuration) : base(_Context)
+           // UserManager<Users> _userManger, SignInManager<Users> _SignInManger, IConfiguration _configuration) : base(_Context)
         {
             userManger = _userManger;
             SignInManger = _SignInManger;
             EmailServices = _EmailServices;
             Configuration = _Configuration;
-            configuration = _configuration;
+            //configuration = _configuration;
         }
         public PaginingViewModel<List<UsersViewModel>> Get(string id = "", string UserName = "", string Email = "", string phone = "", DateTime? registerDate = null, string NameEn = "", string NameAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)

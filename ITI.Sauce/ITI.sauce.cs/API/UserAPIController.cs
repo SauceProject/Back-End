@@ -51,8 +51,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result
-                        = await UserRepo.SignUp(model);
+                var  result = await UserRepo.SignUp(model);
 
                 if (!result.Succeeded)
                 {
