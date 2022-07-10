@@ -43,7 +43,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             //ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
             //.Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-            return null; 
+            return null;
         }
 
         [HttpPost]
@@ -51,10 +51,10 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result
+                var result
                         = await UserRepo.SignUp(model);
 
-                if (!result.Succeeded)
+                if (!result.IsSuccess)
                 {
                     //ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
                     //.Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
@@ -77,14 +77,15 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult SignIn()
         {
 
-            return new ObjectResult(new{
-                Message="Plese LOgin",
-                SignInUrl="userApI/SignIn"
+            return new ObjectResult(new
+            {
+                Message = "Plese LOgin",
+                SignInUrl = "userApI/SignIn"
             });
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn([FromBody]UserLoginViewModel model)
+        public async Task<IActionResult> SignIn([FromBody] UserLoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -101,13 +102,13 @@ namespace ITI.sauce.MVC.Controllers
                     return new ObjectResult(new
                     {
 
-                      Token=token,
+                        Token = token,
                     });
                 }
             }
             List<string> errors = new List<string>();
-            foreach(var i in ModelState.Values)
-                foreach(var error in i.Errors)
+            foreach (var i in ModelState.Values)
+                foreach (var error in i.Errors)
                     errors.Add(error.ErrorMessage);
             return new ObjectResult(errors);
         }
@@ -158,7 +159,7 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult ChangePassword()
         {
-            
+
             return null;
         }
 
@@ -171,7 +172,7 @@ namespace ITI.sauce.MVC.Controllers
                 if (result.Succeeded)
                 {
                     ModelState.Clear();
-                    
+
                 }
 
             }

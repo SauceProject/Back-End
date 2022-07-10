@@ -10,3 +10,14 @@ D:\Track .NET\Final Project\DBGUT\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\
 D:\Track .NET\Final Project\DBGUT\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\refint\ITI.Sauce.Services.dll
 D:\Track .NET\Final Project\DBGUT\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
 D:\Track .NET\Final Project\DBGUT\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.deps.json
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ref\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.pdb
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.AssemblyInfoInputs.cache
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.AssemblyInfo.cs
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.CoreCompileInputs.cache
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
