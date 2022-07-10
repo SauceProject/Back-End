@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Abp.Extensions;
-using Abp.Linq.Expressions;
-
 using X.PagedList;
 using Microsoft.AspNetCore.Identity;
-
+using Microsoft.Extensions.Configuration;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
+using ITI.Sauce.Services;
+using Castle.Core.Configuration;
+using Abp.Linq.Expressions;
+using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
@@ -21,12 +22,17 @@ namespace ITI.Sauce.Repository
     {
         UserManager<Users> userManger;
         SignInManager<Users> SignInManger;
+        EmailServices EmailServices;
+        IConfiguration Configuration;
         IConfiguration configuration;
         public UserRepository(DBContext _Context,
+            UserManager<Users> _userManger, SignInManager<Users> _SignInManger , EmailServices _EmailServices, IConfiguration _Configuration) : base(_Context)
             UserManager<Users> _userManger, SignInManager<Users> _SignInManger, IConfiguration _configuration) : base(_Context)
         {
             userManger = _userManger;
             SignInManger = _SignInManger;
+            EmailServices = _EmailServices;
+            Configuration = _Configuration;
             configuration = _configuration;
         }
         public PaginingViewModel<List<UsersViewModel>> Get(string id = "", string UserName = "", string Email = "", string phone = "", DateTime? registerDate = null, string NameEn = "", string NameAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
@@ -78,20 +84,38 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
         }
-        public async Task<IdentityResult> SignUp(UserEditViewModel model)
+        public async Task<AccountResultViewModel> SignUp(UserEditViewModel model)
         {
             Users User = model.ToModel();
            var result =  await userManger.CreateAsync(User, model.Password);
-        result = await userManger.AddToRoleAsync(User, model.Role);
-            return result;
-
-        }
-        public async Task<string> SignUpForVendor(UserEditViewModel model)
-        {
-            Users User = model.ToModel();
-            var result = await userManger.CreateAsync(User, model.Password);
-            result = await userManger.AddToRoleAsync(User, "Vendor");
-            return User.Id;
+            if (result.Succeeded)
+            {
+                result = await userManger.AddToRoleAsync(User, model.Role);
+                if (result.Succeeded)
+                {
+                    string token = await userManger.GenerateEmailConfirmationTokenAsync(User);
+                    string PathOfRedirectOfConfirmation
+                    =String.Format(Configuration.GetSection("Application:AppDomin").Value
+                    +Configuration.GetSection("Application:ConfirmationEmail").Value
+                    ,User.Id , token);
+                    SendEmailOptions options = new SendEmailOptions()
+                    {
+                        Subject = "Confirmation Email",
+                        FromEmail = "Info@SauceMang.com",
+                        FromEmailDisplayName = "Sauce App",
+                        IsBodyHTML = true,
+                        Body = SendEmailOptions.GenerateBodyFromTemplate("ConfirmEmail",
+                        new Dictionary<string, string>()
+                        {
+                            {"{{UserName}}",  User.NameEN},
+                            {"{{Link}}" ,PathOfRedirectOfConfirmation  }
+                        })
+                    };
+                    options.ToEmails.Add(User.Email);
+                    await EmailServices.SendEmail(options);
+                }
+            }
+            return new AccountResultViewModel { IsSuccess= result.Succeeded,UserId=User.Id,Errors = result.Errors};
 
         }
         public async Task<String> SignIn(UserLoginViewModel model)
@@ -117,11 +141,6 @@ namespace ITI.Sauce.Repository
         public async Task SignOut() =>
             await SignInManger.SignOutAsync();
         
-        
-
-
-     
-
         public IPagedList<UsersViewModel> Search(int pageIndex = 1, int pageSize = 2)
                    =>
    GetList().Select(i => new UsersViewModel
@@ -147,5 +166,9 @@ namespace ITI.Sauce.Repository
          var result =  await userManger.ChangePasswordAsync(users, model.CurrentPassword, model.NewPassword);
             return result;
         }
+
+
+        public async Task<IdentityResult> ConfirmEmail(string Id, string token) =>
+             await userManger.ConfirmEmailAsync(await userManger.FindByIdAsync(Id), token);
     }
 }

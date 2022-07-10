@@ -57,15 +57,24 @@ var userId = claim.Value;
         <input type="text" placeholder="Search..." />
         <i class="fa-solid fa-bell nav-icn"></i>
         <i class="fa-solid fa-envelope nav-icn"></i>
-        <a asp-action="SignUp" asp-controller="Users">
-          <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
-        </a>
+            @if (_SignInManager.IsSignedIn(User)   )
+            {
+                <a asp-action="Details" asp-controller="Vendor" asp-route-id="@userId">
+                    <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
+                </a> 
+            }
+            else
+            {
+                <a asp-action="SignUp" asp-controller="Users">
+                    <img src="~/Content//Images/pic.png" id="restaurant-pic" alt="restaurant-pic" />
+                </a>  
+            }
         @if(_SignInManager.IsSignedIn(User))
         {
             <div>
          <span id="restaurant-name">@User.Identity.Name </span>|
         <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span> |
-        <span><a asp-action="ChangePassword" asp-controller="Users">ChangePassword</a></span> |
+        <span><a asp-action="ChangePassword" asp-controller="Users">ChangePassword</a></span> 
 
         </div>
         }

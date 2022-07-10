@@ -36,6 +36,15 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Details(string id)
         {
             var data = vendorRepo.Get(id);
+            foreach (var i in data.Data)
+            {
+                ViewBag.NameEN = i.NameEN;
+                ViewBag.NameAR = i.NameAR;
+                ViewBag.Email = i.Email;
+                ViewBag.Phone = i.phone;
+                ViewBag.Password = i.Password;
+                ViewBag.UserName = i.UserName;
+            }
             return View(data);
         }
 
@@ -62,10 +71,10 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var result= await userRepo.SignUpForVendor(model);
-                if (!string.IsNullOrEmpty(result))
+                var result= await userRepo.SignUp(model);
+                if (!string.IsNullOrEmpty(result.UserId))
                 {
-                    vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                    vendorRepo.Add(new VendorEditViewModel { Id=result.UserId,registerDate=DateTime.Now});
                     UnitOfWork.Save();
                     return RedirectToAction("Search");
                 }

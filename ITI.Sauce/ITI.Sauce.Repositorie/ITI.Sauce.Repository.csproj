@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITI.Sauce.Models\ITI.Sauce.Models.csproj" />
+    <ProjectReference Include="..\ITI.Sauce.Services\ITI.Sauce.Services.csproj" />
     <ProjectReference Include="..\ITI.Sauce.ViewModels\ITI.Sauce.ViewModels.csproj" />
   </ItemGroup>
 

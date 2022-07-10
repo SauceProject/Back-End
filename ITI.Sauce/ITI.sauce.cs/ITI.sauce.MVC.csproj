@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ITI.Sauce.Repositorie\ITI.Sauce.Repository.csproj" />
+    <ProjectReference Include="..\ITI.Sauce.Services\ITI.Sauce.Services.csproj" />
     <ProjectReference Include="..\ITI.Sauce.ViewModels\ITI.Sauce.ViewModels.csproj" />
   </ItemGroup>
 

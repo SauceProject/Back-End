@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "9iFFsGCuIYvxGZeNZcqMT2Q3dBZeUx9TNj1Jj0SL6v0FRizM7oFg0IzNuzCIWIuwO0vo8anSH206qxFpNI5OoQ==",
+  "success": true,
+  "projectFilePath": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ECC\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ECC\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\ECC\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\ECC\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

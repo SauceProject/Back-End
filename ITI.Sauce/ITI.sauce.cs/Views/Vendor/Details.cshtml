@@ -11,7 +11,7 @@
         <div class="profile">
 
             <img class="profileimg" src="./images/logo.jpg">
-            <h2 class="head">@Model.Data.Select(i=>i.NameEN)</h2>
+            <h2 class="head">@ViewBag.NameEN</h2>
 @*             <h2 class="head">name</h2>*@
              <p>Lorem ipsum dolor sit amet consectetur.</p>
         </div>
@@ -20,27 +20,27 @@
             <ul>
                 <li>
                     <h3>Name In Arabic</h3>
-                    <p> Vendor1233 </p>
+                    <p> @ViewBag.NameAR</p>
                 </li>
                 <li>
                     <h3>User Name</h3>
-                    <p> Vendor1233 </p>
+                    <p> @ViewBag.UserName </p>
                 </li>
 
                 <li>
                     <h3>Password</h3>
-                    <p> 1100** </p>
+                    <p> @ViewBag.Password </p>
                 </li>
                 <li>
                     <h3> Email</h3>
-                    <p> rest@gmail.com </p>
+                    <p> @ViewBag.Email </p>
                 </li>
                 <li>
                     <h3> Phone </h3>
-                    <p> 01112 </p>
+                    <p> @ViewBag.Phone </p>
                 </li>
                 <li>
-                    <button class="edit-btn"><span>Edit</span>
+                    <button class="profile-edit-btn"><span>Edit</span>
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button>
                 </li>

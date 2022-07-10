@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
+
 namespace ITI.sauce.MVC.Controllers
 {
 
@@ -15,14 +16,18 @@ namespace ITI.sauce.MVC.Controllers
     {
 
         private readonly UserRepository UserRepo;
+        private readonly VendorRepository VendorRepo;
+
         private readonly UnitOfWork UnitOfWork;
         private readonly RoleRepository RoleRepository;
 
 
         public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository)
+        public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository, VendorRepository _VendorRepo)
         {
 
             this.UserRepo = _UserRepo;
+            this.VendorRepo = _VendorRepo;
             //DBContext dBContext = new DBContext();
             UnitOfWork = _unitOfWork;
             RoleRepository = _RoleRepository;
@@ -52,10 +57,12 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result
+                var result
                         = await UserRepo.SignUp(model);
 
                 if (!result.Succeeded)
+
+                if (!result.IsSuccess)
                 {
                     ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
     .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
@@ -66,7 +73,8 @@ namespace ITI.sauce.MVC.Controllers
                 {
                     if (model.Role == "Vendor")
                     {
-                        //vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                        VendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
+                        UnitOfWork.Save();
                     }
                     return RedirectToAction("SignIn", "Users");
                 }
@@ -196,6 +204,20 @@ namespace ITI.sauce.MVC.Controllers
             }
             return View();
         }
-    }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string uid, string token)
+        {
+            token = token.Replace(' ', '+');
+            var result = await UserRepo.ConfirmEmail(uid, token);
+            if (result.Succeeded)
+                ViewBag.Success = true;
+            else
+                ViewBag.Success = false;
+            
+            return View();
+        }
+    }
 }
