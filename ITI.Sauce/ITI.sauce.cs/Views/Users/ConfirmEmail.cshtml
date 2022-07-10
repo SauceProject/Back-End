@@ -1,0 +1,63 @@
+﻿@using ITI.Sauce.ViewModels
+@model ChangePasswardViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChangePassward</title>	
+<link rel="stylesheet" href="~/Content/CSS/SignIn.css"/>
+   
+
+   
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<form asp-action="ChangePassword" asp-controller="Users" method="post" asp-route-returnUrl="@ViewBag.ReturnUrl">
+  <div class="container">
+    <h1>ChangePassword</h1>
+    <hr>
+            @if (ViewBag.Success == true)
+            {
+                <div>
+                    <p style="color:green">You Successfully Confirm Email  </p>
+                    <hr />
+                    <p>
+                        <a asp-action ="SignIn" asp-controller="Users">Press Here To Login</a>
+                    </p>
+                </div>
+            }
+               else
+                {
+                    <h1>You Can Try Again Later</h1>
+                }
+
+     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+
+
+   <label asp-for="CurrentPassword"> CurrentPassword</label>
+    <input  asp-for="CurrentPassword">
+    <span asp-validation-for="CurrentPassword" style="color:red"></span>
+
+       <label asp-for="NewPassword"> NewPassword</label>
+    <input  asp-for="NewPassword">
+    <span asp-validation-for="NewPassword" style="color:red"></span>
+
+        <label asp-for="ConfirmNewPassword"> ConfirmNewPassword</label>
+    <input  asp-for="ConfirmNewPassword">
+    <span asp-validation-for="ConfirmNewPassword" style="color:red"></span>
+    <hr>
+
+    <button  id="btnAdd"  value="Change">Change</button>
+  </div>
+  
+</form>
+<script src="~/Content/JS/vendor.js"></script>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
+

@@ -1,8 +1,10 @@
-﻿@*@using ITI.Sauce.ViewModels
+﻿@using ITI.Sauce.ViewModels
 
 @model PaginingViewModel<List<RecipeViewModel>>
 @section StyleSection{
-}     <link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
+
+} 
+<link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
 
         <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
         
@@ -17,9 +19,10 @@
     <th scope="col">Image</th>
     <th scope="col">Category</th>
     <th scope="col">Restaurant</th>
+    <th  scope="col">Status</th>
     <th  scope="col">Actions</th>
   </tr>
-    @foreach(var V in Model)
+    @foreach(var V in Model.Data)
 {  
   <tr>
      <td scope="row">@V.NameEN</td>
@@ -30,8 +33,13 @@
     <td> <img src="@V.ImageUrl" width="100 px" height="100 px">   </td>
     <td>@V.CategoryID</td>
     <td>@V.RestaurantName</td>
+    <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
 
-    <td> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID">Update </a> | Remove</td>
+
+    <td> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID">Update </a> |
+        <a asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID">Reject</a>
+        | <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID">Accept</a>
+    </td>
 
   </tr>
     }
@@ -53,7 +61,7 @@
         });
     </script>
 </div>
-*@
 
+*@
     
           

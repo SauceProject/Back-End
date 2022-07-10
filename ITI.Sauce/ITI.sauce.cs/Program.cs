@@ -2,6 +2,7 @@
 using ITI.Sauce.Models;
 using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
+using ITI.Sauce.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
@@ -13,14 +14,19 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-        builder.Services.AddControllersWithViews();
+        builder.Services.AddControllersWithViews().AddNewtonsoftJson(optonis =>
+        {
+            optonis.SerializerSettings.Formatting=Newtonsoft.Json.Formatting.Indented;
+            optonis.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        });
         builder.Services.AddIdentity<Users, IdentityRole>().
-            AddEntityFrameworkStores<DBContext>();
+            AddEntityFrameworkStores<DBContext>().AddDefaultTokenProviders();
         builder.Services.AddScoped(typeof(VendorRepository));
         builder.Services.AddScoped(typeof(UserRepository));
         builder.Services.AddScoped(typeof(RestaurantRepository));
         builder.Services.AddScoped(typeof(RecipeRepository));
         builder.Services.AddScoped(typeof(RatingRepository));
+        builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.AddScoped(typeof(OrderRepository));
         builder.Services.AddScoped(typeof(MemberShipRepository));
 
@@ -35,13 +41,28 @@ public class Program
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));
+        builder.Services.AddScoped(typeof(EmailServices));
+        builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
         builder.Services.AddScoped(typeof(DBContext));
         builder.Services.AddScoped(typeof(UnitOfWork));
         builder.Services.AddScoped<IUserClaimsPrincipalFactory<Users>, UserClaimsFactory>();
-
+        builder.Services.Configure<IdentityOptions>(options =>
+        {
+            options.Password.RequireDigit = false;
+            options.Password.RequireLowercase = false;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireUppercase = false;
+        });
+        //builder.Services.ConfigureApplicationCookie(Option =>
+        //{
+        //    Option.LoginPath = "/Users/SignUp";
+        //});
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/Users/SignIn";
+            Option.LoginPath = "/UserAPI/SignIn";
+            Option.LoginPath = "/Users/SignUp";
+           // Option.SignIn.RequireConfirmedEmail = true;
+
         });
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()

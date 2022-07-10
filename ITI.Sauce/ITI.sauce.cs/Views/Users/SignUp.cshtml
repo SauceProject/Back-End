@@ -2,15 +2,22 @@
 @using ITI.Sauce.ViewModels
 @model UserEditViewModel
 
-
-	@section StyleSection{
+    <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>	
 <link rel="stylesheet" href="~/Content/CSS/SighnUp.css"/>
-    }
+  
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-  <div>
+</head>
+<body style="background-color: burlywood;">
+  <div >
 <form asp-action="SignUp" asp-controller="Users" method="post">
     <h1>Register</h1>
+    <a  asp-action="SignIn" asp-controller="Users">SignIn</a>
     <p>Please fill in this form to Register an account.</p>
      <div asp-validation-summary="ModelOnly" style="color:red" ></div>
     <hr>
@@ -19,24 +26,23 @@
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
-
+    <br />
     <label asp-for="NameAR"> NameAR</label>
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
-
+    <br />
     <label asp-for="phone"> phone</label>
     <input  asp-for="phone">
     <span asp-validation-for="phone" style="color:red"></span>
-
+    <br />
     <label asp-for="Email"> Email</label>
     <input  asp-for="Email">
     <span asp-validation-for="Email" style="color:red"></span>
-
+    <br />
     <label asp-for="Password"> Password</label>
     <input  asp-for="Password">
     <span asp-validation-for="Password" style="color:red"></span>
-    
-
+    <br />
     <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
     <input  asp-for="ConfirnmPassword">
     <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
@@ -49,4 +55,10 @@
     <button id="btnAdd" type="submit" value="Register">Register</button>
 </form>
   </div>
+
+  <script src="~/Content/JS/vendor.js"></script>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
 

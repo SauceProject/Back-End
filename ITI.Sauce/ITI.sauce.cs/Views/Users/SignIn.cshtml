@@ -3,13 +3,20 @@
 @model UserLoginViewModel
 
 
-	@section StyleSection{
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SignIn</title>	
 <link rel="stylesheet" href="~/Content/CSS/SignIn.css"/>
-    }
+   
+
+   
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-
+</head>
+<body>
 <form asp-action="SignIn" asp-controller="Users" method="post" asp-route-returnUrl="@ViewBag.ReturnUrl">
   <div class="container">
     <h1>Sign In</h1>
@@ -35,4 +42,10 @@
   </div>
   
 </form>
+<script src="~/Content/JS/vendor.js"></script>
+     
+      <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
+
 

@@ -1,4 +1,11 @@
-﻿
-@{
+﻿@using ITI.Sauce.Models
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> _SignInManager
+
+ 
+
+@if(_SignInManager.IsSignedIn(User))
+        {
+
 		Layout = "_Layout";
 	}

@@ -1,0 +1,51 @@
+﻿@using ITI.Sauce.ViewModels
+@{
+    Layout="_Layout";
+
+}
+@model PaginingViewModel<List<VendorViewModel>>
+@section StyleSection {
+    <link rel="stylesheet" href="~/Content/CSS/VendorDetails.css"/>
+}
+<section>
+        <div class="profile">
+
+            <img class="profileimg" src="./images/logo.jpg">
+            <h2 class="head">@ViewBag.NameEN</h2>
+@*             <h2 class="head">name</h2>*@
+             <p>Lorem ipsum dolor sit amet consectetur.</p>
+        </div>
+
+        <div class="data">
+            <ul>
+                <li>
+                    <h3>Name In Arabic</h3>
+                    <p> @ViewBag.NameAR</p>
+                </li>
+                <li>
+                    <h3>User Name</h3>
+                    <p> @ViewBag.UserName </p>
+                </li>
+
+                <li>
+                    <h3>Password</h3>
+                    <p> @ViewBag.Password </p>
+                </li>
+                <li>
+                    <h3> Email</h3>
+                    <p> @ViewBag.Email </p>
+                </li>
+                <li>
+                    <h3> Phone </h3>
+                    <p> @ViewBag.Phone </p>
+                </li>
+                <li>
+                    <button class="profile-edit-btn"><span>Edit</span>
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </li>
+            </ul>
+            
+            
+        </div>
+    </section>
