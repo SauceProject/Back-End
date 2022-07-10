@@ -22,7 +22,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly RoleRepository RoleRepository;
 
 
-        public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository)
+        
         public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository, VendorRepository _VendorRepo)
         {
 
@@ -60,7 +60,7 @@ namespace ITI.sauce.MVC.Controllers
                 var result
                         = await UserRepo.SignUp(model);
 
-                if (!result.Succeeded)
+                if (!result.IsSuccess)
 
                 if (!result.IsSuccess)
                 {
