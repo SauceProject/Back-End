@@ -71,10 +71,10 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var result= await userRepo.SignUpForVendor(model);
-                if (!string.IsNullOrEmpty(result))
+                var result= await userRepo.SignUp(model);
+                if (!string.IsNullOrEmpty(result.UserId))
                 {
-                    vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
+                    vendorRepo.Add(new VendorEditViewModel { Id=result.UserId,registerDate=DateTime.Now});
                     UnitOfWork.Save();
                     return RedirectToAction("Search");
                 }

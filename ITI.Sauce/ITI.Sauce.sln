@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.ViewModels", "ITI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ITI.Sauce.Models", "ITI.Sauce.Models\ITI.Sauce.Models.csproj", "{C5F9918A-3761-4A17-A688-179869B85DCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITI.Sauce.Services", "ITI.Sauce.Services\ITI.Sauce.Services.csproj", "{FDB88679-28D9-4B66-B6F7-84F1DCB4F123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C5F9918A-3761-4A17-A688-179869B85DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5F9918A-3761-4A17-A688-179869B85DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5F9918A-3761-4A17-A688-179869B85DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDB88679-28D9-4B66-B6F7-84F1DCB4F123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDB88679-28D9-4B66-B6F7-84F1DCB4F123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDB88679-28D9-4B66-B6F7-84F1DCB4F123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDB88679-28D9-4B66-B6F7-84F1DCB4F123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
