@@ -36,6 +36,15 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Details(string id)
         {
             var data = vendorRepo.Get(id);
+            foreach (var i in data.Data)
+            {
+                ViewBag.NameEN = i.NameEN;
+                ViewBag.NameAR = i.NameAR;
+                ViewBag.Email = i.Email;
+                ViewBag.Phone = i.phone;
+                ViewBag.Password = i.Password;
+                ViewBag.UserName = i.UserName;
+            }
             return View(data);
         }
 

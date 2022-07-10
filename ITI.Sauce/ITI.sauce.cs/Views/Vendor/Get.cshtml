@@ -1,9 +1,4 @@
-﻿
-
-
-@using ITI.Sauce.ViewModels
-
-
+﻿@using ITI.Sauce.ViewModels
 @model IPagedList<VendorViewModel>
 
     @section StyleSection{
@@ -20,6 +15,8 @@
     <th>NameAr</th>
     <th>Phone</th>
     <th>Email</th>
+    <th>Restaurants</th>
+    <th>Membership</th>
     <th>Actions</th>
   </tr>
     @foreach(var V in Model)
@@ -29,14 +26,31 @@
      <td>@V.NameEN</td>
     <td>@V.NameAR</td>
     <td>@V.phone</td>
-    <td>@V.ID --- @V.Email</td>
+    <td> @V.Email</td>
     <td><a asp-action="Search" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
-    <a asp-action="Get" asp-controller="MemberShip" >MemberShip</a>
-    <a asp-action="Get" asp-controller="Ingredient" asp-route-vendorID="@V.ID">Ingredient</a>
-   <a asp-action="Update" asp-controller="Vendor" asp-route-Id="@V.ID"> Update </a>
-   <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID"> Remove </a>
+    <td>
+        
+            @if(!(@V.Vendor_MemberShips ==null))
+            {
+            <ul style="list-style-type: none;">
+            @foreach(var i in @V.Vendor_MemberShips)
+            { <li>i</li>
+            }
+            </ul>
+            }
+            else
+            {
+                <p>none</p>
+            }
 
+       
     </td>
+    <td>
+   <a asp-action="Update" asp-controller="Vendor" asp-route-Id="@V.ID"> Update </a>
+   |
+   <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID"> Remove </a>
+   </td>
+   
   </tr>
     }
 </table>
