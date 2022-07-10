@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.Models;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 
 namespace ITI.Sauce.Repository
 {
@@ -18,11 +21,13 @@ namespace ITI.Sauce.Repository
     {
         UserManager<Users> userManger;
         SignInManager<Users> SignInManger;
+        IConfiguration configuration;
         public UserRepository(DBContext _Context,
-            UserManager<Users> _userManger, SignInManager<Users> _SignInManger) : base(_Context)
+            UserManager<Users> _userManger, SignInManager<Users> _SignInManger, IConfiguration _configuration) : base(_Context)
         {
             userManger = _userManger;
             SignInManger = _SignInManger;
+            configuration = _configuration;
         }
         public PaginingViewModel<List<UsersViewModel>> Get(string id = "", string UserName = "", string Email = "", string phone = "", DateTime? registerDate = null, string NameEn = "", string NameAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
@@ -89,9 +94,25 @@ namespace ITI.Sauce.Repository
             return User.Id;
 
         }
-        public async Task<SignInResult> SignIn(UserLoginViewModel model) =>
-            await SignInManger.PasswordSignInAsync(model.Email, model.Password,
+        public async Task<String> SignIn(UserLoginViewModel model)
+        { 
+            var result=await SignInManger.PasswordSignInAsync(model.Email, model.Password,
                 model.RemmeberMe, false);
+            if (result.Succeeded)
+            {
+                JwtSecurityToken token = new JwtSecurityToken
+                    (
+                        signingCredentials: new SigningCredentials
+                    (
+                        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:Key"])),
+                        SecurityAlgorithms.HmacSha256
+                    ),
+                        expires: DateTime.Now.AddDays(1)
+                    );
+              return new JwtSecurityTokenHandler().WriteToken(token);
+            }
+            return String.Empty;
+        }
 
         public async Task SignOut() =>
             await SignInManger.SignOutAsync();

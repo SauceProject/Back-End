@@ -11,7 +11,7 @@ using System.Security.Claims;
 namespace ITI.sauce.MVC.Controllers
 {
 
-    public class UsersController : Controller
+    public class UserAPIController : ControllerBase
     {
 
         private readonly UserRepository UserRepo;
@@ -19,7 +19,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly RoleRepository RoleRepository;
 
 
-        public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository)
+        public UserAPIController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository)
         {
 
             this.UserRepo = _UserRepo;
@@ -35,16 +35,15 @@ namespace ITI.sauce.MVC.Controllers
             var Resultdata =
             UserRepo.Get(id, UserName, Email, phone, registerDate, NameEn, NameAr, orderby, isAscending, pageIndex, pageSize);
 
-            return View(Resultdata);
-
+            return null;
         }
 
         [HttpGet]
         public IActionResult SignUp()
         {
-            ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
-                .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-            return View();
+            //ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+            //.Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+            return null; 
         }
 
         [HttpPost]
@@ -57,8 +56,8 @@ namespace ITI.sauce.MVC.Controllers
 
                 if (!result.Succeeded)
                 {
-                    ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
-    .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+                    //ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+                    //.Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
                     foreach (var error in result.Errors)
                         ModelState.AddModelError("", error.Description);
                 }
@@ -71,39 +70,21 @@ namespace ITI.sauce.MVC.Controllers
                     return RedirectToAction("SignIn", "Users");
                 }
             }
-            return View();
+            return null;
         }
 
         [HttpGet]
         public IActionResult SignIn()
         {
 
-            return View();
+            return new ObjectResult(new{
+                Message="Plese LOgin",
+                SignInUrl="userApI/SignIn"
+            });
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> SignIn(UserLoginViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result
-        //                = await UserRepo.SignIn(model);
-        //        if (!result.Succeeded)
-        //        {
-        //            ModelState.AddModelError("", "Invalid UserName Or Password");
-        //        }
-        //        else
-        //        {
-
-
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //    }
-        //    return View();
-        //}
-        //api
         [HttpPost]
-        public async Task<IActionResult> SignIn(UserLoginViewModel model)
+        public async Task<IActionResult> SignIn([FromBody]UserLoginViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -120,13 +101,13 @@ namespace ITI.sauce.MVC.Controllers
                     return new ObjectResult(new
                     {
 
-                        Token = token,
+                      Token=token,
                     });
                 }
             }
             List<string> errors = new List<string>();
-            foreach (var i in ModelState.Values)
-                foreach (var error in i.Errors)
+            foreach(var i in ModelState.Values)
+                foreach(var error in i.Errors)
                     errors.Add(error.ErrorMessage);
             return new ObjectResult(errors);
         }
@@ -145,19 +126,19 @@ namespace ITI.sauce.MVC.Controllers
         {
             var data =
              UserRepo.Get(id);
-            return View(data);
+            return null;
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = UserRepo.Search(pageIndex, pageSize);
-            return View("Get", Data);
+            return null;
         }
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return null;
         }
 
         [Authorize(Roles = "Admin")]
@@ -171,14 +152,14 @@ namespace ITI.sauce.MVC.Controllers
                 return RedirectToAction("Search");
             }
             else
-                return View();
+                return null;
         }
 
         [HttpGet]
         public IActionResult ChangePassword()
         {
-            ViewBag.IsSuccess = false;
-            return View();
+            
+            return null;
         }
 
         [HttpPost]
@@ -190,11 +171,11 @@ namespace ITI.sauce.MVC.Controllers
                 if (result.Succeeded)
                 {
                     ModelState.Clear();
-                    ViewBag.IsSuccess = true;
+                    
                 }
 
             }
-            return View();
+            return null;
         }
     }
 

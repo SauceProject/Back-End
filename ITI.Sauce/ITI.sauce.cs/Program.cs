@@ -13,7 +13,11 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-        builder.Services.AddControllersWithViews();
+        builder.Services.AddControllersWithViews().AddNewtonsoftJson(optonis =>
+        {
+            optonis.SerializerSettings.Formatting=Newtonsoft.Json.Formatting.Indented;
+            optonis.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        });
         builder.Services.AddIdentity<Users, IdentityRole>().
             AddEntityFrameworkStores<DBContext>();
         builder.Services.AddScoped(typeof(VendorRepository));
@@ -45,9 +49,13 @@ public class Program
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
         });
+        //builder.Services.ConfigureApplicationCookie(Option =>
+        //{
+        //    Option.LoginPath = "/Users/SignUp";
+        //});
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/Users/SignUp";
+            Option.LoginPath = "/UserAPI/SignIn";
         });
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()

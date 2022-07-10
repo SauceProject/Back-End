@@ -13,8 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body>
-  <div>
+<body style="background-color: burlywood;">
+  <div >
 <form asp-action="SignUp" asp-controller="Users" method="post">
     <h1>Register</h1>
     <a  asp-action="SignIn" asp-controller="Users">SignIn</a>
@@ -26,24 +26,23 @@
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN">
     <span asp-validation-for="NameEN" style="color:red"></span>
-
+    <br />
     <label asp-for="NameAR"> NameAR</label>
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
-
+    <br />
     <label asp-for="phone"> phone</label>
     <input  asp-for="phone">
     <span asp-validation-for="phone" style="color:red"></span>
-
+    <br />
     <label asp-for="Email"> Email</label>
     <input  asp-for="Email">
     <span asp-validation-for="Email" style="color:red"></span>
-
+    <br />
     <label asp-for="Password"> Password</label>
     <input  asp-for="Password">
     <span asp-validation-for="Password" style="color:red"></span>
-    
-
+    <br />
     <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
     <input  asp-for="ConfirnmPassword">
     <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
