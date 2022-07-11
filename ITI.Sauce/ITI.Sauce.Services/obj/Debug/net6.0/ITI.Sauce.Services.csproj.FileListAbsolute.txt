@@ -21,3 +21,4 @@ E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csp
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.dll
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.AssemblyReference.cache
