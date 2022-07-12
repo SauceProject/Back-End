@@ -60,7 +60,7 @@ public class Program
         builder.Services.ConfigureApplicationCookie(Option =>
         {
             Option.LoginPath = "/UserAPI/SignIn";
-            Option.LoginPath = "/Users/SignUp";
+          //  Option.LoginPath = "/Users/SignUp";
            // Option.SignIn.RequireConfirmedEmail = true;
 
         });
