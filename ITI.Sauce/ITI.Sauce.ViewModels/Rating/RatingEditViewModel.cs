@@ -23,7 +23,6 @@ namespace ITI.Sauce.ViewModels
                 RecipeID = model.RecipeID,
                 UserID = model.UserID,
                 IsDeleted = model.IsDeleted,
-
             };
         }
     }
@@ -35,6 +34,7 @@ namespace ITI.Sauce.ViewModels
         public string Comment { get; set; }
         [Required]
         public int RatingValue { get; set; }
+        public bool IsDeleted { get; set; }
         [Required]
         public int RecipeID { get; set; }
         [Required]

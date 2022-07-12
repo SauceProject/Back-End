@@ -15,6 +15,7 @@ using IConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using System.Security.Claims;
 
 namespace ITI.Sauce.Repository
 {
@@ -24,7 +25,6 @@ namespace ITI.Sauce.Repository
         SignInManager<Users> SignInManger;
         EmailServices EmailServices;
         IConfiguration Configuration;
-        IConfiguration configuration;
         public UserRepository(DBContext _Context,
             UserManager<Users> _userManger, SignInManager<Users> _SignInManger , EmailServices _EmailServices, IConfiguration _Configuration) : base(_Context)
            
@@ -124,18 +124,24 @@ namespace ITI.Sauce.Repository
                 model.RemmeberMe, false);
             if (result.Succeeded)
             {
-                JwtSecurityToken token = new JwtSecurityToken
-                    (
-                        signingCredentials: new SigningCredentials
-                    (
-                        new SymmetricSecurityKey(Encoding.ASCII.GetBytes(configuration["JWT:Key"])),
-                        SecurityAlgorithms.HmacSha256
-                    ),
-                        expires: DateTime.Now.AddDays(1)
-                    );
-              return new JwtSecurityTokenHandler().WriteToken(token);
+                Users user = await  userManger.FindByEmailAsync(model.Email);
+                List<Claim> claims = new List<Claim>();
+                IList<string> roles= await userManger.GetRolesAsync(user);
+                roles.ToList().ForEach(i => claims.Add(new Claim(ClaimTypes.Role, i)));
+                JwtSecurityToken token
+                     = new JwtSecurityToken
+                     (
+                       signingCredentials: new SigningCredentials
+                         (
+                             new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JWT:Key"]))
+                             , SecurityAlgorithms.HmacSha256
+                         ),
+                       expires: DateTime.Now.AddDays(1),
+                        claims:claims
+                     );
+                return new JwtSecurityTokenHandler().WriteToken(token);
             }
-            return String.Empty;
+            return string.Empty;
         }
 
         public async Task SignOut() =>

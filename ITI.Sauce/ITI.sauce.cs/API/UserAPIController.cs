@@ -74,7 +74,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn()
+        public IActionResult SignIn(string? returnUrl)
         {
 
             return new ObjectResult(new
@@ -85,7 +85,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn([FromBody] UserLoginViewModel model)
+        public async Task<IActionResult> SignIn([FromBody] UserLoginViewModel model, string? returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -103,6 +103,7 @@ namespace ITI.sauce.MVC.Controllers
                     {
 
                         Token = token,
+                        ReturnUrl = returnUrl
                     });
                 }
             }
