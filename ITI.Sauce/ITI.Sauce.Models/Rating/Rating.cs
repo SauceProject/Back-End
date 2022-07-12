@@ -13,6 +13,7 @@ namespace ITI.Sauce.Models
         public int RatingValue { get; set; }
         public int RecipeID { get; set; }
         public string UserID { get; set; }
+        public bool IsDeleted { get; set; }
         public virtual Recipe Recipe { get; set; }
         public virtual Users User { get; set; }
 
