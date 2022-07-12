@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 
 using X.PagedList;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -83,7 +84,11 @@ namespace ITI.Sauce.Repository
             return base.Add(Order).Entity.ToViewModel();
         }
 
-
+        public List<TextValueViewModel> GetRecipeID() =>
+           GetList().Select(i => new TextValueViewModel
+           {
+               Value =i.Recipe_ID
+           }).ToList();
         public OrderViewModel Update(OrderEditViewModel model)
         {
 
