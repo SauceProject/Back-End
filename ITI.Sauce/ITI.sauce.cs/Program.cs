@@ -46,6 +46,7 @@ public class Program
         builder.Services.AddScoped(typeof(RatingRepository));
         builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.AddScoped(typeof(OrderRepository));
+        builder.Services.AddScoped(typeof(CartRepository));
         builder.Services.AddScoped(typeof(MemberShipRepository));
 
 
