@@ -47,6 +47,10 @@ namespace ITI.Sauce.ViewModels
 
 
     }
+
+
+
+
     public class RatingViewModel
     {
         public int RatingID { get; set; }
@@ -55,5 +59,7 @@ namespace ITI.Sauce.ViewModels
         public bool IsDeleted { get; set; }
         public int RecipeID { get; set; }
         public string UserID { get; set; }
+        public bool IsDeleted { get; set; }
+
     }
 }

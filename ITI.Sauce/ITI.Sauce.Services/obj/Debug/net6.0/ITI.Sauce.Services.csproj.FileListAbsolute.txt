@@ -21,4 +21,15 @@ E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csp
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.dll
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll
 E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
-E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.AssemblyReference.cache
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.deps.json
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.dll
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\bin\Debug\net6.0\ITI.Sauce.Services.pdb
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.AssemblyReference.cache
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.AssemblyInfoInputs.cache
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.AssemblyInfo.cs
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.CoreCompileInputs.cache
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.dll
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\refint\ITI.Sauce.Services.dll
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
+D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll

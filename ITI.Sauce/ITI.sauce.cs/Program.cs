@@ -46,6 +46,7 @@ public class Program
         builder.Services.AddScoped(typeof(RatingRepository));
         builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.AddScoped(typeof(OrderRepository));
+        builder.Services.AddScoped(typeof(CartRepository));
         builder.Services.AddScoped(typeof(MemberShipRepository));
 
 
@@ -59,6 +60,7 @@ public class Program
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));
+        builder.Services.AddScoped(typeof(FavRepository));
         builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
         builder.Services.AddScoped(typeof(DBContext));
