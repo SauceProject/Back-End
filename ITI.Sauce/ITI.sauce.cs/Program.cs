@@ -1,12 +1,14 @@
 ﻿
+using System.Text;
 using ITI.Sauce.Models;
 using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
 using ITI.Sauce.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-
+using Microsoft.IdentityModel.Tokens;
 
 public class Program
 {
@@ -18,6 +20,22 @@ public class Program
         {
             optonis.SerializerSettings.Formatting=Newtonsoft.Json.Formatting.Indented;
             optonis.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        });
+        builder.Services.AddAuthentication(options =>
+        {
+
+            options.DefaultAuthenticateScheme=JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultSignInScheme=JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+            {
+                ValidateAudience=false,
+                ValidateIssuer=false,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["JWT:Key"]))
+            };
         });
         builder.Services.AddIdentity<Users, IdentityRole>().
             AddEntityFrameworkStores<DBContext>().AddDefaultTokenProviders();
@@ -60,7 +78,7 @@ public class Program
         builder.Services.ConfigureApplicationCookie(Option =>
         {
             Option.LoginPath = "/UserAPI/SignIn";
-          //  Option.LoginPath = "/Users/SignUp";
+         
            // Option.SignIn.RequireConfirmedEmail = true;
 
         });
