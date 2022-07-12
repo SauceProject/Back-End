@@ -132,15 +132,11 @@ namespace ITI.Sauce.Repository
             var old = filterd;
 
             filterd = filterd.Or(c => c.ID == model.Id);
-
-
             var Result = base.GetByID(filterd);
 
             Result.IsDeleted = true;
 
             return Result.ToViewModel();
-
-
         }
 
 

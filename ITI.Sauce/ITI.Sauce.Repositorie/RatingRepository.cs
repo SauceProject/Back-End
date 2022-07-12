@@ -79,7 +79,6 @@ namespace ITI.Sauce.Repository
 
 
 
-
         public RatingViewModel Update(RatingEditViewModel model)
         {
 
@@ -99,9 +98,6 @@ namespace ITI.Sauce.Repository
         }
         public RatingViewModel GetOne(int _ID = 0)
         {
-
-
-
             var filterd = PredicateBuilder.New<Rating>();
             var old = filterd;
             if (_ID > 0)
@@ -111,15 +107,18 @@ namespace ITI.Sauce.Repository
                 filterd = null;
 
             var query = base.GetByID(filterd);
-
-
             return query.ToViewModel();
 
+        }
 
-
-
-
-
+        public RatingViewModel Remove(RatingEditViewModel model)
+        {
+            var filterd = PredicateBuilder.New<Rating>();
+            var old = filterd;
+            filterd = filterd.Or(c => c.RatingID == model.RatingID);
+            var Result = base.GetByID(filterd);
+            Result.IsDeleted = true;
+            return Result.ToViewModel();
         }
     }
 }

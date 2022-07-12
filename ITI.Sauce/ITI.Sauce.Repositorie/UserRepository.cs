@@ -124,6 +124,10 @@ namespace ITI.Sauce.Repository
                 model.RemmeberMe, false);
             if (result.Succeeded)
             {
+                Users user = await  userManger.FindByEmailAsync(model.Email);
+                List<Claim> claims = new List<Claim>();
+                IList<string> roles= await userManger.GetRolesAsync(user);
+                roles.ToList().ForEach(i => claims.Add(new Claim(ClaimTypes.Role, i)));
                 JwtSecurityToken token
                      = new JwtSecurityToken
                      (
@@ -132,7 +136,8 @@ namespace ITI.Sauce.Repository
                              new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration["JWT:Key"]))
                              , SecurityAlgorithms.HmacSha256
                          ),
-                       expires: DateTime.Now.AddDays(1)
+                       expires: DateTime.Now.AddDays(1),
+                        claims:claims
                      );
                 return new JwtSecurityTokenHandler().WriteToken(token);
             }

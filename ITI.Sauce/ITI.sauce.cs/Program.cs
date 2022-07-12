@@ -82,6 +82,13 @@ public class Program
            // Option.SignIn.RequireConfirmedEmail = true;
 
         });
+        builder.Services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(i =>
+            {
+                i.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+            });
+        });
         var app = builder.Build();
         app.UseStaticFiles(new StaticFileOptions()
         {
@@ -92,6 +99,8 @@ public class Program
             RequestPath = "/Content"
         }
         );
+        app.UseRouting();
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
         app.MapDefaultControllerRoute();
