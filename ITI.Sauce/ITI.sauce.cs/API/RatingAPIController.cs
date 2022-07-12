@@ -15,66 +15,122 @@ namespace ITI.sauce.MVC.Controllers
         public RatingAPIController(UnitOfWork _unitOfWork
             , RatingRepository _RatepRepo)
         {
-            //DBContext dBContext = new DBContext();
             UnitOfWork = _unitOfWork;
             RatepRepo = _RatepRepo;
         }
-        public IActionResult Get(int id = 0, int RatingValue = 0,
+        public ResultViewModel Get(int id = 0, int RatingValue = 0,
                 string orderyBy = "", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 20)
         {
             var data =
             RatepRepo.Get(id, RatingValue, orderyBy,
                 isAscending, pageIndex, pageSize);
-            return null;
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message="",
+                Data=data
+            };
         }
         public IActionResult GetById(int id)
         {
             var data =
            RatepRepo.Get(id);
-            return null;
+            return new ObjectResult(data);
         }
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        public ResultViewModel Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = RatepRepo.Search(pageIndex, pageSize);
-            return new ObjectResult(Data);
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = Data
+            };
         }
         [HttpGet]
-        public IActionResult Add()
+        public ResultViewModel Add()
         {
             List<TextValueViewModel> Values = RatepRepo.GetRecipeID();
-            return null;
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = Values
+            };
         }
         [HttpPost]
-        public IActionResult Add(RatingEditViewModel model)
+        public ResultViewModel Add(RatingEditViewModel model)
         {
             if (ModelState.IsValid == true)
             {
                 RatepRepo.Add(model);
                 UnitOfWork.Save();
-                return RedirectToAction("Search");
+                return new ResultViewModel()
+                {
+                    Message = "Added Succesfully",
+                    Success=true,
+                    Data=null
+                }; 
             }
-            else
-                return null;
+            else { 
+                List<string> errors = new List<string>();
+            foreach (var i in ModelState.Values)
+                foreach (var error in i.Errors)
+                    errors.Add(error.ErrorMessage);
+                return new ResultViewModel()
+                {
+                    Message = "Added Succesfully",
+                    Success = false,
+                    Data = null
+                };
+            }
         }
 
         [HttpGet]
-        public IActionResult Update(int Id)
+        public ResultViewModel Update(int Id)
         {
             var Results = RatepRepo.GetOne(Id);
 
-            return null;
+            return new ResultViewModel()
+            {
+                Message = "",
+                Success = true,
+                Data = Results
+            };
 
         }
 
 
         [HttpPost]
-        public IActionResult Update(RatingEditViewModel model, int ID = 0)
+        public ResultViewModel Update(RatingEditViewModel model, int ID = 0)
         {
             RatepRepo.Update(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+            return new ResultViewModel()
+            {
+                Message = "Update Succesfully",
+                Success = true,
+                Data = null
+            };
 
         }
+
+        [HttpGet]
+        public ResultViewModel Remove(RatingEditViewModel model, int ID)
+        {
+            var res = RatepRepo.Remove(model);
+            UnitOfWork.Save();
+            return new ResultViewModel()
+            {
+                Message = "Remove Succesfully",
+                Success = true,
+                Data = null
+            };
+        }
+
+       
+        
+
     }
 }

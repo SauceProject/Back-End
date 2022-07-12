@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
 using Abp.Linq.Expressions;
+using X.PagedList;
 
 namespace ITI.Sauce.Repository
 {
@@ -33,12 +34,6 @@ namespace ITI.Sauce.Repository
 
             if (filter == oldFiler)
                 filter = null;
-
-
-
-
-
-
             var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
 
             var result =
@@ -63,6 +58,18 @@ namespace ITI.Sauce.Repository
 
             return finalResult;
         }
+
+        public IPagedList<IngredientViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                    =>
+    GetList().Select(V => new IngredientViewModel
+    {
+        ID = V.ID,
+        NameEN = V.NameEN,
+        NameAR = V.NameAR,
+        IsDeleted = V.IsDeleted,
+      
+
+    }).ToPagedList(pageIndex, pageSize);
 
         public IngredientViewModel Add(IngredientEditViewModel model)
         {

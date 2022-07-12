@@ -38,7 +38,7 @@ namespace ITI.sauce.MVC.Controllers
             var data = vendorRepo.Get(id);
             return null;
         }
-
+        [HttpGet]
         [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
@@ -49,8 +49,8 @@ namespace ITI.sauce.MVC.Controllers
 
 
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add()
         {
             return null;

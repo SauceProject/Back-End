@@ -74,7 +74,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult SignIn()
+        public IActionResult SignIn(string? returnUrl)
         {
 
             return new ObjectResult(new
