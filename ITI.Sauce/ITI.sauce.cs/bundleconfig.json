@@ -1,0 +1,16 @@
+[
+
+    {
+        "outputFileName": "Content/CSS/Shared.css",
+        "inputFiles": [
+            "Content/CSS/Vendor.css",
+            "Content/CSS/VendorDetails.css"
+
+        ],
+        "minify": {
+            "enabled": true,
+            "renameLocals": true
+        }
+    }
+
+]
