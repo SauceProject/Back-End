@@ -41,6 +41,7 @@ public class Program
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));
+        builder.Services.AddScoped(typeof(FavRepository));
         builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
         builder.Services.AddScoped(typeof(DBContext));
@@ -60,7 +61,7 @@ public class Program
         builder.Services.ConfigureApplicationCookie(Option =>
         {
             Option.LoginPath = "/UserAPI/SignIn";
-            Option.LoginPath = "/Users/SignUp";
+           // Option.LoginPath = "/Users/SignUp";
            // Option.SignIn.RequireConfirmedEmail = true;
 
         });

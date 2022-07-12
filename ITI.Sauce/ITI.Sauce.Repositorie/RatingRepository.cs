@@ -116,10 +116,22 @@ namespace ITI.Sauce.Repository
             return query.ToViewModel();
 
 
+        }
+
+        public RatingViewModel Remove(RatingEditViewModel model)
+        {
+
+            var filterd = PredicateBuilder.New<Rating>();
+            var old = filterd;
+
+            filterd = filterd.Or(c => c.RatingID == model.RatingID);
 
 
+            var Result = base.GetByID(filterd);
 
+            Result.IsDeleted = true;
 
+            return Result.ToViewModel();
         }
     }
 }
