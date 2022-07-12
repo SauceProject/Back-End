@@ -39,5 +39,10 @@ namespace ITI.Sauce.ViewModels
         public int RecipeID { get; set; }
         [Required]
         public string UserID { get; set; }
+        [Required]
+        public bool IsDeleted { get; set; }
+
+
+
     }
 }

@@ -19,6 +19,8 @@ namespace ITI.Sauce.Models
             builder.Property(R => R.RatingValue).IsRequired();
             builder.Property(R => R.RecipeID).IsRequired();
             builder.Property(R => R.UserID).IsRequired();
+            builder.Property(R => R.IsDeleted).IsRequired();
+
 
         }
     }
