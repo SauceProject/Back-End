@@ -19,6 +19,7 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.NameAR,
                 registerDate = model.registerDate,
                 IsDeleted = model.IsDeleted,
+                Recipe_ID =model.Recipe_ID,
             };
         }
     }
@@ -35,5 +36,8 @@ namespace ITI.Sauce.ViewModels
         public DateTime registerDate { get; set; }
         [Required]
         public bool IsDeleted { get; set; }
+        [Required]
+        public int Recipe_ID { get; set; }
+
     }
 }

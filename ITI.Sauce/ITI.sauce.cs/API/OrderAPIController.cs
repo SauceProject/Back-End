@@ -66,7 +66,7 @@ namespace ITI.sauce.MVC.Controllers
         }
         //[Authorize(Roles = "Admin")]
         [HttpPost]
-        public ResultViewModel Add(OrderEditViewModel model)
+        public ResultViewModel Add([FromBody] OrderEditViewModel model)
         {
             if (ModelState.IsValid == true)
             {
