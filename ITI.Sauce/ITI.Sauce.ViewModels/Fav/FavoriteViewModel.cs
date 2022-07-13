@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITI.Sauce.Models
+namespace ITI.Sauce.ViewModels
 {
-    public class Fav
+    public class FavoriteViewModel
     {
-        public int ID { get; set; }
+
+        public int Fav_ID { get; set; }
         public string UserID { get; set; }
         public int Recipe_ID { get; set; }
-        public virtual Users User { get; set; }   
-        public virtual Recipe Recipe { get; set; }
-        
 
     }
 }

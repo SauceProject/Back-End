@@ -1,6 +1,7 @@
 ﻿
 using System.Text;
 using ITI.Sauce.Models;
+using ITI.Sauce.MVC.Filters;
 using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
 using ITI.Sauce.Services;
@@ -16,7 +17,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-        builder.Services.AddControllersWithViews().AddNewtonsoftJson(optonis =>
+        builder.Services.AddControllersWithViews(options =>
+        {
+            options.Filters.Add<HandelException>();
+        }).AddNewtonsoftJson(optonis =>
         {
             optonis.SerializerSettings.Formatting=Newtonsoft.Json.Formatting.Indented;
             optonis.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -60,6 +64,7 @@ public class Program
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));
+        builder.Services.AddScoped(typeof(FavRepository));
         builder.Services.AddScoped(typeof(EmailServices));
         builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
         builder.Services.AddScoped(typeof(DBContext));
