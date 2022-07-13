@@ -1,4 +1,6 @@
 ﻿using ITI.Sauce.Repository;
+using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,16 +14,24 @@ namespace ITI.Sauce.MVC.API
         {
             cartRepository = _cartRepository;
         }
-        public ObjectResult Get()
+        [HttpGet]
+        public ResultViewModel Get()
         {
             var CartInfo = cartRepository.Get();
-            return new ObjectResult(CartInfo);
+            return new ResultViewModel { Data=CartInfo, Success=true};
             
         }
-        public ObjectResult Details(int ID)
+        [HttpGet]
+        public ResultViewModel Details(int ID)
         {
             var CartInfo = cartRepository.Get(ID);
-            return new ObjectResult(CartInfo);
+            return new ResultViewModel { Data=CartInfo, Success=true};
+        }
+        [HttpPost]
+        public ResultViewModel Add([FromBody] CartEditViewModel model)
+        {
+            var result = cartRepository.Add(model);
+            return new ResultViewModel { Data = result, Success = true };
         }
     }
 }
