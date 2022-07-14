@@ -77,17 +77,17 @@ public class Program
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequireUppercase = false;
         });
-        //builder.Services.ConfigureApplicationCookie(Option =>
-        //{
-        //    Option.LoginPath = "/Users/SignUp";
-        //});
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/UserAPI/SignIn";
+           Option.LoginPath = "/Users/SignUp";
+        });
+      //  builder.Services.ConfigureApplicationCookie(Option =>
+       // {
+          //  Option.LoginPath = "/UserAPI/SignIn";
          
            // Option.SignIn.RequireConfirmedEmail = true;
 
-        });
+       // });
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(i =>

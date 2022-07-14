@@ -24,25 +24,29 @@ namespace ITI.sauce.MVC.Controllers
         {
             var Resultdata =
                 ResRepo .Get (vendorID,id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
-            return View(Resultdata);
+            return View("Get",Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
             var Data = ResRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-        //[Authorize(Roles = "Admin,Vendor")]
+        [Authorize(Roles = "Vendor")]
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            return View(new RestaurantEditViewModel{ Vendor_ID = userId});
         }
 
-        //[Authorize(Roles = "Admin,Vendor")]
+        [Authorize(Roles = "Vendor")]
         [HttpPost]
         public IActionResult Add(RestaurantEditViewModel model)
         {
+            //model.
             string? bookUploadUrl = "/Content/Uploads/Resturant/";
 
             string newFileName = Guid.NewGuid().ToString() + model.Image.FileName;

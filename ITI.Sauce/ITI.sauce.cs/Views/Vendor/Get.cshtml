@@ -27,7 +27,7 @@
     <td>@V.NameAR</td>
     <td>@V.phone</td>
     <td> @V.Email</td>
-    <td><a asp-action="Search" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
+    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID">Restaurant</a>
     <td>
         
             @if(!(@V.Vendor_MemberShips ==null))
