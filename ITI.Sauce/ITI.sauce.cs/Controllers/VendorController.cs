@@ -26,10 +26,10 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Get(string id = "",
                 string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
-                int pageIndex = 1, int pageSize = 20)
+                int pageIndex = 1, int pageSize = 5)
         {
             var data =
-            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
+            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy, 
                 isAscending, pageIndex, pageSize);
             return View(data);
         }

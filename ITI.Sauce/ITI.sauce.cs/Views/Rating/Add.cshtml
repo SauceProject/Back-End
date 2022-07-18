@@ -52,30 +52,18 @@
             <div asp-validation-summary="ModelOnly" style="color:red"></div>
             
             <p>Please Choose Rating.</p>
-            <br />
-
-            <label asp-for="RecipeID"> Recipe ID</label>
-            
-           
-            <select>
-                @foreach (var i in ViewBag.Rating)
-                {
-                    <option selected>Choose Option</option>
-                    <option>@i.Value</option>
-                }
-
-            </select>
-           
-           
-           
-
-            <label asp-for="UserID">  User ID </label>
+            <br />                         
+            <label asp-for="RecipeID"> RecipeID </label>
+    <select asp-for="RecipeID" asp-items="@ViewBag.Rating">
+        <option selected>Choose an option</option>                 
+    </select>
+    <span data-ajax="true" asp-validation-for="RecipeID" style="color:red"></span>
+    <br />
+             <label asp-for="UserID"> UserID </label>
             <input asp-for="UserID">
             <span asp-validation-for="UserID" style="color:red"></span>
-
-
+    <span data-ajax="true" asp-validation-for="UserID" style="color:red"></span>
             <br />
-
             <label asp-for="Comment"> Comment </label>
             <input asp-for="Comment">
             <span asp-validation-for="Comment" style="color:red"></span>
@@ -84,11 +72,7 @@
             <label asp-for="RatingValue"> Rating Value </label>
             <input asp-for="RatingValue">
             <span asp-validation-for="RatingValue" style="color:red"></span>
-
-
             <br />
-
-
             <button id="btnAdd" type="Add" value="Rating">Add</button>
         </form>
     </div>
