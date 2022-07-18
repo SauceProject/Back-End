@@ -38,16 +38,7 @@ namespace ITI.sauce.MVC.Controllers
            RatepRepo.Get(id);
             return new ObjectResult(data);
         }
-        public ResultViewModel Search(int pageIndex = 1, int pageSize = 2)
-        {
-            var Data = RatepRepo.Search(pageIndex, pageSize);
-            return new ResultViewModel()
-            {
-                Success = true,
-                Message = "",
-                Data = Data
-            };
-        }
+        
         [HttpGet]
         public ResultViewModel Add()
         {
@@ -80,7 +71,7 @@ namespace ITI.sauce.MVC.Controllers
                     errors.Add(error.ErrorMessage);
                 return new ResultViewModel()
                 {
-                    Message = "Added Succesfully",
+                    Message = "Not Added ",
                     Success = false,
                     Data = null
                 };
@@ -89,23 +80,23 @@ namespace ITI.sauce.MVC.Controllers
 
         [HttpGet]
         public ResultViewModel Update(int Id)
-        {
-            var Results = RatepRepo.GetOne(Id);
-
+        { 
+                var Results = RatepRepo.GetOne(Id);
             return new ResultViewModel()
             {
                 Message = "",
                 Success = true,
                 Data = Results
             };
-
         }
 
 
         [HttpPost]
         public ResultViewModel Update(RatingEditViewModel model, int ID = 0)
         {
-            RatepRepo.Update(model);
+            if (ModelState.IsValid == true)
+            { 
+                RatepRepo.Update(model);
             UnitOfWork.Save();
             return new ResultViewModel()
             {
@@ -113,13 +104,28 @@ namespace ITI.sauce.MVC.Controllers
                 Success = true,
                 Data = null
             };
+            }
+            else
+            {
+                List<string> errors = new List<string>();
+                foreach (var i in ModelState.Values)
+                    foreach (var error in i.Errors)
+                        errors.Add(error.ErrorMessage);
+                return new ResultViewModel()
+                {
+                    Message = "Not Updated ",
+                    Success = false,
+                    Data = null
+                };
+            }
 
         }
 
         [HttpGet]
         public ResultViewModel Remove(RatingEditViewModel model, int ID)
         {
-            var res = RatepRepo.Remove(model);
+            if (ModelState.IsValid == true) { 
+                var res = RatepRepo.Remove(model);
             UnitOfWork.Save();
             return new ResultViewModel()
             {
@@ -127,6 +133,22 @@ namespace ITI.sauce.MVC.Controllers
                 Success = true,
                 Data = null
             };
+            }
+            else
+            {
+                List<string> errors = new List<string>();
+                foreach (var i in ModelState.Values)
+                    foreach (var error in i.Errors)
+                        errors.Add(error.ErrorMessage);
+                return new ResultViewModel()
+                {
+                    Message = "Not Removed ",
+                    Success = false,
+                    Data = null
+                };
+            }
+
+
         }
 
        

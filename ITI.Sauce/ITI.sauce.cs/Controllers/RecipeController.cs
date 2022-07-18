@@ -48,8 +48,10 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Add(string? returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            IEnumerable<SelectListItem> Categories = GetCateogriesNames(CatRepo.GetCategoriesDropDown());
-            IEnumerable<SelectListItem> Restaurants = GetRestaurantNames(RestRepo.GetCRestaurantDropDown());
+            IEnumerable<SelectListItem> Categories = 
+                GetCateogriesNames(CatRepo.GetCategoriesDropDown());
+            IEnumerable<SelectListItem> Restaurants = 
+                GetRestaurantNames(RestRepo.GetCRestaurantDropDown());
 
             ViewBag.Categories = Categories;
             ViewBag.Restaurants = Restaurants;
