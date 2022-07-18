@@ -50,7 +50,9 @@ namespace ITI.Sauce.Repository
                 NameAR = V.NameAR,
                 RegisterDate = V.RegisterDate,
                 IsDeleted = V.IsDeleted,
-            }).ToPagedList(pageIndex, pageSize);
+                ImageUrl = V.ImageUrl,
+                Vendor_ID = V.Vendor_ID
+        }).ToPagedList(pageIndex, pageSize);
             return result;
 
             //PaginingViewModel<List<RestaurantViewModel>>
@@ -76,6 +78,8 @@ namespace ITI.Sauce.Repository
            NameAR = V.NameAR,
            RegisterDate = V.RegisterDate,
            IsDeleted = V.IsDeleted,
+           ImageUrl = V.ImageUrl,
+           Vendor_ID = V.Vendor_ID
        }).ToPagedList(pageIndex, pageSize);
 
         public RestaurantViewModel Add(RestaurantEditViewModel model)
@@ -109,6 +113,8 @@ namespace ITI.Sauce.Repository
             Result.NameAR = model.NameAR;
             Result.RegisterDate = model.RegisterDate;
             Result.IsDeleted = model.IsDeleted;
+            Result.ImageUrl = model.ImageUrl;
+            Result.Vendor_ID = model.Vendor_ID;
             return Result.ToViewModel();
         }
         public RestaurantViewModel GetOne(int _ID = 0)

@@ -66,6 +66,9 @@
             <label asp-for="WorkTime "> WorkTime </label>
             <input asp-for="WorkTime ">
             <span asp-validation-for="WorkTime " style="color:red"></span>
+            <br />
+            <input hidden asp-for="Vendor_ID">
+         
             <br >
          <label asp-for="Vendor_ID"> Vendor_ID </label>
     <select asp-for="Vendor_ID" asp-items="@ViewBag.Restaurants">

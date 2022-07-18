@@ -28,20 +28,19 @@ namespace ITI.sauce.MVC.Controllers
             return View("Get",Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
             var Data = ResRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-
-        //[Authorize(Roles = "Admin,Vendor")]
+        [Authorize(Roles = "Vendor")]
         [HttpGet]
         public IActionResult Add()
         {
-            IEnumerable<SelectListItem> Restaurants =
-                GetRestaurantNames(ResRepo.GetCRestaurantDropDown());
-            ViewBag.Restaurants = Restaurants;
-            return View();
+            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
+            return View(new RestaurantEditViewModel{ Vendor_ID = userId});
         }
         private IEnumerable<SelectListItem> GetRestaurantNames(List<TextValueViewModel> list)
         {
@@ -52,10 +51,11 @@ namespace ITI.sauce.MVC.Controllers
             });
         }
 
-        //[Authorize(Roles = "Admin,Vendor")]
+        [Authorize(Roles = "Vendor")]
         [HttpPost]
         public IActionResult Add(RestaurantEditViewModel model)
         {
+            //model.
             string? bookUploadUrl = "/Content/Uploads/Resturant/";
 
             string newFileName = Guid.NewGuid().ToString() + model.Image.FileName;

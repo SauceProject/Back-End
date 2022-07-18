@@ -1,7 +1,7 @@
 ﻿using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
-using ITI.Sauce.ViewModels.Cart;
 using LinqKit;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,11 @@ namespace ITI.Sauce.Repository
 {
     public class CartRepository : GeneralRepository<Cart>
     {
-        public CartRepository (DBContext _dBContext) : base(_dBContext) { }
+        private readonly UnitOfWork unitOfWork;
+        public CartRepository (DBContext _dBContext, UnitOfWork _unitOfWork) 
+            : base(_dBContext) {
+            unitOfWork = _unitOfWork;
+        }
 
         public PaginingViewModel<List<CartViewModel>> Get( int ID=0,
             string orderBy = null, 
@@ -53,6 +57,14 @@ namespace ITI.Sauce.Repository
                 };
             return finalResult;
 
+        }
+
+        public CartViewModel Add(CartEditViewModel model)
+        {
+            var cart = model.ToModel();
+            var result = base.Add(cart);
+            unitOfWork.Save();
+            return result.Entity.ToViewModel();
         }
 
     }
