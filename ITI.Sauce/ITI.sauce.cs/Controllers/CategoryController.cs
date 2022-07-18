@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using ITI.Sauce.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -21,6 +22,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
+        [Authorize(Roles = "User,Vendor")]
 
         public ViewResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",
             string NameAR = "",int pageIndex = 1 , int pageSize = 20 )
@@ -30,6 +32,7 @@ namespace ITI.sauce.MVC.Controllers
             return View(data);
         }
 
+        [Authorize(Roles = "User,Vendor")]
         [HttpGet]
         public IActionResult Add ()
         {

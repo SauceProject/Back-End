@@ -13,10 +13,10 @@ namespace ITI.Sauce.Repository
 {
     public class RecipeRepository : GeneralRepository<Recipe>
     {
-        
-        public RecipeRepository(DBContext _Context) : base(_Context)
+        RatingRepository rateRepo;
+        public RecipeRepository(DBContext _Context,RatingRepository _rateRepo) : base(_Context)
         {
-            
+            this.rateRepo = _rateRepo;
         }
         public PaginingViewModel<List<RecipeViewModel>> Get ( 
             string NameAr=null, string NameEN=null,string orderBy=null, string ImageUrl = "", string VideoUrl = "",
@@ -187,6 +187,64 @@ namespace ITI.Sauce.Repository
 
             return base.Update(recipe).Entity.ToViewModel();
 
+        }
+
+
+
+
+
+
+
+
+        public PaginingViewModel<List<RecipeViewModel>> Search(string Name="", string orderBy = null,
+            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        {
+            var filterd = PredicateBuilder.New<Recipe>();
+            var old = filterd;
+            if (string.IsNullOrEmpty(Name))
+                filterd = filterd.Or(b => b.NameEN.Contains(Name));
+                filterd = filterd.Or(b => b.NameAR.Contains(Name));
+
+            if (old == filterd)
+                filterd = null;
+            var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
+            var result =
+            query.Select(i => new RecipeViewModel
+            {
+                ID = i.ID,
+                CategoryID = i.CategoryID,
+                CategoryName = i.Category.NameEN,
+                RateValue=this.getRateByRecipeId(i.ID),
+                Details = i.Details,
+                GoodFor = i.GoodFor,
+                IsDeleted = i.IsDeleted,
+                NameAR = i.NameAR,
+                NameEN = i.NameEN,
+                Price = i.Price,
+                RegisterDate = i.RegisterDate,
+                ImageUrl = i.ImageUrl,
+                VideoUrl = i.VideoUrl,
+                RestaurantName = i.Restaurant.NameEN
+            });
+
+            PaginingViewModel<List<RecipeViewModel>>
+                finalResult = new PaginingViewModel<List<RecipeViewModel>>()
+                {
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    Count = base.GetList().Count(),
+                    Data = result.ToList()
+                };
+            return finalResult;
+
+
+        }
+
+        double getRateByRecipeId(int id)
+        {
+            var res = rateRepo.Get(0, 0, id);
+           double val= res.Data.Average(r => r.RatingValue);
+            return val;
         }
 
     }

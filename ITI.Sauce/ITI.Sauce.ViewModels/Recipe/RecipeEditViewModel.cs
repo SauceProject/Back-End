@@ -31,6 +31,9 @@ namespace ITI.Sauce.ViewModels
                 RegisterDate = model.RegisterDate,
                 ImageUrl = model.ImageUrl,
                 VideoUrl = model.VideoUrl,
+                
+
+
             };
         }
     }
@@ -61,7 +64,13 @@ namespace ITI.Sauce.ViewModels
         public DateTime RegisterDate { get; set; }
         [Required]
         public bool IsDeleted { get; set; }
-       
+        [Required]
+        public string CategoryName { get; set; }
+
+        [Required]
+
+        public double RateValue { get; set; }
+
         public IFormFile? Image { get; set; }
         public Restaurant? Restaurant { get; set; }
         public int RestaurantID { get; set; }

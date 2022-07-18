@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Models;
 
 using ITI.Sauce.Repository;
+using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,8 +31,10 @@ namespace ITI.sauce.MVC.Controllers
             ViewBag.UserCount=UserRepo.GetList().Count();
             ViewBag.VendorCount=VendorRepo.GetList().Count();
             ViewBag.ReataurantCount = RestaurantRepo.GetList().Count();
-
             return new ObjectResult(ViewBag);
+           
         }
+
+        
     }
 }

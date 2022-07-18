@@ -38,10 +38,16 @@ namespace ITI.sauce.MVC.Controllers
             return View(data);
         }
         //[Authorize(Roles = "Admin,Vendor")]
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        public ResultViewModel Search(string Name = "", string orderBy = null, bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
-            var Data = RecipeRepo.Search(pageIndex, pageSize);
-            return View("Get", Data);
+            var result = RecipeRepo.Search(Name, orderBy, isAscending, pageIndex, pageSize);
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = result
+            };
+
         }
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
@@ -147,6 +153,10 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork.Save();
             return RedirectToAction("Get");
         }
+
+
+
+        
 
     }
 }
