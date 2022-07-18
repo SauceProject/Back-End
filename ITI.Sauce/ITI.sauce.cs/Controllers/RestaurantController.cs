@@ -1,30 +1,31 @@
 ﻿using ITI.Sauce.Models;
 using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
+using ITI.Sauce.ViewModels.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ITI.sauce.MVC.Controllers
 {
     public class RestaurantController : Controller
     {
-
         private readonly RestaurantRepository ResRepo;
         private readonly UnitOfWork UnitOfWork;
         public RestaurantController(RestaurantRepository _RepoRes, UnitOfWork _unitOfWork)
         {
-            //DBContext dBContext = new DBContext();
             this.ResRepo = _RepoRes;
             UnitOfWork = _unitOfWork;
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(string vendorID = "",int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public IActionResult Get(string vendorID = "",int id = 0, DateTime? WorkTime = null,
+            string NameEn = "", string NameAr = "", DateTime? registerDate = null,
+            bool isDeleted = false, string orderby = "ID", bool isAscending = false,
+            int pageIndex = 1, int pageSize = 20)
         {
             var Resultdata =
                 ResRepo .Get (vendorID,id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
-            return View(Resultdata);
+            return View("Get",Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
@@ -32,11 +33,23 @@ namespace ITI.sauce.MVC.Controllers
             var Data = ResRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
+
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
         public IActionResult Add()
         {
+            IEnumerable<SelectListItem> Restaurants =
+                GetRestaurantNames(ResRepo.GetCRestaurantDropDown());
+            ViewBag.Restaurants = Restaurants;
             return View();
+        }
+        private IEnumerable<SelectListItem> GetRestaurantNames(List<TextValueViewModel> list)
+        {
+            return list.Select(i => new SelectListItem
+            {
+                Text = i.Text,
+                Value = i.Value.ToString()
+            });
         }
 
         //[Authorize(Roles = "Admin,Vendor")]
@@ -60,7 +73,7 @@ namespace ITI.sauce.MVC.Controllers
 
             ResRepo.Add(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+            return RedirectToAction("Search");
         }
 
 
@@ -70,6 +83,9 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Update(int Id)
         {
+            IEnumerable<SelectListItem> Restaurants =
+                GetRestaurantNames(ResRepo.GetCRestaurantDropDown());
+            ViewBag.Restaurants = Restaurants;
             var Results = ResRepo.GetOne(Id);
 
             return View(Results.ToEditViewModel());

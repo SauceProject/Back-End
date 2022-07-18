@@ -43,8 +43,8 @@
 
 </table>
 
-@*<div>
-    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
+<div>
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Get", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions
         {
         DisplayItemSliceAndTotal = true,
@@ -59,4 +59,4 @@
             $('ul.pagination > li.disabled > a').addClass('page-link');
         });
     </script>
-</div>*@
+</div>

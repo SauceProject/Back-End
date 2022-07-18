@@ -16,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -166,7 +167,10 @@ namespace ITI.Sauce.Repository
             return base.Add(Users).Entity.ToViewModel();
         }
 
-     public async Task<IdentityResult> ChangePassward(ChangePasswardViewModel model)
+
+       
+
+        public async Task<IdentityResult> ChangePassward(ChangePasswardViewModel model)
         {
             Users users = await userManger.FindByIdAsync(model.Id);
          var result =  await userManger.ChangePasswordAsync(users, model.CurrentPassword, model.NewPassword);
