@@ -22,11 +22,13 @@ namespace ITI.Sauce.Repository
         public PaginingViewModel<List<VendorViewModel>> Get(string id = "",
             string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderby = "ID", bool isAscending = false, int pageIndex = 1,
-                        int pageSize = 20)
+                        int pageSize = 5)
         {
 
             var filter = PredicateBuilder.New<Vendor>();
             var oldFiler = filter;
+           // if(SearchText != "" && SearchText!=null)
+              //  filter = filter.Or(v => v.User.NameEN.Contains(SearchText) || v.User.Email.Contains(SearchText));
             if (!string.IsNullOrEmpty(id))
                 filter = filter.Or(V => V.ID == id);
             if (!string.IsNullOrEmpty(nameEN))

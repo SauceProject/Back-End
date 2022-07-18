@@ -54,6 +54,7 @@ namespace ITI.Sauce.ViewModels
         public string phone { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
+        public string SearchText { get; set; }
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
         public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }
