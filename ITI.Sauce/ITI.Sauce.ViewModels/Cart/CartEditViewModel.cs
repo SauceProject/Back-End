@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace ITI.Sauce.ViewModels
 {
-    public static partial class CartExtensions
+    public  static partial class CartExtensions
     {
-        public static CartViewModel ToViewModel(this Cart model)
+        public static Cart ToModel(this CartEditViewModel model)
         {
-            return new CartViewModel
+            return new Cart
             {
-                Recipe_ID = model.Recipe_ID,
-                UserID = model.UserID,
-                Qty = model.Qty,
+                Recipe_ID=model.Recipe_ID,
+                UserID=model.UserID,
+                Qty=model.Qty,
+
             };
         }
     }
-    public class CartViewModel
+    public class CartEditViewModel
     {
         public int ID { get; set; }
         public string? UserID { get; set; }

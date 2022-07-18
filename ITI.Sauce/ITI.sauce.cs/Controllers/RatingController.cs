@@ -3,6 +3,7 @@ using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -10,14 +11,16 @@ namespace ITI.sauce.MVC.Controllers
     {
         private readonly UnitOfWork UnitOfWork;
         private readonly RatingRepository RatepRepo;
+        private readonly UserRepository UserRepo;
+
 
 
         public RatingController( UnitOfWork _unitOfWork
-            , RatingRepository _RatepRepo)
+            , RatingRepository _RatepRepo, UserRepository _UserRepo)
         {
-            //DBContext dBContext = new DBContext();
             UnitOfWork = _unitOfWork;
             RatepRepo = _RatepRepo;
+            UserRepo = _UserRepo;
         }
         public IActionResult Get(int id = 0, int RatingValue = 0,
                 string orderyBy = "", bool isAscending = false,
@@ -42,10 +45,25 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            List<TextValueViewModel> Values = RatepRepo.GetRecipeID();
-            ViewBag.Rating = Values;
+            IEnumerable<SelectListItem> Ratings =
+                GetRatingNames(RatepRepo.GetRecipeID());
+            ViewBag.Rating = Ratings;
+
+           
             return View();
         }
+
+        private IEnumerable<SelectListItem> GetRatingNames(List<TextValueViewModel> list)
+        {
+            return list.Select(i => new SelectListItem
+            {
+                Text = i.Text,
+                Value = i.Value.ToString()
+            });
+        }
+
+        
+
         [HttpPost]
         public IActionResult Add(RatingEditViewModel model)
         {

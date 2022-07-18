@@ -16,6 +16,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
 using System.Security.Claims;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -98,21 +99,21 @@ namespace ITI.Sauce.Repository
                     =String.Format(Configuration.GetSection("Application:AppDomin").Value
                     +Configuration.GetSection("Application:ConfirmationEmail").Value
                     ,User.Id , token);
-                    SendEmailOptions options = new SendEmailOptions()
-                    {
-                        Subject = "Confirmation Email",
-                        FromEmail = "Info@SauceMang.com",
-                        FromEmailDisplayName = "Sauce App",
-                        IsBodyHTML = true,
-                        Body = SendEmailOptions.GenerateBodyFromTemplate("ConfirmEmail",
-                        new Dictionary<string, string>()
-                        {
-                            {"{{UserName}}",  User.NameEN},
-                            {"{{Link}}" ,PathOfRedirectOfConfirmation  }
-                        })
-                    };
-                    options.ToEmails.Add(User.Email);
-                    await EmailServices.SendEmail(options);
+                    //SendEmailOptions options = new SendEmailOptions()
+                    //{
+                    //    Subject = "Confirmation Email",
+                    //    FromEmail = "Info@SauceMang.com",
+                    //    FromEmailDisplayName = "Sauce App",
+                    //    IsBodyHTML = true,
+                    //    Body = SendEmailOptions.GenerateBodyFromTemplate("ConfirmEmail",
+                    //    new Dictionary<string, string>()
+                    //    {
+                    //        {"{{UserName}}",  User.NameEN},
+                    //        {"{{Link}}" ,PathOfRedirectOfConfirmation  }
+                    //    })
+                    //};
+                    //options.ToEmails.Add(User.Email);
+                    //await EmailServices.SendEmail(options);
                 }
             }
             return new AccountResultViewModel { IsSuccess= result.Succeeded,UserId=User.Id,Errors = result.Errors};
@@ -166,7 +167,10 @@ namespace ITI.Sauce.Repository
             return base.Add(Users).Entity.ToViewModel();
         }
 
-     public async Task<IdentityResult> ChangePassward(ChangePasswardViewModel model)
+
+       
+
+        public async Task<IdentityResult> ChangePassward(ChangePasswardViewModel model)
         {
             Users users = await userManger.FindByIdAsync(model.Id);
          var result =  await userManger.ChangePasswordAsync(users, model.CurrentPassword, model.NewPassword);

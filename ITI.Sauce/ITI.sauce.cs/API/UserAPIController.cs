@@ -47,7 +47,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignUp(UserEditViewModel model)
+        public async Task<IActionResult> SignUp([FromBody] UserEditViewModel model)
         {
             if (ModelState.IsValid)
             {

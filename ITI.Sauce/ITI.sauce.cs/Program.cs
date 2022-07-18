@@ -1,6 +1,7 @@
 ﻿
 using System.Text;
 using ITI.Sauce.Models;
+using ITI.Sauce.MVC.Filters;
 using ITI.Sauce.MVC.Helpers;
 using ITI.Sauce.Repository;
 using ITI.Sauce.Services;
@@ -16,7 +17,10 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder();
         builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-        builder.Services.AddControllersWithViews().AddNewtonsoftJson(optonis =>
+        builder.Services.AddControllersWithViews(options =>
+        {
+            options.Filters.Add<HandelException>();
+        }).AddNewtonsoftJson(optonis =>
         {
             optonis.SerializerSettings.Formatting=Newtonsoft.Json.Formatting.Indented;
             optonis.SerializerSettings.ReferenceLoopHandling=Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -79,11 +83,15 @@ public class Program
         });
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/UserAPI/SignIn";
+           Option.LoginPath = "/Users/SignUp";
+        });
+    //   builder.Services.ConfigureApplicationCookie(Option =>
+      // {
+           // Option.LoginPath = "/UserAPI/SignIn";
          
            // Option.SignIn.RequireConfirmedEmail = true;
 
-        });
+       // });
         builder.Services.AddCors(options =>
         {
             options.AddDefaultPolicy(i =>

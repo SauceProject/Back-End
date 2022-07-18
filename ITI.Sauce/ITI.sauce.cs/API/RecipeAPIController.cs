@@ -1,6 +1,7 @@
 ﻿using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -15,10 +16,11 @@ namespace ITI.Sauce.MVC.API
         {
             this.RecipeRepo = _RecipeRepo;
           
-
         }
+
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public ObjectResult Get(string NameAr = null, string NameEN = null,
+        [HttpGet]
+        public ResultViewModel Get(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20)
@@ -26,13 +28,7 @@ namespace ITI.Sauce.MVC.API
             var data = RecipeRepo.Get(
                 NameAr, NameEN, orderBy, ImageUrl, VideoUrl,
                 isAscending, Price, rdate, category, pageIndex, pageSize);
-            return new ObjectResult(data);
-        }
-        //[Authorize(Roles = "Admin,Vendor")]
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
-        {
-            var Data = RecipeRepo.Search(pageIndex, pageSize);
-            return new ObjectResult(Data);
+            return new ResultViewModel { Data=data.Data , Success=true};
         }
         
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)

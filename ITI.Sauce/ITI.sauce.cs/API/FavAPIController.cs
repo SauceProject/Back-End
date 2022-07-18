@@ -109,14 +109,30 @@ namespace ITI.Sauce.MVC
         [HttpGet]
         public ResultViewModel Remove(FavEditViewModelExtentions model, int Fav_ID)
         {
-            var res = FavRepo.Remove(model);
+            if (ModelState.IsValid == true)
+            { 
+                var res = FavRepo.Remove(model);
             UnitOfWork.Save();
             return new ResultViewModel()
             {
                 Success = true,
-                Message = "",
+                Message = "Removed Succesfully",
                 Data = res
             };
+            }
+            else
+            {
+                List<string> errors = new List<string>();
+                foreach (var i in ModelState.Values)
+                    foreach (var error in i.Errors)
+                        errors.Add(error.ErrorMessage);
+                return new ResultViewModel()
+                {
+                    Message = "Not Removed ",
+                    Success = false,
+                    Data = null
+                };
+            }
 
         }
 
