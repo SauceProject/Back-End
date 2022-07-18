@@ -18,7 +18,7 @@ namespace ITI.Sauce.MVC.API
           
         }
 
-        [Authorize(Roles = "Admin,User,Vendor")]
+        //[Authorize(Roles = "Admin,User,Vendor")]
         [HttpGet]
         public ResultViewModel Get(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",

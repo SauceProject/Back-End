@@ -33,5 +33,12 @@ namespace ITI.Sauce.MVC.API
             var result = cartRepository.Add(model);
             return new ResultViewModel { Data = result, Success = true };
         }
+        [HttpPost]
+        public ResultViewModel Remove([FromBody] CartEditViewModel model)
+        {
+            var result = cartRepository.Remove(model);
+
+            return new ResultViewModel { Data = result, Success = true };
+        }
     }
 }
