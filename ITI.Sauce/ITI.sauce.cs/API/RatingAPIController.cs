@@ -60,7 +60,7 @@ namespace ITI.sauce.MVC.Controllers
                 return new ResultViewModel()
                 {
                     Message = "Added Succesfully",
-                    Success=true,
+                    Success = true,
                     Data=null
                 }; 
             }

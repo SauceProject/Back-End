@@ -31,7 +31,8 @@ namespace ITI.sauce.MVC.Controllers
             ViewBag.VendorCount=VendorRepo.GetList().Count();
             ViewBag.ReataurantCount = RestaurantRepo.GetList().Count();
 
-            return new ObjectResult(ViewBag);
+            // return new ObjectResult(ViewBag);
+            return View();
         }
     }
 }

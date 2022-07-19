@@ -32,18 +32,19 @@ var userId = claim.Value;
           <a asp-action="Index" asp-controller="Home" class="mylogo"><i class="fas fa-utensils"></i>Sauce</a>
       
         </li>
-        <li><a asp-action="Add" asp-controller="Recipe" asp-route-vendorID="@userId">Add Recipes </a></li>
-        <li><a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
+        <li><a asp-action="Search" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
         <li><a asp-action="Search" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
-        <li><a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
+        <li><a asp-action="Search" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
        
      
         @if(this.User.HasClaim(c => c.Value=="Admin")) 
 {
         <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
-        <li><a asp-action="Get" asp-controller="Users">View Users </a></li>
+        <li><a asp-action="Search" asp-controller="Users">View Users </a></li>
         <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
-        <li><a asp-action="Get" asp-controller="Vendor">View Vendors </a></li>
+        <li><a asp-action="search" asp-controller="Vendor">View Vendors </a></li>
+        <li><a asp-action="Search" asp-controller="Category">View Category </a></li>
+
 }
         
 
@@ -53,10 +54,10 @@ var userId = claim.Value;
 
     <main>
       <nav>
-        <i class="fa-solid fa-bars menu-icn " onclick="Menu()"></i>
-        <input type="text" placeholder="Search..." />
-        <i class="fa-solid fa-bell nav-icn"></i>
-        <i class="fa-solid fa-envelope nav-icn"></i>
+        <i style="margin-right:70%;" class="fa-solid fa-bars menu-icn " onclick="Menu()" ></i>
+    @*    <input type="text" placeholder="Search..." />*@
+  @*      <i class="fa-solid fa-bell nav-icn"></i>
+        <i class="fa-solid fa-envelope nav-icn"></i>*@
             @if (_SignInManager.IsSignedIn(User)   )
             {
                 <a asp-action="Details" asp-controller="Vendor" asp-route-id="@userId">
@@ -73,8 +74,7 @@ var userId = claim.Value;
         {
             <div>
          <span id="restaurant-name">@User.Identity.Name </span>|
-        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span> |
-        <span><a asp-action="ChangePassword" asp-controller="Users">ChangePassword</a></span> 
+        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span> 
 
         </div>
         }

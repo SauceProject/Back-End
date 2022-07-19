@@ -123,7 +123,7 @@ namespace ITI.Sauce.MVC
                 return new ResultViewModel()
                 {
                     Message = "Not Removed ",
-                    Success = false,
+                    Success = true,
                     Data = null
                 };
             }

@@ -4,6 +4,7 @@ using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ITI.sauce.MVC.Controllers
 {
     public class VendorController : Controller
@@ -24,12 +25,12 @@ namespace ITI.sauce.MVC.Controllers
 
         [Authorize(Roles = "Admin")]
         public IActionResult Get(string id = "",
-                string nameEN = "", string nameAR="", string Email = "",string phone = "",
+                string nameEN = "", string nameAR = "", string Email = "", string phones = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 5)
         {
             var data =
-            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy, 
+            vendorRepo.Get(id, nameEN, nameAR, Email, phones, orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
@@ -41,21 +42,27 @@ namespace ITI.sauce.MVC.Controllers
                 ViewBag.NameEN = i.NameEN;
                 ViewBag.NameAR = i.NameAR;
                 ViewBag.Email = i.Email;
-                ViewBag.Phone = i.phone;
-                ViewBag.Password = i.Password;
-                ViewBag.UserName = i.UserName;
+                ViewBag.Phones = i.phones;
+                //ViewBag.Password = i.Password;
+                //ViewBag.UserName = i.UserName;
             }
             return View(data);
         }
 
         [Authorize(Roles = "Admin")]
+      
+
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
+            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;
             var Data = vendorRepo.Search(pageIndex, pageSize);
+            Data.Where(i => i.ID != userId);
             return View("Get", Data);
         }
-        
-   
+
+  
 
 
         [Authorize(Roles = "Admin")]
@@ -71,20 +78,23 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var result= await userRepo.SignUp(model);
+                var result = await userRepo.SignUp(model);
                 if (!string.IsNullOrEmpty(result.UserId))
                 {
-                    vendorRepo.Add(new VendorEditViewModel { Id=result.UserId,registerDate=DateTime.Now});
+                    vendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
                     UnitOfWork.Save();
                     return RedirectToAction("Search");
                 }
-                else {
+                else
+                {
                     return View();
                 }
 
             }
             else
                 return View();
+
+
         }
 
 
@@ -102,13 +112,14 @@ namespace ITI.sauce.MVC.Controllers
 
             vendorRepo.Update(model);
             UnitOfWork.Save();
-            return RedirectToAction("Search");
+            return RedirectToAction("Get");
 
         }
 
         [HttpGet]
         public IActionResult Remove(VendorEditViewModel model, int ID)
         {
+            
             var res = vendorRepo.Remove(model);
             UnitOfWork.Save();
             return RedirectToAction("Search");

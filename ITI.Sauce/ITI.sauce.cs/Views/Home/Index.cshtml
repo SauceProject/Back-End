@@ -42,10 +42,11 @@ var userId = claim.Value;
            </div>
         </div>
     }
-             <div class="stat-card three">
+    <div style="display:flex; margin-top:15px; ">
+             <div class="stat-card three" style="margin-right:30px;">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
               <p>@ViewBag.RecipeCount</p>
-              <a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
+              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
             </div> 
             <div class="stat-card four">
               <h3><i class="fa-solid fa-chart-line"></i></h3>
@@ -53,7 +54,7 @@ var userId = claim.Value;
     <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
             </div>
-
+</div>
 
         <!--ORDERS LIST-->
         <div class="head-order">

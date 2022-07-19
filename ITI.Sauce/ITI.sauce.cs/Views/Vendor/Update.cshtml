@@ -10,7 +10,7 @@
 <h1>Edit Vendor</h1>
 
 <div>
-  <form data-ajax="true" method="post" asp-action="Update" asp-controller="Vendor">
+  <form data-ajax="true" method="post" asp-action="Update" asp-controller="Vendor" enctype="multipart/form-data">
       
     <label asp-for="NameEN"> NameEN</label>
     <input  asp-for="NameEN"  value="@Model.NameEN">

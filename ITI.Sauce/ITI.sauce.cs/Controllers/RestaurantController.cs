@@ -112,6 +112,7 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Remove(RestaurantEditViewModel model, int ID)
         {
+
             var res = ResRepo.Remove(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");

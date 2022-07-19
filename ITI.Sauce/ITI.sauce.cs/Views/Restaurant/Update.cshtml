@@ -1,5 +1,5 @@
 ﻿@using ITI.Sauce.ViewModels
-@model RestaurantViewModel
+@model RestaurantEditViewModel
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +57,7 @@ div {
 
   <div>
 <form data-ajax="true"  asp-action="Update" asp-controller="Restaurant" method="post" enctype="multipart/form-data">
-    <h1>Update MemberShip</h1>
+    <h1>Update Restaurant</h1>
 
    @*  <div style="display:none">
       
@@ -76,15 +76,15 @@ div {
 
     <br />
 
-     <label asp-for="Vendor_ID"> Vendor_ID  </label>
-    <input  asp-for="Vendor_ID">
-    <span asp-validation-for="Vendor_ID" style="color:red"></span>
+@*     <label asp-for="Vendor_ID"> Vendor_ID  </label>*@
+    <input type="hidden" asp-for="Vendor_ID">
+    @*<span asp-validation-for="Vendor_ID" style="color:red"></span>*@
 
     <br />
 
      <label asp-for="NameEN"> English Name </label>
     <input  asp-for="NameEN">
-    <span asp-validation-for="NameEN" style="color:red"></span>
+    <span asp-validation-for="NameEN" style="color:red" ></span>
 
     <br />
 
@@ -107,6 +107,15 @@ div {
 
  
     
+    <div>
+            <label asp-for="Image"></label>
+                <input asp-for="Image" class="custom-file-input" id="customFile" value="@ViewBag.Image">
+                
+      
+        </div>
+        <div>
+         <img src="@ViewBag.Image" alt="@ViewBag.NameEN"/>
+         </div>
     <br />
 
 

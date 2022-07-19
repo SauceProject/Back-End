@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using ITI.Sauce.ViewModels.Shared;
+using ITI.Sauce.Repository;
+using ITI.Sauce.ViewModels;
+
 
 namespace ITI.Sauce.MVC.Controllers
 {
@@ -20,19 +23,18 @@ namespace ITI.Sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
-        
-        public ResultViewModel Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
-            string NameAR = "", int pageIndex = 1, int pageSize = 20)
-        {
-            PaginingViewModel<List<CategoryViewModel>> result
-                = CateRepo.Get(ID, orderBy, isAscending,
-                NameEN, NameAR, pageIndex, pageSize);
 
+        public ResultViewModel Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
+          string NameAR = "", int pageIndex = 1, int pageSize = 20)
+        {
+            var data =
+                CateRepo.Get(ID, orderBy, isAscending, NameEN, NameAR, pageIndex, pageSize);
+           
             return new ResultViewModel()
             {
                 Success = true,
                 Message = "",
-                Data = result
+                Data = data
             };
 
 
