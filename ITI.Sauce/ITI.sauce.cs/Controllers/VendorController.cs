@@ -13,6 +13,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UnitOfWork UnitOfWork;
 
 
+
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
             UserRepository _userRepo)
         {
@@ -33,6 +34,9 @@ namespace ITI.sauce.MVC.Controllers
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
+
+        
+
         public IActionResult Details(string id)
         {
             var data = vendorRepo.Get(id);
@@ -56,8 +60,6 @@ namespace ITI.sauce.MVC.Controllers
         }
         
    
-
-
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
@@ -114,6 +116,11 @@ namespace ITI.sauce.MVC.Controllers
             return RedirectToAction("Search");
 
 
+        }
+        public IActionResult AddMemberShip()
+        {
+
+            return View("Get");
         }
 
     }

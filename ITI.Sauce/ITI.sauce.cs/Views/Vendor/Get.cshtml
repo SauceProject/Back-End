@@ -22,9 +22,10 @@
     <a asp-action="Add" asp-controller="Vendor" id="btnAdd">Add</a>
   
     <div class="col-4 p-0 justify-content-end mt-1">
-         <form asp-action="Search">
+         <form asp-action="Get" asp-controller="Vendor" method="post">
              <span class="btn-group">
-        <input class="form-control" type="text" placeholder="Search..." name="SearchText" value="@ViewBag.SearchText" />
+                 
+        <input  class="form-control" type="text" placeholder="Search..." name="SearchText" value="@ViewBag.SearchText" />
         <input class="p-1 ml-2 btn btn-sm btn-danger" style="border-radius:10px; margin:5px; "  type="submit" value="Search"/>
         </span>
 
