@@ -24,19 +24,19 @@ namespace ITI.Sauce.Repository
     {
         UserManager<Users> userManger;
         SignInManager<Users> SignInManger;
-        EmailServices EmailServices;
+        //EmailServices EmailServices;
         IConfiguration Configuration;
         public UserRepository(DBContext _Context,
-            UserManager<Users> _userManger, SignInManager<Users> _SignInManger , EmailServices _EmailServices, IConfiguration _Configuration) : base(_Context)
+            UserManager<Users> _userManger, SignInManager<Users> _SignInManger ,  IConfiguration _Configuration) : base(_Context)
            
         {
             userManger = _userManger;
             SignInManger = _SignInManger;
-            EmailServices = _EmailServices;
+           // EmailServices = _EmailServices;
             Configuration = _Configuration;
           
         }
-        public PaginingViewModel<List<UsersViewModel>> Get(string id = "", string UserName = "", string Email = "", string phone = "", DateTime? registerDate = null, string NameEn = "", string NameAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
+        public PaginingViewModel<List<UsersViewModel>> Get(string id = "", string UserName = "", string Email = "", string phones = "", DateTime? registerDate = null, string NameEn = "", string NameAr = "", string orderby = "ID", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
 
@@ -48,8 +48,8 @@ namespace ITI.Sauce.Repository
                 filter.Or(U => U.UserName.Contains(UserName));
             if (!string.IsNullOrEmpty(Email))
                 filter.Or(U => U.Email.Contains(Email));
-            if (!string.IsNullOrEmpty(phone))
-                filter = filter.Or(U => U.PhoneNumber == phone);
+            if (!string.IsNullOrEmpty(phones))
+                filter = filter.Or(U => U.PhoneNumber == phones);
             if (!string.IsNullOrEmpty(NameEn))
                 filter = filter.Or(NEn => NEn.NameEN.Contains(NameEn));
             if (!string.IsNullOrEmpty(NameAr))
@@ -64,11 +64,12 @@ namespace ITI.Sauce.Repository
             var result = query.Select(i => new UsersViewModel
             {
                 ID = i.Id,
-                UserName = i.UserName,
+
                 Email = i.Email,
                 phone = i.PhoneNumber,
                 registerDate = i.registerDate,
                 NameEN = i.NameEN,
+                NameAR = i.NameAR,
 
 
             });
@@ -94,11 +95,11 @@ namespace ITI.Sauce.Repository
                 result = await userManger.AddToRoleAsync(User, model.Role);
                 if (result.Succeeded)
                 {
-                    string token = await userManger.GenerateEmailConfirmationTokenAsync(User);
-                    string PathOfRedirectOfConfirmation
-                    =String.Format(Configuration.GetSection("Application:AppDomin").Value
-                    +Configuration.GetSection("Application:ConfirmationEmail").Value
-                    ,User.Id , token);
+                    //string token = await userManger.GenerateEmailConfirmationTokenAsync(User);
+                    //string PathOfRedirectOfConfirmation
+                    //=String.Format(Configuration.GetSection("Application:AppDomin").Value
+                    //+Configuration.GetSection("Application:ConfirmationEmail").Value
+                    //,User.Id , token);
                     //SendEmailOptions options = new SendEmailOptions()
                     //{
                     //    Subject = "Confirmation Email",
@@ -114,6 +115,8 @@ namespace ITI.Sauce.Repository
                     //};
                     //options.ToEmails.Add(User.Email);
                     //await EmailServices.SendEmail(options);
+                    return new AccountResultViewModel { IsSuccess = result.Succeeded, UserId = User.Id, Errors =null};
+
                 }
             }
             return new AccountResultViewModel { IsSuccess= result.Succeeded,UserId=User.Id,Errors = result.Errors};
@@ -150,10 +153,9 @@ namespace ITI.Sauce.Repository
         
         public IPagedList<UsersViewModel> Search(int pageIndex = 1, int pageSize = 2)
                    =>
-   GetList().Select(i => new UsersViewModel
+   GetList().Where(v => v.Vendor == null).Select(i => new UsersViewModel
    {
        ID = i.Id,
-       UserName = i.UserName,
        Email = i.Email,
        Password = i.PasswordHash,
        phone = i.PhoneNumber,

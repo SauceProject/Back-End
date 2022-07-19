@@ -39,6 +39,8 @@ namespace ITI.Sauce.MVC
 
         }
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
         public ResultViewModel Search(int pageIndex = 1, int pageSize = 2)
         {
             var Data = FavRepo.Search(pageIndex, pageSize);
@@ -53,6 +55,8 @@ namespace ITI.Sauce.MVC
 
 
         [HttpGet]
+        [Authorize(Roles = "User")]
+
         public ResultViewModel Add()
         {
             List<TextValueViewModel> Values = FavRepo.GetFavID();
@@ -66,6 +70,8 @@ namespace ITI.Sauce.MVC
         }
 
         [HttpPost]
+        [Authorize(Roles = "User")]
+
         public ResultViewModel Add(FavEditViewModelExtentions model)
         {
             if (ModelState.IsValid == true)
@@ -123,7 +129,7 @@ namespace ITI.Sauce.MVC
                 return new ResultViewModel()
                 {
                     Message = "Not Removed ",
-                    Success = false,
+                    Success = true,
                     Data = null
                 };
             }

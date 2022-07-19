@@ -17,14 +17,13 @@ namespace ITI.Sauce.ViewModels
                 NameEN=model.NameEN,
                 NameAR=model.NameAR,
                 Email=model.Email,
-                UserName=model.Email,
+              
             };
         }
     }
     public class UsersViewModel
     {
         public string? ID { get; set; }
-        public string? UserName { get; set; }
         public string? Password { get; set; }
         public string? Email { get; set; }
         public string? phone { get; set; }

@@ -23,7 +23,7 @@ namespace ITI.sauce.MVC.Controllers
                 int pageIndex = 1, int pageSize = 20)
         {
             var data =
-            RatepRepo.Get(id, RatingValue, orderyBy,
+            RatepRepo.Get(id, RatingValue,null, orderyBy,
                 isAscending, pageIndex, pageSize);
             return new ResultViewModel()
             {
@@ -60,7 +60,7 @@ namespace ITI.sauce.MVC.Controllers
                 return new ResultViewModel()
                 {
                     Message = "Added Succesfully",
-                    Success=true,
+                    Success = true,
                     Data=null
                 }; 
             }

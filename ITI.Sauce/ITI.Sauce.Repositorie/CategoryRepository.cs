@@ -7,6 +7,8 @@ using Abp.Linq.Expressions;
 using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
+using X.PagedList;
+
 
 namespace ITI.Sauce.Repository
 {
@@ -16,7 +18,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<CategoryViewModel>> Get(int ID = 0, string orderBy = null, bool isAscending = false,
+        public IPagedList<CategoryViewModel> Get(int ID = 0, string orderBy = null, bool isAscending = false,
             string NameEN = "", string NameAR = "", int pageIndex = 1, int pageSize = 20)
 
         {
@@ -44,22 +46,30 @@ namespace ITI.Sauce.Repository
                     NameEN = i.NameEN,
                     NameAR = i.NameAR,
 
-                });
+                }).ToPagedList(pageIndex,pageSize);
 
-            PaginingViewModel<List<CategoryViewModel>>
-                finalResult = new PaginingViewModel<List<CategoryViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList()
-                };
+            //PaginingViewModel<List<CategoryViewModel>>
+            //    finalResult = new PaginingViewModel<List<CategoryViewModel>>()
+            //    {
+            //        PageIndex = pageIndex,
+            //        PageSize = pageSize,
+            //        Count = base.GetList().Count(),
+            //        Data = result.ToList()
+            //    };
 
-            return finalResult;
+            return result;
 
 
         }
+        public IPagedList<CategoryViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                       =>
+       GetList().Select(i => new CategoryViewModel
+       {
+           ID = i.ID,
+           NameEN = i.NameEN,
+           NameAR = i.NameAR,
 
+       }).ToPagedList(pageIndex, pageSize);
         public CategoryViewModel Add (CategoryEditViewModel model)
         {
             Category category = model.ToModel();

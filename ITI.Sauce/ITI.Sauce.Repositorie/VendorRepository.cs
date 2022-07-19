@@ -54,7 +54,7 @@ namespace ITI.Sauce.Repository
                 NameAR = V.User.NameAR,
                 Email = V.User.Email,
                 IsDeleted = V.IsDeleted,
-                phone = V.User.PhoneNumber,
+                phones = V.User.PhoneNumber,
 
             });
 
@@ -72,7 +72,7 @@ namespace ITI.Sauce.Repository
         }
         public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
                     =>
-    GetList().Select(V => new VendorViewModel
+    GetList().Where(v=> v.User.Vendor!=null).Select(V => new VendorViewModel
     {
         ID = V.ID,
         UserName = V.User.UserName,
@@ -81,7 +81,7 @@ namespace ITI.Sauce.Repository
         NameAR = V.User.NameAR,
         Email = V.User.Email,
         IsDeleted = V.IsDeleted,
-        phone = V.User.PhoneNumber,
+        phones = V.User.PhoneNumber,
 
     }).ToPagedList(pageIndex, pageSize);
 

@@ -21,7 +21,7 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.User.NameEN,
                 NameAR = model.User.NameAR,
                 Email = model.User.Email,
-                phone = model.User.PhoneNumber,
+                phones = model.User.PhoneNumber,
                 Vendor_MemberShips=model.Vendor_MemberShips
                 
                
@@ -51,7 +51,7 @@ namespace ITI.Sauce.ViewModels
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
-        public string phone { get; set; }
+        public string phones { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }
         public string SearchText { get; set; }

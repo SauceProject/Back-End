@@ -22,7 +22,7 @@ namespace ITI.sauce.MVC.Controllers
         private readonly RoleRepository RoleRepository;
 
 
-        
+
         public UsersController(UserRepository _UserRepo, UnitOfWork _unitOfWork, RoleRepository _RoleRepository, VendorRepository _VendorRepo)
         {
 
@@ -62,24 +62,24 @@ namespace ITI.sauce.MVC.Controllers
 
                 if (!result.IsSuccess)
 
-                if (!result.IsSuccess)
-                {
-                    ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
-    .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-                    foreach (var error in result.Errors)
-                        ModelState.AddModelError("", error.Description);
-                }
-                else
-                {
-                    if (model.Role == "Vendor")
+                    if (!result.IsSuccess)
                     {
-                        VendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
-                        UnitOfWork.Save();
+                        ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+        .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+                        foreach (var error in result.Errors)
+                            ModelState.AddModelError("", error.Description);
                     }
-                    return RedirectToAction("SignIn", "Users");
-                }
+                    else
+                    {
+                        if (model.Role == "Vendor")
+                        {
+                            VendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
+                            UnitOfWork.Save();
+                        }
+                        return RedirectToAction("SignIn", "Users");
+                    }
             }
-            return View();
+            return RedirectToAction("SignIn", "Users");
         }
 
         [HttpGet]
@@ -107,9 +107,11 @@ namespace ITI.sauce.MVC.Controllers
         //            return RedirectToAction("Index", "Home");
         //        }
         //    }
+
         //    return View();
         //}
-        //api
+
+        ////api
         [HttpPost]
         public async Task<IActionResult> SignIn(UserLoginViewModel model)
         {
@@ -125,12 +127,14 @@ namespace ITI.sauce.MVC.Controllers
                 {
 
 
-                    return new ObjectResult(new
-                    {
+                    //    return new ObjectResult(new
+                    //    {
 
-                        Token = token,
-                    });
+                    //        Token = token,
+                    //    });
+                    return RedirectToAction("Index", "Home");
                 }
+                
             }
             List<string> errors = new List<string>();
             foreach (var i in ModelState.Values)
@@ -138,7 +142,20 @@ namespace ITI.sauce.MVC.Controllers
                     errors.Add(error.ErrorMessage);
             return new ObjectResult(errors);
         }
-
+        public IActionResult Details(string id)
+        {
+            var data = UserRepo.Get(id);
+            foreach (var i in data.Data)
+            {
+                ViewBag.NameEN = i.NameEN;
+                ViewBag.NameAR = i.NameAR;
+                ViewBag.Email = i.Email;
+                ViewBag.Phone = i.phone;
+                //ViewBag.Password = i.Password;
+                //ViewBag.UserName = i.UserName;
+            }
+            return View(data);
+        }
 
         [HttpGet]
         public new async Task<IActionResult> SignOut()

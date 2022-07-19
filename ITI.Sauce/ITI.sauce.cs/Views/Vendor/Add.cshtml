@@ -19,7 +19,10 @@
     <input  asp-for="NameAR">
     <span asp-validation-for="NameAR" style="color:red"></span>
     <br />
- 
+  <label asp-for="Email"> Email</label>
+    <input  asp-for="Email">
+    <span asp-validation-for="Email" style="color:red"></span>
+    <br />
     <label asp-for="Password"> Password</label>
     <input  asp-for="Password">
     <span asp-validation-for="Password" style="color:red"></span>
@@ -31,16 +34,14 @@
      <label asp-for="UserName"> UserName</label>
     <input  asp-for="UserName">
     <span asp-validation-for="UserName" style="color:red"></span>*@
-    <br />
+ <br />
      <label asp-for="phone"> Phone Number</label>
     <input  asp-for="phone">
     <span asp-validation-for="phone" style="color:red"></span>
     <br />
-    <label asp-for="Email"> Email</label>
-    <input  asp-for="Email">
-    <span asp-validation-for="Email" style="color:red"></span>
+   
 
-    <input  hidden asp-for="Role">
+    <input type=" hidden" asp-for="Role">
 
 
     <input type="submit" value="Add">

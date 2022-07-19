@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Abp.Linq.Expressions;
 using Microsoft.AspNetCore.Mvc;
 using ITI.Sauce.Repository;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -21,15 +22,20 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
+        [Authorize(Roles = "User,Vendor")]
 
-        public ViewResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",
+        public IActionResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",
             string NameAR = "",int pageIndex = 1 , int pageSize = 20 )
         {
             var data =
                 CateRepo.Get(ID, orderBy, isAscending, NameEN, NameAR, pageIndex, pageSize);
             return View(data);
         }
-
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
+        {
+            var Data = CateRepo.Search(pageIndex, pageSize);
+            return View("Get", Data);
+        }
         [HttpGet]
         public IActionResult Add ()
         {
