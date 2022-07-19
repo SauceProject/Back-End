@@ -26,6 +26,7 @@ namespace ITI.Sauce.ViewModels
                 RegisterDate=model.RegisterDate,
                 ImageUrl=model.ImageUrl,
                 VideoUrl=model.VideoUrl,
+                
             };
         }
     }
@@ -39,6 +40,10 @@ namespace ITI.Sauce.ViewModels
         public int GoodFor { get; set; }
         public float Price { get; set; }
         public string NameEN { get; set; }
+
+        public double RateValue { get; set; }
+
+        public string CategoryName { get; set; }
 
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }

@@ -22,6 +22,7 @@ namespace ITI.Sauce.ViewModels
     }
     public class CartEditViewModel
     {
+        public int ID { get; set; }
         public string? UserID { get; set; }
         public int Qty { get; set; }
         public int Recipe_ID { get; set; }

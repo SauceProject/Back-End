@@ -19,7 +19,7 @@ namespace ITI.Sauce.Repository
 
         }
         public PaginingViewModel<List<RatingViewModel>> Get(int id = 0,
-                    int RatingValue = 0,
+                    int RatingValue = 0,int? RecipeId=null,
                 string orderby = "", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
         {
@@ -28,7 +28,8 @@ namespace ITI.Sauce.Repository
             var oldFiler = filter;
             if (id > 0)
                 filter = filter.Or(V => V.RatingID == id);
-
+            if (RecipeId !=null)
+                filter = filter.Or(V => V.RecipeID == RecipeId);
 
             if (filter == oldFiler)
                 filter = null;

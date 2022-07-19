@@ -18,7 +18,7 @@ namespace ITI.Sauce.MVC.API
           
         }
 
-        [Authorize(Roles = "Admin,User,Vendor")]
+        //[Authorize(Roles = "Admin,User,Vendor")]
         [HttpGet]
         public ResultViewModel Get(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
@@ -48,11 +48,30 @@ namespace ITI.Sauce.MVC.API
                 Value = i.Value.ToString()
             });
         }
-        
 
 
 
-       
+
+
+
+
+
+
+        //[HttpGet]
+        //private ResultViewModel Search(string Name ="", string orderBy = null, bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        //{
+        //   var result = RecipeRepo.Search(Name,orderBy,isAscending,pageIndex,pageSize);
+        //    return new ResultViewModel()
+        //    {
+        //        Success = true,
+        //        Message = "",
+        //        Data = result
+        //    };
+
+        //}
+
+
+
 
     }
 }

@@ -13,8 +13,10 @@ namespace ITI.Sauce.Repository
 {
     public class RestaurantRepository : GeneralRepository<Restaurant>
     {
-        public RestaurantRepository(DBContext _Context) : base(_Context)
+        RatingRepository rateRepo;
+        public RestaurantRepository(DBContext _Context, RatingRepository _rateRepo) : base(_Context)
         {
+            this.rateRepo = _rateRepo;
 
         }
         public IPagedList<RestaurantViewModel> Get(string Vendor_ID="", int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
@@ -151,6 +153,66 @@ namespace ITI.Sauce.Repository
 
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public PaginingViewModel<List<RestaurantViewModel>> Search(int ID = 0, DateTime? WorkTime = null, string Vendor_ID = "",  string Name = "", string orderBy = null, 
+            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        {
+            var filterd = PredicateBuilder.New<Restaurant>();
+            var old = filterd;
+            if (string.IsNullOrEmpty(Name))
+                filterd = filterd.Or(b => b.NameEN.Contains(Name));
+            filterd = filterd.Or(b => b.NameAR.Contains(Name));
+
+            if (old == filterd)
+                filterd = null;
+            var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
+            var result =
+            query.Select(i => new RestaurantViewModel
+            {
+                ID = i.ID,
+                WorkTime = i.WorkTime,
+                Vendor_ID = i.Vendor_ID,
+                NameEN = i.NameEN,
+                NameAR = i.NameAR,
+                RegisterDate =i.RegisterDate,
+                IsDeleted = i.IsDeleted,
+                ImageUrl = i.ImageUrl,
+
+
+               
+            });
+
+            PaginingViewModel<List<RestaurantViewModel>>
+                finalResult = new PaginingViewModel<List<RestaurantViewModel>>()
+                {
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    Count = base.GetList().Count(),
+                    Data = result.ToList()
+                };
+            return finalResult;
+
+        }
+        double getRateByRecipeId(int id)
+        {
+            var res = rateRepo.Get(0, 0, id);
+            double val = res.Data.Average(r => r.RatingValue);
+            return val;
+        }
+
 
     }
 }

@@ -23,6 +23,7 @@ namespace ITI.Sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
+        [Authorize(Roles = "User")]
 
         public ResultViewModel Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
           string NameAR = "", int pageIndex = 1, int pageSize = 20)
