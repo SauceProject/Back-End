@@ -27,12 +27,22 @@ namespace ITI.sauce.MVC.Controllers
         [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Index()
         {
+            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            var userId = claim.Value;   
+
             ViewBag.RecipeCount=RecRepo.GetList().Count();
             ViewBag.UserCount=UserRepo.GetList().Count();
-            ViewBag.VendorCount=VendorRepo.GetList().Count();
+            ViewBag.VendorCount = VendorRepo.GetList().Count();
             ViewBag.ReataurantCount = RestaurantRepo.GetList().Count();
-            return new ObjectResult(ViewBag);
-           
+            if (this.User.HasClaim(c => c.Value == "Vendor"))
+            {
+                var Vendor = VendorRepo.GetList().FirstOrDefault(i => i.ID == userId);
+                ViewBag.Flag = Vendor.IsDeleted;
+            }
+
+            // return new ObjectResult(ViewBag);
+            return View();
         }
 
         

@@ -18,6 +18,7 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.NameAR,
                 Email = model.Email,
                 UserName = model.Email,
+                PhoneNumber =model.phone,
             };
         }
 
@@ -30,7 +31,6 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 Email = model.Email,
-                UserName = model.UserName,
                 Role=model.Role,
             };
         }

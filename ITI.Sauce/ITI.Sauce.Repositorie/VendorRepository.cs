@@ -27,8 +27,7 @@ namespace ITI.Sauce.Repository
 
             var filter = PredicateBuilder.New<Vendor>();
             var oldFiler = filter;
-           // if(SearchText != "" && SearchText!=null)
-              //  filter = filter.Or(v => v.User.NameEN.Contains(SearchText) || v.User.Email.Contains(SearchText));
+           
             if (!string.IsNullOrEmpty(id))
                 filter = filter.Or(V => V.ID == id);
             if (!string.IsNullOrEmpty(nameEN))
@@ -55,7 +54,7 @@ namespace ITI.Sauce.Repository
                 NameAR = V.User.NameAR,
                 Email = V.User.Email,
                 IsDeleted = V.IsDeleted,
-                phone = V.User.PhoneNumber,
+                phones = V.User.PhoneNumber,
 
             });
 
@@ -73,7 +72,7 @@ namespace ITI.Sauce.Repository
         }
         public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
                     =>
-    GetList().Select(V => new VendorViewModel
+    GetList().Where(v=> v.User.Vendor!=null).Select(V => new VendorViewModel
     {
         ID = V.ID,
         UserName = V.User.UserName,
@@ -82,7 +81,7 @@ namespace ITI.Sauce.Repository
         NameAR = V.User.NameAR,
         Email = V.User.Email,
         IsDeleted = V.IsDeleted,
-        phone = V.User.PhoneNumber,
+        phones = V.User.PhoneNumber,
 
     }).ToPagedList(pageIndex, pageSize);
 
@@ -140,6 +139,7 @@ namespace ITI.Sauce.Repository
 
             return Result.ToViewModel();
         }
+       
 
 
 

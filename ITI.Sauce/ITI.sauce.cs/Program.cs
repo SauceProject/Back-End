@@ -65,8 +65,8 @@ public class Program
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));
         builder.Services.AddScoped(typeof(FavRepository));
-        builder.Services.AddScoped(typeof(EmailServices));
-        builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
+        //builder.Services.AddScoped(typeof(EmailServices));
+        //builder.Services.Configure<SMTPConfig>(builder.Configuration.GetSection("SMTPConfig"));
         builder.Services.AddScoped(typeof(DBContext));
         builder.Services.AddScoped(typeof(UnitOfWork));
         builder.Services.AddScoped<IUserClaimsPrincipalFactory<Users>, UserClaimsFactory>();
@@ -79,7 +79,7 @@ public class Program
         });
         builder.Services.ConfigureApplicationCookie(Option =>
         {
-            Option.LoginPath = "/Users/SignUp";
+           Option.LoginPath = "/Users/SignIn";
         });
         builder.Services.ConfigureApplicationCookie(Option =>
         {

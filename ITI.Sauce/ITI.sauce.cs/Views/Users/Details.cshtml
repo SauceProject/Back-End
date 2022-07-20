@@ -1,23 +1,30 @@
-﻿@using ITI.Sauce.ViewModels
+﻿@using ITI.Sauce.Models
+@using ITI.Sauce.ViewModels
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<Users> _SignInManager
+
 @{
     Layout="_Layout";
 
 }
-@model PaginingViewModel<List<VendorViewModel>>
+@model PaginingViewModel<List<UsersViewModel>>
 @section StyleSection {
     <link rel="stylesheet" href="~/Content/CSS/VendorDetails.css"/>
 }
 <section>
         <div class="profile">
             <i class="fa-solid fa-user" style="font-size:50px;"></i>
-            <h2 class="head">Name:@ViewBag.NameEN</h2>
+            <h2 class="head">NameEn:@ViewBag.NameEN</h2>
 @*             <h2 class="head">name</h2>*@
         </div>
+        
 
+
+        
         <div class="data">
             <ul>
                 <li style="font-size:25px;">
-                    <h3>Name In Arabic</h3>
+                    <h3>NameAr</h3>
                     <p> @ViewBag.NameAR</p>
                 </li>
                 <li style="font-size:25px;">
@@ -28,7 +35,7 @@
                     <h3> Phone </h3>
                     <p> @ViewBag.Phone </p>
                 </li>
-                 <li>
+                <li>
       <a asp-action="ChangePassword" asp-controller="Users">ChangePassword</a>
 
                 </li>

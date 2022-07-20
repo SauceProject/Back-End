@@ -21,6 +21,19 @@
 }
 
 
+@{
+    
+
+@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
+{
+    <div class="bronze">
+        <h3><i class="fa-solid fa-chart-line"></i></h3>
+        <p>Bronze</p>
+        <a asp-action="AddMemberShip" asp-controller="Vendor">Join</a>
+    </div>
+    
+}
+}
 <!---------------STATISTICS------------------->
 @if (this.User.HasClaim(c => c.Value == "Admin"))
 {
@@ -40,46 +53,47 @@
                 <a asp-action="search" asp-controller="Vendor">Vendors</a>
             </div>
 
-
+            
+           </div>
         </div>
-    </div>
-}
-<div class="stat-card three">
-    <h3><i class="fa-solid fa-chart-line"></i></h3>
-    <p>@ViewBag.RecipeCount</p>
-    <a asp-action="Get" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
-</div>
-<div class="stat-card four">
-    <h3><i class="fa-solid fa-chart-line"></i></h3>
-    <p>@ViewBag.ReataurantCount</p>
-    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID="@userId">Restaurant</a>
+    }
+    <div style="display:flex; margin-top:15px; ">
+             <div class="stat-card three" style="margin-right:30px;">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.RecipeCount</p>
+              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
+            </div> 
+            <div class="stat-card four">
+              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <p>@ViewBag.ReataurantCount</p>
+    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
-</div>
-
-
-<!--ORDERS LIST-->
-<div class="head-order">
-    <h2>Order List</h2>
-    <span>27-5-2022</span>
-</div>
-<div class="orders">
-    <div>
-        <h3>Order #1</h3>
-        <h4>Title Lorem ipsum dolor sit.</h4>
-        <p>Price 15$</p>
-    </div>
-    <div>
-        <h3>Order #1</h3>
-        <h4>Title Lorem ipsum dolor sit.</h4>
-        <p>Price 15$</p>
-    </div>
-    <div>
-        <h3>Order #1</h3>
-        <h4>Title Lorem ipsum dolor sit.</h4>
-        <p>Price 15$</p>
-    </div>
+            </div>
 </div>
 
+        <!--ORDERS LIST-->
+        <div class="head-order">
+          <h2>Order List</h2>
+          <span>27-5-2022</span>
+        </div>
+        <div class="orders">
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+          <div>
+            <h3>Order #1</h3>
+            <h4>Title Lorem ipsum dolor sit.</h4>
+            <p>Price 15$</p>
+          </div>
+        </div>
+        
 
 
 <!------------POPULAR DISHES------------->

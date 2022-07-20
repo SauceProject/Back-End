@@ -1,19 +1,88 @@
 ﻿@using ITI.Sauce.ViewModels
 
-@model PaginingViewModel<List<RecipeViewModel>>
+@model IPagedList<RecipeViewModel>
 @section StyleSection{
+<link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 } 
-<link rel="stylesheet" href="~/Content/CSS/GeneralTable.css"/>
+@{
+    var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+    var userId = claim.Value;
+}
+
+<style>
+        
+        .page-link{background-color:#143444; color:#F6EE99; }
+        .page-link:hover{background-color:#F6EE99; color:#143444 }
+        .disabled{color: #143444; margin-right:15px;}
+        th{text-align:center; font-size:20px; background-color:#143444; color:#F6EE99;}
+        td{text-align:center;}
+
+
+#btnA {
+    width: 7%;
+    background-color: blue;
+    color: #F6EE99;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#btnA:hover {
+ 
+    background-color: green;
+    color:#F6EE99;
+}
+
+
+#Resbtn {
+    width: 100%;
+    background-color: darkcyan;
+    color: #F6EE99;
+    padding: 10px 5px;
+    margin: 8px 3px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#Resbtn:hover{
+    width:90%;
+}
+
+#Rejbtn {
+    width: 100%;
+    background-color: red;
+    color: #143444;;
+    padding: 10px 5px;
+    margin: 8px 3px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#Rejbtn:hover{
+    width:90%;
+}
+</style>
+@if (this.User.HasClaim(c => c.Value == "Vendor"))
+{
 
         <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
-        
-    <h2>Recipe Table</h2>
+} 
+    <h2 style="margin:10px;">Recipe Table</h2>
     
 <table class="table">
-  <tr>
-   <th scope="col">Name In English</th>
-    <th scope="col">Name In Arabic </th>
+  <tr style="background-color:#143444;">
+   <th  scope="col">NameEn</th>
+    <th scope="col">NameAr </th>
     <th scope="col">Price</th>
     <th scope="col">Good For</th>
     <th scope="col">Image</th>
@@ -22,7 +91,7 @@
     <th  scope="col">Status</th>
     <th  scope="col">Actions</th>
   </tr>
-    @foreach(var V in Model.Data)
+    @foreach(var V in Model)
 {  
   <tr>
      <td scope="row">@V.NameEN</td>
@@ -36,15 +105,15 @@
     <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
 
 
-    <td> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID">Update </a> |
-        <a asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID">Reject</a>
-        | <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID">Accept</a>
+    <td style="display:flex;"> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID"><i class="fa-solid fa-pen-to-square" style=" font-size:28px; margin-top:15px;"></i> </a> |
+        <a asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID" id="Rejbtn">Reject</a>
+        | <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID"  id="Resbtn">Accept</a>
     </td>
 
   </tr>
     }
 </table>
-@*<div>
+<div>
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions
         {
@@ -59,9 +128,10 @@
         $(document).ready(function() {
             $('ul.pagination > li.disabled > a').addClass('page-link');
         });
-    </script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 </div>
 
-*@
+
     
           

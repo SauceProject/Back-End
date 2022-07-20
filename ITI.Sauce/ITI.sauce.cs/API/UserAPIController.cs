@@ -67,10 +67,20 @@ namespace ITI.sauce.MVC.Controllers
                     {
                         //vendorRepo.Add(new VendorEditViewModel { Id=result,registerDate=DateTime.Now});
                     }
-                    return RedirectToAction("SignIn", "Users");
+                    return new ObjectResult(new
+                    {
+                        Message = " LOgin Sucess",
+                        SignInUrl = "userApI/SignIn",
+                        Success = true
+                    });
                 }
             }
-            return null;
+            return new ObjectResult(new
+            {
+                Message = " invalid input",
+                SignInUrl = "userApI/SignIn",
+                Success = false
+            });
         }
 
         [HttpGet]
@@ -80,7 +90,9 @@ namespace ITI.sauce.MVC.Controllers
             return new ObjectResult(new
             {
                 Message = "Plese LOgin",
-                SignInUrl = "userApI/SignIn"
+                SignInUrl = "userApI/SignIn",
+                Success = false
+
             });
         }
 
@@ -103,11 +115,15 @@ namespace ITI.sauce.MVC.Controllers
                     {
 
                         Token = token,
-                        ReturnUrl = returnUrl
+                        ReturnUrl = returnUrl,
+                        Success = true
                     });
                 }
             }
-            List<string> errors = new List<string>();
+
+
+        
+                List<string> errors = new List<string>();
             foreach (var i in ModelState.Values)
                 foreach (var error in i.Errors)
                     errors.Add(error.ErrorMessage);
