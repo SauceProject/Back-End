@@ -1,0 +1,17 @@
+﻿@using ITI.Sauce.ViewModels
+@model IPagedList<VendorViewModel>
+
+
+	<h1>HI Table</h1>
+	  @if(!(@ViewBag.vendorMemberships ==null))
+            {
+            <ul style="list-style-type: none;">
+            @foreach(var i in @ViewBag.vendorMemberships)
+            { <li>@i</li>
+            }
+            </ul>
+            }
+            else
+            {
+                <p>none</p>
+            }

@@ -208,7 +208,7 @@ namespace ITI.Sauce.Repository
         //        };
         //    return finalResult;
 
-        }
+        
 
         public RestaurantViewModel AcceptRestaurant(RestaurantEditViewModel model,int ID)
         {

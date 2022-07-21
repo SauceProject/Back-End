@@ -109,7 +109,7 @@
     <td> @V.Email</td>
     <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID" id="Resbtn" >Restaurant</a>
     <td>
-            @if(!(@V.Vendor_MemberShips ==null))
+           @* @if(!(@ViewBag.vendorMemberships ==null))
             {
             <ul style="list-style-type: none;">
             @foreach(var i in @V.Vendor_MemberShips)
@@ -120,7 +120,8 @@
             else
             {
                 <p>none</p>
-            }
+            }*@
+   <a asp-action="GetMemberships" asp-controller="Vendor" asp-route-vendorID="@V.ID" id="Resbtn" >MemberShip</a>
 
        
     </td>

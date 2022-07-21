@@ -22,7 +22,7 @@ namespace ITI.Sauce.ViewModels
                 NameAR = model.User.NameAR,
                 Email = model.User.Email,
                 phones = model.User.PhoneNumber,
-                Vendor_MemberShips=model.Vendor_MemberShips
+                
                 
                
 
@@ -57,6 +57,8 @@ namespace ITI.Sauce.ViewModels
         public string SearchText { get; set; }
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
+        public List<string> MemberShipsNames { get; set; }
+
         public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }
 
 
