@@ -30,7 +30,6 @@ namespace ITI.Sauce.Models
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Restaurant_Phones> Restaurant_Phones { get; set; }
-        public DbSet<UserOrder> UserOrders { get; set; }
         #endregion
 
 
@@ -53,7 +52,6 @@ namespace ITI.Sauce.Models
             new OrderConfiguration().Configure(modelBuilder.Entity<Order>());
             new OrderListConfiguration().Configure(modelBuilder.Entity<OrderList>());
             new RatingConfiguration().Configure(modelBuilder.Entity<Rating>());
-            new UserOrderConfiguration().Configure(modelBuilder.Entity<UserOrder>());
 
             new VendorConfiguration().Configure(modelBuilder.Entity<Vendor>());
             new MemberShipConfiguration().Configure(modelBuilder.Entity<MemberShip>());

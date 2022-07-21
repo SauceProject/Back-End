@@ -42,7 +42,7 @@
 
 
 </style>
-@if (this.User.HasClaim(c => c.Value == "Vendor"))
+@if (this.User.HasClaim(c => c.Value == "Vendor,Admin"))
 {
 
         <a asp-action="Add" asp-controller="Recipe" asp-route-ResturantId="@ViewBag.Resturant" id="btnA">Add</a>

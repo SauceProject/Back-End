@@ -47,7 +47,7 @@ namespace ITI.sauce.MVC.Controllers
         }
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
-        public IActionResult Add(string? returnUrl, int ResturantId)
+        public IActionResult Add(string? returnUrl, int? ResturantId)
         {
             ViewBag.ReturnUrl = returnUrl;
             IEnumerable<SelectListItem> Categories = 

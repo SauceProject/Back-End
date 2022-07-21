@@ -15,11 +15,9 @@ namespace ITI.Sauce.Models
             builder.ToTable("Order");
             builder.HasKey(O=>O.ID);
             builder.Property(O => O.ID).ValueGeneratedOnAdd();
-            builder.Property(O=>O.NameEN).HasMaxLength(500).IsRequired();
-            builder.Property(O => O.NameAR).HasMaxLength(500).IsRequired();
-            builder.Property(O => O.registerDate).IsRequired();
+            builder.Property(O => O.OrderDate).IsRequired();
             builder.Property(O => O.IsDeleted).IsRequired();
-            builder.Property(O => O.Recipe_ID).ValueGeneratedOnAdd();
+            builder.Property(O => O.UserId).IsRequired();
 
 
         }

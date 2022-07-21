@@ -24,7 +24,7 @@ namespace ITI.Sauce.Models
         public virtual List<Fav> Favs { get; set; }
         public virtual List<Cart> Carts { get; set; }
         public virtual List<Rating> Ratings { get; set; }
-        public virtual List<Order> Orders { get; set; }
+        public virtual List<OrderList> OrderList { get; set; }
         public virtual int? ResturantID { get; set; }
         public virtual Restaurant Restaurant { get; set; }
 

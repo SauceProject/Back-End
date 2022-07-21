@@ -73,6 +73,6 @@ namespace ITI.Sauce.ViewModels
 
         public IFormFile? Image { get; set; }
         public Restaurant? Restaurant { get; set; }
-        public int RestaurantID { get; set; }
+        public int? RestaurantID { get; set; }
     }
 }

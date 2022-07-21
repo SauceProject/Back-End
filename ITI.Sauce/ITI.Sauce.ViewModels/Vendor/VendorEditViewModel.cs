@@ -40,6 +40,7 @@ namespace ITI.Sauce.ViewModels
         public DateTime registerDate { get; set; }
         public bool IsDeleted { get; set; }
         public string? Search { get; set; }
+
         public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }
         public virtual List<Restaurant>? Restaurants { get; set; }
 

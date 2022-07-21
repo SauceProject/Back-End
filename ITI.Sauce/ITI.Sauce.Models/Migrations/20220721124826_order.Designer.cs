@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ITI.Sauce.Models.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20220713091422_isdelete")]
-    partial class isdelete
+    [Migration("20220721124826_order")]
+    partial class order
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -200,26 +200,16 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("NameAR")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("NameEN")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("Recipe_ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("registerDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Recipe_ID");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Order", (string)null);
                 });
@@ -233,15 +223,22 @@ namespace ITI.Sauce.Models.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderListID"), 1L, 1);
 
                     b.Property<int>("OrderID")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<float>("OrderListPrice")
+                        .HasColumnType("real");
+
                     b.Property<int>("OrderListQty")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Recipe_ID")
                         .HasColumnType("int");
 
                     b.HasKey("OrderListID");
 
                     b.HasIndex("OrderID");
+
+                    b.HasIndex("Recipe_ID");
 
                     b.ToTable("OrderList", (string)null);
                 });
@@ -323,7 +320,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 13, 11, 14, 22, 355, DateTimeKind.Local).AddTicks(8949));
+                        .HasDefaultValue(new DateTime(2022, 7, 21, 14, 48, 25, 852, DateTimeKind.Local).AddTicks(1133));
 
                     b.Property<int?>("ResturantID")
                         .HasColumnType("int");
@@ -372,6 +369,9 @@ namespace ITI.Sauce.Models.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -395,14 +395,14 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("RegisterDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 13, 11, 14, 22, 359, DateTimeKind.Local).AddTicks(2385));
+                        .HasDefaultValue(new DateTime(2022, 7, 21, 14, 48, 25, 854, DateTimeKind.Local).AddTicks(1966));
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Vendor_ID")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("WorkTime")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
@@ -422,21 +422,6 @@ namespace ITI.Sauce.Models.Migrations
                     b.HasKey("Restaurant_ID", "Restaurant_phone");
 
                     b.ToTable("Restaurant_Phones", (string)null);
-                });
-
-            modelBuilder.Entity("ITI.Sauce.Models.UserOrder", b =>
-                {
-                    b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("OrderID")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserID", "OrderID");
-
-                    b.HasIndex("OrderID");
-
-                    b.ToTable("UserOrder", (string)null);
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.Users", b =>
@@ -531,7 +516,7 @@ namespace ITI.Sauce.Models.Migrations
                     b.Property<DateTime>("registerDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2022, 7, 13, 11, 14, 22, 358, DateTimeKind.Local).AddTicks(3768));
+                        .HasDefaultValue(new DateTime(2022, 7, 21, 14, 48, 25, 853, DateTimeKind.Local).AddTicks(3627));
 
                     b.HasKey("ID");
 
@@ -745,13 +730,13 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Order", b =>
                 {
-                    b.HasOne("ITI.Sauce.Models.Recipe", "Recipe")
+                    b.HasOne("ITI.Sauce.Models.Users", "User")
                         .WithMany("Orders")
-                        .HasForeignKey("Recipe_ID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Recipe");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.OrderList", b =>
@@ -762,7 +747,15 @@ namespace ITI.Sauce.Models.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ITI.Sauce.Models.Recipe", "Recipe")
+                        .WithMany("OrderList")
+                        .HasForeignKey("Recipe_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Order");
+
+                    b.Navigation("Recipe");
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.Rating", b =>
@@ -841,25 +834,6 @@ namespace ITI.Sauce.Models.Migrations
                         .IsRequired();
 
                     b.Navigation("Restaurants");
-                });
-
-            modelBuilder.Entity("ITI.Sauce.Models.UserOrder", b =>
-                {
-                    b.HasOne("ITI.Sauce.Models.Order", "Order")
-                        .WithMany("UserOrders")
-                        .HasForeignKey("OrderID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ITI.Sauce.Models.Users", "User")
-                        .WithMany("UserOrders")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ITI.Sauce.Models.Vendor", b =>
@@ -960,8 +934,6 @@ namespace ITI.Sauce.Models.Migrations
 
             modelBuilder.Entity("ITI.Sauce.Models.Order", b =>
                 {
-                    b.Navigation("UserOrders");
-
                     b.Navigation("orderLists");
                 });
 
@@ -971,7 +943,7 @@ namespace ITI.Sauce.Models.Migrations
 
                     b.Navigation("Favs");
 
-                    b.Navigation("Orders");
+                    b.Navigation("OrderList");
 
                     b.Navigation("Ratings");
 
@@ -991,12 +963,11 @@ namespace ITI.Sauce.Models.Migrations
                 {
                     b.Navigation("Carts");
 
+                    b.Navigation("Orders");
+
                     b.Navigation("Ratings");
 
-                    b.Navigation("UserOrders");
-
-                    b.Navigation("Vendor")
-                        .IsRequired();
+                    b.Navigation("Vendor");
 
                     b.Navigation("favs");
                 });

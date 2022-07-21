@@ -15,11 +15,9 @@ namespace ITI.Sauce.ViewModels
             return new Order
             {
                 ID = model.ID,
-                NameEN = model.NameEN,
-                NameAR = model.NameAR,
-                registerDate = model.registerDate,
+                OrderDate = model.OrderDate,
                 IsDeleted = model.IsDeleted,
-                Recipe_ID =model.Recipe_ID,
+                UserId =model.UserId,
             };
         }
     }
@@ -29,15 +27,11 @@ namespace ITI.Sauce.ViewModels
         [Required]
         public int ID { get; set; }
         [Required]
-        public string NameEN { get; set; }
-        [Required]
-        public string NameAR { get; set; }
-        [Required]
-        public DateTime registerDate { get; set; }
+        public DateTime OrderDate { get; set; }
         [Required]
         public bool IsDeleted { get; set; }
         [Required]
-        public int Recipe_ID { get; set; }
+        public string UserId { get; set; }
 
     }
 }

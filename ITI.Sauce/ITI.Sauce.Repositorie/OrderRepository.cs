@@ -20,8 +20,7 @@ namespace ITI.Sauce.Repository
 
         }
         public PaginingViewModel<List<OrderViewModel>> Get(int ID = 0, string orderBy = null
-            , bool isAscending = false, string NameEN = "",
-            string NameAR = "", DateTime? registerDate =null 
+            , bool isAscending = false, string UserId = "", DateTime? registerDate =null 
             ,int pageIndex = 1, int pageSize = 20)
                     
         {
@@ -30,12 +29,10 @@ namespace ITI.Sauce.Repository
             var oldFiler = filter;
             if (ID > 0)
                 filter = filter.Or(o => o.ID == ID);
-            if (!string.IsNullOrEmpty(NameEN))
-                filter = filter.Or(o => o.NameEN.Contains(NameEN));
-            if (!string.IsNullOrEmpty(NameAR))
-                filter = filter.Or(o => o.NameAR.Contains(NameAR));
+            if (!string.IsNullOrEmpty(UserId))
+                filter = filter.Or(o => o.UserId.Contains(UserId));
             if (registerDate != null) 
-                filter = filter.Or(o => o.registerDate.Year == registerDate.Value.Year);
+                filter = filter.Or(o => o.OrderDate.Year == registerDate.Value.Year);
             
             if (filter == oldFiler)
                 filter = null;
@@ -46,10 +43,10 @@ namespace ITI.Sauce.Repository
             query.Select(i => new OrderViewModel
             {
                 ID = i.ID,
-                NameEN = i.NameEN,
-                NameAR = i.NameAR,
+                UserId = i.UserId,
+                
                 IsDeleted=i.IsDeleted,
-                registerDate=i.registerDate,
+                OrderDate=i.OrderDate,
 
             });
 
@@ -71,10 +68,10 @@ namespace ITI.Sauce.Repository
    GetList().Select(V => new OrderViewModel
    {
        ID = V.ID,
-       NameEN = V.NameEN,
-       NameAR = V.NameAR,
+       UserId = V.UserId,
+
        IsDeleted = V.IsDeleted,
-       registerDate = V.registerDate,
+       OrderDate = V.OrderDate,
 
    }).ToPagedList(pageIndex, pageSize);
 
@@ -84,11 +81,11 @@ namespace ITI.Sauce.Repository
             return base.Add(Order).Entity.ToViewModel();
         }
 
-        public List<TextValueViewModel> GetRecipeID() =>
-           GetList().Select(i => new TextValueViewModel
-           {
-               Value =i.Recipe_ID
-           }).ToList();
+        //public List<TextValueViewModel> GetRecipeID() =>
+        //   GetList().Select(i => new TextValueViewModel
+        //   {
+        //       Value =i.Recipe_ID
+        //   }).ToList();
         public OrderViewModel Update(OrderEditViewModel model)
         {
 
@@ -99,10 +96,9 @@ namespace ITI.Sauce.Repository
 
             var Result = base.GetByID(filterd);
             Result.ID = model.ID;
-            Result.NameEN = model.NameEN;
-            Result.NameAR = model.NameAR;
+            Result.UserId = model.UserId;
             Result.IsDeleted=model.IsDeleted;
-            Result.registerDate= model.registerDate;
+            Result.OrderDate= model.OrderDate;
            
 
             return Result.ToViewModel();

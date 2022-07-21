@@ -23,12 +23,12 @@ namespace ITI.sauce.MVC.Controllers
             ordRepo = _ordRepo;
             UnitOfWork = _unitOfWork;
         }
-        public IActionResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
-            string NameAR = "", DateTime? registerDate = null,int pageIndex = 1, int pageSize = 20)
+        public IActionResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string UserId = "",
+             DateTime? registerDate = null,int pageIndex = 1, int pageSize = 20)
                     
         {
             var data =
-                ordRepo.Get(ID, orderBy,isAscending, NameEN, NameAR, registerDate, pageIndex, pageSize);
+                ordRepo.Get(ID, orderBy,isAscending, UserId, registerDate, pageIndex, pageSize);
             return View(data);
         }
 

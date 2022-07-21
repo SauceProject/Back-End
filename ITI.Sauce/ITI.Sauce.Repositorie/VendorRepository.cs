@@ -14,9 +14,17 @@ namespace ITI.Sauce.Repository
     public class VendorRepository
          : GeneralRepository<Vendor>
     {
-        public VendorRepository(DBContext _Context)
+        private readonly Vendor_MembershipRepository vendorMemberRepo;
+        private readonly MemberShipRepository memberShipRepository;
+
+
+        public VendorRepository(DBContext _Context, Vendor_MembershipRepository _vendorMemberRepo,
+            MemberShipRepository _memberShipRepository)
             : base(_Context)
         {
+            vendorMemberRepo = _vendorMemberRepo;
+            memberShipRepository = _memberShipRepository;
+
 
         }
         public PaginingViewModel<List<VendorViewModel>> Get(string id = "",
@@ -32,6 +40,7 @@ namespace ITI.Sauce.Repository
                 filter = filter.Or(V => V.ID == id);
             if (!string.IsNullOrEmpty(nameEN))
                 filter = filter.Or(V => V.User.NameEN.Contains(nameEN));
+            
             if (!string.IsNullOrEmpty(nameAR))
                 filter = filter.Or(V => V.User.NameAR.Contains(nameAR));
             if (!string.IsNullOrEmpty(Email))
@@ -41,8 +50,9 @@ namespace ITI.Sauce.Repository
 
             if (filter == oldFiler)
                 filter = null;
-            var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize
-                );
+            var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize, "Vendor_MemberShips");
+
+            
 
             var result =
             query.Select(V => new VendorViewModel
@@ -55,8 +65,9 @@ namespace ITI.Sauce.Repository
                 Email = V.User.Email,
                 IsDeleted = V.IsDeleted,
                 phones = V.User.PhoneNumber,
+                MemberShipsNames= getMemberShipName(V.Vendor_MemberShips),
 
-            });
+            }).ToList();
 
             PaginingViewModel<List<VendorViewModel>>
                 finalResult = new PaginingViewModel<List<VendorViewModel>>()
@@ -64,12 +75,14 @@ namespace ITI.Sauce.Repository
                     PageIndex = pageIndex,
                     PageSize = pageSize,
                     Count = base.GetList().Count(),
-                    Data = result.ToList()
+                    Data = result
                 };
 
 
             return finalResult;
         }
+
+
         public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
                     =>
                 GetList().Select(V => new VendorViewModel
@@ -82,6 +95,7 @@ namespace ITI.Sauce.Repository
                     Email = V.User.Email,
                     IsDeleted = V.IsDeleted,
                     phones = V.User.PhoneNumber,
+                    
 
                 }).ToPagedList(pageIndex, pageSize);
 
@@ -123,7 +137,21 @@ namespace ITI.Sauce.Repository
                 filterd = null;
 
             var query = base.GetByID(filterd);
-            return query.ToViewModel();
+
+            return new VendorViewModel
+            {
+                ID = query.ID,
+                UserName = query.User.UserName,
+                
+                NameEN = query.User.NameEN,
+                NameAR = query.User.NameAR,
+                Email = query.User.Email,
+                phones = query.User.PhoneNumber,
+
+                MemberShipsNames = getMemberShipName(query.Vendor_MemberShips),
+
+
+            }; ;
         }
 
         public VendorViewModel Remove(string Id)
@@ -158,6 +186,15 @@ public VendorViewModel AcceptVendor (string ID)
 
 
 
+    List<string> getMemberShipName(List<Vendor_MemberShip> vendorMemberShips)
+    {
+            var res = new List<string>();
+            foreach(var item in vendorMemberShips)
+            {
+                res.Add(memberShipRepository.GetOne(item.MemberShip_ID).TypeEn);
+            }
+           return res;
+    }
     }
 
 }

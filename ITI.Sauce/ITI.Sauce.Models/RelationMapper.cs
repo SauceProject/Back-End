@@ -82,18 +82,6 @@ namespace ITI.Sauce.Models
                .WithMany(O => O.orderLists)
                .HasForeignKey(O => O.OrderID)
                .OnDelete(DeleteBehavior.Cascade);
-            /*User - Order*/
-            modelBuilder.Entity<UserOrder>()
-                .HasOne(uo => uo.User)
-                .WithMany(u => u.UserOrders)
-                .HasForeignKey(uo => uo.UserID)
-                .OnDelete(DeleteBehavior.Cascade);
-
-            modelBuilder.Entity<UserOrder>()
-               .HasOne(uo => uo.Order)
-               .WithMany(o => o.UserOrders)
-               .HasForeignKey(uo => uo.OrderID)
-               .OnDelete(DeleteBehavior.Cascade);
 
             /*User - Rating */
             modelBuilder.Entity<Rating>().HasOne(r => r.User)
@@ -119,9 +107,14 @@ namespace ITI.Sauce.Models
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
 
-            /*Recipe - Order*/
-            modelBuilder.Entity<Order>().HasOne(o => o.Recipe)
-                .WithMany(r => r.Orders).HasForeignKey(o => o.Recipe_ID)
+            /*user - Order*/
+            modelBuilder.Entity<Order>().HasOne(o => o.User)
+                .WithMany(r => r.Orders).HasForeignKey(o => o.UserId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Cascade);
+            //Recipe => orderList
+            modelBuilder.Entity<OrderList>().HasOne(r => r.Recipe)
+                .WithMany(c => c.OrderList).HasForeignKey(r => r.Recipe_ID)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Cascade);
             /*Recipe - Resturant*/
