@@ -1,13 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "VnoMa5L7dRKFYim22LmeJ6q1GY4YCDOOj9O96HziMhM2dXbTSTqe1nvBcE2jcBD19PRRXP+CA1vMg/ZOt8T9pQ==",
+  "dgSpecHash": "6JeNqFgp+wx8a6GmXdCtYtqaAgQYfK+r/AI0usNbYS9zMmSmHeShbQiKO2aM6DmNUOdP5YbkktFWkmsPPnFlyQ==",
   "success": true,
-  "projectFilePath": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+  "projectFilePath": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Bishoy\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
-    "C:\\Users\\Bishoy\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
-    "C:\\Users\\Bishoy\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
-    "C:\\Users\\Bishoy\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

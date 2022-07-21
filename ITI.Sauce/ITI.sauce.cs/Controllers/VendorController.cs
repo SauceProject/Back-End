@@ -3,6 +3,7 @@ using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -11,16 +12,19 @@ namespace ITI.sauce.MVC.Controllers
         private readonly VendorRepository vendorRepo;
         private readonly UserRepository userRepo;
         private readonly UnitOfWork UnitOfWork;
+        private readonly Vendor_MembershipRepository vendorMemberRepo;
+
 
 
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
-            UserRepository _userRepo)
+            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo)
         {
             //DBContext dBContext = new DBContext();
             this.vendorRepo = _vendorRepo;
             this.userRepo = _userRepo;
             UnitOfWork = _unitOfWork;
+            vendorMemberRepo = _vendorMemberRepo;
         }
 
         [Authorize(Roles = "Admin")]
@@ -45,7 +49,7 @@ namespace ITI.sauce.MVC.Controllers
                 ViewBag.NameEN = i.NameEN;
                 ViewBag.NameAR = i.NameAR;
                 ViewBag.Email = i.Email;
-                //ViewBag.Phone = i.Phone;
+                //ViewBag.Phone = i.phone;
                 //ViewBag.Password = i.Password;
                 //ViewBag.UserName = i.UserName;
             }
@@ -53,8 +57,11 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+      
+
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
+           // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var Data = vendorRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
@@ -109,19 +116,29 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Remove(VendorEditViewModel model, int ID)
+        public IActionResult Remove(string ID)
         {
-            var res = vendorRepo.Remove(model);
+            
+            var res = vendorRepo.Remove(ID);
             UnitOfWork.Save();
             return RedirectToAction("Search");
 
 
         }
-        public IActionResult AddMemberShip()
+        public IActionResult AddMemberShip(string Id, int membershipid )
         {
 
-            return View("Get");
+            vendorMemberRepo.Add(Id, membershipid);
+            UnitOfWork.Save();
+            
+            return RedirectToAction("Index", "Home");
         }
 
+        public IActionResult AcceptVendor(string ID)
+        {
+            vendorRepo.AcceptVendor(ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+        }
     }
 }

@@ -26,6 +26,8 @@ namespace ITI.Sauce.ViewModels
                 RegisterDate=model.RegisterDate,
                 ImageUrl=model.ImageUrl,
                 VideoUrl=model.VideoUrl,
+                ResturantID = model.ResturantID,
+                
                 
             };
         }
@@ -49,5 +51,7 @@ namespace ITI.Sauce.ViewModels
         public DateTime RegisterDate { get; set; }
         public bool IsDeleted { get; set; }
         public string RestaurantName { get; set; }
+        public  int? ResturantID { get; set; }
+
     }
 }

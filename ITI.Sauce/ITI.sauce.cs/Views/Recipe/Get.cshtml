@@ -23,7 +23,7 @@
 
 #btnA {
     width: 7%;
-    background-color: blue;
+    background-color: #143444;
     color: #F6EE99;
     padding: 14px 20px;
     margin: 8px 0;
@@ -35,47 +35,17 @@
 }
 #btnA:hover {
  
-    background-color: green;
-    color:#F6EE99;
+    width: 10%;
+    text-align:center;
 }
 
 
-#Resbtn {
-    width: 100%;
-    background-color: darkcyan;
-    color: #F6EE99;
-    padding: 10px 5px;
-    margin: 8px 3px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    float: right;
-}
-#Resbtn:hover{
-    width:90%;
-}
 
-#Rejbtn {
-    width: 100%;
-    background-color: red;
-    color: #143444;;
-    padding: 10px 5px;
-    margin: 8px 3px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    float: right;
-}
-#Rejbtn:hover{
-    width:90%;
-}
 </style>
 @if (this.User.HasClaim(c => c.Value == "Vendor"))
 {
 
-        <a asp-action="Add" asp-controller="Recipe" id="btnAdd">Add</a>
+        <a asp-action="Add" asp-controller="Recipe" asp-route-ResturantId="@ViewBag.Resturant" id="btnA">Add</a>
 } 
     <h2 style="margin:10px;">Recipe Table</h2>
     
@@ -99,15 +69,25 @@
     <td>@V.NameAR</td>
     <td>@V.Price</td>
     <td>@V.GoodFor</td>
-    <td> <img src="@V.ImageUrl" width="100 px" height="100 px">   </td>
-    <td>@V.CategoryID</td>
+    <td> <img src="..@V.ImageUrl" width="100 px" height="100 px">   </td>
+    <td>@V.CategoryName</td>
     <td>@V.RestaurantName</td>
     <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
 
 
-    <td style="display:flex;"> <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID"><i class="fa-solid fa-pen-to-square" style=" font-size:28px; margin-top:15px;"></i> </a> |
-        <a asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID" id="Rejbtn">Reject</a>
-        | <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID"  id="Resbtn">Accept</a>
+    <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
+        <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID"><i class="fa-solid fa-pen-to-square" style=" font-size:25px;  margin-right:10px;"></i> </a> |
+             @if(@V.IsDeleted == false){
+             <a  asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-left:10px; font-size:25px;"></i>
+
+</a>
+            }
+           
+             @if(@V.IsDeleted == true){
+        <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID"  ><i class="fa-solid fa-circle-check" style="margin-left:10px; font-size:25px;"></i>
+</a>
+            }
+          
     </td>
 
   </tr>

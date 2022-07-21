@@ -61,6 +61,7 @@ public class Program
         });
 
         builder.Services.AddScoped(typeof(OrderListRepository));
+        builder.Services.AddScoped(typeof(Vendor_MembershipRepository));
         builder.Services.AddScoped(typeof(IngredientRepository));
         builder.Services.AddScoped(typeof(CategoryRepository));
         builder.Services.AddScoped(typeof(RoleRepository));

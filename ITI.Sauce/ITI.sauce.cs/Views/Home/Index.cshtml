@@ -2,6 +2,7 @@
 @using ITI.Sauce.ViewModels
 
 
+
 @using Microsoft.AspNetCore.Identity;
 @inject SignInManager<Users> _SignInManager
 
@@ -19,26 +20,127 @@
 @section StyleSection{
 <link rel="stylesheet" href="~/Content/CSS/vendor.css" />
 }
+<style>
+    .bronze {
+    background-color:#143444 ;
+    color: #ed8b05;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+}
+.gold{
+    background-color: #143444;
+    color: #FFD700;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
 
+
+}
+.silver{
+    background-color: #143444;
+    color: #C0C0C0;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+
+
+}
+.memcards{
+    margin-top:3rem;
+    display:flex;
+    gap:1rem
+}
+.memcards h3 {
+        font-size: 6rem;
+    }
+    .memcards h5 {
+        font-size: 2.1rem;
+        font-weight:bold;
+    }
+    .memcards h6 {
+        font-size: 1.5rem;
+        font-weight:bold;
+    }
+    .memcards p{
+        color:#fff
+    }
+    .memcards a{
+        text-decoration:none;
+        color:#143444;
+        background-color:#fff;
+        padding:0.5rem;
+        margin-top: 0.5rem;
+        display:inline-block;
+        width:100%;
+        font-weight:bold
+    }
+    .msg{
+        background-color:#bcefbc;
+        border: 1px green solid;
+        box-shadow:2px 2px 8px grey;
+        padding:1rem;
+        width:100%;
+        display:inline-block;
+
+
+    }
+</style>
 
 @{
     
+//For Not Accepted Vendors
+@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
+{
+            <div class="memcards">
+             <div class="bronze">
+                    <h3><i class="fa-solid fa-medal"></i></h3>
+                    <h5>@ViewBag.Bronze.TypeEn</h5>
+                    <h6>For @ViewBag.Bronze.OrderNum Orders</h6>
+                    <p>@ViewBag.Bronze.Price EGP</p>
+                    <a asp-action="AddMemberShip" asp-controller="Vendor" 
+                    asp-route-membershipid="@ViewBag.Bronze.ID"
+                    asp-route-id="@userId">Subscribe</a>
+                </div>
+                <div class="silver">
+                    <h3><i class="fa-solid fa-medal"></i></h3>
+                    <h5>@ViewBag.Silver.TypeEn</h5>
+                    <h6>For @ViewBag.Silver.OrderNum Orders </h6>
+                    <p>@ViewBag.Silver.Price EGP</p>
+                    <a asp-action="AddMemberShip" asp-controller="Vendor" 
+                    asp-route-membershipid="@ViewBag.Silver.ID"
+                    asp-route-id="@userId">Subscribe</a>
+                </div>
+                <div class="gold">
+                    <h3><i class="fa-solid fa-medal"></i></h3>
+                    <h5>@ViewBag.Golden.TypeEn</h5>
+                    <h6>For @ViewBag.Golden.OrderNum Orders</h6>
+                    <p>@ViewBag.Golden.Price EGP</p>
+                    <a asp-action="AddMemberShip" asp-controller="Vendor"
+                    asp-route-membershipid="@ViewBag.Golden.ID"
+                    asp-route-id="@userId">Subscribe</a>
+                </div>
 
-//@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
-//{
-//    <div class="bronze">
-//        <h3><i class="fa-solid fa-chart-line"></i></h3>
-//        <p>Bronze</p>
-//        <a asp-action="AddMemberShip" asp-controller="Vendor">Join</a>
-//    </div>
-    
-//}
+            </div>
+            @if(ViewBag.Waiting)
+            {
+            <span class="msg" >Your request was sent. Check your email for response</span>
+            }
+
+}
 }
 <!---------------STATISTICS------------------->
 @if (this.User.HasClaim(c => c.Value == "Admin"))
 {
-    <div class="stat">
-        <h2 class="head">Restaurant Overview</h2>
+    
+        <div class="stat">
+            <h2 class="head">Restaurant Overview</h2>
         <hr />
         <div class="flexbox">
             <div class="stat-card one">
@@ -56,135 +158,145 @@
             
            </div>
         </div>
+        
     }
-    <div style="display:flex; margin-top:15px; ">
-             <div class="stat-card three" style="margin-right:30px;">
-              <h3><i class="fa-solid fa-chart-line"></i></h3>
-              <p>@ViewBag.RecipeCount</p>
-              <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
+    <!-- For Admin and Accepted Vendors Only -->
+    @if(ViewBag.Flag != null || this.User.HasClaim(c => c.Value == "Admin"))
+    @if (this.User.HasClaim(c => c.Value == "Admin"))
+                    ViewBag.Flag = false;
+    @if ( !ViewBag.Flag)
+    {
+        <div style="display:flex; margin-top:15px; ">
+            <div class="stat-card three" style="margin-right:30px;">
+                <h3><i class="fa-solid fa-chart-line"></i></h3>
+                <p>@ViewBag.RecipeCount</p>
+                <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
             </div> 
             <div class="stat-card four">
-              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <h3><i class="fa-solid fa-chart-line"></i></h3>             
+
               <p>@ViewBag.ReataurantCount</p>
-    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
+    <a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
             </div>
-</div>
+        </div>
 
         <!--ORDERS LIST-->
         <div class="head-order">
-          <h2>Order List</h2>
-          <span>27-5-2022</span>
+            <h2>Order List</h2>
+            <span>27-5-2022</span>
         </div>
         <div class="orders">
-          <div>
-            <h3>Order #1</h3>
-            <h4>Title Lorem ipsum dolor sit.</h4>
-            <p>Price 15$</p>
-          </div>
-          <div>
-            <h3>Order #1</h3>
-            <h4>Title Lorem ipsum dolor sit.</h4>
-            <p>Price 15$</p>
-          </div>
-          <div>
-            <h3>Order #1</h3>
-            <h4>Title Lorem ipsum dolor sit.</h4>
-            <p>Price 15$</p>
-          </div>
-        </div>
-        
-
-
-<!------------POPULAR DISHES------------->
-<div class="top-section">
-    <h2 class="head">Popular Dishes</h2>
-    <hr />
-    <div class="flexbox">
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-        </div>
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-        </div>
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>4.8 <i class="fa-solid fa-star"></i></h4>
-        </div>
-    </div>
-    <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
-</div>
-
-<!------------POPULAR RESTAURANTS------------->
-<div class="top-section">
-    <h2 class="head">Popular Restaurants</h2>
-    <hr />
-    <div class="flexbox">
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-        </div>
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-        </div>
-        <div class="card">
-            <img src="~/Content/Images/food.jpg" alt="food" />
-            <h3>Title Lorem, ipsum dolor.</h3>
-            <h4>4.8 <i class="fa-solid fa-star"></i></h4>
-        </div>
-    </div>
-
-    <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
-</div>
-
-<!------------Top Reviews------------->
-<div class="top-section">
-    <h2 class="head">Top Reviews</h2>
-    <hr />
-    <div class="flexbox">
-        <div class="card">
-            <div class="user-info"><img src="~/Content/Images/user.jpg"><h3>User Name</h3></div>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                voluptate facere vero eos fuga nesciunt quis commodi beatae
-                sequi modi provident sapiente mollitia veniam tempora
-                repudiandae maxime, hic rem rerum.
-            </p>
+            <div>
+                <h3>Order #1</h3>
+                <h4>Title Lorem ipsum dolor sit.</h4>
+                <p>Price 15$</p>
+            </div>
+            <div>
+                <h3>Order #1</h3>
+                <h4>Title Lorem ipsum dolor sit.</h4>
+                <p>Price 15$</p>
+            </div>
+            <div>
+                <h3>Order #1</h3>
+                <h4>Title Lorem ipsum dolor sit.</h4>
+                <p>Price 15$</p>
+            </div>
         </div>
 
-        <div class="card">
-            <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
-            <h4>4 <i class="fa-solid fa-star"></i></h4>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                voluptate facere vero eos fuga nesciunt quis commodi beatae
-                sequi modi provident sapiente mollitia veniam tempora
-                repudiandae maxime, hic rem rerum.
-            </p>
+
+
+        <!------------POPULAR DISHES------------->
+        <div class="top-section">
+            <h2 class="head">Popular Dishes</h2>
+            <hr />
+            <div class="flexbox">
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                </div>
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                </div>
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>4.8 <i class="fa-solid fa-star"></i></h4>
+                </div>
+            </div>
+            <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
         </div>
 
-        <div class="card">
-            <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
-            <h4>5 <i class="fa-solid fa-star"></i></h4>
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
-                voluptate facere vero eos fuga nesciunt quis commodi beatae
-                sequi modi provident sapiente mollitia veniam tempora
-                repudiandae maxime, hic rem rerum.
-            </p>
+        <!------------POPULAR RESTAURANTS------------->
+        <div class="top-section">
+            <h2 class="head">Popular Restaurants</h2>
+            <hr />
+            <div class="flexbox">
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                </div>
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                </div>
+                <div class="card">
+                    <img src="~/Content/Images/food.jpg" alt="food" />
+                    <h3>Title Lorem, ipsum dolor.</h3>
+                    <h4>4.8 <i class="fa-solid fa-star"></i></h4>
+                </div>
+            </div>
+
+            <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
         </div>
-    </div>
-    <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
-</div>
+
+        <!------------Top Reviews------------->
+        <div class="top-section">
+            <h2 class="head">Top Reviews</h2>
+            <hr />
+            <div class="flexbox">
+                <div class="card">
+                    <div class="user-info"><img src="~/Content/Images/user.jpg"><h3>User Name</h3></div>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                        voluptate facere vero eos fuga nesciunt quis commodi beatae
+                        sequi modi provident sapiente mollitia veniam tempora
+                        repudiandae maxime, hic rem rerum.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
+                    <h4>4 <i class="fa-solid fa-star"></i></h4>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                        voluptate facere vero eos fuga nesciunt quis commodi beatae
+                        sequi modi provident sapiente mollitia veniam tempora
+                        repudiandae maxime, hic rem rerum.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <div class="user-info"><img src="~/Content/Images/user.jpg" alt="user-pic"><h3>User Name</h3></div>
+                    <h4>5 <i class="fa-solid fa-star"></i></h4>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum
+                        voluptate facere vero eos fuga nesciunt quis commodi beatae
+                        sequi modi provident sapiente mollitia veniam tempora
+                        repudiandae maxime, hic rem rerum.
+                    </p>
+                </div>
+            </div>
+            <a href="#" class="seeMore"> See More <i class="fa-solid fa-angles-right"></i> </a>
+        </div>
+    }
+
 
 
 

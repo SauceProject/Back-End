@@ -72,18 +72,18 @@ namespace ITI.Sauce.Repository
         }
         public IPagedList<VendorViewModel> Search(int pageIndex = 1, int pageSize = 2)
                     =>
-    GetList().Where(v=> v.User.Vendor!=null).Select(V => new VendorViewModel
-    {
-        ID = V.ID,
-        UserName = V.User.UserName,
+                GetList().Select(V => new VendorViewModel
+                {
+                    ID = V.ID,
+                    UserName = V.User.UserName,
 
-        NameEN = V.User.NameEN,
-        NameAR = V.User.NameAR,
-        Email = V.User.Email,
-        IsDeleted = V.IsDeleted,
-        phones = V.User.PhoneNumber,
+                    NameEN = V.User.NameEN,
+                    NameAR = V.User.NameAR,
+                    Email = V.User.Email,
+                    IsDeleted = V.IsDeleted,
+                    phones = V.User.PhoneNumber,
 
-    }).ToPagedList(pageIndex, pageSize);
+                }).ToPagedList(pageIndex, pageSize);
 
         public VendorViewModel Add(VendorEditViewModel model)
         {
@@ -126,13 +126,13 @@ namespace ITI.Sauce.Repository
             return query.ToViewModel();
         }
 
-        public VendorViewModel Remove(VendorEditViewModel model)
+        public VendorViewModel Remove(string Id)
         {
 
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
 
-            filterd = filterd.Or(c => c.ID == model.Id);
+            filterd = filterd.Or(c => c.ID == Id);
             var Result = base.GetByID(filterd);
 
             Result.IsDeleted = true;
@@ -141,7 +141,20 @@ namespace ITI.Sauce.Repository
         }
        
 
+public VendorViewModel AcceptVendor (string ID)
+        {
+            var filterd = PredicateBuilder.New<Vendor>();
+            var old = filterd;
+            if (!string.IsNullOrEmpty(ID))
+                filterd = filterd.Or(i => i.ID == ID);
 
+            if (old == filterd)
+                filterd = null;
+
+            var vendor = base.GetByID(filterd);
+            vendor.IsDeleted = false;
+            return base.Update(vendor).Entity.ToViewModel();
+        }
 
 
 

@@ -19,24 +19,12 @@
         td{text-align:center;}
 
       
-#Resbtn {
-    width: 100%;
-    background-color: darkcyan;
-    color: #F6EE99;
-    padding: 10px 5px;
-    margin: 8px 0;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    text-decoration: none;
-    float: right;
-}
-#Resbtn:hover{
-    width:90%;
-}
+
+
+
 #btnA {
     width: 7%;
-    background-color: blue;
+    background-color: #143444;
     color: #F6EE99;
     padding: 14px 20px;
     margin: 8px 0;
@@ -48,10 +36,44 @@
 }
 #btnA:hover {
  
-    background-color: green;
-    color:#F6EE99;
+    width: 10%;
+    text-align:center;
 }
-    </style>
+
+
+#Resbtn {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 10px 5px;
+    margin: 8px 3px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#Resbtn:hover{
+    width:90%;
+}
+
+#Rejbtn {
+    width: 100%;
+    background-color: red;
+    color: #143444;;
+    padding: 10px 5px;
+    margin: 8px 3px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#Rejbtn:hover{
+    width:90%;
+}
+</style>
+
 
 
     <a asp-action="Add" asp-controller="Vendor" id="btnA">Add</a>
@@ -74,6 +96,7 @@
     <th>Email</th>
     <th>Restaurants</th>
     <th>Membership</th>
+    <th  scope="col">Status</th>
     <th>  Actions  </th>
   </tr>
     @foreach(var V in Model)
@@ -86,7 +109,6 @@
     <td> @V.Email</td>
     <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID" id="Resbtn" >Restaurant</a>
     <td>
-        
             @if(!(@V.Vendor_MemberShips ==null))
             {
             <ul style="list-style-type: none;">
@@ -102,14 +124,23 @@
 
        
     </td>
-    <td>
-   <a asp-action="Details" asp-controller="Vendor" asp-route-Id="@V.ID" ><i class="fa-solid fa-eye" style="color:black; font-size:20px;"></i>
+    <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
+        <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
+             @if(@V.IsDeleted == false){
+             <a  asp-action="Remove" asp-controller="Vendor" asp-route-ID="@V.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
 
-
+</a>
+            }
+           
+             @if(@V.IsDeleted == true){
+        <a asp-action="AcceptVendor" asp-controller="Vendor" asp-route-ID="@V.ID"  ><i class="fa-solid fa-circle-check" style="margin-right:10px; font-size:25px;"></i>
+</a>
+            }
+            |
+   <a asp-action="Details" asp-controller="Vendor" asp-route-Id="@V.ID" ><i class="fa-solid fa-eye" style="color:black; font-size:23px; margin-left:10px; margin-right:10px"></i>
  </a>
    |
-   <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID" > <i class="fa-solid fa-trash" style="color:red; font-size:20px;"></i>
-
+   <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID" > <i class="fa-solid fa-trash" style="color:red; font-size:23px; margin-left:10px;"></i>
  </a>
    </td>
    

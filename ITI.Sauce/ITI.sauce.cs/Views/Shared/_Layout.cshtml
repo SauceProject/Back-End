@@ -4,51 +4,59 @@
 
    
      
-@{var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+@{
+    var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
     var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-var userId = claim.Value;    
+    var userId = claim.Value;
 }     
-        
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    
 
-  
+
+
     <link
       rel="stylesheet"
       href="~/Content/lib/font-awesome/css/all.css"
     />
     <link rel="stylesheet" href="~/Content/CSS/vendor.css" />
 
-     @RenderSection("StyleSection",false)
-  </head>
-  <body>
+    @RenderSection("StyleSection",false)
+</head>
+<body>
     <aside id="side">
-      <ul class="mysidebar">
-       
-        <li>
-          <a asp-action="Index" asp-controller="Home" class="mylogo"><i class="fas fa-utensils"></i>Sauce</a>
-      
-        </li>
-        <li><a asp-action="Search" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
-        <li><a asp-action="Search" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
-        <li><a asp-action="Search" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
-       
-     
-        @if(this.User.HasClaim(c => c.Value=="Admin")) 
-{
-        <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
-        <li><a asp-action="Search" asp-controller="Users">View Users </a></li>
-        <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
-        <li><a asp-action="search" asp-controller="Vendor">View Vendors </a></li>
-        <li><a asp-action="Search" asp-controller="Category">View Category </a></li>
+        <ul class="mysidebar">
 
-}
-        
+            <li>
+                <a asp-action="Index" asp-controller="Home" class="mylogo"><i class="fas fa-utensils"></i>Sauce</a>
+
+            </li>
+            
+                @if (ViewBag.Flag == null)
+                    ViewBag.Flag = false;
+                @if ((!ViewBag.Flag && this.User.HasClaim(c => c.Value == "Vendor")) || this.User.HasClaim(c => c.Value == "Admin") )
+                {
+                    <!--View Recipes / Reviews / Orders-->
+                    <li><a asp-action="Search" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
+                    <li><a asp-action="Search" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
+                    <li><a asp-action="Search" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
+
+
+                    @if (this.User.HasClaim(c => c.Value == "Admin"))
+                    {
+                        <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
+                        <li><a asp-action="Search" asp-controller="Users">View Users </a></li>
+                        <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
+                        <li><a asp-action="search" asp-controller="Vendor">View Vendors </a></li>
+                        <li><a asp-action="Search" asp-controller="Category">View Category </a></li>
+
+                    }
+                }
+            
 
 
       </ul>

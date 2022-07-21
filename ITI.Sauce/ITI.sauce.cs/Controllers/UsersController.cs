@@ -49,7 +49,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
                 .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-            return View();
+            return View(new UserEditViewModel());
         }
 
         [HttpPost]
@@ -59,9 +59,6 @@ namespace ITI.sauce.MVC.Controllers
             {
                 var result
                         = await UserRepo.SignUp(model);
-
-                if (!result.IsSuccess)
-
                     if (!result.IsSuccess)
                     {
                         ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
@@ -76,10 +73,16 @@ namespace ITI.sauce.MVC.Controllers
                             VendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
                             UnitOfWork.Save();
                         }
-                        return RedirectToAction("SignIn", "Users");
                     }
+                    return RedirectToAction("SignIn", "Users");
             }
-            return RedirectToAction("SignIn", "Users");
+            else
+            {
+                ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+                .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+                return View(model);
+            }
+
         }
 
         [HttpGet]
@@ -122,6 +125,7 @@ namespace ITI.sauce.MVC.Controllers
                 if (string.IsNullOrEmpty(token))
                 {
                     ModelState.AddModelError("", "Invalid UserName Or Password");
+                    return View();
                 }
                 else
                 {
@@ -140,7 +144,7 @@ namespace ITI.sauce.MVC.Controllers
             foreach (var i in ModelState.Values)
                 foreach (var error in i.Errors)
                     errors.Add(error.ErrorMessage);
-            return new ObjectResult(errors);
+            return View();
         }
         public IActionResult Details(string id)
         {
@@ -175,6 +179,7 @@ namespace ITI.sauce.MVC.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
         {
+            //var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var Data = UserRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
