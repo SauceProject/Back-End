@@ -33,3 +33,4 @@ D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0
 D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\refint\ITI.Sauce.Services.dll
 D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.pdb
 D:\Final Project\Back-End\Back-End\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ref\ITI.Sauce.Services.dll
+E:\2-ITI\aa\ITI.Sauce\ITI.Sauce.Services\obj\Debug\net6.0\ITI.Sauce.Services.csproj.AssemblyReference.cache
