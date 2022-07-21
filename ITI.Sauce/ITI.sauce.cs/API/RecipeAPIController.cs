@@ -20,7 +20,7 @@ namespace ITI.Sauce.MVC.API
 
         //[Authorize(Roles = "Admin,User,Vendor")]
         [HttpGet]
-        public ResultViewModel Get(string NameAr = null, string NameEN = null,
+        public ResultViewModel GetAPI(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20)

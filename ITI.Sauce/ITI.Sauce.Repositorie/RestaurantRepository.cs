@@ -19,9 +19,9 @@ namespace ITI.Sauce.Repository
             this.rateRepo = _rateRepo;
 
         }
-        public IPagedList<RestaurantViewModel> Get(string Vendor_ID="", int id = 0,
-            DateTime? WorkTime = null, string NameEn = "", string NameAr = "", 
-            DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", 
+        public IPagedList<RestaurantViewModel> Get(string Vendor_ID = "", int id = 0,
+            DateTime? WorkTime = null, string NameEn = "", string NameAr = "",
+            DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID",
             bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
 
@@ -57,7 +57,7 @@ namespace ITI.Sauce.Repository
                 IsDeleted = V.IsDeleted,
                 ImageUrl = V.ImageUrl,
                 Vendor_ID = V.Vendor_ID
-        }).ToPagedList(pageIndex, pageSize);
+            }).ToPagedList(pageIndex, pageSize);
             return result;
 
             //PaginingViewModel<List<RestaurantViewModel>>
@@ -73,9 +73,11 @@ namespace ITI.Sauce.Repository
 
         }
 
-            public IPagedList<RestaurantViewModel> Search(int pageIndex = 1, int pageSize = 2)
-                       =>
+        public IPagedList<RestaurantViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                   =>
        GetList().Select(V => new RestaurantViewModel
+
+
        {
            ID = V.ID,
            WorkTime = V.WorkTime,
@@ -86,6 +88,7 @@ namespace ITI.Sauce.Repository
            ImageUrl = V.ImageUrl,
            Vendor_ID = V.Vendor_ID,
        }).ToPagedList(pageIndex, pageSize);
+
 
         public RestaurantViewModel Add(RestaurantEditViewModel model)
         {
@@ -159,58 +162,7 @@ namespace ITI.Sauce.Repository
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //public PaginingViewModel<List<RestaurantViewModel>> Search(int ID = 0, DateTime? WorkTime = null, string Vendor_ID = "",  string Name = "", string orderBy = null, 
-        //    bool isAscending = false, int pageIndex = 1, int pageSize = 20)
-        //{
-        //    var filterd = PredicateBuilder.New<Restaurant>();
-        //    var old = filterd;
-        //    if (string.IsNullOrEmpty(Name))
-        //        filterd = filterd.Or(b => b.NameEN.Contains(Name));
-        //    filterd = filterd.Or(b => b.NameAR.Contains(Name));
-
-        //    if (old == filterd)
-        //        filterd = null;
-        //    var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
-        //    var result =
-        //    query.Select(i => new RestaurantViewModel
-        //    {
-        //        ID = i.ID,
-        //        WorkTime = i.WorkTime,
-        //        Vendor_ID = i.Vendor_ID,
-        //        NameEN = i.NameEN,
-        //        NameAR = i.NameAR,
-        //        RegisterDate =i.RegisterDate,
-        //        IsDeleted = i.IsDeleted,
-        //        ImageUrl = i.ImageUrl,
-
-
-               
-        //    });
-
-        //    PaginingViewModel<List<RestaurantViewModel>>
-        //        finalResult = new PaginingViewModel<List<RestaurantViewModel>>()
-        //        {
-        //            PageIndex = pageIndex,
-        //            PageSize = pageSize,
-        //            Count = base.GetList().Count(),
-        //            Data = result.ToList()
-        //        };
-        //    return finalResult;
-
-        }
-
-        public RestaurantViewModel AcceptRestaurant(RestaurantEditViewModel model,int ID)
+        public RestaurantViewModel AcceptRestaurant(RestaurantEditViewModel model, int ID)
         {
             var filterd = PredicateBuilder.New<Restaurant>();
             var old = filterd;
@@ -229,7 +181,9 @@ namespace ITI.Sauce.Repository
             double val = res.Data.Average(r => r.RatingValue);
             return val;
         }
-
-
     }
 }
+
+
+
+
