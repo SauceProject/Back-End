@@ -28,7 +28,12 @@ namespace ITI.Sauce.MVC.API
             var data = RecipeRepo.Get(
                 NameAr, NameEN, orderBy, ImageUrl, VideoUrl,
                 isAscending, Price, rdate, category, pageIndex, pageSize);
-            return new ResultViewModel { Data=data.Data , Success=true};
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = data
+            };
         }
         
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)

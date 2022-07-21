@@ -27,31 +27,27 @@ namespace ITI.sauce.MVC.Controllers
 
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public ViewResult Get(string NameAr = null, string NameEN = null,
+        public IActionResult Get(string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
-            int pageIndex = 1, int pageSize = 20)
+            int pageIndex = 1, int pageSize = 20 , int RestaurantID = 0)
         {
             var data = RecipeRepo.Get(
                 NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
-                isAscending,Price, rdate, category,pageIndex,pageSize);
+                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
+            ViewBag.Resturant = RestaurantID;
             return View(data);
         }
         //[Authorize(Roles = "Admin,Vendor")]
-        public ResultViewModel Search(string Name = "", string orderBy = null, bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
-            var result = RecipeRepo.Search(Name, orderBy, isAscending, pageIndex, pageSize);
-            return new ResultViewModel()
-            {
-                Success = true,
-                Message = "",
-                Data = result
-            };
+            var result = RecipeRepo.Search(pageIndex, pageSize);
+            return View("Get", result);
 
         }
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
-        public IActionResult Add(string? returnUrl)
+        public IActionResult Add(string? returnUrl, int ResturantId)
         {
             ViewBag.ReturnUrl = returnUrl;
             IEnumerable<SelectListItem> Categories = 
@@ -61,7 +57,8 @@ namespace ITI.sauce.MVC.Controllers
 
             ViewBag.Categories = Categories;
             ViewBag.Restaurants = Restaurants;
-            return View();
+            
+            return View(new RecipeEditViewModel { RestaurantID = ResturantId });
         }
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)
         {
@@ -145,7 +142,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             RecipeRepo.Remove(model,ID);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+            return RedirectToAction("Search");
 
 
         }
@@ -153,7 +150,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             RecipeRepo.AcceptRecipe(model, ID);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+            return RedirectToAction("Search");
         }
 
 

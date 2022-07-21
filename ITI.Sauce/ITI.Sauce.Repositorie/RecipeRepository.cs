@@ -18,11 +18,10 @@ namespace ITI.Sauce.Repository
         {
             this.rateRepo = _rateRepo;
         }
-        public PaginingViewModel<List<RecipeViewModel>> Get ( 
-            string NameAr=null, string NameEN=null,string orderBy=null, string ImageUrl = "", string VideoUrl = "",
-            bool isAscending = false, float Price=0,DateTime? rdate=null , string category=null ,
-            int pageIndex=1,int pageSize=20
-            )
+        public IPagedList<RecipeViewModel> Get( 
+            string? NameAr=null, string? NameEN=null,string? orderBy=null, string ImageUrl = "", string VideoUrl = "",
+            bool isAscending = false, float Price=0,DateTime? rdate=null , string? category=null ,
+            int pageIndex=1,int pageSize=20, int RestaurantID =0)
         {
             var filter = PredicateBuilder.New<Recipe>();
             var oldFilter = filter;
@@ -52,6 +51,10 @@ namespace ITI.Sauce.Repository
 
             if (!string.IsNullOrEmpty(VideoUrl))
                 filter = filter.Or(I => I.ImageUrl.Contains(VideoUrl));
+            if (RestaurantID > 0)
+            {
+                filter = filter.Or(r => r.ResturantID == RestaurantID);
+            }
             if (filter == oldFilter)
             {
                 filter = null;
@@ -72,18 +75,22 @@ namespace ITI.Sauce.Repository
                 RegisterDate = i.RegisterDate,
                 ImageUrl = i.ImageUrl,
                 VideoUrl = i.VideoUrl,
-                RestaurantName= i.Restaurant.NameEN
-            });
+                RestaurantName= i.Restaurant.NameEN,
+                CategoryName = i.Category.NameEN,
+                ResturantID = i.ResturantID,
+            }).ToPagedList(pageIndex, pageSize);
+            return result;
 
-            PaginingViewModel<List<RecipeViewModel>>
-                finalResult = new PaginingViewModel<List<RecipeViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList()
-                };
-            return finalResult;
+
+            //PaginingViewModel<List<RecipeViewModel>>
+            //    finalResult = new PaginingViewModel<List<RecipeViewModel>>()
+            //    {
+            //        PageIndex = pageIndex,
+            //        PageSize = pageSize,
+            //        Count = base.GetList().Count(),
+            //        Data = result.ToList()
+            //    };
+            //return finalResult;
 
         }
         public IPagedList<RecipeViewModel> Search(int pageIndex = 1, int pageSize = 2)
@@ -101,6 +108,9 @@ namespace ITI.Sauce.Repository
      RegisterDate = V.RegisterDate,
      ImageUrl = V.ImageUrl,
      VideoUrl = V.VideoUrl,
+     RestaurantName = V.Restaurant.NameEN,
+     CategoryName = V.Category.NameEN,
+     ResturantID = V.ResturantID,
 
  }).ToPagedList(pageIndex, pageSize);
 
@@ -196,49 +206,7 @@ namespace ITI.Sauce.Repository
 
 
 
-        public PaginingViewModel<List<RecipeViewModel>> Search(string Name="", string orderBy = null,
-            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
-        {
-            var filterd = PredicateBuilder.New<Recipe>();
-            var old = filterd;
-            if (string.IsNullOrEmpty(Name))
-                filterd = filterd.Or(b => b.NameEN.Contains(Name));
-                filterd = filterd.Or(b => b.NameAR.Contains(Name));
-
-            if (old == filterd)
-                filterd = null;
-            var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
-            var result =
-            query.Select(i => new RecipeViewModel
-            {
-                ID = i.ID,
-                CategoryID = i.CategoryID,
-                CategoryName = i.Category.NameEN,
-                RateValue=this.getRateByRecipeId(i.ID),
-                Details = i.Details,
-                GoodFor = i.GoodFor,
-                IsDeleted = i.IsDeleted,
-                NameAR = i.NameAR,
-                NameEN = i.NameEN,
-                Price = i.Price,
-                RegisterDate = i.RegisterDate,
-                ImageUrl = i.ImageUrl,
-                VideoUrl = i.VideoUrl,
-                RestaurantName = i.Restaurant.NameEN
-            });
-
-            PaginingViewModel<List<RecipeViewModel>>
-                finalResult = new PaginingViewModel<List<RecipeViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList()
-                };
-            return finalResult;
-
-
-        }
+       
 
         double getRateByRecipeId(int id)
         {

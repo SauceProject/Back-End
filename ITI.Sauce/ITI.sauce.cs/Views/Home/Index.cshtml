@@ -2,6 +2,7 @@
 @using ITI.Sauce.ViewModels
 
 
+
 @using Microsoft.AspNetCore.Identity;
 @inject SignInManager<Users> _SignInManager
 
@@ -51,9 +52,10 @@
               <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
             </div> 
             <div class="stat-card four">
-              <h3><i class="fa-solid fa-chart-line"></i></h3>
+              <h3><i class="fa-solid fa-chart-line"></i></h3>             
+
               <p>@ViewBag.ReataurantCount</p>
-    <a asp-action="search" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
+    <a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
             </div>
 </div>

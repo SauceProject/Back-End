@@ -153,16 +153,17 @@ namespace ITI.Sauce.Repository
         
         public IPagedList<UsersViewModel> Search(int pageIndex = 1, int pageSize = 2)
                    =>
-   GetList().Where(v => v.Vendor == null).Select(i => new UsersViewModel
-   {
-       ID = i.Id,
-       Email = i.Email,
-       Password = i.PasswordHash,
-       phone = i.PhoneNumber,
-       registerDate = i.registerDate,
-       NameEN = i.NameEN,
-       IsDelete = i.IsDelete
-   }).ToPagedList(pageIndex, pageSize);
+               GetList().Where(v => v.Vendor == null).Select(i => new UsersViewModel
+               {
+                   ID = i.Id,
+                   Email = i.Email,
+                   Password = i.PasswordHash,
+                   phone = i.PhoneNumber,
+                   registerDate = i.registerDate,
+                   NameEN = i.NameEN,
+                   IsDelete = i.IsDelete,
+                   NameAR = i.NameAR,
+               }).ToPagedList(pageIndex, pageSize);
         public UsersViewModel Add(UserEditViewModel model)
         {
             Users Users = model.ToModel();

@@ -3,6 +3,7 @@ using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 
 namespace ITI.sauce.MVC.Controllers
@@ -52,13 +53,10 @@ namespace ITI.sauce.MVC.Controllers
         [Authorize(Roles = "Admin")]
       
 
-        public IActionResult Search(int pageIndex = 1, int pageSize = 2)
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
-            var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
-            var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            var userId = claim.Value;
+           // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var Data = vendorRepo.Search(pageIndex, pageSize);
-            Data.Where(i => i.ID != userId);
             return View("Get", Data);
         }
 
@@ -117,15 +115,21 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult Remove(VendorEditViewModel model, int ID)
+        public IActionResult Remove(string ID)
         {
             
-            var res = vendorRepo.Remove(model);
+            var res = vendorRepo.Remove(ID);
             UnitOfWork.Save();
             return RedirectToAction("Search");
 
 
         }
 
+        public IActionResult AcceptVendor(string ID)
+        {
+            vendorRepo.AcceptVendor(ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+        }
     }
 }

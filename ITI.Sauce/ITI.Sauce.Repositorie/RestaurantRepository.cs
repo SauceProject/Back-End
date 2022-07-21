@@ -19,7 +19,10 @@ namespace ITI.Sauce.Repository
             this.rateRepo = _rateRepo;
 
         }
-        public IPagedList<RestaurantViewModel> Get(string Vendor_ID="", int id = 0, DateTime? WorkTime = null, string NameEn = "", string NameAr = "", DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        public IPagedList<RestaurantViewModel> Get(string Vendor_ID="", int id = 0,
+            DateTime? WorkTime = null, string NameEn = "", string NameAr = "", 
+            DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", 
+            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
 
             var filter = PredicateBuilder.New<Restaurant>();
@@ -81,7 +84,7 @@ namespace ITI.Sauce.Repository
            RegisterDate = V.RegisterDate,
            IsDeleted = V.IsDeleted,
            ImageUrl = V.ImageUrl,
-           Vendor_ID = V.Vendor_ID
+           Vendor_ID = V.Vendor_ID,
        }).ToPagedList(pageIndex, pageSize);
 
         public RestaurantViewModel Add(RestaurantEditViewModel model)
@@ -205,6 +208,20 @@ namespace ITI.Sauce.Repository
                 };
             return finalResult;
 
+        }
+
+        public RestaurantViewModel AcceptRestaurant(RestaurantEditViewModel model,int ID)
+        {
+            var filterd = PredicateBuilder.New<Restaurant>();
+            var old = filterd;
+            if (ID > 0)
+                filterd = filterd.Or(i => i.ID == ID);
+
+            if (old == filterd)
+                filterd = null;
+            var Restaurant = base.GetByID(filterd);
+            Restaurant.IsDeleted = false;
+            return base.Update(Restaurant).Entity.ToViewModel();
         }
         double getRateByRecipeId(int id)
         {

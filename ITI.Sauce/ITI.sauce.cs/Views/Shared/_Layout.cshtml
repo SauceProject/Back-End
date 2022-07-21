@@ -40,14 +40,14 @@ var userId = claim.Value;
        
      
         @if(this.User.HasClaim(c => c.Value=="Admin")) 
-{
+       {
         <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
         <li><a asp-action="Search" asp-controller="Users">View Users </a></li>
         <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
         <li><a asp-action="search" asp-controller="Vendor">View Vendors </a></li>
         <li><a asp-action="Search" asp-controller="Category">View Category </a></li>
 
-}
+       }
         
 
 

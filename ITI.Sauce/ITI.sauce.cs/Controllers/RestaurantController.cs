@@ -1,4 +1,5 @@
-﻿using ITI.Sauce.Models;
+﻿using System.Security.Claims;
+using ITI.Sauce.Models;
 using ITI.Sauce.Repository;
 using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
@@ -18,18 +19,21 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(string vendorID = "",int id = 0, DateTime? WorkTime = null,
+        public IActionResult Get(string vendorID = "", int id = 0, DateTime? WorkTime = null,
             string NameEn = "", string NameAr = "", DateTime? registerDate = null,
             bool isDeleted = false, string orderby = "ID", bool isAscending = false,
             int pageIndex = 1, int pageSize = 20)
         {
             var Resultdata =
-                ResRepo .Get (vendorID,id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
-            return View("Get",Resultdata);
+                ResRepo.Get(vendorID, id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
+            return View("Get", Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
+           
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ViewBag.Reataurant = ResRepo.GetList().Where(v => v.Vendor_ID == userId);
             var Data = ResRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
@@ -40,7 +44,7 @@ namespace ITI.sauce.MVC.Controllers
             var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             var userId = claim.Value;
-            return View(new RestaurantEditViewModel{ Vendor_ID = userId});
+            return View(new RestaurantEditViewModel { Vendor_ID = userId });
         }
         private IEnumerable<SelectListItem> GetRestaurantNames(List<TextValueViewModel> list)
         {
@@ -117,6 +121,13 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork.Save();
             return RedirectToAction("Get");
 
+
+        }
+        public  IActionResult  AcceptRestaurant(RestaurantEditViewModel model, int ID)
+        {
+            ResRepo.AcceptRestaurant(model, ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Get");
 
         }
     }

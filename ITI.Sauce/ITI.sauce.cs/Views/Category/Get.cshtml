@@ -39,7 +39,7 @@
 
 #btnA {
     width: 7%;
-    background-color: blue;
+    background-color: #143444;
     color: #F6EE99;
     padding: 14px 20px;
     margin: 8px 0;
@@ -51,16 +51,18 @@
 }
 #btnA:hover {
  
-    background-color: green;
-    color:#F6EE99;
+    width: 10%;
+    text-align:center;
 }
 </style>
 
 <body>
 
     <h2>Category</h2>
+            @if(this.User.HasClaim(c => c.Value=="Vendor")) 
+       {
         <a asp-action="Add" asp-controller="Restaurant" id="btnA">Add</a>
-
+       }
     <table>
         <tr>
             <th>ID</th>

@@ -1,8 +1,17 @@
 ﻿
 @using ITI.Sauce.ViewModels
+@using ITI.Sauce.Models
 
 
 @model IPagedList<OrderViewModel>
+
+
+   
+     
+@{var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+var userId = claim.Value;    
+} 
 
 @section StyleSection{
 <link rel="stylesheet" href="~/Content/CSS/Order.css"/>
@@ -21,7 +30,7 @@
 
 #btnA {
     width: 7%;
-    background-color: blue;
+    background-color: #143444;
     color: #F6EE99;
     padding: 14px 20px;
     margin: 8px 0;
@@ -33,14 +42,16 @@
 }
 #btnA:hover {
  
-    background-color: green;
-    color:#F6EE99;
+    width: 10%;
+    text-align:center;
 }
 </style>
 
 <h2 style="margin:10px;">Order</h2>
+        @if(this.User.HasClaim(c => c.Value=="Vendor")) 
+       {
     <a asp-action="Add" asp-controller="Order" id="btnA">Add</a>
-
+       }
 
 <table>
   <tr>
