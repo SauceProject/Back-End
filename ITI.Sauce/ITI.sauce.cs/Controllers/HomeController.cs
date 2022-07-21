@@ -38,7 +38,9 @@ namespace ITI.sauce.MVC.Controllers
             if (this.User.HasClaim(c => c.Value == "Vendor"))
             {
                 var Vendor = VendorRepo.GetList().FirstOrDefault(i => i.ID == userId);
-                ViewBag.Flag = Vendor.IsDeleted;
+                //if (Vendor != null)
+                //ViewBag.Flag = Vendor.IsDeleted;
+                
             }
 
             // return new ObjectResult(ViewBag);

@@ -24,15 +24,15 @@
 @{
     
 
-@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
-{
-    <div class="bronze">
-        <h3><i class="fa-solid fa-chart-line"></i></h3>
-        <p>Bronze</p>
-        <a asp-action="AddMemberShip" asp-controller="Vendor">Join</a>
-    </div>
+//@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
+//{
+//    <div class="bronze">
+//        <h3><i class="fa-solid fa-chart-line"></i></h3>
+//        <p>Bronze</p>
+//        <a asp-action="AddMemberShip" asp-controller="Vendor">Join</a>
+//    </div>
     
-}
+//}
 }
 <!---------------STATISTICS------------------->
 @if (this.User.HasClaim(c => c.Value == "Admin"))

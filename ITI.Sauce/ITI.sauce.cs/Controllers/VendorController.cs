@@ -45,9 +45,9 @@ namespace ITI.sauce.MVC.Controllers
                 ViewBag.NameEN = i.NameEN;
                 ViewBag.NameAR = i.NameAR;
                 ViewBag.Email = i.Email;
-                ViewBag.Phone = i.phone;
-                ViewBag.Password = i.Password;
-                ViewBag.UserName = i.UserName;
+                //ViewBag.Phone = i.Phone;
+                //ViewBag.Password = i.Password;
+                //ViewBag.UserName = i.UserName;
             }
             return View(data);
         }
