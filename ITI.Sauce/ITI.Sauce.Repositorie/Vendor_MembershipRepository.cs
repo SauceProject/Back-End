@@ -20,6 +20,13 @@ namespace ITI.Sauce.Repository
             return base.Add(VM).Entity;
  
         }
-        
+        public List<Vendor_MemberShip> Get(string VendorID)
+        {
+            
+            return base.GetList().Where(i=>i.Vendor_ID==VendorID).ToList();
+
+        }
+
+
     }
 }

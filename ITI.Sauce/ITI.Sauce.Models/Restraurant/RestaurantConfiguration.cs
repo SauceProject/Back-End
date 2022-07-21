@@ -15,7 +15,8 @@ namespace ITI.Sauce.Models
             builder.ToTable("Restaurant");
             builder.HasKey(r => r.ID);
             builder.Property(r => r.ID).ValueGeneratedOnAdd();
-            builder.Property(r => r.WorkTime).IsRequired();
+            builder.Property(r => r.FromDate).IsRequired();
+            builder.Property(r => r.ToDate).IsRequired();
             builder.Property(r => r.Vendor_ID).IsRequired();
             builder.Property(r => r.NameEN).IsRequired().HasMaxLength(300);
             builder.Property(r => r.NameAR).IsRequired().HasMaxLength(300);

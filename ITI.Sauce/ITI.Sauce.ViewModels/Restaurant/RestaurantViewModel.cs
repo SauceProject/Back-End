@@ -15,7 +15,8 @@ namespace ITI.Sauce.ViewModels
             return new RestaurantViewModel
             {
                 ID = model.ID,
-                WorkTime = model.WorkTime,
+                FromDate = model.FromDate,
+                ToDate = model.ToDate,
                 Vendor_ID = model.Vendor_ID,
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
@@ -32,7 +33,8 @@ namespace ITI.Sauce.ViewModels
             return new RestaurantEditViewModel()
             {
 
-                WorkTime = model.WorkTime,
+                FromDate = model.FromDate,
+                ToDate = model.ToDate,
                 Vendor_ID = model.Vendor_ID,
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
@@ -52,7 +54,8 @@ namespace ITI.Sauce.ViewModels
     public class RestaurantViewModel
     {
         public int ID { get; set; }
-        public DateTime WorkTime { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
         public string Vendor_ID { get; set; }
         public string NameEN { get; set; }
         public string NameAR { get; set; }

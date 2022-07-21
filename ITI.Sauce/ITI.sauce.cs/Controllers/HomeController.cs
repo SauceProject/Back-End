@@ -81,7 +81,7 @@ namespace ITI.sauce.MVC.Controllers
             }
             else
             {
-       
+               // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 ViewBag.ReataurantCount = RestaurantRepo.GetList().Where(v=>v.Vendor_ID ==userId).Count();
 
 

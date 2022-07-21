@@ -10,8 +10,11 @@ namespace ITI.Sauce.Models
     {
         public int OrderListID { get; set; }
         public int OrderListQty { get; set; }
+        public float OrderListPrice { get; set; }//subprice
         public int OrderID { get; set; }
         public virtual Order Order { get; set; }
+        public int Recipe_ID { get; set; }
+        public virtual Recipe Recipe { get; set; }
 
     }
 }

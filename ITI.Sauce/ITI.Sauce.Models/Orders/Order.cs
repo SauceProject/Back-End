@@ -9,14 +9,11 @@ namespace ITI.Sauce.Models
     public class Order
     {
         public int ID { get; set; }
-        public string NameEN { get; set; }
-        public string NameAR { get; set; }
-        public DateTime registerDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public bool IsDeleted { get; set; }
-        public int Recipe_ID { get; set; }
         public virtual List <OrderList> orderLists { get; set; }
-        public virtual Recipe Recipe { get; set; }
-        public virtual List<UserOrder> UserOrders { get; set; }
+        public string UserId { get; set; }
+        public virtual Users User { get; set; }
 
 
     }

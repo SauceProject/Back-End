@@ -13,18 +13,20 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UserRepository userRepo;
         private readonly UnitOfWork UnitOfWork;
         private readonly Vendor_MembershipRepository vendorMemberRepo;
+        private readonly MemberShipRepository memberShipRepository;
 
 
 
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
-            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo)
+            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo, MemberShipRepository _memberShipRepository)
         {
             //DBContext dBContext = new DBContext();
             this.vendorRepo = _vendorRepo;
             this.userRepo = _userRepo;
             UnitOfWork = _unitOfWork;
             vendorMemberRepo = _vendorMemberRepo;
+            memberShipRepository = _memberShipRepository;
         }
 
         [Authorize(Roles = "Admin")]
@@ -34,9 +36,10 @@ namespace ITI.sauce.MVC.Controllers
                 int pageIndex = 1, int pageSize = 5)
         {
             var data =
-            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy, 
+            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
+            
         }
 
         
@@ -133,6 +136,15 @@ namespace ITI.sauce.MVC.Controllers
             
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult GetMemberships(string VendorID)
+        {
+            var m = vendorRepo.GetOne(VendorID);
+            ViewBag.vendorMemberships = m.MemberShipsNames;
+
+            return View();
+        }
+
 
         public IActionResult AcceptVendor(string ID)
         {
