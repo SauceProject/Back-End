@@ -170,43 +170,43 @@ namespace ITI.Sauce.Repository
 
 
 
-        public PaginingViewModel<List<RestaurantViewModel>> Search(int ID = 0, DateTime? WorkTime = null, string Vendor_ID = "",  string Name = "", string orderBy = null, 
-            bool isAscending = false, int pageIndex = 1, int pageSize = 20)
-        {
-            var filterd = PredicateBuilder.New<Restaurant>();
-            var old = filterd;
-            if (string.IsNullOrEmpty(Name))
-                filterd = filterd.Or(b => b.NameEN.Contains(Name));
-            filterd = filterd.Or(b => b.NameAR.Contains(Name));
+        //public PaginingViewModel<List<RestaurantViewModel>> Search(int ID = 0, DateTime? WorkTime = null, string Vendor_ID = "",  string Name = "", string orderBy = null, 
+        //    bool isAscending = false, int pageIndex = 1, int pageSize = 20)
+        //{
+        //    var filterd = PredicateBuilder.New<Restaurant>();
+        //    var old = filterd;
+        //    if (string.IsNullOrEmpty(Name))
+        //        filterd = filterd.Or(b => b.NameEN.Contains(Name));
+        //    filterd = filterd.Or(b => b.NameAR.Contains(Name));
 
-            if (old == filterd)
-                filterd = null;
-            var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
-            var result =
-            query.Select(i => new RestaurantViewModel
-            {
-                ID = i.ID,
-                WorkTime = i.WorkTime,
-                Vendor_ID = i.Vendor_ID,
-                NameEN = i.NameEN,
-                NameAR = i.NameAR,
-                RegisterDate =i.RegisterDate,
-                IsDeleted = i.IsDeleted,
-                ImageUrl = i.ImageUrl,
+        //    if (old == filterd)
+        //        filterd = null;
+        //    var query = base.Get(filterd, orderBy, isAscending, pageIndex, pageSize);
+        //    var result =
+        //    query.Select(i => new RestaurantViewModel
+        //    {
+        //        ID = i.ID,
+        //        WorkTime = i.WorkTime,
+        //        Vendor_ID = i.Vendor_ID,
+        //        NameEN = i.NameEN,
+        //        NameAR = i.NameAR,
+        //        RegisterDate =i.RegisterDate,
+        //        IsDeleted = i.IsDeleted,
+        //        ImageUrl = i.ImageUrl,
 
 
                
-            });
+        //    });
 
-            PaginingViewModel<List<RestaurantViewModel>>
-                finalResult = new PaginingViewModel<List<RestaurantViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList()
-                };
-            return finalResult;
+        //    PaginingViewModel<List<RestaurantViewModel>>
+        //        finalResult = new PaginingViewModel<List<RestaurantViewModel>>()
+        //        {
+        //            PageIndex = pageIndex,
+        //            PageSize = pageSize,
+        //            Count = base.GetList().Count(),
+        //            Data = result.ToList()
+        //        };
+        //    return finalResult;
 
         }
 

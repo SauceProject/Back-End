@@ -27,8 +27,7 @@ namespace ITI.Sauce.Repository
 
             var filter = PredicateBuilder.New<Vendor>();
             var oldFiler = filter;
-           // if(SearchText != "" && SearchText!=null)
-              //  filter = filter.Or(v => v.User.NameEN.Contains(SearchText) || v.User.Email.Contains(SearchText));
+           
             if (!string.IsNullOrEmpty(id))
                 filter = filter.Or(V => V.ID == id);
             if (!string.IsNullOrEmpty(nameEN))
@@ -140,6 +139,7 @@ namespace ITI.Sauce.Repository
 
             return Result.ToViewModel();
         }
+       
 
 public VendorViewModel AcceptVendor (string ID)
         {

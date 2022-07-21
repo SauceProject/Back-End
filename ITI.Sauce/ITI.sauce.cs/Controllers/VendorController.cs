@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-
 namespace ITI.sauce.MVC.Controllers
 {
     public class VendorController : Controller
@@ -13,28 +12,35 @@ namespace ITI.sauce.MVC.Controllers
         private readonly VendorRepository vendorRepo;
         private readonly UserRepository userRepo;
         private readonly UnitOfWork UnitOfWork;
+        private readonly Vendor_MembershipRepository vendorMemberRepo;
+
+
 
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
-            UserRepository _userRepo)
+            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo)
         {
             //DBContext dBContext = new DBContext();
             this.vendorRepo = _vendorRepo;
             this.userRepo = _userRepo;
             UnitOfWork = _unitOfWork;
+            vendorMemberRepo = _vendorMemberRepo;
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Get(string id = "",
-                string nameEN = "", string nameAR = "", string Email = "", string phones = "",
+                string nameEN = "", string nameAR="", string Email = "",string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 5)
         {
             var data =
-            vendorRepo.Get(id, nameEN, nameAR, Email, phones, orderyBy,
+            vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy, 
                 isAscending, pageIndex, pageSize);
             return View(data);
         }
+
+        
+
         public IActionResult Details(string id)
         {
             var data = vendorRepo.Get(id);
@@ -43,7 +49,7 @@ namespace ITI.sauce.MVC.Controllers
                 ViewBag.NameEN = i.NameEN;
                 ViewBag.NameAR = i.NameAR;
                 ViewBag.Email = i.Email;
-                ViewBag.Phones = i.phones;
+                //ViewBag.Phone = i.phone;
                 //ViewBag.Password = i.Password;
                 //ViewBag.UserName = i.UserName;
             }
@@ -59,10 +65,8 @@ namespace ITI.sauce.MVC.Controllers
             var Data = vendorRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-
-  
-
-
+        
+   
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
@@ -76,23 +80,20 @@ namespace ITI.sauce.MVC.Controllers
         {
             if (ModelState.IsValid == true)
             {
-                var result = await userRepo.SignUp(model);
+                var result= await userRepo.SignUp(model);
                 if (!string.IsNullOrEmpty(result.UserId))
                 {
-                    vendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
+                    vendorRepo.Add(new VendorEditViewModel { Id=result.UserId,registerDate=DateTime.Now});
                     UnitOfWork.Save();
                     return RedirectToAction("Search");
                 }
-                else
-                {
+                else {
                     return View();
                 }
 
             }
             else
                 return View();
-
-
         }
 
 
@@ -110,7 +111,7 @@ namespace ITI.sauce.MVC.Controllers
 
             vendorRepo.Update(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+            return RedirectToAction("Search");
 
         }
 
@@ -123,6 +124,14 @@ namespace ITI.sauce.MVC.Controllers
             return RedirectToAction("Search");
 
 
+        }
+        public IActionResult AddMemberShip(string Id, int membershipid )
+        {
+
+            vendorMemberRepo.Add(Id, membershipid);
+            UnitOfWork.Save();
+            
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AcceptVendor(string ID)

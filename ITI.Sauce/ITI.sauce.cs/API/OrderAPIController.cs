@@ -29,7 +29,8 @@ namespace ITI.sauce.MVC.Controllers
 
         {
             var data =
-                ordRepo.Get(ID, orderBy, isAscending, NameEN, NameAR, registerDate, pageIndex, pageSize);
+                ordRepo.Get(ID, orderBy, isAscending, NameEN, 
+                NameAR, registerDate, pageIndex, pageSize);
             return new ResultViewModel()
             {
                 Success = true,
