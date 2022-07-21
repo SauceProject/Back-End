@@ -19,13 +19,13 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(string vendorID = "", int id = 0, DateTime? WorkTime = null,
+        public IActionResult Get(string vendorID = "", int id = 0, DateTime? FromTime = null, DateTime? ToTime = null,
             string NameEn = "", string NameAr = "", DateTime? registerDate = null,
             bool isDeleted = false, string orderby = "ID", bool isAscending = false,
             int pageIndex = 1, int pageSize = 20)
         {
             var Resultdata =
-                ResRepo.Get(vendorID, id, WorkTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
+                ResRepo.Get(vendorID, id, FromTime, ToTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
             return View("Get", Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]

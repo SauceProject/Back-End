@@ -1,11 +1,11 @@
 ﻿
 @using ITI.Sauce.ViewModels
 @model OrderEditViewModel
-
+@*
 <!DOCTYPE html>
 <html>
 <head>
-    @*<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>*@
+<link rel="stylesheet" href="~/Content/CSS/VendorTable.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
     input[type=text],[type=email],[type=password], select {
@@ -54,14 +54,14 @@ div {
 
 </style>
 </head>
-<body>
+<body>*@
 
 @section StyleSection{
     <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
 }
 
 
-<div>
+@*<div>
 <form data-ajax="true" enctype="multipart/form-data" asp-action="Add" asp-controller="Order" method="post"  >
     <h1>Order</h1>
     <p>Please Choose Your Order.</p>
@@ -85,10 +85,10 @@ div {
 
 
 
-@*     <label asp-for="IsDeleted"> Is Deleted  </label>
-*@    <input type="hidden"  asp-for="IsDeleted">
-@*    <span asp-validation-for="IsDeleted" style="color:red"></span>
-*@
+     <label asp-for="IsDeleted"> Is Deleted  </label>
+   <input type="hidden"  asp-for="IsDeleted">
+    <span asp-validation-for="IsDeleted" style="color:red"></span>
+
     
      <label asp-for="Recipe_ID"> Recipe_ID </label>
     <input  asp-for="Recipe_ID">
@@ -102,18 +102,4 @@ div {
 
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*@

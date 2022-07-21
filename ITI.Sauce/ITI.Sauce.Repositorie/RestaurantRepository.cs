@@ -20,7 +20,7 @@ namespace ITI.Sauce.Repository
 
         }
         public IPagedList<RestaurantViewModel> Get(string Vendor_ID="", int id = 0,
-            DateTime? WorkTime = null, string NameEn = "", string NameAr = "", 
+            DateTime? FromDate = null, DateTime? ToDate = null, string NameEn = "", string NameAr = "", 
             DateTime? registerDate = null, bool isDeleted = false, string orderby = "ID", 
             bool isAscending = false, int pageIndex = 1, int pageSize = 20)
         {
@@ -31,8 +31,10 @@ namespace ITI.Sauce.Repository
                 filter = filter.Or(U => U.ID == id);
             if (!string.IsNullOrEmpty(Vendor_ID))
                 filter = filter.Or(U => U.Vendor_ID == Vendor_ID);
-            if (WorkTime != null)
-                filter = filter.Or(d => d.WorkTime <= WorkTime);
+            if (FromDate != null)
+                filter = filter.Or(d => d.FromDate <= FromDate);
+            if (ToDate != null)
+                filter = filter.Or(d => d.ToDate <= ToDate);
             if (!string.IsNullOrEmpty(NameEn))
                 filter = filter.Or(NEn => NEn.NameEN.Contains(NameEn));
             if (!string.IsNullOrEmpty(NameAr))
@@ -50,7 +52,8 @@ namespace ITI.Sauce.Repository
             query.Select(V => new RestaurantViewModel
             {
                 ID = V.ID,
-                WorkTime = V.WorkTime,
+                FromDate = V.FromDate,
+                ToDate = V.ToDate,
                 NameEN = V.NameEN,
                 NameAR = V.NameAR,
                 RegisterDate = V.RegisterDate,
@@ -78,7 +81,8 @@ namespace ITI.Sauce.Repository
        GetList().Select(V => new RestaurantViewModel
        {
            ID = V.ID,
-           WorkTime = V.WorkTime,
+           FromDate = V.FromDate,
+           ToDate = V.ToDate,
            NameEN = V.NameEN,
            NameAR = V.NameAR,
            RegisterDate = V.RegisterDate,
@@ -113,7 +117,8 @@ namespace ITI.Sauce.Repository
             filterd = filterd.Or(V => V.ID == model.ID);
             var Result = base.GetByID(filterd);
             Result.ID = model.ID;
-            Result.WorkTime = model.WorkTime;
+            Result.FromDate = model.FromDate;
+            Result.ToDate = model.ToDate;
             Result.NameEN = model.NameEN;
             Result.NameAR = model.NameAR;
             Result.RegisterDate = model.RegisterDate;

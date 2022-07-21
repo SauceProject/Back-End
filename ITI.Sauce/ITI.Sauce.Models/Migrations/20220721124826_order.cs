@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ITI.Sauce.Models.Migrations
 {
-    public partial class Init : Migration
+    public partial class order : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -206,11 +206,32 @@ namespace ITI.Sauce.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Order_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Vendor",
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 94, DateTimeKind.Local).AddTicks(4963)),
+                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 21, 14, 48, 25, 853, DateTimeKind.Local).AddTicks(3627)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false)
                 },
                 constraints: table =>
@@ -230,11 +251,12 @@ namespace ITI.Sauce.Models.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    WorkTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Vendor_ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NameEN = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 95, DateTimeKind.Local).AddTicks(4354)),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 21, 14, 48, 25, 854, DateTimeKind.Local).AddTicks(1966)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false, defaultValue: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false)
                 },
@@ -309,7 +331,7 @@ namespace ITI.Sauce.Models.Migrations
                     Price = table.Column<float>(type: "real", nullable: false),
                     NameEN = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     NameAR = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 5, 21, 4, 3, 92, DateTimeKind.Local).AddTicks(4331)),
+                    RegisterDate = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue: new DateTime(2022, 7, 21, 14, 48, 25, 852, DateTimeKind.Local).AddTicks(1133)),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ResturantID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -402,22 +424,27 @@ namespace ITI.Sauce.Models.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "OrderList",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    OrderListID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    NameEN = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    NameAR = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    registerDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    OrderListQty = table.Column<int>(type: "int", nullable: false),
+                    OrderListPrice = table.Column<float>(type: "real", nullable: false),
+                    OrderID = table.Column<int>(type: "int", nullable: false),
                     Recipe_ID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.PrimaryKey("PK_OrderList", x => x.OrderListID);
                     table.ForeignKey(
-                        name: "FK_Order_Recipe_Recipe_ID",
+                        name: "FK_OrderList_Order_OrderID",
+                        column: x => x.OrderID,
+                        principalTable: "Order",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderList_Recipe_Recipe_ID",
                         column: x => x.Recipe_ID,
                         principalTable: "Recipe",
                         principalColumn: "ID",
@@ -433,7 +460,8 @@ namespace ITI.Sauce.Models.Migrations
                     Comment = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: false),
                     RatingValue = table.Column<int>(type: "int", nullable: false),
                     RecipeID = table.Column<int>(type: "int", nullable: false),
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -474,50 +502,6 @@ namespace ITI.Sauce.Models.Migrations
                         name: "FK_RecipeIngredient_Recipe_RecipeID",
                         column: x => x.RecipeID,
                         principalTable: "Recipe",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "OrderList",
-                columns: table => new
-                {
-                    OrderListID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    OrderListQty = table.Column<int>(type: "int", nullable: false),
-                    OrderID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_OrderList", x => x.OrderListID);
-                    table.ForeignKey(
-                        name: "FK_OrderList_Order_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserOrder",
-                columns: table => new
-                {
-                    UserID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    OrderID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserOrder", x => new { x.UserID, x.OrderID });
-                    table.ForeignKey(
-                        name: "FK_UserOrder_AspNetUsers_UserID",
-                        column: x => x.UserID,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_UserOrder_Order_OrderID",
-                        column: x => x.OrderID,
-                        principalTable: "Order",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -582,14 +566,19 @@ namespace ITI.Sauce.Models.Migrations
                 column: "UserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_Recipe_ID",
+                name: "IX_Order_UserId",
                 table: "Order",
-                column: "Recipe_ID");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OrderList_OrderID",
                 table: "OrderList",
                 column: "OrderID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderList_Recipe_ID",
+                table: "OrderList",
+                column: "Recipe_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rating_RecipeID",
@@ -620,11 +609,6 @@ namespace ITI.Sauce.Models.Migrations
                 name: "IX_Restaurant_Vendor_ID",
                 table: "Restaurant",
                 column: "Vendor_ID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserOrder_OrderID",
-                table: "UserOrder",
-                column: "OrderID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vendor_MemberShip_MemberShip_ID",
@@ -671,25 +655,22 @@ namespace ITI.Sauce.Models.Migrations
                 name: "Restaurant_Phones");
 
             migrationBuilder.DropTable(
-                name: "UserOrder");
-
-            migrationBuilder.DropTable(
                 name: "Vendor_MemberShip");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Ingredient");
-
-            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "MemberShip");
+                name: "Ingredient");
 
             migrationBuilder.DropTable(
                 name: "Recipe");
+
+            migrationBuilder.DropTable(
+                name: "MemberShip");
 
             migrationBuilder.DropTable(
                 name: "Category");
