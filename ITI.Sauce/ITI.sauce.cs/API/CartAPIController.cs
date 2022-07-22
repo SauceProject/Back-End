@@ -3,6 +3,7 @@ using ITI.Sauce.ViewModels;
 using ITI.Sauce.ViewModels.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace ITI.Sauce.MVC.API
 {
@@ -30,6 +31,13 @@ namespace ITI.Sauce.MVC.API
         [HttpPost]
         public ResultViewModel Add([FromBody] CartEditViewModel model)
         {
+            var UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            UserID= model.UserID ;
+
+            //var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+            //var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+            //var userId = claim.Value;
+
             var result = cartRepository.Add(model);
             return new ResultViewModel { Data = result, Success = true };
         }
