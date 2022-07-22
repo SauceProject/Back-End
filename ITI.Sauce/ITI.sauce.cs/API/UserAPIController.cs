@@ -7,6 +7,7 @@ using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -97,7 +98,7 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SignIn([FromBody] UserLoginViewModel model, string? returnUrl = null)
+        public async Task<ResultViewModel> SignIn([FromBody] UserLoginViewModel model, string? returnUrl = null)
         {
             if (ModelState.IsValid)
             {
@@ -111,13 +112,20 @@ namespace ITI.sauce.MVC.Controllers
                 {
 
 
-                    return new ObjectResult(new
-                    {
+                    //return new ObjectResult(new
+                    //{
 
-                        Token = token,
-                        ReturnUrl = returnUrl,
-                        Success = true
-                    });
+                    //    Token = token,
+                    //    ReturnUrl = returnUrl,
+                    //    Success = true
+                    //});
+                    var userId = UserRepo.getbyEmail(model.Email).Result.Id;
+                    return new ResultViewModel()
+                    {
+                        Data = new {UserId=userId, Token=token},
+                        Success = true,
+                        Message = "",
+                    };
                 }
             }
 
@@ -127,7 +135,7 @@ namespace ITI.sauce.MVC.Controllers
             foreach (var i in ModelState.Values)
                 foreach (var error in i.Errors)
                     errors.Add(error.ErrorMessage);
-            return new ObjectResult(errors);
+            return new ResultViewModel() { Data= errors };
         }
 
 
