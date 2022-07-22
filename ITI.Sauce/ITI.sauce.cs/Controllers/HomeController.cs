@@ -83,9 +83,6 @@ namespace ITI.sauce.MVC.Controllers
             {
                // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 ViewBag.ReataurantCount = RestaurantRepo.GetList().Where(v=>v.Vendor_ID ==userId).Count();
-
-
-
             }
 
             // return new ObjectResult(ViewBag);

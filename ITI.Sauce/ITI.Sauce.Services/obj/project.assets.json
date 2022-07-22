@@ -160,19 +160,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Bishoy\\.nuget\\packages\\": {}
+    "C:\\Users\\ECC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+      "projectUniqueName": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
       "projectName": "ITI.Sauce.Services",
-      "projectPath": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
-      "packagesPath": "C:\\Users\\Bishoy\\.nuget\\packages\\",
-      "outputPath": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
+      "projectPath": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+      "packagesPath": "C:\\Users\\ECC\\.nuget\\packages\\",
+      "outputPath": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Bishoy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ECC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
