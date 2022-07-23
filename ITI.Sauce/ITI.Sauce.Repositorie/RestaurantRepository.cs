@@ -60,7 +60,7 @@ namespace ITI.Sauce.Repository
                 IsDeleted = V.IsDeleted,
                 ImageUrl = V.ImageUrl,
                 Vendor_ID = V.Vendor_ID
-        }).ToPagedList(pageIndex, pageSize);
+            }).ToPagedList(pageIndex, pageSize);
             return result;
 
             //PaginingViewModel<List<RestaurantViewModel>>
@@ -76,9 +76,11 @@ namespace ITI.Sauce.Repository
 
         }
 
-            public IPagedList<RestaurantViewModel> Search(int pageIndex = 1, int pageSize = 2)
-                       =>
+        public IPagedList<RestaurantViewModel> Search(int pageIndex = 1, int pageSize = 2)
+                   =>
        GetList().Select(V => new RestaurantViewModel
+
+
        {
            ID = V.ID,
            FromDate = V.FromDate,
@@ -90,6 +92,7 @@ namespace ITI.Sauce.Repository
            ImageUrl = V.ImageUrl,
            Vendor_ID = V.Vendor_ID,
        }).ToPagedList(pageIndex, pageSize);
+
 
         public RestaurantViewModel Add(RestaurantEditViewModel model)
         {
@@ -237,7 +240,9 @@ namespace ITI.Sauce.Repository
             double val = res.Average(r => r.RatingValue);
             return val;
         }
-
-
     }
 }
+
+
+
+

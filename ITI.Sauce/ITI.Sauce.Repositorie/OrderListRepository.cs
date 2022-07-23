@@ -13,8 +13,11 @@ namespace ITI.Sauce.Repository
 {
     public class OrderListRepository : GeneralRepository<OrderList>
     {
-        public OrderListRepository(DBContext _Context) : base(_Context)
+        private readonly UnitOfWork unitOfWork;
+
+        public OrderListRepository(DBContext _Context,UnitOfWork _unitOfWork) : base(_Context)
         {
+            unitOfWork = _unitOfWork;
 
         }
         public PaginingViewModel<List<OrderListViewModel>> Get(int ID = 0, string orderBy = null
@@ -57,6 +60,14 @@ namespace ITI.Sauce.Repository
 
 
             return finalResult;
+        }
+
+        public OrderListViewModel Add(OrderListEditViewModel model)
+        {
+            var cart = model.ToModel();
+            var result = base.Add(cart);
+            unitOfWork.Save();
+            return result.Entity.ToViewModel();
         }
 
     }

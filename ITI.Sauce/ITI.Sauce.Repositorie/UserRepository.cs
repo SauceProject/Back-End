@@ -169,6 +169,10 @@ namespace ITI.Sauce.Repository
             Users Users = model.ToModel();
             return base.Add(Users).Entity.ToViewModel();
         }
+        public Task<Users> getbyEmail(string email)
+        {
+            return userManger.FindByNameAsync(email);
+        }
 
 
        
