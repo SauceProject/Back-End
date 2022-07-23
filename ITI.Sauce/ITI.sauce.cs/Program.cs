@@ -82,10 +82,10 @@ public class Program
         {
            Option.LoginPath = "/Users/SignIn";
         });
-        builder.Services.ConfigureApplicationCookie(Option =>
-        {
-           Option.LoginPath = "/Users/SignUp";
-        });
+        //builder.Services.ConfigureApplicationCookie(Option =>
+        //{
+        //   Option.LoginPath = "/Users/SignUp";
+        //});
     //   builder.Services.ConfigureApplicationCookie(Option =>
       // {
            // Option.LoginPath = "/UserAPI/SignIn";

@@ -38,24 +38,28 @@
             
                 @if (ViewBag.Flag == null)
                     ViewBag.Flag = false;
-                @if ((!ViewBag.Flag && this.User.HasClaim(c => c.Value == "Vendor")) || this.User.HasClaim(c => c.Value == "Admin") )
+                @if ((!ViewBag.Flag && this.User.HasClaim(c => c.Value == "Vendor"))  )
                 {
                     <!--View Recipes / Reviews / Orders-->
-                    <li><a asp-action="Search" asp-controller="Recipe" asp-route-vendorID="@userId">View Recipes </a></li>
-                    <li><a asp-action="Search" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
-                    <li><a asp-action="Search" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
-
+                    <li><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@userId">View Restaurant </a></li>
+                    <li><a asp-action="Get" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
+                    <li><a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
+                }
 
                     @if (this.User.HasClaim(c => c.Value == "Admin"))
                     {
-                        <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
+                        <li><a asp-action="Search" asp-controller="Recipe" >View Recipes </a></li>
+                    <li><a asp-action="Search" asp-controller="Rating" >View Reviews </a></li>
+                    <li><a asp-action="Search" asp-controller="Order" >View Orders </a></li>
                         <li><a asp-action="Search" asp-controller="Users">View Users </a></li>
-                        <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
                         <li><a asp-action="search" asp-controller="Vendor">View Vendors </a></li>
+                        <li><a asp-action="search" asp-controller="Ingredient">View Ingredients </a></li>
                         <li><a asp-action="Search" asp-controller="Category">View Category </a></li>
+                         <li><a asp-action="Add" asp-controller="Users">Add Users </a></li>
+                        <li><a asp-action="Add" asp-controller="Vendor">Add Vendors </a></li>
                         <li><a asp-action="Add" asp-controller="Recipe">Add Recipe for Website </a></li>
                     }
-                }
+                
             
 
 

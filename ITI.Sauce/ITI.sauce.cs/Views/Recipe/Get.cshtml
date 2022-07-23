@@ -42,12 +42,11 @@
 
 
 </style>
-@if (this.User.HasClaim(c => c.Value == "Vendor,Admin"))
-{
+
 
         <a asp-action="Add" asp-controller="Recipe" asp-route-ResturantId="@ViewBag.Resturant" id="btnA">Add</a>
-} 
-    <h2 style="margin:10px;">Recipe Table</h2>
+
+    <h2 style="margin:10px;">Recipe </h2>
     
 <table class="table">
   <tr style="background-color:#143444;">
@@ -57,7 +56,7 @@
     <th scope="col">Good For</th>
     <th scope="col">Image</th>
     <th scope="col">Category</th>
-    <th scope="col">Restaurant</th>
+   @* <th scope="col">Restaurant</th>*@
     <th  scope="col">Status</th>
     <th  scope="col">Actions</th>
   </tr>
@@ -69,22 +68,22 @@
     <td>@V.NameAR</td>
     <td>@V.Price</td>
     <td>@V.GoodFor</td>
-    <td> <img src="..@V.ImageUrl" width="100 px" height="100 px">   </td>
+    <td> <img src="..@V.ImageUrl" style="width:100px; height:100px;">   </td>
     <td>@V.CategoryName</td>
-    <td>@V.RestaurantName</td>
+   @* <td>@V.RestaurantName</td>*@
     <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
 
 
     <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
         <a asp-action="Update" asp-controller="Recipe" asp-route-Id="@V.ID"><i class="fa-solid fa-pen-to-square" style=" font-size:25px;  margin-right:10px;"></i> </a> |
              @if(@V.IsDeleted == false){
-             <a  asp-action="Remove" asp-controller="Recipe" asp-route-Id="@V.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-left:10px; font-size:25px;"></i>
+             <a  asp-action="Remove" asp-controller="Recipe" asp-route-RestaurantID="@V.ResturantID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-left:10px; font-size:25px;"></i>
 
 </a>
             }
            
              @if(@V.IsDeleted == true){
-        <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-Id="@V.ID"  ><i class="fa-solid fa-circle-check" style="margin-left:10px; font-size:25px;"></i>
+        <a asp-action="AcceptRecipe" asp-controller="Recipe" asp-route-RestaurantID="@V.ResturantID"   ><i class="fa-solid fa-circle-check" style="margin-left:10px; font-size:25px;"></i>
 </a>
             }
           

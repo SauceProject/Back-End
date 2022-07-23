@@ -36,8 +36,19 @@ namespace ITI.Sauce.MVC.API
             };
         }
 
+        public ResultViewModel GetDetails(int id)
+        {
+            var data = RecipeRepo.GetOne(
+               id);
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = data
+            };
+        }
 
-        
+
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)
         {
             return list.Select(i => new SelectListItem

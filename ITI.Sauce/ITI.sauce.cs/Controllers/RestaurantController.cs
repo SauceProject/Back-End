@@ -19,19 +19,19 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(string vendorID = "", int id = 0, DateTime? FromTime = null, DateTime? ToTime = null,
+        public IActionResult Get(string Vendor_ID = "", int id = 0, DateTime? FromTime = null, DateTime? ToTime = null,
             string NameEn = "", string NameAr = "", DateTime? registerDate = null,
             bool isDeleted = false, string orderby = "ID", bool isAscending = false,
             int pageIndex = 1, int pageSize = 20)
         {
             var Resultdata =
-                ResRepo.Get(vendorID, id, FromTime, ToTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
+                ResRepo.Get(Vendor_ID, id, FromTime, ToTime, NameEn, NameAr, registerDate, isDeleted, orderby, isAscending, pageIndex, pageSize);
             return View("Get", Resultdata);
         }
         //[Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
-           
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ViewBag.Reataurant = ResRepo.GetList().Where(v => v.Vendor_ID == userId);
             var Data = ResRepo.Search(pageIndex, pageSize);
@@ -77,7 +77,7 @@ namespace ITI.sauce.MVC.Controllers
 
             ResRepo.Add(model);
             UnitOfWork.Save();
-            return RedirectToAction("Search");
+            return RedirectToAction("Get");
         }
 
 
@@ -114,20 +114,36 @@ namespace ITI.sauce.MVC.Controllers
 
 
         [HttpGet]
-        public IActionResult Remove(RestaurantEditViewModel model, int ID)
+        public IActionResult Remove(RestaurantEditViewModel model, int ID, string Vendor_ID)
         {
 
             var res = ResRepo.Remove(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
-
+            //    if (!string.IsNullOrEmpty(Vendor_ID))
+            //    {
+            //        return RedirectToAction("Get", new { vVendor_ID = Vendor_ID });
+            //    }
+            //    else
+            //        return RedirectToAction("Get");
 
         }
-        public  IActionResult  AcceptRestaurant(RestaurantEditViewModel model, int ID)
+        public IActionResult AcceptRestaurant(RestaurantEditViewModel model, int ID, string Vendor_ID)
         {
+
             ResRepo.AcceptRestaurant(model, ID);
             UnitOfWork.Save();
             return RedirectToAction("Get");
+
+            //    if (!string.IsNullOrEmpty(Vendor_ID))
+            //{
+            //    return RedirectToAction("Get",new { Vendor_ID = Vendor_ID });
+            //}
+            //else
+            //    return RedirectToAction("Get");
+
+
+
 
         }
     }

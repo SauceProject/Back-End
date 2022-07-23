@@ -59,6 +59,10 @@ namespace ITI.Sauce.Repository
             {
                 filter = filter.Or(r => r.ResturantID == RestaurantID);
             }
+            if (CategoryID > 0)
+            {
+                filter = filter.Or(r => r.CategoryID == CategoryID );
+            }
             if (filter == oldFilter)
             {
                 filter = null;
@@ -82,6 +86,7 @@ namespace ITI.Sauce.Repository
                 RestaurantName = i.Restaurant.NameEN,
                 CategoryName = i.Category.NameEN,
                 ResturantID = i.ResturantID,
+              
             }).ToPagedList(pageIndex, pageSize);
             return result;
 
@@ -293,7 +298,7 @@ namespace ITI.Sauce.Repository
         double getRateByRecipeId(int id)
         {
             var res = rateRepo.Get(0, 0, id);
-            double val = res.Data.Average(r => r.RatingValue);
+           double val= res.Average(r => r.RatingValue);
             return val;
         }
 

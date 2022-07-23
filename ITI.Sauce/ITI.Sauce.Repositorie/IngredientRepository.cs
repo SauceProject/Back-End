@@ -16,7 +16,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<IngredientViewModel>> Get (int ID =0,string orderBy = null, 
+        public IPagedList<IngredientViewModel> Get (int ID =0,string orderBy = null, 
             bool isAscending = false , string NameEN = "",
             string NameAR = "", string ImageUrl="" ,int pageIndex=1, int pageSize= 20)
         {
@@ -44,19 +44,19 @@ namespace ITI.Sauce.Repository
                     NameEN = i.NameEN,
                     NameAR = i.NameAR,
                     ImageUrl = i.ImageUrl,
-                });
+                }).ToPagedList(pageIndex, pageSize);
 
-            PaginingViewModel<List<IngredientViewModel>>
-                finalResult = new PaginingViewModel<List<IngredientViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList(),
-                };
+            //PaginingViewModel<List<IngredientViewModel>>
+            //    finalResult = new PaginingViewModel<List<IngredientViewModel>>()
+            //    {
+            //        PageIndex = pageIndex,
+            //        PageSize = pageSize,
+            //        Count = base.GetList().Count(),
+            //        Data = result.ToList(),
+            //    };
 
 
-            return finalResult;
+            return result;
         }
 
         public IPagedList<IngredientViewModel> Search(int pageIndex = 1, int pageSize = 2)
@@ -77,12 +77,6 @@ namespace ITI.Sauce.Repository
             return base.Add(ingredient).Entity.ToViewModel();
         }
 
-
-
-
-
-
-
         public IngredientViewModel Update(IngredientEditViewModel model)
         {
 
@@ -102,9 +96,6 @@ namespace ITI.Sauce.Repository
         }
         public IngredientViewModel GetOne(int _ID = 0)
         {
-
-
-
             var filterd = PredicateBuilder.New<Ingredient>();
             var old = filterd;
             if (_ID > 0)

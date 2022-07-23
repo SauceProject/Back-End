@@ -95,9 +95,6 @@ namespace ITI.Sauce.Repository
         }
         public CategoryViewModel GetOne(int _ID = 0)
         {
-
-
-
             var filterd = PredicateBuilder.New<Category>();
             var old = filterd;
             if (_ID > 0)
@@ -114,8 +111,6 @@ namespace ITI.Sauce.Repository
 
 
         }
-
-
 
         public CategoryViewModel Remove(CategoryEditViewModel model)
         {

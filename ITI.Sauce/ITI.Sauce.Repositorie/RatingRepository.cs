@@ -18,7 +18,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<RatingViewModel>> Get(int id = 0,
+        public IPagedList<RatingViewModel> Get(int id = 0,
                     int RatingValue = 0,int? RecipeId=null,
                 string orderby = "", bool isAscending = false, int pageIndex = 1,
                         int pageSize = 20)
@@ -41,19 +41,19 @@ namespace ITI.Sauce.Repository
             {
                 RatingID = V.RatingID,
                 RatingValue = V.RatingValue
-            });
+            }).ToPagedList(pageIndex, pageSize); ;
 
-            PaginingViewModel<List<RatingViewModel>>
-                finalResult = new PaginingViewModel<List<RatingViewModel>>()
-                {
-                    PageIndex = pageIndex,
-                    PageSize = pageSize,
-                    Count = base.GetList().Count(),
-                    Data = result.ToList()
-                };
+            //PaginingViewModel<List<RatingViewModel>>
+            //    finalResult = new PaginingViewModel<List<RatingViewModel>>()
+            //    {
+            //        PageIndex = pageIndex,
+            //        PageSize = pageSize,
+            //        Count = base.GetList().Count(),
+            //        Data = result.ToList()
+            //    };
 
 
-            return finalResult;
+            return result;
         }
         public IPagedList<RatingViewModel> Search(int pageIndex = 1, int pageSize = 2)
                     =>

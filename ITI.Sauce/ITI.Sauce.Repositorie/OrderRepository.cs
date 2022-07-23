@@ -19,7 +19,7 @@ namespace ITI.Sauce.Repository
         {
 
         }
-        public PaginingViewModel<List<OrderViewModel>> Get(int ID = 0, string orderBy = null
+        public IPagedList<OrderViewModel> Get(int ID = 0, string orderBy = null
             , bool isAscending = false, string UserId = "", DateTime? registerDate =null 
             ,int pageIndex = 1, int pageSize = 20)
                     
@@ -48,19 +48,19 @@ namespace ITI.Sauce.Repository
                 IsDeleted=i.IsDeleted,
                 OrderDate=i.OrderDate,
 
-            });
+            }).ToPagedList(pageIndex, pageSize);
 
-            PaginingViewModel<List<OrderViewModel>>
-               finalResult = new PaginingViewModel<List<OrderViewModel>>()
-               {
-                   PageIndex = pageIndex,
-                   PageSize = pageSize,
-                   Count = base.GetList().Count(),
-                   Data = result.ToList()
-               };
+            //PaginingViewModel<List<OrderViewModel>>
+            //   finalResult = new PaginingViewModel<List<OrderViewModel>>()
+            //   {
+            //       PageIndex = pageIndex,
+            //       PageSize = pageSize,
+            //       Count = base.GetList().Count(),
+            //       Data = result.ToList()
+            //   };
 
 
-            return finalResult;
+            return result;
         }
 
         public IPagedList<OrderViewModel> Search(int pageIndex = 1, int pageSize = 2)

@@ -1,254 +1,295 @@
-﻿
-@using ITI.Sauce.ViewModels
+﻿@using ITI.Sauce.ViewModels
 @model UserEditViewModel
 
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Dashboard</title>	
+    <title>Admin Dashboard</title>
 
-  <style>
-       body{
-	margin:0;
-	color:#6a6f8c;
-	background:#c8c8c8;
-	font:600 16px/18px 'Open Sans',sans-serif;
-}
-*,:after,:before{box-sizing:border-box}
-.clearfix:after,.clearfix:before{content:'';display:table}
-.clearfix:after{clear:both;display:block}
-a{color:inherit;text-decoration:none}
+    <style>
+        body {
+            margin: 0;
+            color: #6a6f8c;
+            background: #c8c8c8;
+            font: 600 16px/18px 'Open Sans',sans-serif;
+        }
 
-.login-wrap{
-	width:100%;
-	margin:auto;
-	max-width:525px;
-	min-height:720px;
-	position:relative;
-	background:url(~/Content/Images/ss.png) no-repeat center;
-	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
-}
-.login-html{
-	width:100%;
-	height:100%;
-	position:absolute;
-	padding:90px 70px 50px 70px;
-	background:rgba(40,57,101,.9);
-}
-.login-html .sign-in-htm,
-.login-html .sign-up-htm{
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
-	position:absolute;
-	transform:rotateY(180deg);
-	backface-visibility:hidden;
-	transition:all .4s linear;
-}
-.login-html .sign-in,
-.login-html .sign-up,
-.login-form .group .check{
-	display:none;
-}
-.login-html .tab,
-.login-form .group .label,
-.login-form .group .button{
-	text-transform:uppercase;
-}
-.login-html .tab{
-	font-size:22px;
-	margin-right:15px;
-	padding-bottom:5px;
-	margin:0 15px 10px 0;
-	display:inline-block;
-	border-bottom:2px solid transparent;
-}
-.login-html .sign-in:checked + .tab,
-.login-html .sign-up:checked + .tab{
-	color:#fff;
-	border-color:#1161ee;
-}
-.login-form{
-	min-height:345px;
-	position:relative;
-	perspective:1000px;
-	transform-style:preserve-3d;
-}
-.login-form .group{
-	margin-bottom:15px;
-}
-.login-form .group .label,
-.login-form .group .input,
-.login-form .group .button{
-	width:100%;
-	color:#fff;
-	display:block;
-}
-.login-form .group .input ,
-.login-form .group .button{
-	border:none;
-	padding:15px 20px;
-	border-radius:25px;
-	background:rgba(255,255,255,.1);
-}
-.login-form .group input[data-type="password"]{
-	text-security:circle;
-	-webkit-text-security:circle;
-}
-.login-form .group .label{
-	color:#aaa;
-	font-size:12px;
-}
-.login-form .group .button{
-	background:#1161ee;
-}
-.login-form .group label .icon{
-	width:15px;
-	height:15px;
-	border-radius:2px;
-	position:relative;
-	display:inline-block;
-	background:rgba(255,255,255,.1);
-}
-.login-form .group label .icon:before,
-.login-form .group label .icon:after{
-	content:'';
-	width:10px;
-	height:2px;
-	background:#fff;
-	position:absolute;
-	transition:all .2s ease-in-out 0s;
-}
-.login-form .group label .icon:before{
-	left:3px;
-	width:5px;
-	bottom:6px;
-	transform:scale(0) rotate(0);
-}
-.login-form .group label .icon:after{
-	top:6px;
-	right:0;
-	transform:scale(0) rotate(0);
-}
-.login-form .group .check:checked + label{
-	color:#fff;
-}
-.login-form .group .check:checked + label .icon{
-	background:#1161ee;
-}
-.login-form .group .check:checked + label .icon:before{
-	transform:scale(1) rotate(45deg);
-}
-.login-form .group .check:checked + label .icon:after{
-	transform:scale(1) rotate(-45deg);
-}
-.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
-	transform:rotate(0);
-}
-.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
-	transform:rotate(0);
-}
+        *, :after, :before {
+            box-sizing: border-box
+        }
 
-.hr{
-	height:2px;
-	margin:60px 0 50px 0;
-	background:rgba(255,255,255,.2);
-}
-.foot-lnk{
-	text-align:center;
-}
-  </style>
+        .clearfix:after, .clearfix:before {
+            content: '';
+            display: table
+        }
+
+        .clearfix:after {
+            clear: both;
+            display: block
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .login-wrap {
+            width: 100%;
+            margin: auto;
+            max-width: 525px;
+            min-height: 720px;
+            position: relative;
+            background: url(~/Content/Images/ss.png) no-repeat center;
+            box-shadow: 0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+        }
+
+        .login-html {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            padding: 90px 70px 50px 70px;
+            background: rgba(40,57,101,.9);
+        }
+
+            .login-html .sign-in-htm,
+            .login-html .sign-up-htm {
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                position: absolute;
+                transform: rotateY(180deg);
+                backface-visibility: hidden;
+                transition: all .4s linear;
+            }
+
+            .login-html .sign-in,
+            .login-html .sign-up,
+            .login-form .group .check {
+                display: none;
+            }
+
+            .login-html .tab,
+            .login-form .group .label,
+            .login-form .group .button {
+                text-transform: uppercase;
+            }
+
+            .login-html .tab {
+                font-size: 22px;
+                margin-right: 15px;
+                padding-bottom: 5px;
+                margin: 0 15px 10px 0;
+                display: inline-block;
+                border-bottom: 2px solid transparent;
+            }
+
+            .login-html .sign-in:checked + .tab,
+            .login-html .sign-up:checked + .tab {
+                color: #fff;
+                border-color: #1161ee;
+            }
+
+        .login-form {
+            min-height: 345px;
+            position: relative;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+            .login-form .group {
+                margin-bottom: 15px;
+            }
+
+                .login-form .group .label,
+                .login-form .group .input,
+                .login-form .group .button {
+                    width: 100%;
+                    color: #fff;
+                    display: block;
+                }
+
+                .login-form .group .input,
+                .login-form .group .button {
+                    border: none;
+                    padding: 15px 20px;
+                    border-radius: 25px;
+                    background: rgba(255,255,255,.1);
+                }
+
+                .login-form .group input[data-type="password"] {
+                    text-security: circle;
+                    -webkit-text-security: circle;
+                }
+
+                .login-form .group .label {
+                    color: #aaa;
+                    font-size: 12px;
+                }
+
+                .login-form .group .button {
+                    background: #1161ee;
+                }
+
+                .login-form .group label .icon {
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 2px;
+                    position: relative;
+                    display: inline-block;
+                    background: rgba(255,255,255,.1);
+                }
+
+                    .login-form .group label .icon:before,
+                    .login-form .group label .icon:after {
+                        content: '';
+                        width: 10px;
+                        height: 2px;
+                        background: #fff;
+                        position: absolute;
+                        transition: all .2s ease-in-out 0s;
+                    }
+
+                    .login-form .group label .icon:before {
+                        left: 3px;
+                        width: 5px;
+                        bottom: 6px;
+                        transform: scale(0) rotate(0);
+                    }
+
+                    .login-form .group label .icon:after {
+                        top: 6px;
+                        right: 0;
+                        transform: scale(0) rotate(0);
+                    }
+
+                .login-form .group .check:checked + label {
+                    color: #fff;
+                }
+
+                    .login-form .group .check:checked + label .icon {
+                        background: #1161ee;
+                    }
+
+                        .login-form .group .check:checked + label .icon:before {
+                            transform: scale(1) rotate(45deg);
+                        }
+
+                        .login-form .group .check:checked + label .icon:after {
+                            transform: scale(1) rotate(-45deg);
+                        }
+
+        .login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm {
+            transform: rotate(0);
+        }
+
+        .login-html .sign-up:checked + .tab + .login-form .sign-up-htm {
+            transform: rotate(0);
+        }
+
+        .hr {
+            height: 2px;
+            margin: 60px 0 50px 0;
+            background: rgba(255,255,255,.2);
+        }
+
+        .foot-lnk {
+            text-align: center;
+        }
+    </style>
 </head>
-<body >
-@*  <div class="container" style="width:700px; margin-left:300px;">
-<form asp-action="SignUp" asp-controller="Users" method="post">
-    <h1 style="margin-top:0px;">Register</h1>
-    <p>Please fill in this form to Register an account.</p>
-     <div asp-validation-summary="ModelOnly" style="color:red" ></div>
-    <hr>
+<body>
+    @*  <div class="container" style="width:700px; margin-left:300px;">
+        <form asp-action="SignUp" asp-controller="Users" method="post">
+        <h1 style="margin-top:0px;">Register</h1>
+        <p>Please fill in this form to Register an account.</p>
+        <div asp-validation-summary="ModelOnly" style="color:red" ></div>
+        <hr>
 
 
-    <label asp-for="NameEN"> NameEN</label>
-    <input  asp-for="NameEN">
-    <span asp-validation-for="NameEN" style="color:red"></span>
-    <br />
-    <label asp-for="NameAR"> NameAR</label>
-    <input  asp-for="NameAR">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-    <br />
-    <label asp-for="phone"> phone</label>
-    <input  asp-for="phone">
-    <span asp-validation-for="phone" style="color:red"></span>
-    <br />
-    <label asp-for="Email"> Email</label>
-    <input  asp-for="Email">
-    <span asp-validation-for="Email" style="color:red"></span>
-    <br />
-    <label asp-for="Password"> Password</label>
-    <input  asp-for="Password">
-    <span asp-validation-for="Password" style="color:red"></span>
-    <br />
-    <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
-    <input  asp-for="ConfirnmPassword">
-    <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
-
-      
-    <select asp-for="Role" asp-items="@ViewBag.Roles"  ></select>
-      
-    
-
-    <button id="btnAdd" type="submit" value="Register">Register</button>
-</form>
-  </div>*@
+        <label asp-for="NameEN"> NameEN</label>
+        <input  asp-for="NameEN">
+        <span asp-validation-for="NameEN" style="color:red"></span>
+        <br />
+        <label asp-for="NameAR"> NameAR</label>
+        <input  asp-for="NameAR">
+        <span asp-validation-for="NameAR" style="color:red"></span>
+        <br />
+        <label asp-for="phone"> phone</label>
+        <input  asp-for="phone">
+        <span asp-validation-for="phone" style="color:red"></span>
+        <br />
+        <label asp-for="Email"> Email</label>
+        <input  asp-for="Email">
+        <span asp-validation-for="Email" style="color:red"></span>
+        <br />
+        <label asp-for="Password"> Password</label>
+        <input  asp-for="Password">
+        <span asp-validation-for="Password" style="color:red"></span>
+        <br />
+        <label asp-for="ConfirnmPassword"> ConfirnmPassword</label>
+        <input  asp-for="ConfirnmPassword">
+        <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
 
 
-  <form class="login-form" asp-action="SignUp" asp-controller="Users" method="post">
-	  <div class="login-wrap">
+        <select asp-for="Role" asp-items="@ViewBag.Roles"  ></select>
+
+
+
+        <button id="btnAdd" type="submit" value="Register">Register</button>
+        </form>
+        </div>*@
+
+
+    <form class="login-form" asp-action="SignUp" asp-controller="Users" method="post">
+        <div class="login-wrap">
             <div class="login-html">
-                <input id="tab-2" type="radio" name="tab" class="sign-in" >
-                <label for="tab-2" class="tab"><a  asp-action="SignIn" asp-controller="Users">SignIn</a></label>
+                <input id="tab-2" type="radio" name="tab" class="sign-in">
+                <label for="tab-2" class="tab"><a asp-action="SignIn" asp-controller="Users">SignIn</a></label>
                 <input id="tab-1" type="radio" name="tab" class="sign-in" checked>
-                <label style="color:white;" for="tab-1" class="tab" > <a  asp-action="SignUp" asp-controller="Users">SignUp</a>
-</label>
-@*<div class="sign-up-htm">*@
-                        <div class="group">
-                            <label asp-for="NameEN" for="user" class="label">NameEN</label>
-                            <input asp-for="NameEN" id="user" type="text" class="input">
-    <span asp-validation-for="NameEN" style="color:red"></span>
+                <label style="color:white;" for="tab-1" class="tab">
+                    <a asp-action="SignUp" asp-controller="Users">SignUp</a>
+                </label>
+                @*<div class="sign-up-htm">*@
+                <div class="group">
+                    <label asp-for="NameEN" for="user" class="label">NameEN</label>
+                    <input asp-for="NameEN" id="user" type="text" class="input">
+                    <span asp-validation-for="NameEN" style="color:red"></span>
+
+                </div>
+                <div class="group">
+                    <label asp-for="NameAR" for="user" class="label"> NameAR</label>
+                    <input asp-for="NameAR" id="user" type="text" class="input">
+                    <span asp-validation-for="NameAR" style="color:red"></span>
+                </div>
+                <div class="group">
+                    <label asp-for="phone" for="user" class="label"> Phone</label>
+                    <input asp-for="phone" id="user" type="text" class="input">
+                    <span asp-validation-for="NameAR" style="color:red"></span>
+                </div>
+                <div class="group">
+                    <label asp-for="Email" for="user" class="label">Email</label>
+                    <input asp-for="Email" id="user" type="text" class="input">
+                    <span asp-validation-for="Email" style="color:red"></span>
+                </div>
+                <div class="group">
+                    <label asp-for="Password" for="pass" class="label">Password</label>
+                    <input asp-for="Password" id="pass" type="password" class="input" data-type="password">
+                    <span asp-validation-for="Password" style="color:red"></span>
+                </div>
+
+                <div class="group">
+                    <label asp-for="ConfirnmPassword" for="pass" class="label">Confirm Password</label>
+                    <input asp-for="ConfirnmPassword" id="pass" type="password" class="input" data-type="password">
+                    <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
 
                         </div>
-						<div class="group">
-	  <label asp-for="NameAR" for="user" class="label"> NameAR</label>
-    <input  asp-for="NameAR" id="user" type="text" class="input">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-							</div>
-							<div class="group">
-	  <label asp-for="phone" for="user" class="label"> Phone</label>
-    <input  asp-for="phone" id="user" type="text" class="input">
-    <span asp-validation-for="NameAR" style="color:red"></span>
-							</div>
-							 <div class="group">
-                           <label asp-for="Email" for="user" class="label">Email</label>
-                            <input asp-for="Email" id="user" type="text" class="input">
-    <span asp-validation-for="Email" style="color:red"></span>
-                        </div>
-                        <div class="group">
-							<label asp-for="Password" for="pass" class="label">Password</label>
-                            <input asp-for="Password"  id="pass" type="password" class="input" data-type="password">
-    <span asp-validation-for="Password" style="color:red"></span>
-                        </div>
-						
-                        <div class="group">
-                            <label asp-for="ConfirnmPassword" for="pass" class="label">Confirm Password</label>
-                            <input asp-for="ConfirnmPassword" id="pass" type="password" class="input" data-type="password">
-    <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
-
-                        </div>
-                       
-						<div class="group">
+				
+@*    <input  asp-for="IsDeleted"  type="hidden" value="true">
+*@					
+				<div class="group">
                            <label  for="user" class="label">Role</label>
     <select style="width:100%; height:40px;border-radius:25px;background:rgba(255,255,255,.1);" asp-for="Role" asp-items="@ViewBag.Roles" id="user" ></select>
 						</div>

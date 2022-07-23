@@ -30,17 +30,19 @@ namespace ITI.sauce.MVC.Controllers
         public IActionResult Get(int ID=0,string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
-            int pageIndex = 1, int pageSize = 20 , int RestaurantID = 0)
+            int pageIndex = 1, int pageSize = 20 , int RestaurantID = 0,int CategoryID=0)
         {
             var data = RecipeRepo.Get(
                 ID,NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
                 isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
             ViewBag.Resturant = RestaurantID;
+            ViewBag.Category = CategoryID;
             return View(data);
         }
         //[Authorize(Roles = "Admin,Vendor")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
+
             var result = RecipeRepo.Search(pageIndex, pageSize);
             return View("Get", result);
 
@@ -138,19 +140,35 @@ namespace ITI.sauce.MVC.Controllers
             return RedirectToAction("Get");
            
         }
-        public IActionResult Remove(RecipeEditViewModel model, int ID)
+        public IActionResult Remove(RecipeEditViewModel model, int ID , int RestaurantID)
         {
             RecipeRepo.Remove(model,ID);
             UnitOfWork.Save();
-            return RedirectToAction("Search");
-
+            //return RedirectToAction("Get" , RestaurantID);
+            if (RestaurantID > 0)
+            {
+                return RedirectToAction("Get", new { RestaurantID = RestaurantID });
+            }
+            else
+            {
+                return RedirectToAction("Get");
+            }
 
         }
-        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID)
+        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID , int RestaurantID)
         {
+           
             RecipeRepo.AcceptRecipe(model, ID);
             UnitOfWork.Save();
-            return RedirectToAction("Search");
+            //return RedirectToAction("Get", RestaurantID);
+            if (RestaurantID > 0)
+            {
+                return RedirectToAction("Get",new { RestaurantID = RestaurantID } );
+            }
+            else 
+            {
+                return RedirectToAction("Get");
+            }
         }
 
 
