@@ -1,17 +1,104 @@
 ﻿@using ITI.Sauce.ViewModels
+@using ITI.Sauce.Models
+@using ITI.Sauce.ViewModels
+
+
+@using Microsoft.AspNetCore.Identity;
 @model IPagedList<VendorViewModel>
 
 
-	<h1>HI Table</h1>
+    @{
+    var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+    var userId = claim.Value;
+}
+    <style>
+        section{
+            margin-top:3rem;
+    display:flex;
+    gap:1rem;
+        }
+     .memper:nth-child(1){
+       background-color:#143444 ;
+    color: #ed8b05;
+    width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+ 
+
+    }
+
+    .memper h3{
+         font-size: 6rem;
+    }
+    .memper h5{
+         font-size: 2.1rem;
+        font-weight:bold;
+    }
+    .memper h6 {
+        font-size: 1.5rem;
+        font-weight:bold;
+    }
+    .memper p{
+         color:#fff
+    }
+   
+    .memper:nth-child(2){
+         background-color: #143444 ;
+    color: #FFD700;
+    width:  300px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+
+    }
+
+    .memper:nth-child(3){
+          background-color: #143444;
+    color: #C0C0C0;
+    width:  300px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    }
+
+    .memper:nth-child(4){
+         background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 300px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    }
+</style>
+
+
 	  @if(!(@ViewBag.vendorMemberships ==null))
             {
-            <ul style="list-style-type: none;">
+            <section >
             @foreach(var i in @ViewBag.vendorMemberships)
-            { <li>@i</li>
+            {
+                @* <div class="memper" >@i.TypeEn</div>
+             <div class="memper" >@i.OrderNum</div>
+             <div class="memper" >@i.Price</div>*@
+
+                <div class="memper">
+                    <h3 ><i class="fa-solid fa-medal"></i></h3>
+                    <h5 >@i.TypeEn</h5>
+                    <h6>For @i.OrderNum Orders</h6>
+                    <p><i class="fa-solid fa-dollar-sign"></i> @i.Price </p>
+                
+                </div>
+           
+
             }
-            </ul>
+            </section>
             }
             else
             {
-                <p>none</p>
+                <div>none</div>
             }

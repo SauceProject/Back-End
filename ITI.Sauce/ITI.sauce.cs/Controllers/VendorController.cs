@@ -14,6 +14,8 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UnitOfWork UnitOfWork;
         private readonly Vendor_MembershipRepository vendorMemberRepo;
         private readonly MemberShipRepository memberShipRepository;
+    
+
 
 
 
@@ -139,10 +141,15 @@ namespace ITI.sauce.MVC.Controllers
 
         public IActionResult GetMemberships(string VendorID)
         {
+            ViewBag.Bronze = memberShipRepository.GetList().FirstOrDefault(i => i.TypeEn == "Bronze");
+            ViewBag.Silver = memberShipRepository.GetList().FirstOrDefault(i => i.TypeEn == "Silver");
+            ViewBag.Golden = memberShipRepository.GetList().FirstOrDefault(i => i.TypeEn == "Golden");
+            ViewBag.Free = memberShipRepository.GetList().FirstOrDefault(i => i.TypeEn == "Free");
             var m = vendorRepo.GetOne(VendorID);
-            ViewBag.vendorMemberships = m.MemberShipsNames;
+            ViewBag.vendorMemberships = m.MemberShips;
+          
 
-            return View();
+                return View();
         }
 
 

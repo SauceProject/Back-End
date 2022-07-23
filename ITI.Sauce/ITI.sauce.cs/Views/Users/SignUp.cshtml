@@ -247,8 +247,10 @@ a{color:inherit;text-decoration:none}
     <span asp-validation-for="ConfirnmPassword" style="color:red"></span>
 
                         </div>
-                       
-						<div class="group">
+				
+    <input  asp-for="IsDeleted"  type="hidden" value="true">
+					
+				<div class="group">
                            <label  for="user" class="label">Role</label>
     <select style="width:100%; height:40px;border-radius:25px;background:rgba(255,255,255,.1);" asp-for="Role" asp-items="@ViewBag.Roles" id="user" ></select>
 						</div>

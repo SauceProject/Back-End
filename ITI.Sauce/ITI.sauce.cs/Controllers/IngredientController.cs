@@ -24,7 +24,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
-        public ViewResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
+        public IActionResult Get(int ID = 0, string orderBy = null, bool isAscending = false, string NameEN = "",
             string NameAR = "", string ImageUrl = "", int pageIndex = 1, int pageSize = 20)
         {
             var data =
@@ -32,7 +32,11 @@ namespace ITI.sauce.MVC.Controllers
 
             return View(data);
         }
-
+        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
+        {
+            var Data = IngrRepo.Search(pageIndex, pageSize);
+            return View("Get", Data);
+        }
         [HttpGet]
         public IActionResult Add()
         {

@@ -65,7 +65,7 @@ namespace ITI.Sauce.Repository
                 Email = V.User.Email,
                 IsDeleted = V.IsDeleted,
                 phones = V.User.PhoneNumber,
-                MemberShipsNames= getMemberShipName(V.Vendor_MemberShips),
+                MemberShips= getMemberShipName(V.Vendor_MemberShips),
 
             }).ToList();
 
@@ -75,7 +75,7 @@ namespace ITI.Sauce.Repository
                     PageIndex = pageIndex,
                     PageSize = pageSize,
                     Count = base.GetList().Count(),
-                    Data = result
+                    Data = result,
                 };
 
 
@@ -148,7 +148,7 @@ namespace ITI.Sauce.Repository
                 Email = query.User.Email,
                 phones = query.User.PhoneNumber,
 
-                MemberShipsNames = getMemberShipName(query.Vendor_MemberShips),
+                MemberShips = getMemberShipName(query.Vendor_MemberShips),
 
 
             }; ;
@@ -186,12 +186,12 @@ public VendorViewModel AcceptVendor (string ID)
 
 
 
-    List<string> getMemberShipName(List<Vendor_MemberShip> vendorMemberShips)
+    List<MemberShipViewModel> getMemberShipName(List<Vendor_MemberShip> vendorMemberShips)
     {
-            var res = new List<string>();
+            var res = new List<MemberShipViewModel>();
             foreach(var item in vendorMemberShips)
             {
-                res.Add(memberShipRepository.GetOne(item.MemberShip_ID).TypeEn);
+                res.Add(memberShipRepository.GetOne(item.MemberShip_ID));
             }
            return res;
     }

@@ -151,11 +151,14 @@ namespace ITI.Sauce.Repository
             var old = filterd;
 
             filterd = filterd.Or(c => c.ID == model.ID);
+            //if (old == filterd)
+            //    filterd = null;
 
 
             var Result = base.GetByID(filterd);
 
             Result.IsDeleted = true;
+
 
             return Result.ToViewModel();
 
@@ -231,7 +234,7 @@ namespace ITI.Sauce.Repository
         double getRateByRecipeId(int id)
         {
             var res = rateRepo.Get(0, 0, id);
-            double val = res.Data.Average(r => r.RatingValue);
+            double val = res.Average(r => r.RatingValue);
             return val;
         }
 

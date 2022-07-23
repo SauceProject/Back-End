@@ -55,14 +55,14 @@
     text-align:center;
 }
 </style>
+   
 
 <body>
 
     <h2>Category</h2>
-            @if(this.User.HasClaim(c => c.Value=="Vendor")) 
-       {
-        <a asp-action="Add" asp-controller="Restaurant" id="btnA">Add</a>
-       }
+      
+        <a asp-action="Add" asp-controller="Category" id="btnA">Add</a>
+    
     <table>
         <tr>
             <th>ID</th>
@@ -81,7 +81,7 @@
                 <td>@c.ID</td>
                 <td>@c.NameEN</td>
                 <td>@c.NameAR</td>
-                <td><a asp-action="search" asp-controller="Recipe" asp-route-ID="@c.ID" id="Resbtn"> Recipe </a></td>
+                <td><a asp-action="Get" asp-controller="Recipe" asp-route-CategoryID="@c.ID" id="Resbtn"> Recipe </a></td>
                 <td><a asp-action="Update" asp-controller="Category" asp-route-Id="@c.ID"> <i class="fa-solid fa-pen-to-square" style=" font-size:20px;"></i> </a>|
 
                <a asp-controller="Category" asp-action="Remove"   asp-route-id="@c.ID" ><i class="fa-solid fa-trash" style="color:red; font-size:20px;"></i></a></td>

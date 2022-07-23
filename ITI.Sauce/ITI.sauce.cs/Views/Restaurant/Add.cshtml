@@ -60,7 +60,7 @@
     @section StyleSection{
     <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css" />
     }
-    <h3>Add to Restaurants Table</h3>
+    <h3>Add to Restaurants </h3>
     <div>
         <form method="post" enctype="multipart/form-data" asp-action="Add" asp-controller="Restaurant">
             <label asp-for="FromDate "> FromDate </label>
@@ -70,16 +70,16 @@
             <label asp-for="ToDate "> ToDate </label>
             <input asp-for="ToDate ">
             <span asp-validation-for="ToDate " style="color:red"></span>
-            <br />
+            @*<br />
             <input hidden asp-for="Vendor_ID">
          
-            <br >
-         <label asp-for="Vendor_ID"> Vendor_ID </label>
-    <select asp-for="Vendor_ID" asp-items="@ViewBag.Restaurants">
-        <option selected>Choose an option</option>                 
-    </select>
-    <span data-ajax="true" asp-validation-for="Vendor_ID" style="color:red"></span>
-    <br />
+            <br >*@
+@*         <label asp-for="Vendor_ID"> Vendor_ID </label>
+*@    <input type="hidden" asp-for="Vendor_ID" asp-items="@ViewBag.Restaurants">
+@*        <option selected>Choose an option</option>                 
+*@    </input>
+@*    <span data-ajax="true" asp-validation-for="Vendor_ID" style="color:red"></span>
+*@    <br />
             <br >
             <label asp-for="NameEN"> NameEN</label>
             <input asp-for="NameEN">

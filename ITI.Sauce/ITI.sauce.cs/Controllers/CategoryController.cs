@@ -22,7 +22,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
         }
 
-        [Authorize(Roles = "User,Vendor")]
+        //[Authorize(Roles = "User,Vendor")]
 
         public IActionResult Get (int ID =0 ,string orderBy = null, bool isAscending = false , string NameEN = "",
             string NameAR = "",int pageIndex = 1 , int pageSize = 20 )

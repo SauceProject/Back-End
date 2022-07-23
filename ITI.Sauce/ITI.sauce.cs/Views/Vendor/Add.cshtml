@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="~/Content/CSS/AddGeneralToDB.css"/>
 }
 
-<h3>Add to Vendor Table</h3>
+<h3>Add to Vendor </h3>
 
 <div>
   <form data-ajax="true" method="post" asp-action="Add" asp-controller="Vendor">
@@ -28,6 +28,8 @@
     <input  asp-for="Email">
     <span asp-validation-for="Email" style="color:red"></span>
     <br />
+    	
+   		
     <label asp-for="Password"> Password</label>
     <input  asp-for="Password">
     <span asp-validation-for="Password" style="color:red"></span>
@@ -44,7 +46,8 @@
 
     <input type=" hidden" asp-for="Role">
 
-
+    <input  asp-for="IsDeleted"  checked >
+     
     <input type="submit" value="Add">
   </form>
 </div>

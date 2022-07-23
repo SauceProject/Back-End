@@ -52,11 +52,23 @@
 
 
 }
+.Free{
+    background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+ 
+}
+
 .memcards{
     margin-top:3rem;
     display:flex;
-    gap:1rem
+    gap:1rem;
+
 }
+
 .memcards h3 {
         font-size: 6rem;
     }
@@ -91,19 +103,61 @@
 
 
     }
+
+
+   /* div:nth-child(1){
+          background-color:#143444 ;
+    color: #ed8b05;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+
+    }
+
+    div:nth-child(2){
+         background-color: #143444;
+    color: #FFD700;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+
+    }
+
+    div:nth-child(3){
+          background-color: #143444;
+    color: #C0C0C0;
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    }
+
+    div:nth-child(4){
+ background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 35%;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    }*/
 </style>
 
-@{
+
     
-//For Not Accepted Vendors
-@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
+@*//For Not Accepted Vendors
+*@@if(this.User.HasClaim(c => c.Value=="Vendor") && ViewBag.Flag )
 {
             <div class="memcards">
              <div class="bronze">
                     <h3><i class="fa-solid fa-medal"></i></h3>
                     <h5>@ViewBag.Bronze.TypeEn</h5>
                     <h6>For @ViewBag.Bronze.OrderNum Orders</h6>
-                    <p>@ViewBag.Bronze.Price EGP</p>
+                    <p><i class="fa-solid fa-dollar-sign"></i> @ViewBag.Bronze.Price </p>
                     <a asp-action="AddMemberShip" asp-controller="Vendor" 
                     asp-route-membershipid="@ViewBag.Bronze.ID"
                     asp-route-id="@userId">Subscribe</a>
@@ -112,7 +166,7 @@
                     <h3><i class="fa-solid fa-medal"></i></h3>
                     <h5>@ViewBag.Silver.TypeEn</h5>
                     <h6>For @ViewBag.Silver.OrderNum Orders </h6>
-                    <p>@ViewBag.Silver.Price EGP</p>
+                    <p><i class="fa-solid fa-dollar-sign"></i> @ViewBag.Silver.Price </p>
                     <a asp-action="AddMemberShip" asp-controller="Vendor" 
                     asp-route-membershipid="@ViewBag.Silver.ID"
                     asp-route-id="@userId">Subscribe</a>
@@ -121,27 +175,37 @@
                     <h3><i class="fa-solid fa-medal"></i></h3>
                     <h5>@ViewBag.Golden.TypeEn</h5>
                     <h6>For @ViewBag.Golden.OrderNum Orders</h6>
-                    <p>@ViewBag.Golden.Price EGP</p>
+                    <p><i class="fa-solid fa-dollar-sign"></i> @ViewBag.Golden.Price </p>
                     <a asp-action="AddMemberShip" asp-controller="Vendor"
                     asp-route-membershipid="@ViewBag.Golden.ID"
                     asp-route-id="@userId">Subscribe</a>
                 </div>
-
-            </div>
+                 <div class="Free">
+                    <h3><i class="fa-solid fa-medal"></i></h3>
+                    <h5>@ViewBag.Free.TypeEn</h5>
+                    <h6>For @ViewBag.Free.OrderNum Orders</h6>
+                    <p><i class="fa-solid fa-dollar-sign"></i> @ViewBag.Free.Price</p>
+                    <a asp-action="AddMemberShip" asp-controller="Vendor"
+                    asp-route-membershipid="@ViewBag.Free.ID"
+                    asp-route-id="@userId">Subscribe</a>
+                </div>
+                </div>
+  }
             @if(ViewBag.Waiting)
             {
-            <span class="msg" >Your request was sent. Check your email for response</span>
+            <span class="msg" >Please wait for Acceptance</span>
             }
 
-}
-}
+
 <!---------------STATISTICS------------------->
 @if (this.User.HasClaim(c => c.Value == "Admin"))
 {
     
-        <div class="stat">
-            <h2 class="head">Restaurant Overview</h2>
-        <hr />
+        <div class="stat" style="margin-left:200px;">
+            <div style="margin-right:170px;">
+            <h2 class="head" >Welcome Admin</h2>
+        <hr  />
+        </div>
         <div class="flexbox">
             <div class="stat-card one">
                 <h3><i class="fa-solid fa-chart-line"></i></h3>
@@ -154,35 +218,58 @@
                 <p>@ViewBag.VendorCount</p>
                 <a asp-action="search" asp-controller="Vendor">Vendors</a>
             </div>
+           </div>
+               
 
+    <div style="display:flex; margin-top:15px;  ">
+
+        <div class="stat-card three" style="margin-right:30px;">
+            <h3><i class="fa-solid fa-chart-line"></i></h3>
+            <p>@ViewBag.RecipeCount</p>
+            <a asp-action="Search" asp-controller="Recipe">Recipes</a>
+        </div> 
+        <div class="stat-card four">
+            <h3><i class="fa-solid fa-chart-line"></i></h3>             
+
+            <p>@ViewBag.ReataurantCount</p>
+            <a asp-action="Search" asp-controller="Restaurant" >Restaurant</a>
+
+        </div>
             
            </div>
-        </div>
+         
+       </div>
         
     }
     <!-- For Admin and Accepted Vendors Only -->
-    @if(ViewBag.Flag != null || this.User.HasClaim(c => c.Value == "Admin"))
+ @*   @if(ViewBag.Flag != null || this.User.HasClaim(c => c.Value == "Admin"))
     @if (this.User.HasClaim(c => c.Value == "Admin"))
                     ViewBag.Flag = false;
-    @if ( !ViewBag.Flag)
-    {
-        <div style="display:flex; margin-top:15px; ">
-            <div class="stat-card three" style="margin-right:30px;">
-                <h3><i class="fa-solid fa-chart-line"></i></h3>
-                <p>@ViewBag.RecipeCount</p>
-                <a asp-action="search" asp-controller="Recipe" asp-route-vendorID="@userId">Recipes</a>
-            </div> 
-            <div class="stat-card four">
-              <h3><i class="fa-solid fa-chart-line"></i></h3>             
+@if (!ViewBag.Flag)*@
+@if(this.User.HasClaim(c => c.Value=="Vendor") && !ViewBag.Flag )
+{
+   <div class="stat">
+            <h2 class="head">Welcome Vendor</h2>
+        <hr />
+      
+    <div style="display:flex; margin-top:35px; margin-left:200px;  height:300px; ">
+        <div class="stat-card three" style="margin-right:30px;">
+            <h3><i class="fa-solid fa-chart-line"></i></h3>
+            <p>@ViewBag.OrderCount</p>
+            <a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">Orders</a>
+        </div> 
+        <div class="stat-card four">
+            <h3><i class="fa-solid fa-chart-line"></i></h3>             
 
-              <p>@ViewBag.ReataurantCount</p>
-    <a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
+            <p>@ViewBag.ReataurantCount</p>
+            <a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID = "@userId">Restaurant</a>
 
-            </div>
         </div>
-
-        <!--ORDERS LIST-->
-        <div class="head-order">
+    </div>
+    </div>
+}
+<!--ORDERS LIST-->
+       @* <div class="head-order">
             <h2>Order List</h2>
             <span>27-5-2022</span>
         </div>
@@ -297,7 +384,7 @@
         </div>
     }
 
-
+*@
 
 
 

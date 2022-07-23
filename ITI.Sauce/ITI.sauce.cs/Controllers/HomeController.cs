@@ -17,13 +17,14 @@ namespace ITI.sauce.MVC.Controllers
         public UserRepository UserRepo;
         public VendorRepository VendorRepo;
         public RestaurantRepository RestaurantRepo;
+        public OrderRepository ordRepo;
         public MemberShipRepository MemberShipRepo;
         private readonly Vendor_MembershipRepository vendorMemberRepo;
 
 
         public HomeController(UserRepository _UserRepository, RecipeRepository _RecRepo, VendorRepository _VendorRepo
             , RestaurantRepository _RestaurantRepo, MemberShipRepository _memberShipRepository
-            , Vendor_MembershipRepository _vendorMemberRepo)
+            , Vendor_MembershipRepository _vendorMemberRepo, OrderRepository _OrderRepo)
         {
             RecRepo = _RecRepo;
             UserRepo = _UserRepository;
@@ -31,6 +32,7 @@ namespace ITI.sauce.MVC.Controllers
             RestaurantRepo = _RestaurantRepo;
             MemberShipRepo = _memberShipRepository;
             vendorMemberRepo = _vendorMemberRepo;
+            ordRepo = _OrderRepo;
         }
         [Authorize(Roles = "Admin,Vendor")]
         public IActionResult Index()
@@ -46,6 +48,8 @@ namespace ITI.sauce.MVC.Controllers
             ViewBag.Bronze = MemberShipRepo.GetList().FirstOrDefault(i=>i.TypeEn=="Bronze");
             ViewBag.Silver = MemberShipRepo.GetList().FirstOrDefault(i => i.TypeEn == "Silver");
             ViewBag.Golden = MemberShipRepo.GetList().FirstOrDefault(i => i.TypeEn == "Golden");
+            ViewBag.Free = MemberShipRepo.GetList().FirstOrDefault(i => i.TypeEn == "Free");
+
 
 
             if (this.User.HasClaim(c => c.Value == "Vendor"))
@@ -83,6 +87,10 @@ namespace ITI.sauce.MVC.Controllers
             {
                // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 ViewBag.ReataurantCount = RestaurantRepo.GetList().Where(v=>v.Vendor_ID ==userId).Count();
+                ViewBag.OrderCount = ordRepo.GetList().Where(v => v.UserId == userId).Count();
+
+
+
 
 
 
