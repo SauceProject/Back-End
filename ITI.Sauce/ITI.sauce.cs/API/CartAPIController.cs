@@ -11,9 +11,13 @@ namespace ITI.Sauce.MVC.API
     public class CartAPIController : ControllerBase
     {
         private readonly CartRepository cartRepository;
-        public CartAPIController(CartRepository _cartRepository)
+        UnitOfWork unitOfWork;
+
+        public CartAPIController(CartRepository _cartRepository, UnitOfWork _unitOfWork
+)
         {
             cartRepository = _cartRepository;
+            unitOfWork = _unitOfWork;
         }
         [HttpGet]
         public ResultViewModel Get()
@@ -37,14 +41,30 @@ namespace ITI.Sauce.MVC.API
             //var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
             //var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
             //var userId = claim.Value;
-
-            var result = cartRepository.Add(model);
-            return new ResultViewModel { Data = result, Success = true };
+            var res = cartRepository.GetList().FirstOrDefault(i => i.Recipe_ID == model.Recipe_ID);
+            if (res == null)
+            {
+                cartRepository.Add(model);
+                return new ResultViewModel
+                { Data = true, Success = true };
+            }
+            else
+            {
+                return new ResultViewModel { Data = false, Success = true };
+            }
         }
         [HttpPost]
         public ResultViewModel Remove([FromBody] CartEditViewModel model)
         {
             var result = cartRepository.Remove(model);
+
+            return new ResultViewModel { Data = result, Success = true };
+        }
+        public ResultViewModel Update([FromBody] CartEditViewModel model)
+        {
+
+            var result = cartRepository.Update(model);
+            unitOfWork.Save();
 
             return new ResultViewModel { Data = result, Success = true };
         }

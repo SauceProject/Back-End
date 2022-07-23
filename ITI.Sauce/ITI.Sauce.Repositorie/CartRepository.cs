@@ -66,6 +66,25 @@ namespace ITI.Sauce.Repository
             unitOfWork.Save();
             return result.Entity.ToViewModel();
         }
+        public CartViewModel Update(CartEditViewModel model)
+        {
+            var filterd = PredicateBuilder.New<Cart>();
+            var old = filterd;
+            if (model.ID > 0)
+                filterd = filterd.Or(i => i.ID == model.ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var cart = base.GetByID(filterd);
+
+            cart.Qty = model.Qty;
+
+            //recipe = model.ToModel();
+
+            return base.Update(cart).Entity.ToViewModel();
+            
+        }
         public CartViewModel Remove (CartEditViewModel model)
         {
             var filterd = PredicateBuilder.New<Cart>();

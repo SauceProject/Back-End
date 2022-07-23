@@ -27,13 +27,13 @@ namespace ITI.sauce.MVC.Controllers
 
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
-        public IActionResult Get(string NameAr = null, string NameEN = null,
+        public IActionResult Get(int ID=0,string NameAr = null, string NameEN = null,
             string orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20 , int RestaurantID = 0)
         {
             var data = RecipeRepo.Get(
-                NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
+                ID,NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
                 isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
             ViewBag.Resturant = RestaurantID;
             return View(data);
