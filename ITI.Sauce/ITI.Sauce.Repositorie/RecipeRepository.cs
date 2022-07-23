@@ -21,7 +21,7 @@ namespace ITI.Sauce.Repository
         public IPagedList<RecipeViewModel> Get(
             int ID = 0, string? NameAr = null, string? NameEN = null, string? orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string? category = null,
-            int pageIndex = 1, int pageSize = 20, int RestaurantID = 0)
+            int pageIndex = 1, int pageSize = 20, int RestaurantID = 0, int CategoryID=0)
         {
             var filter = PredicateBuilder.New<Recipe>();
             var oldFilter = filter;
