@@ -25,8 +25,8 @@ namespace ITI.Sauce.MVC.API
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20)
         {
-            var data = RecipeRepo.Get(
-                ID,NameAr, NameEN, orderBy, ImageUrl, VideoUrl,
+            var data = RecipeRepo.GetAPI(
+                NameAr, NameEN, orderBy, ImageUrl, VideoUrl,
                 isAscending, Price, rdate, category, pageIndex, pageSize);
             return new ResultViewModel()
             {
