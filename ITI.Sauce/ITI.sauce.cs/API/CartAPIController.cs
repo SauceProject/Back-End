@@ -33,11 +33,6 @@ namespace ITI.Sauce.MVC.API
         {
             var UserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
             UserID= model.UserID ;
-
-            //var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
-            //var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
-            //var userId = claim.Value;
-
             var result = cartRepository.Add(model);
             return new ResultViewModel { Data = result, Success = true };
         }

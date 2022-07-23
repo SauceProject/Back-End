@@ -25,7 +25,7 @@ namespace ITI.Sauce.MVC.API
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string category = null,
             int pageIndex = 1, int pageSize = 20)
         {
-            var data = RecipeRepo.Get(
+            var data = RecipeRepo.GetAPI(
                 NameAr, NameEN, orderBy, ImageUrl, VideoUrl,
                 isAscending, Price, rdate, category, pageIndex, pageSize);
             return new ResultViewModel()
@@ -35,7 +35,20 @@ namespace ITI.Sauce.MVC.API
                 Data = data
             };
         }
-        
+
+        public ResultViewModel GetDetails(int id)
+        {
+            var data = RecipeRepo.GetOne(
+               id);
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = data
+            };
+        }
+
+
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)
         {
             return list.Select(i => new SelectListItem
