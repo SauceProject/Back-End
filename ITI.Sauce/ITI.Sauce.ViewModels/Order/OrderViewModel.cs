@@ -18,6 +18,7 @@ namespace ITI.Sauce.ViewModels
                 OrderDate = model.OrderDate,
                 IsDeleted = model.IsDeleted,
                 UserId = model.UserId,
+                
             };
         }
 
@@ -32,7 +33,7 @@ namespace ITI.Sauce.ViewModels
                 OrderDate = model.OrderDate,
                 IsDeleted = model.IsDeleted,
                 UserId = model.UserId,
-
+                orderLists=model.orderLists
             };
         }
     }
@@ -43,6 +44,8 @@ namespace ITI.Sauce.ViewModels
         public DateTime OrderDate { get; set; }
         public bool IsDeleted { get; set; }
         public string UserId { get; set; }
+        public List<OrderList> orderLists { get; set; }
+
 
     }
 

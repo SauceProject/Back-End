@@ -27,6 +27,13 @@ namespace ITI.Sauce.MVC.API
             
         }
         [HttpGet]
+        public ResultViewModel GetByUser(string userId)
+        {
+            var CartInfo = cartRepository.GetByUser(userId);
+            return new ResultViewModel { Data = CartInfo, Success = true };
+
+        }
+        [HttpGet]
         public ResultViewModel Details(int ID)
         {
             var CartInfo = cartRepository.Get(ID);

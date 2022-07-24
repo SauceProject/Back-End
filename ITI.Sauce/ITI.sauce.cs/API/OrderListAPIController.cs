@@ -21,7 +21,16 @@ namespace ITI.Sauce.MVC.API
             return new ResultViewModel { Data = OrderListInfo, Success = true };
 
         }
+        [HttpGet]
+        public ResultViewModel GetByOrderID(int OrderID = 0, bool isAscending = false,
+           string orderBy = null, int pageIndex = 1, int pageSize = 20)
+        {
+            var OrderListInfo = orderListRepository.GetByOrderID(OrderID, isAscending,
+           orderBy ,pageIndex ,pageSize);
+            
+            return new ResultViewModel { Data = OrderListInfo, Success = true };
 
+        }
         [HttpPost]
         public ResultViewModel Add([FromBody] OrderListEditViewModel model)
         {
