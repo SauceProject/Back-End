@@ -108,10 +108,10 @@ namespace ITI.Sauce.Repository
 
         }
 
-        public PaginingViewModel<List<RecipeViewModel>> GetAPI( 
+        public PaginingViewModel<List<RecipeViewModel>> GetAPI( int ResturantID=0,
             string? NameAr = null, string? NameEN = null, string? orderBy = null, string ImageUrl = "", string VideoUrl = "",
             bool isAscending = false, float Price = 0, DateTime? rdate = null, string? category = null,
-            int pageIndex = 1, int pageSize = 20, int RestaurantID = 0)
+            int pageIndex = 1, int pageSize = 20)
         {
             var filter = PredicateBuilder.New<Recipe>();
             var oldFilter = filter;
@@ -132,6 +132,10 @@ namespace ITI.Sauce.Repository
             {
                 filter = filter.Or(r => r.Price <= Price);
             }
+            if (ResturantID > 0)
+            {
+                filter = filter.Or(r => r.ResturantID == ResturantID);
+            }
             if (category != null)
             {
                 filter = filter.Or(r => r.Category.NameEN == category);
@@ -141,10 +145,6 @@ namespace ITI.Sauce.Repository
 
             if (!string.IsNullOrEmpty(VideoUrl))
                 filter = filter.Or(I => I.ImageUrl.Contains(VideoUrl));
-            if (RestaurantID > 0)
-            {
-                filter = filter.Or(r => r.ResturantID == RestaurantID);
-            }
             if (filter == oldFilter)
             {
                 filter = null;
