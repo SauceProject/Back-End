@@ -146,6 +146,22 @@ namespace ITI.Sauce.Repository
 
             return res.Entity.ToViewModel();
         }
+        public CartViewModel Remove(int ID)
+        {
+            var filterd = PredicateBuilder.New<Cart>();
+            var old = filterd;
+            if (ID > 0)
+                filterd = filterd.Or(i => i.ID == ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var cart = base.GetByID(filterd);
+            var res = base.Remove(cart);
+            unitOfWork.Save();
+
+            return res.Entity.ToViewModel();
+        }
 
     }
 }

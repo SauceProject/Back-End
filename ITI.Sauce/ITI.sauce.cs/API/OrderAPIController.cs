@@ -87,15 +87,20 @@ namespace ITI.sauce.MVC.Controllers
 
                 i++;
             }
+            model.OrderDate = DateTime.Now;
+            ordRepo.Add(model);
+            foreach (var c in userCarts.Data)
+            {
+                cartRepository.Remove(c.ID);
+            }
 
-                ordRepo.Add(model);
-                UnitOfWork.Save();
-                return new ResultViewModel()
-                {
-                    Message = "Added Succesfully",
-                    Success = true,
-                    Data = null
-                };
+            UnitOfWork.Save();
+            return new ResultViewModel()
+            {
+                Message = "Added Succesfully",
+                Success = true,
+                Data = null
+            };
            
         }
 

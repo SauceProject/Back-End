@@ -36,7 +36,7 @@ namespace ITI.Sauce.Repository
             
             if (filter == oldFiler)
                 filter = null;
-            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
+            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize, "orderLists") ;
 
 
             var result =
@@ -47,6 +47,7 @@ namespace ITI.Sauce.Repository
                 
                 IsDeleted=i.IsDeleted,
                 OrderDate=i.OrderDate,
+                orderLists=i.orderLists
 
             }).ToPagedList(pageIndex, pageSize);
 
@@ -62,6 +63,8 @@ namespace ITI.Sauce.Repository
 
             return result;
         }
+
+       
 
         public IPagedList<OrderViewModel> Search(int pageIndex = 1, int pageSize = 2)
                    =>
