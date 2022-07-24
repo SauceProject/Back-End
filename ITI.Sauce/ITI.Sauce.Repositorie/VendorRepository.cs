@@ -151,7 +151,7 @@ namespace ITI.Sauce.Repository
                 MemberShips = getMemberShipName(query.Vendor_MemberShips),
 
 
-            }; ;
+            }; 
         }
 
         public VendorViewModel Remove(string Id)

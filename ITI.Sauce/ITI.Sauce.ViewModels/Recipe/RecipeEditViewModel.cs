@@ -31,8 +31,7 @@ namespace ITI.Sauce.ViewModels
                 RegisterDate = model.RegisterDate,
                 ImageUrl = model.ImageUrl,
                 VideoUrl = model.VideoUrl,
-                
-
+                RecipeIngredients = model.Ingredients.Select(d=>new RecipeIngredient { IngredientID = d,Qty = 1,Type=""}).ToList()
 
             };
         }
@@ -70,7 +69,8 @@ namespace ITI.Sauce.ViewModels
         [Required]
 
         public double RateValue { get; set; }
-
+        public virtual List<RecipeIngredient>? RecipeIngredients { get; set; }
+        public List<int> Ingredients { get; set; }
         public IFormFile? Image { get; set; }
         public Restaurant? Restaurant { get; set; }
         public int? RestaurantID { get; set; }
