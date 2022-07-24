@@ -185,9 +185,10 @@ namespace ITI.sauce.MVC.Controllers
 
             public IActionResult GetIngredient(int RecipeID)
             {
+            ////var ingredient = RecipeRepo.GetOne(RecipeID);
             //var ingredient = RecipeRepo.GetOne(RecipeID);
-            var ingredient = RecipeRepo.GetOne(RecipeID);
-            ViewBag.recipe_IngredientRepository = ingredient.Ingredients;
+            var res = recipe_IngredientRepository.GetIng(RecipeID);
+            ViewBag.recipe_IngredientRepository = res;
             return View();
             }
 

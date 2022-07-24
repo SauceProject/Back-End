@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ITI.Sauce.Models;
+using ITI.Sauce.ViewModels;
 
 namespace ITI.Sauce.Repository
 {
    public class Recipe_IngredientRepository :GeneralRepository<RecipeIngredient>
     {
-        public Recipe_IngredientRepository(DBContext _Context) : base(_Context)
+        private readonly IngredientRepository ingredientRepository;
+        public Recipe_IngredientRepository(DBContext _Context, IngredientRepository _ingredientRepository) : base(_Context)
         {
-
+            ingredientRepository = _ingredientRepository;
         }
         public RecipeIngredient Add(int RecipeId, int Ingredient)
         {
@@ -31,6 +33,17 @@ namespace ITI.Sauce.Repository
         return base.GetList().Where(i => i.RecipeID == RecipeId).ToList();
 
     }
+        public List<IngredientViewModel> GetIng(int RecipeId)
+        {
+            List<IngredientViewModel> list = new List<IngredientViewModel>();
+            var res =  base.GetList().Where(i => i.RecipeID == RecipeId).ToList();
+            foreach (var item in res)
+            {
+                list.Add(ingredientRepository.GetOne(item.IngredientID));
+            }
+            return list;
 
-}
+        }
+
+    }
 }

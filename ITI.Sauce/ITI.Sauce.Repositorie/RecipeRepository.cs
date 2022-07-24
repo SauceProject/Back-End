@@ -90,7 +90,7 @@ namespace ITI.Sauce.Repository
                 RestaurantName = i.Restaurant.NameEN,
                 CategoryName = i.Category.NameEN,
                 ResturantID = i.ResturantID,
-                Ingredients = getNameIngredient(i.RecipeIngredients),
+               // Ingredients = getNameIngredient(i.RecipeIngredients),
               
             }).ToPagedList(pageIndex, pageSize);
             return result;
@@ -168,7 +168,7 @@ namespace ITI.Sauce.Repository
                 RestaurantName = i.Restaurant.NameEN,
                 CategoryName = i.Category.NameEN,
                 ResturantID = i.ResturantID,
-                Ingredients = getNameIngredient(i.RecipeIngredients),
+                //Ingredients = getNameIngredient(i.RecipeIngredients),
 
             });
 
@@ -252,7 +252,7 @@ namespace ITI.Sauce.Repository
                 RestaurantName = (query.Restaurant!= null) ? query.Restaurant.NameEN :"",
                 CategoryName = query.Category.NameEN,
                 ResturantID = query.ResturantID,
-                Ingredients = getNameIngredient(query.RecipeIngredients),
+                //Ingredients = getNameIngredient(query.RecipeIngredients),
             };
         }
 
