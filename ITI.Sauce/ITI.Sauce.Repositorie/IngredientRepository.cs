@@ -7,6 +7,7 @@ using ITI.Sauce.Models;
 using ITI.Sauce.ViewModels;
 using Abp.Linq.Expressions;
 using X.PagedList;
+using ITI.Sauce.ViewModels.Shared;
 
 namespace ITI.Sauce.Repository
 {
@@ -133,7 +134,14 @@ namespace ITI.Sauce.Repository
 
 
         }
+        
 
+            public List<TextValueViewModel> GetingredientDropDown() =>
+          GetList().Select(i => new TextValueViewModel
+          {
+              Value = i.ID,
+              Text = i.NameEN
+          }).ToList();
     }
 
 }

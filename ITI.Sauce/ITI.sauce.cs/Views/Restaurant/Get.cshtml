@@ -50,6 +50,7 @@
 }
 <table>
   <tr>
+
     <th>Name</th>
     <th>IsDeleted</th>
     <th>RegisterDate</th>
@@ -61,8 +62,10 @@
 
 
   </tr>
+  
 	@foreach (var U in Model)
-{  
+{
+    <input asp-for="@U.Vendor_ID" hidden/>
   <tr>
 	<td>@U.NameEN</td>
 	<td>@U.IsDeleted</td>
@@ -75,13 +78,13 @@
 
        <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
              @if(@U.IsDeleted == false){
-             <a  asp-action="Remove" asp-controller="Restaurant" asp-route-Id="@U.Vendor_ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
+             <a  asp-action="Remove" asp-controller="Restaurant" asp-route-Id="@U.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
 
 </a>
             }
            
              @if(@U.IsDeleted == true){
-        <a asp-action="AcceptRestaurant" asp-controller="Restaurant" asp-route-Id="@U.Vendor_ID"  ><i class="fa-solid fa-circle-check" style="margin-right:10px; font-size:25px;"></i>
+        <a asp-action="AcceptRestaurant" asp-controller="Restaurant" asp-route-Id="@U.ID"  ><i class="fa-solid fa-circle-check" style="margin-right:10px; font-size:25px;"></i>
 </a>
             }
             | <a asp-action="Update" asp-controller="Restaurant" asp-route-Id="@U.ID"> <i class="fa-solid fa-pen-to-square" style=" font-size:20px; margin-right:8px; margin-left:10px;"></i></a> 
