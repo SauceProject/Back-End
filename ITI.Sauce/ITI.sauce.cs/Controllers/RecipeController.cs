@@ -38,7 +38,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             var data = RecipeRepo.Get(
                 ID,NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
-                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
+                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID, CategoryID);
             ViewBag.Resturant = RestaurantID;
             ViewBag.Category = CategoryID;
             return View(data);
@@ -123,11 +123,17 @@ namespace ITI.sauce.MVC.Controllers
         {
             IEnumerable<SelectListItem> Categories = GetCateogriesNames(CatRepo.GetCategoriesDropDown());
             IEnumerable<SelectListItem> Restaurants = GetRestaurantNames(RestRepo.GetCRestaurantDropDown());
+            IEnumerable<SelectListItem> items =
+         GetRestaurantNames(ingredientRepository.GetingredientDropDown());
+
+
 
             ViewBag.Categories = Categories;
             ViewBag.Restaurants = Restaurants;
             var recipe = RecipeRepo.GetOne(ID);
             ViewBag.CurrentRecipe = recipe;
+            ViewBag.Ingredients = items;
+
             return View();
         }
         [HttpPost]
@@ -183,7 +189,39 @@ namespace ITI.sauce.MVC.Controllers
             }
         }
 
-            public IActionResult GetIngredient(int RecipeID)
+        public IActionResult RemoveSearch(RecipeEditViewModel model, int ID, int RestaurantID)
+        {
+            RecipeRepo.Remove(model, ID);
+            UnitOfWork.Save();
+            //return RedirectToAction("Get" , RestaurantID);
+            if (RestaurantID > 0)
+            {
+                return RedirectToAction("Get", new { RestaurantID = RestaurantID });
+            }
+            else
+            {
+                return RedirectToAction("Get");
+            }
+
+        }
+        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID, int RestaurantID)
+        {
+
+            RecipeRepo.AcceptRecipe(model, ID);
+            UnitOfWork.Save();
+            //return RedirectToAction("Get", RestaurantID);
+            if (RestaurantID > 0)
+            {
+                return RedirectToAction("Get", new { RestaurantID = RestaurantID });
+            }
+            else
+            {
+                return RedirectToAction("Get");
+            }
+        }
+
+
+        public IActionResult GetIngredient(int RecipeID)
             {
             ////var ingredient = RecipeRepo.GetOne(RecipeID);
             //var ingredient = RecipeRepo.GetOne(RecipeID);

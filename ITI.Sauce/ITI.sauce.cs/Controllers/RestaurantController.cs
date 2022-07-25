@@ -114,17 +114,18 @@ namespace ITI.sauce.MVC.Controllers
 
 
         [HttpGet]
-        public IActionResult Remove(RestaurantEditViewModel model, int ID) { 
+        public IActionResult Remove(RestaurantEditViewModel model, int ID)
+        {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var res = ResRepo.Remove(model);
             UnitOfWork.Save();
-            
-            if (!this.User.HasClaim(c => c.Value == "Vendor"))
-            {
-                return RedirectToAction("Get", new { Vendor_ID = userId });
-            }
-            else
-                return RedirectToAction("Get");
+
+            //if (!this.User.HasClaim(c => c.Value == "Vendor"))
+            //{
+            //    return RedirectToAction("Get", new { Vendor_ID = userId });
+            //}
+            //else
+            return RedirectToAction("Search");
 
         }
         public IActionResult AcceptRestaurant(RestaurantEditViewModel model, int ID)
@@ -132,15 +133,16 @@ namespace ITI.sauce.MVC.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ResRepo.AcceptRestaurant(model, ID);
             UnitOfWork.Save();
+            return RedirectToAction("Search");
             // return RedirectToAction("Get");
-           
 
-            if (!this.User.HasClaim(c => c.Value == "Vendor"))
-            {
-                return RedirectToAction("Get", new { Vendor_ID = userId });
-            }
-            else
-                return RedirectToAction("Get");
+
+            //if (!this.User.HasClaim(c => c.Value == "Vendor"))
+            //{
+            //    return RedirectToAction("Get", new { Vendor_ID = userId });
+            //}
+            //else
+            //return RedirectToAction("Get");
 
         }
 
@@ -149,3 +151,4 @@ namespace ITI.sauce.MVC.Controllers
 
     }
 }
+
