@@ -10,12 +10,15 @@ namespace ITI.Sauce.MVC.API
     public class RecipeAPIController : ControllerBase
     {
         private readonly RecipeRepository RecipeRepo;
-       
+        private readonly Recipe_IngredientRepository recipe_IngredientRepository;
 
-        public RecipeAPIController(RecipeRepository _RecipeRepo)
+
+        public RecipeAPIController(RecipeRepository _RecipeRepo, Recipe_IngredientRepository _recipe_IngredientRepository)
         {
             this.RecipeRepo = _RecipeRepo;
-          
+            recipe_IngredientRepository = _recipe_IngredientRepository;
+
+
         }
 
         //[Authorize(Roles = "Admin,User,Vendor")]
@@ -48,7 +51,19 @@ namespace ITI.Sauce.MVC.API
             };
         }
 
+        public ResultViewModel GetIngredient(int RecipeID)
+        {
+            ////var ingredient = RecipeRepo.GetOne(RecipeID);
+            //var ingredient = RecipeRepo.GetOne(RecipeID);
+            var res = recipe_IngredientRepository.GetIng(RecipeID);
 
+            return new ResultViewModel
+            {
+                Data = res,
+                Message="Done",
+                Success=true
+            };
+        }
         private IEnumerable<SelectListItem> GetCateogriesNames(List<TextValueViewModel> list)
         {
             return list.Select(i => new SelectListItem
