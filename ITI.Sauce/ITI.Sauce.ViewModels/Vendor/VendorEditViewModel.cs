@@ -19,6 +19,7 @@ namespace ITI.Sauce.ViewModels
                 ID=model.Id,
                 
                 registerDate=model.registerDate,
+                IsDeleted = true,
                 
             };
         }
@@ -38,7 +39,7 @@ namespace ITI.Sauce.ViewModels
 
         public string? Role { get; set; }
         public DateTime registerDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = true;
         public string? Search { get; set; }
 
         public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }

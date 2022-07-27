@@ -39,7 +39,7 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 RegisterDate = model.RegisterDate,
-                IsDeleted = model.IsDeleted,
+                IsDeleted =true,
                 ImageUrl = model.ImageUrl,
             };
         }
@@ -60,7 +60,7 @@ namespace ITI.Sauce.ViewModels
         public string NameEN { get; set; }
         public string NameAR { get; set; }
         public DateTime RegisterDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } 
         public string ImageUrl { get; set; }
     }
 }

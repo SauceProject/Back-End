@@ -74,10 +74,11 @@ namespace ITI.sauce.MVC.Controllers
 
             model.Image.CopyTo(fs);
             fs.Position = 0;
-
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ResRepo.Add(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+
+            return RedirectToAction("Get", new { Vendor_ID = userId });
         }
 
 
@@ -109,6 +110,9 @@ namespace ITI.sauce.MVC.Controllers
             return RedirectToAction("Get");
 
         }
+
+
+
 
 
 

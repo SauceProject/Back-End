@@ -59,7 +59,7 @@ namespace ITI.Sauce.Repository
                 RegisterDate = V.RegisterDate,
                 IsDeleted = V.IsDeleted,
                 ImageUrl = V.ImageUrl,
-                Vendor_ID = V.Vendor_ID
+                Vendor_ID= V.Vendor_ID
             }).ToPagedList(pageIndex, pageSize);
             return result;
 
@@ -227,6 +227,9 @@ namespace ITI.Sauce.Repository
         }
 
 
+      
+
+
 
 
 
@@ -264,7 +267,7 @@ namespace ITI.Sauce.Repository
         //        ImageUrl = i.ImageUrl,
 
 
-               
+
         //    });
 
         //    PaginingViewModel<List<RestaurantViewModel>>
@@ -277,7 +280,7 @@ namespace ITI.Sauce.Repository
         //        };
         //    return finalResult;
 
-        
+
 
         public RestaurantViewModel AcceptRestaurant(RestaurantEditViewModel model,int ID)
         {
