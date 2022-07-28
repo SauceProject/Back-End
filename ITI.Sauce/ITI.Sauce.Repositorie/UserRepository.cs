@@ -188,4 +188,6 @@ namespace ITI.Sauce.Repository
         public async Task<IdentityResult> ConfirmEmail(string Id, string token) =>
              await userManger.ConfirmEmailAsync(await userManger.FindByIdAsync(Id), token);
     }
+
+
 }

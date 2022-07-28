@@ -38,7 +38,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             var data = RecipeRepo.Get(
                 ID,NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
-                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
+                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID, CategoryID);
             ViewBag.Resturant = RestaurantID;
             ViewBag.Category = CategoryID;
             return View(data);

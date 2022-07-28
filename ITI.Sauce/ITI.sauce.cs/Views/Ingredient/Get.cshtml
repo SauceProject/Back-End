@@ -88,8 +88,8 @@
             <th>ID</th>
             <th>Name In English</th>
             <th> Name In Arabic</th>
-            <th>Image</th>
-            <th>Actions</th>
+@*            <th>Image</th>
+*@            <th>Actions</th>
            
 
 
@@ -103,8 +103,8 @@
                 <td>@I.ID</td>
                 <td>@I.NameEN</td>
                 <td>@I.NameAR</td>
-                <td> <img src=ّ@I.ImageUrl" style="width:100px; height:80px; >   </td>
-                <td><a asp-action="Update" asp-controller="Ingredient" asp-route-Id="@I.ID">  <i class="fa-solid fa-pen-to-square" style=" font-size:20px;"></i> </a>| 
+@*                <td> <img src=ّ@I.ImageUrl" style="width:100px; height:80px; >   </td>
+*@                <td><a asp-action="Update" asp-controller="Ingredient" asp-route-Id="@I.ID">  <i class="fa-solid fa-pen-to-square" style=" font-size:20px;"></i> </a>| 
                 <a asp-controller="Ingredient" asp-action="Remove"   asp-route-id="@I.ID" ><i class="fa-solid fa-trash" style="color:red; font-size:23px; margin-left:10px;"></i></a></td>
 
 

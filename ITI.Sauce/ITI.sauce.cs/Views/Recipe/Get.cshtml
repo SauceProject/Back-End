@@ -39,7 +39,21 @@
     text-align:center;
 }
 
-
+#Resbtn {
+    width: 100%;
+    background-color: #143444;
+    color: #F6EE99;
+    padding: 10px 5px;
+    margin: 8px 3px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    text-decoration: none;
+    float: right;
+}
+#Resbtn:hover{
+    width:90%;
+}
 
 </style>
 
@@ -71,7 +85,7 @@
     <td> <img src="..@V.ImageUrl" style="width:100px; height:100px;">   </td>
     <td>@V.CategoryName</td>
    @* <td>@V.RestaurantName</td>*@
-     <td><a asp-action="GetIngredient" asp-controller="Recipe" asp-route-RecipeID="@V.ID">Ingredient </a> </td>
+     <td><a asp-action="GetIngredient" asp-controller="Recipe" asp-route-RecipeID="@V.ID" id="Resbtn">Ingredient </a> </td>
 
     <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
     <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
