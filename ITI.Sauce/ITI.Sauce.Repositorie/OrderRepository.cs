@@ -20,8 +20,8 @@ namespace ITI.Sauce.Repository
 
         }
         public IPagedList<OrderViewModel> Get(int ID = 0, string orderBy = null
-            , bool isAscending = false, string UserId = "", DateTime? registerDate =null 
-            ,int pageIndex = 1, int pageSize = 20)
+            , bool isAscending = false, string UserId = "", DateTime? registerDate =null ,
+             int pageIndex = 1, int pageSize = 20)
                     
         {
             
@@ -29,6 +29,7 @@ namespace ITI.Sauce.Repository
             var oldFiler = filter;
             if (ID > 0)
                 filter = filter.Or(o => o.ID == ID);
+         
             if (!string.IsNullOrEmpty(UserId))
                 filter = filter.Or(o => o.UserId.Contains(UserId));
             if (registerDate != null) 

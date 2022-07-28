@@ -74,10 +74,11 @@ namespace ITI.sauce.MVC.Controllers
 
             model.Image.CopyTo(fs);
             fs.Position = 0;
-
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ResRepo.Add(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+
+            return RedirectToAction("Get", new { Vendor_ID = userId });
         }
 
 
@@ -113,6 +114,9 @@ namespace ITI.sauce.MVC.Controllers
 
 
 
+
+
+
         [HttpGet]
         public IActionResult Remove(RestaurantEditViewModel model, int ID)
         {
@@ -133,6 +137,7 @@ namespace ITI.sauce.MVC.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ResRepo.AcceptRestaurant(model, ID);
             UnitOfWork.Save();
+            return RedirectToAction("Search");
             // return RedirectToAction("Get");
 
 
@@ -141,7 +146,7 @@ namespace ITI.sauce.MVC.Controllers
             //    return RedirectToAction("Get", new { Vendor_ID = userId });
             //}
             //else
-            return RedirectToAction("Search");
+            //return RedirectToAction("Get");
 
         }
 

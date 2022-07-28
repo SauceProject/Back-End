@@ -187,6 +187,23 @@ namespace ITI.Sauce.Repository
 
         public async Task<IdentityResult> ConfirmEmail(string Id, string token) =>
              await userManger.ConfirmEmailAsync(await userManger.FindByIdAsync(Id), token);
+
+
+
+        public async Task<IdentityResult> Update(UsersViewModel result)
+        {
+            var filter = PredicateBuilder.New<Users>();
+            filter = filter.Or(p => p.Id == result.ID);
+            var last = GetByID(filter);
+            last.NameEN = result.NameEN;
+            last.NameAR = result.NameAR;
+            last.Email = result.Email;
+            last.PhoneNumber = result.phone;
+           
+
+            return await userManger.UpdateAsync(last);
+        }
+
     }
 
 
