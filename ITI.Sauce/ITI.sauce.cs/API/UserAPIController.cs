@@ -203,6 +203,34 @@ namespace ITI.sauce.MVC.Controllers
             }
             return null;
         }
+
+        
+        [HttpGet]
+        public async Task<ResultViewModel> Update(string ID)
+        {
+            var obj = UserRepo.Get(ID);
+            return new ResultViewModel()
+            {
+                Data = obj,
+                Success = true,
+                Message = "",
+            };
+        }
+        [HttpPost]
+        public async Task<ResultViewModel> Edit([FromBody] UsersViewModel model)
+        {
+
+            await UserRepo.Update(model);
+            UnitOfWork.Save();
+            return new ResultViewModel()
+            {
+                Data = null,
+                Success = true,
+                Message = "Succseed",
+            };
+        }
+
+
     }
 
 }
