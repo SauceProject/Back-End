@@ -62,6 +62,45 @@ namespace ITI.Sauce.Repository
             return finalResult;
         }
 
+        public PaginingViewModel<List<OrderListViewModel>> GetByOrderID( int OrderID=0, bool isAscending = false,
+           string orderBy = null, int pageIndex = 1, int pageSize = 20)
+
+        {
+
+            var filter = PredicateBuilder.New<OrderList>();
+            var oldFiler = filter;
+            if (OrderID > 0)
+                filter = filter.Or(o => o.OrderID == OrderID);
+        
+
+            if (filter == oldFiler)
+                filter = null;
+            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
+
+
+            var result =
+            query.Select(i => new OrderListViewModel
+            {
+                OrderListID = i.OrderListID,
+                OrderListQty = i.OrderListID,
+                OrderListPrice=i.OrderListPrice,
+                RecipeID=i.Recipe_ID
+
+            });
+
+            PaginingViewModel<List<OrderListViewModel>>
+               finalResult = new PaginingViewModel<List<OrderListViewModel>>()
+               {
+                   PageIndex = pageIndex,
+                   PageSize = pageSize,
+                   Count = base.GetList().Count(),
+                   Data = result.ToList()
+               };
+
+
+            return finalResult;
+        }
+
         public OrderListViewModel Add(OrderListEditViewModel model)
         {
             var cart = model.ToModel();

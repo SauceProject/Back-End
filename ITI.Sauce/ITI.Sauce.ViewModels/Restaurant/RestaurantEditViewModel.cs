@@ -22,7 +22,7 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 RegisterDate = model.RegisterDate,
-                IsDeleted = model.IsDeleted,
+                IsDeleted =true,
                 ImageUrl = model.ImageUrl,
             };
         }

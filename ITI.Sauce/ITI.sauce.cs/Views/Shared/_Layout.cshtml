@@ -41,9 +41,9 @@
                 @if ((!ViewBag.Flag && this.User.HasClaim(c => c.Value == "Vendor"))  )
                 {
                     <!--View Recipes / Reviews / Orders-->
-                    <li><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@userId">View Restaurant </a></li>
-                    <li><a asp-action="Get" asp-controller="Rating" asp-route-vendorID="@userId">View Reviews </a></li>
-                    <li><a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">View Orders </a></li>
+                    <li><a asp-action="Get" asp-controller="Restaurant" asp-route-Vendor_ID="@userId">View Restaurant </a></li>
+                    <li><a asp-action="Get" asp-controller="Rating" asp-route-Vendor_ID="@userId">View Reviews </a></li>
+                    <li><a asp-action="Get" asp-controller="Order" asp-route-Vendor_ID="@userId">View Orders </a></li>
                 }
 
                     @if (this.User.HasClaim(c => c.Value == "Admin"))
@@ -88,7 +88,7 @@
         {
             <div>
          <span id="restaurant-name">@User.Identity.Name </span>|
-        <span><a asp-action="SignOut" asp-controller="Users">Log out</a></span> 
+        <span><a asp-action="SignOut" asp-controller="Users" style="text-decoration:none; color: #143444; font-size:20px;" >Log out</a></span> 
 
         </div>
         }

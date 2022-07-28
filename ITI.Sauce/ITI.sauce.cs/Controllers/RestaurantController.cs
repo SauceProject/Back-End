@@ -74,10 +74,11 @@ namespace ITI.sauce.MVC.Controllers
 
             model.Image.CopyTo(fs);
             fs.Position = 0;
-
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             ResRepo.Add(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
+
+            return RedirectToAction("Get", new { Vendor_ID = userId });
         }
 
 
@@ -113,38 +114,45 @@ namespace ITI.sauce.MVC.Controllers
 
 
 
-        [HttpGet]
-        public IActionResult Remove(RestaurantEditViewModel model, int ID, string Vendor_ID)
-        {
 
+
+
+        [HttpGet]
+        public IActionResult Remove(RestaurantEditViewModel model, int ID)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var res = ResRepo.Remove(model);
             UnitOfWork.Save();
-            return RedirectToAction("Get");
-            //    if (!string.IsNullOrEmpty(Vendor_ID))
-            //    {
-            //        return RedirectToAction("Get", new { vVendor_ID = Vendor_ID });
-            //    }
-            //    else
-            //        return RedirectToAction("Get");
 
-        }
-        public IActionResult AcceptRestaurant(RestaurantEditViewModel model, int ID, string Vendor_ID)
-        {
-
-            ResRepo.AcceptRestaurant(model, ID);
-            UnitOfWork.Save();
-            return RedirectToAction("Get");
-
-            //    if (!string.IsNullOrEmpty(Vendor_ID))
+            //if (!this.User.HasClaim(c => c.Value == "Vendor"))
             //{
-            //    return RedirectToAction("Get",new { Vendor_ID = Vendor_ID });
+            //    return RedirectToAction("Get", new { Vendor_ID = userId });
             //}
             //else
-            //    return RedirectToAction("Get");
-
-
-
+            return RedirectToAction("Search");
 
         }
+        public IActionResult AcceptRestaurant(RestaurantEditViewModel model, int ID)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            ResRepo.AcceptRestaurant(model, ID);
+            UnitOfWork.Save();
+            return RedirectToAction("Search");
+            // return RedirectToAction("Get");
+
+
+            //if (!this.User.HasClaim(c => c.Value == "Vendor"))
+            //{
+            //    return RedirectToAction("Get", new { Vendor_ID = userId });
+            //}
+            //else
+            //return RedirectToAction("Get");
+
+        }
+
+
+
+
     }
 }
+

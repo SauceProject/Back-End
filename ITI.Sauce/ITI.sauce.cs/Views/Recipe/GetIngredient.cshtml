@@ -1,0 +1,203 @@
+﻿@using ITI.Sauce.ViewModels
+@using ITI.Sauce.Models
+@using ITI.Sauce.ViewModels
+
+
+@using Microsoft.AspNetCore.Identity;
+@model IPagedList<RecipeViewModel>
+
+
+    @{
+    var claimsIdentity = (System.Security.Claims.ClaimsIdentity)this.User.Identity;
+    var claim = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier);
+    var userId = claim.Value;
+}
+    <style>
+        section{
+            margin-top:3rem;
+    display:flex;
+    gap:1rem;
+        }
+     
+
+    .memper h3{
+         font-size: 6rem;
+    }
+    .memper h5{
+         font-size: 2.1rem;
+        font-weight:bold;
+    }
+    .memper h6 {
+        font-size: 1.5rem;
+        font-weight:bold;
+    }
+    .memper p{
+         color:#fff
+    }
+   .memper:nth-child(1){
+      /* background-color:#143444 ;*/
+    color: #ed8b05;
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+ 
+
+    }
+    .memper:nth-child(2){
+         background-color: #143444 ;
+    color: #FFD700;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+
+    }
+
+    .memper:nth-child(3){
+/*          background-color: #143444;
+*/    color: #C0C0C0;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+    }
+
+    .memper:nth-child(4){
+         background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    border-radius:35px;
+    
+    }
+    .memper:nth-child(5){
+      /* background-color:#143444 ;*/
+    color: #ed8b05;
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+ 
+
+    }
+    .memper:nth-child(6){
+         background-color: #143444 ;
+    color: #FFD700;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+
+    }
+
+    .memper:nth-child(7){
+/*          background-color: #143444;
+*/    color: #C0C0C0;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+    }
+
+    .memper:nth-child(8){
+         background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    border-radius:35px;
+    
+    }
+     .memper:nth-child(9){
+      /* background-color:#143444 ;*/
+    color: #ed8b05;
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+ 
+
+    }
+    .memper:nth-child(10){
+         background-color: #143444 ;
+    color: #FFD700;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+
+    }
+
+    .memper:nth-child(11){
+/*          background-color: #143444;
+*/    color: #C0C0C0;
+    width:  130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    box-shadow:2px 2px 8px grey;
+    border-radius:35px;
+
+    }
+
+    .memper:nth-child(12){
+         background-color: #143444;
+    color:  rgb(114, 123, 243);
+    width: 130px;
+    padding: 0.5rem;
+    margin-bottom: 5%;
+    text-align: center;
+    border-radius:35px;
+    
+    }
+</style>
+
+
+	  @if(!(@ViewBag.recipe_IngredientRepository ==null))
+            {
+            <section >
+            @foreach(var i in @ViewBag.recipe_IngredientRepository)
+            {
+                @* <div class="memper" >@i.TypeEn</div>
+             <div class="memper" >@i.OrderNum</div>
+             <div class="memper" >@i.Price</div>*@
+
+                <div class="memper">
+                   <h1>@i.NameEN</h1>
+                   <img src="@i.ImageUrl" style="width:100px; height:100px; border-radius:28px;">
+                
+                </div>
+           
+
+            }
+            </section>
+            }
+            else
+            {
+                <div>none</div>
+            }

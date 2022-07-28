@@ -26,7 +26,11 @@
     </select>
     <span data-ajax="true" asp-validation-for="CategoryID" style="color:red"></span>
     <br />
-
+    <label asp-for="Ingredients"> Ingredients </label>
+    <select asp-for="Ingredients" asp-items="@ViewBag.Ingredients" multiple>
+        <option selected>Choose an option</option>                  
+    </select>
+    <span data-ajax="true" asp-validation-for="CategoryID" style="color:red"></span>
     <input asp-for="RestaurantID" type="hidden">
     @*<label asp-for="RestaurantID"> Restaurant </label>
     <select asp-for="RestaurantID" asp-items="@ViewBag.Restaurants">

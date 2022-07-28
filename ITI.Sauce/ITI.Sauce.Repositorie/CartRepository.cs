@@ -19,19 +19,24 @@ namespace ITI.Sauce.Repository
         }
 
         public PaginingViewModel<List<CartViewModel>> Get( int ID=0,
-            string orderBy = null, 
+            string orderBy = null, string userId=null,
             bool isAscending = false, float Price = 0, DateTime? rdate = null,
             int pageIndex = 1, int pageSize = 20
             )
         {
             var filter = PredicateBuilder.New<Cart>();
             var oldFilter = filter;
-            if (ID>0)
+            if (ID > 0)
             {
                 filter = filter.Or(c => c.ID == ID);
             }
-            
-            if (filter == oldFilter)
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                filter = filter.Or(c => c.UserID == userId);
+            }
+
+             if (filter == oldFilter)
             {
                 filter = null;
             }
@@ -45,6 +50,46 @@ namespace ITI.Sauce.Repository
                 UserID=i.UserID,
                 Qty=i.Qty
                 
+            });
+
+            PaginingViewModel<List<CartViewModel>>
+                finalResult = new PaginingViewModel<List<CartViewModel>>()
+                {
+                    PageIndex = pageIndex,
+                    PageSize = pageSize,
+                    Count = base.GetList().Count(),
+                    Data = result.ToList()
+                };
+            return finalResult;
+
+        }
+
+        public PaginingViewModel<List<CartViewModel>> GetByUser(string userId = null,
+            int pageIndex = 1, int pageSize = 20)
+        {
+            var filter = PredicateBuilder.New<Cart>();
+            var oldFilter = filter;
+           
+
+            if (!string.IsNullOrEmpty(userId))
+            {
+                filter = filter.Or(c => c.UserID == userId);
+            }
+
+            if (filter == oldFilter)
+            {
+                filter = null;
+            }
+
+            var query = base.Get(filter);
+            var result =
+            query.Select(i => new CartViewModel
+            {
+                ID = i.ID,
+                Recipe_ID = i.Recipe_ID,
+                UserID = i.UserID,
+                Qty = i.Qty
+
             });
 
             PaginingViewModel<List<CartViewModel>>
@@ -91,6 +136,22 @@ namespace ITI.Sauce.Repository
             var old = filterd;
             if (model.ID > 0)
                 filterd = filterd.Or(i => i.ID == model.ID);
+
+            if (old == filterd)
+                filterd = null;
+
+            var cart = base.GetByID(filterd);
+            var res = base.Remove(cart);
+            unitOfWork.Save();
+
+            return res.Entity.ToViewModel();
+        }
+        public CartViewModel Remove(int ID)
+        {
+            var filterd = PredicateBuilder.New<Cart>();
+            var old = filterd;
+            if (ID > 0)
+                filterd = filterd.Or(i => i.ID == ID);
 
             if (old == filterd)
                 filterd = null;

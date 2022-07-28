@@ -15,15 +15,19 @@ namespace ITI.sauce.MVC.Controllers
         private readonly UnitOfWork UnitOfWork;
         private readonly VendorRepository VendorRepo;
         private readonly RestaurantRepository RestRepo;
+        private readonly Recipe_IngredientRepository recipe_IngredientRepository;
+        private readonly IngredientRepository ingredientRepository;
 
         public RecipeController(RecipeRepository _RecipeRepo, UnitOfWork _unitOfWork, 
-            VendorRepository _VendorRepo, CategoryRepository _CatRepo, RestaurantRepository _RestRepo)
+            VendorRepository _VendorRepo, CategoryRepository _CatRepo, RestaurantRepository _RestRepo,IngredientRepository ingredient,Recipe_IngredientRepository _recipe_IngredientRepository)
         {
             this.RecipeRepo = _RecipeRepo;
             UnitOfWork = _unitOfWork;
             VendorRepo = _VendorRepo;
             CatRepo = _CatRepo;
             RestRepo = _RestRepo;
+            ingredientRepository = ingredient;
+            recipe_IngredientRepository = _recipe_IngredientRepository;
 
         }
         //[Authorize(Roles = "Admin,User,Vendor")]
@@ -34,7 +38,7 @@ namespace ITI.sauce.MVC.Controllers
         {
             var data = RecipeRepo.Get(
                 ID,NameAr, NameEN, orderBy, ImageUrl,VideoUrl,
-                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID);
+                isAscending,Price, rdate, category,pageIndex,pageSize , RestaurantID, CategoryID);
             ViewBag.Resturant = RestaurantID;
             ViewBag.Category = CategoryID;
             return View(data);
@@ -49,16 +53,16 @@ namespace ITI.sauce.MVC.Controllers
         }
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpGet]
-        public IActionResult Add(string? returnUrl, int? ResturantId)
+        public IActionResult Add(string? returnUrl, int? ResturantId )
         {
             ViewBag.ReturnUrl = returnUrl;
             IEnumerable<SelectListItem> Categories = 
                 GetCateogriesNames(CatRepo.GetCategoriesDropDown());
-            IEnumerable<SelectListItem> Restaurants = 
-                GetRestaurantNames(RestRepo.GetCRestaurantDropDown());
+            IEnumerable<SelectListItem> items = 
+                GetRestaurantNames(ingredientRepository.GetingredientDropDown());
 
             ViewBag.Categories = Categories;
-            ViewBag.Restaurants = Restaurants;
+            ViewBag.Ingredients = items;
             
             return View(new RecipeEditViewModel { RestaurantID = ResturantId });
         }
@@ -72,6 +76,14 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         private IEnumerable<SelectListItem> GetRestaurantNames(List<TextValueViewModel> list)
+        {
+            return list.Select(i => new SelectListItem
+            {
+                Text = i.Text,
+                Value = i.Value.ToString()
+            });
+        }
+        private IEnumerable<SelectListItem> GetIngNames(List<TextValueViewModel> list)
         {
             return list.Select(i => new SelectListItem
             {
@@ -111,11 +123,17 @@ namespace ITI.sauce.MVC.Controllers
         {
             IEnumerable<SelectListItem> Categories = GetCateogriesNames(CatRepo.GetCategoriesDropDown());
             IEnumerable<SelectListItem> Restaurants = GetRestaurantNames(RestRepo.GetCRestaurantDropDown());
+            IEnumerable<SelectListItem> items =
+         GetRestaurantNames(ingredientRepository.GetingredientDropDown());
+
+
 
             ViewBag.Categories = Categories;
             ViewBag.Restaurants = Restaurants;
             var recipe = RecipeRepo.GetOne(ID);
             ViewBag.CurrentRecipe = recipe;
+            ViewBag.Ingredients = items;
+
             return View();
         }
         [HttpPost]
@@ -155,25 +173,50 @@ namespace ITI.sauce.MVC.Controllers
             }
 
         }
-        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID , int RestaurantID)
+        public IActionResult AcceptRecipe(RecipeEditViewModel model, int ID, int RestaurantID)
         {
-           
+
             RecipeRepo.AcceptRecipe(model, ID);
             UnitOfWork.Save();
             //return RedirectToAction("Get", RestaurantID);
             if (RestaurantID > 0)
             {
-                return RedirectToAction("Get",new { RestaurantID = RestaurantID } );
+                return RedirectToAction("Get", new { RestaurantID = RestaurantID });
             }
-            else 
+            else
             {
                 return RedirectToAction("Get");
             }
         }
 
+        public IActionResult RemoveSearch(RecipeEditViewModel model, int ID, int RestaurantID)
+        {
+            RecipeRepo.Remove(model, ID);
+            UnitOfWork.Save();
+            //return RedirectToAction("Get" , RestaurantID);
+            if (RestaurantID > 0)
+            {
+                return RedirectToAction("Get", new { RestaurantID = RestaurantID });
+            }
+            else
+            {
+                return RedirectToAction("Get");
+            }
 
+        }
+       
+      
+
+
+        public IActionResult GetIngredient(int RecipeID)
+            {
+            ////var ingredient = RecipeRepo.GetOne(RecipeID);
+            //var ingredient = RecipeRepo.GetOne(RecipeID);
+            var res = recipe_IngredientRepository.GetIng(RecipeID);
+            ViewBag.recipe_IngredientRepository = res;
+            return View();
+            }
 
         
-
     }
 }

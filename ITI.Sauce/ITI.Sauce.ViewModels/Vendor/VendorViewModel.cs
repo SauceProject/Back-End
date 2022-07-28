@@ -38,7 +38,7 @@ namespace ITI.Sauce.ViewModels
 
                 Id = model.ID,
                 
-                IsDeleted = model.IsDeleted,
+                IsDeleted = true,
 
             };
         }
@@ -56,7 +56,7 @@ namespace ITI.Sauce.ViewModels
         public string NameAR { get; set; }
         public string SearchText { get; set; }
         public DateTime registerDate { get; set; }
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = true;
         public List<string> MemberShipsNames { get; set; }
         public List<MemberShipViewModel> MemberShips { get; set; }
         public virtual List<Vendor_MemberShip>? Vendor_MemberShips { get; set; }

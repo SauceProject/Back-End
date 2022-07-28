@@ -107,7 +107,7 @@
     <td>@V.NameAR</td>
     <td>@V.phones</td>
     <td> @V.Email</td>
-    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-vendorID="@V.ID" id="Resbtn" >Restaurant</a>
+    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-Vendor_ID="@V.ID" id="Resbtn" >Restaurant</a>
     <td>
            @* @if(!(@ViewBag.vendorMemberships ==null))
             {
@@ -138,11 +138,11 @@
 </a>
             }
             |
-   <a asp-action="Details" asp-controller="Vendor" asp-route-Id="@V.ID" ><i class="fa-solid fa-eye" style="color:black; font-size:23px; margin-left:10px; margin-right:10px"></i>
- </a>
-   
- @*  <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID" > <i class="fa-solid fa-trash" style="color:red; font-size:23px; margin-left:10px;"></i>
+  @* <a asp-action="Details" asp-controller="Vendor" asp-route-Id="@V.ID" ><i class="fa-solid fa-eye" style="color:black; font-size:23px; margin-left:10px; margin-right:10px"></i>
  </a>*@
+   
+   <a asp-action="Remove" asp-controller="Vendor" asp-route-Id="@V.ID" > <i class="fa-solid fa-trash" style="color:red; font-size:23px; margin-left:10px;"></i>
+ </a>
    </td>
    
   </tr>
