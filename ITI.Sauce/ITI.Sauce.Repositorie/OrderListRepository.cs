@@ -37,14 +37,17 @@ namespace ITI.Sauce.Repository
 
             if (filter == oldFiler)
                 filter = null;
-            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize);
+            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize,"Recipe","Order");
 
 
             var result =
             query.Select(i => new OrderListViewModel
             {
                 OrderListID = i.OrderListID,
-                OrderListQty=i.OrderListID,
+                OrderListQty=i.OrderListQty,
+                OrderID=i.OrderID,
+                OrderListPrice=i.OrderListPrice,
+                RecipeID=i.Recipe_ID
 
 
             });

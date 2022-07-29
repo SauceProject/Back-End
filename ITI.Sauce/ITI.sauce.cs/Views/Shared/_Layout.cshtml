@@ -43,8 +43,17 @@
                     <!--View Recipes / Reviews / Orders-->
                     <li><a asp-action="Get" asp-controller="Restaurant" asp-route-Vendor_ID="@userId">View Restaurant </a></li>
                     <li><a asp-action="Get" asp-controller="Rating" asp-route-Vendor_ID="@userId">View Reviews </a></li>
+                @if (this.User.HasClaim(c => c.Value == "Vendor"))
+                {
+                    <li><a asp-action="GetOrders" asp-controller="Vendor" asp-route-Vendor_ID="@userId">View Orders </a></li>
+                }
+                else
+                {
                     <li><a asp-action="Get" asp-controller="Order" asp-route-Vendor_ID="@userId">View Orders </a></li>
                 }
+
+
+            }
 
                     @if (this.User.HasClaim(c => c.Value == "Admin"))
                     {

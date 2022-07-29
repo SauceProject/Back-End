@@ -81,14 +81,15 @@ namespace ITI.sauce.MVC.Controllers
                 ViewBag.UserCount=UserRepo.GetList().Count();
                 ViewBag.VendorCount=VendorRepo.GetList().Count();
                 ViewBag.ReataurantCount = RestaurantRepo.GetList().Count();
+                ViewBag.OrderCount = ordRepo.GetList().Count();
+
 
             }
             else
             {
                // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
                 ViewBag.ReataurantCount = RestaurantRepo.GetList().Where(v=>v.Vendor_ID ==userId).Count();
-                ViewBag.OrderCount = ordRepo.GetList().Where(v => v.UserId == userId).Count();
-
+                ViewBag.OrderCount = VendorRepo.GetOrders(userId).Count();
 
 
 

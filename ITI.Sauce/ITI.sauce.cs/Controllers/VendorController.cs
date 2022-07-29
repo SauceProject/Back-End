@@ -4,6 +4,7 @@ using ITI.Sauce.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace ITI.sauce.MVC.Controllers
 {
@@ -12,16 +13,20 @@ namespace ITI.sauce.MVC.Controllers
         private readonly VendorRepository vendorRepo;
         private readonly UserRepository userRepo;
         private readonly UnitOfWork UnitOfWork;
+        private readonly RestaurantRepository restaurantRepository;
         private readonly Vendor_MembershipRepository vendorMemberRepo;
         private readonly MemberShipRepository memberShipRepository;
-    
+        private readonly RecipeRepository recipeRepository;
+        private readonly OrderListRepository orderListRepository;
 
 
 
 
 
         public VendorController(VendorRepository _vendorRepo, UnitOfWork _unitOfWork,
-            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo, MemberShipRepository _memberShipRepository)
+            UserRepository _userRepo, Vendor_MembershipRepository _vendorMemberRepo,
+            MemberShipRepository _memberShipRepository, RestaurantRepository _restaurantRepository,
+            RecipeRepository recipeRepository, OrderListRepository _orderListRepository)
         {
             //DBContext dBContext = new DBContext();
             this.vendorRepo = _vendorRepo;
@@ -29,11 +34,14 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork = _unitOfWork;
             vendorMemberRepo = _vendorMemberRepo;
             memberShipRepository = _memberShipRepository;
+            restaurantRepository = _restaurantRepository;
+            this.recipeRepository = recipeRepository;
+            orderListRepository = _orderListRepository;
         }
 
         [Authorize(Roles = "Admin")]
         public IActionResult Get(string id = "",
-                string nameEN = "", string nameAR="", string Email = "",string phone = "",
+                string nameEN = "", string nameAR = "", string Email = "", string phone = "",
                 string orderyBy = "ID", bool isAscending = false,
                 int pageIndex = 1, int pageSize = 5)
         {
@@ -41,10 +49,10 @@ namespace ITI.sauce.MVC.Controllers
             vendorRepo.Get(id, nameEN, nameAR, Email, phone, orderyBy,
                 isAscending, pageIndex, pageSize);
             return View(data);
-            
+
         }
 
-        
+
 
         public IActionResult Details(string id)
         {
@@ -62,37 +70,38 @@ namespace ITI.sauce.MVC.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-      
+
 
         public IActionResult Search(int pageIndex = 1, int pageSize = 4)
         {
-           // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            // var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var Data = vendorRepo.Search(pageIndex, pageSize);
             return View("Get", Data);
         }
-        
-   
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new UserEditViewModel { Role="Vendor"});
+            return View(new UserEditViewModel { Role = "Vendor" });
         }
 
         [Authorize(Roles = "Admin")]
         [HttpPost]
-        public async Task< IActionResult> Add(UserEditViewModel model)
+        public async Task<IActionResult> Add(UserEditViewModel model)
         {
             if (ModelState.IsValid == true)
             {
-                var result= await userRepo.SignUp(model);
+                var result = await userRepo.SignUp(model);
                 if (!string.IsNullOrEmpty(result.UserId))
                 {
-                    vendorRepo.Add(new VendorEditViewModel { Id=result.UserId,registerDate=DateTime.Now});
+                    vendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
                     UnitOfWork.Save();
                     return RedirectToAction("Search");
                 }
-                else {
+                else
+                {
                     return View();
                 }
 
@@ -123,19 +132,19 @@ namespace ITI.sauce.MVC.Controllers
         [HttpGet]
         public IActionResult Remove(string ID)
         {
-            
+
             var res = vendorRepo.Remove(ID);
             UnitOfWork.Save();
             return RedirectToAction("Search");
 
 
         }
-        public IActionResult AddMemberShip(string Id, int membershipid )
+        public IActionResult AddMemberShip(string Id, int membershipid)
         {
 
             vendorMemberRepo.Add(Id, membershipid);
             UnitOfWork.Save();
-            
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -147,9 +156,9 @@ namespace ITI.sauce.MVC.Controllers
             ViewBag.Free = memberShipRepository.GetList().FirstOrDefault(i => i.TypeEn == "Free");
             var m = vendorRepo.GetOne(VendorID);
             ViewBag.vendorMemberships = m.MemberShips;
-          
 
-                return View();
+
+            return View();
         }
 
 
@@ -159,5 +168,35 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork.Save();
             return RedirectToAction("Search");
         }
+        public IActionResult GetOrders(string Vendor_ID,int pageIndex=1,int pageSize=20)
+        {
+            //var rest = restaurantRepository.GetAPI(Vendor_ID);
+            //var recipeIDS = GetVendorRecipes(rest.Data);
+            //List<OrderListViewModel> orders = new List<OrderListViewModel>();
+            //var list = orderListRepository.Get().Data;
+            //foreach ( var o in list )
+            //{
+            //    foreach(var rID in recipeIDS)
+            //    {
+            //        if (o.RecipeID == rID)
+            //            orders.Add(o);
+            //    }
+            //}
+            var res = vendorRepo.GetOrders(Vendor_ID, pageIndex, pageSize);
+            return View("GetOrders",res);
+        }
+        //private List<int> GetVendorRecipes(List<RestaurantViewModel> VendorRestaurants)
+        //{
+        //    List<int> recipeIDS = new List<int>();
+        //    foreach (var r in VendorRestaurants)
+        //    {
+        //        foreach (var rec in recipeRepository.GetList())
+        //        {
+        //            if (rec.ResturantID == r.ID)
+        //                recipeIDS.Add(rec.ID);
+        //        }           
+        //    }
+        //    return recipeIDS;
+        //}
     }
 }
