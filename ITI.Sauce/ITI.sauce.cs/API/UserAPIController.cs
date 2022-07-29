@@ -147,12 +147,15 @@ namespace ITI.sauce.MVC.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult GetById(string id)
-        {
+        //[Authorize(Roles = "Admin")]
+        public ResultViewModel GetById(string id)
+       {
             var data =
              UserRepo.Get(id);
-            return null;
+            return new ResultViewModel
+            {
+                Data = data.Data
+            };
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
