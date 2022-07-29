@@ -147,12 +147,15 @@ namespace ITI.sauce.MVC.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult GetById(string id)
-        {
+        //[Authorize(Roles = "Admin")]
+        public ResultViewModel GetById(string id)
+       {
             var data =
              UserRepo.Get(id);
-            return null;
+            return new ResultViewModel
+            {
+                Data = data.Data
+            };
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Search(int pageIndex = 1, int pageSize = 2)
@@ -203,6 +206,34 @@ namespace ITI.sauce.MVC.Controllers
             }
             return null;
         }
+
+        
+        [HttpGet]
+        public async Task<ResultViewModel> Update(string ID)
+        {
+            var obj = UserRepo.Get(ID);
+            return new ResultViewModel()
+            {
+                Data = obj,
+                Success = true,
+                Message = "",
+            };
+        }
+        [HttpPost]
+        public async Task<ResultViewModel> Edit([FromBody] UsersViewModel model)
+        {
+
+            await UserRepo.Update(model);
+            UnitOfWork.Save();
+            return new ResultViewModel()
+            {
+                Data = null,
+                Success = true,
+                Message = "Succseed",
+            };
+        }
+
+
     }
 
 }
