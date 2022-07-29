@@ -78,17 +78,37 @@ namespace ITI.sauce.MVC.Controllers
         {
             var userCarts = cartRepository.GetByUser(model.UserId);
             int i = 0;
-            foreach(var c in userCarts.Data)
+            foreach (var c in userCarts.Data)
             {
                 var recipe = recipeRepository.GetOne(c.Recipe_ID);
-
+                //model.orderLists[i].OrderID = model.ID;
                 model.orderLists[i].OrderListPrice = recipe.Price;
                 model.orderLists[i].OrderListQty = c.Qty;
+                model.orderLists[i].Recipe_ID = recipe.ID;
 
                 i++;
             }
             model.OrderDate = DateTime.Now;
             ordRepo.Add(model);
+
+
+            //model.OrderDate = DateTime.Now;
+            //var res= ordRepo.Add(model);
+            //foreach (var c in userCarts.Data)
+            //{
+            //    var recipe = recipeRepository.GetOne(c.Recipe_ID);
+            //    orderListRepository.Add(new OrderListEditViewModel
+            //    {
+            //        OrderID = res.ID,
+            //        OrderListQty = c.Qty,
+            //        RecipeID = c.Recipe_ID,
+            //        OrderListPrice = recipe.Price,                    
+
+            //    });
+            //}
+
+
+
             foreach (var c in userCarts.Data)
             {
                 cartRepository.Remove(c.ID);

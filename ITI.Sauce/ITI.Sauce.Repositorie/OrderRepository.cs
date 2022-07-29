@@ -15,9 +15,10 @@ namespace ITI.Sauce.Repository
 {
     public class OrderRepository : GeneralRepository<Order>
     {
-        public OrderRepository(DBContext _Context) : base(_Context)
+        UnitOfWork unitOfWork;
+        public OrderRepository(DBContext _Context, UnitOfWork unitOfWork) : base(_Context)
         {
-
+            this.unitOfWork = unitOfWork;
         }
         public IPagedList<OrderViewModel> Get(int ID = 0, string orderBy = null
             , bool isAscending = false, string UserId = "", DateTime? registerDate =null ,
@@ -82,7 +83,10 @@ namespace ITI.Sauce.Repository
         public OrderViewModel Add(OrderEditViewModel model)
         {
             Order Order = model.ToModel();
-            return base.Add(Order).Entity.ToViewModel();
+            var res = base.Add(Order).Entity.ToViewModel();
+            unitOfWork.Save();
+
+            return res;
         }
 
         //public List<TextValueViewModel> GetRecipeID() =>

@@ -16,15 +16,24 @@ namespace ITI.Sauce.Repository
     {
         private readonly Vendor_MembershipRepository vendorMemberRepo;
         private readonly MemberShipRepository memberShipRepository;
+        private readonly RestaurantRepository restaurantRepository;
+        private readonly OrderListRepository orderListRepository;
+        private readonly RecipeRepository recipeRepository;
+
+
+
 
 
         public VendorRepository(DBContext _Context, Vendor_MembershipRepository _vendorMemberRepo,
-            MemberShipRepository _memberShipRepository)
+            MemberShipRepository _memberShipRepository, RestaurantRepository restaurantRepository,
+            OrderListRepository orderListRepository, RecipeRepository recipeRepository)
             : base(_Context)
         {
             vendorMemberRepo = _vendorMemberRepo;
             memberShipRepository = _memberShipRepository;
-
+            this.restaurantRepository = restaurantRepository;
+            this.orderListRepository = orderListRepository;
+            this.recipeRepository = recipeRepository;
 
         }
         public PaginingViewModel<List<VendorViewModel>> Get(string id = "",
@@ -169,7 +178,7 @@ namespace ITI.Sauce.Repository
         }
        
 
-public VendorViewModel AcceptVendor (string ID)
+    public VendorViewModel AcceptVendor (string ID)
         {
             var filterd = PredicateBuilder.New<Vendor>();
             var old = filterd;
@@ -195,6 +204,37 @@ public VendorViewModel AcceptVendor (string ID)
             }
            return res;
     }
-    }
 
+        public IPagedList<OrderListViewModel> GetOrders(string Vendor_ID, int pageIndex = 1, int pageSize = 20)
+        {
+            var rest = restaurantRepository.GetAPI(Vendor_ID);
+            var recipeIDS = GetVendorRecipes(rest.Data);
+            List<OrderListViewModel> orders = new List<OrderListViewModel>();
+            var list = orderListRepository.Get().Data;
+            foreach (var o in list)
+            {
+                foreach (var rID in recipeIDS)
+                {
+                    if (o.RecipeID == rID)
+                        orders.Add(o);
+                }
+            }
+            return orders.ToPagedList(pageIndex, pageSize);
+    }
+        private List<int> GetVendorRecipes(List<RestaurantViewModel> VendorRestaurants)
+        {
+            List<int> recipeIDS = new List<int>();
+            foreach (var r in VendorRestaurants)
+            {
+                foreach (var rec in recipeRepository.GetList())
+                {
+                    if (rec.ResturantID == r.ID)
+                        recipeIDS.Add(rec.ID);
+                }
+            }
+            return recipeIDS;
+        }
+
+    }
+    
 }

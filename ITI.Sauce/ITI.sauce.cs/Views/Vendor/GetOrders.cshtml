@@ -3,7 +3,7 @@
 @using ITI.Sauce.Models
 
 
-@model IPagedList<OrderViewModel>
+@model IPagedList<OrderListViewModel>
 
 
    
@@ -60,6 +60,18 @@ var userId = claim.Value;
 #Resbtn:hover{
     width:90%;
 }
+.price{
+    font-size:2.5rem;
+    color: white;
+    background-color:green;
+    width:30%;
+    margin:1.5rem auto;
+    box-shadow:2px 2px 8px grey;
+    padding:1rem;
+    text-align:center
+
+
+}
 </style>
 
 <h2 style="margin:10px;">Order</h2>
@@ -70,26 +82,38 @@ var userId = claim.Value;
 
 <table>
   <tr>
-    <th>ID</th>
+    <th>Order Number</th>
    @* <th>NameEN</th>
     <th>NameAR</th>*@
-    <th>Register Date</th>
     <th>Details</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    
   </tr>
    @foreach(var o in Model)
    {
   <tr>
          
 
-    <td>@o.ID</td>
+    <td> Order#@o.OrderID</td>
    @* <td>@o.OrderDate</td>*@
-    <td>@o.OrderDate</td>
-    <td><a>Details</a></td>
+    <td><a id="Resbtn" asp-action="Get" asp-controller="Recipe" asp-route-ID="@o.RecipeID">Details</a></td>
+    <td>@o.OrderListQty</td>
+    <td>@o.OrderListPrice</td>
 
   </tr>
    }
   
 </table>
+<div class="price">
+<i class="fa-solid fa-sack-dollar "></i>
+@{float price =0;}
+@foreach(var o in Model)
+{
+    price+= @o.OrderListPrice;
+}
+<span>@price EGP</span>
+</div>
 <div>
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Get", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions

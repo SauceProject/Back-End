@@ -43,11 +43,11 @@ namespace ITI.Sauce.Repository
             var filter = PredicateBuilder.New<Users>();
             var oldFiler = filter;
             if (!string.IsNullOrEmpty(id))
-                filter.Or(U => U.Id == id);
+                filter=filter.Or(U => U.Id == id);
             if (!string.IsNullOrEmpty(UserName))
-                filter.Or(U => U.UserName.Contains(UserName));
+                filter = filter.Or(U => U.UserName.Contains(UserName));
             if (!string.IsNullOrEmpty(Email))
-                filter.Or(U => U.Email.Contains(Email));
+                filter = filter.Or(U => U.Email.Contains(Email));
             if (!string.IsNullOrEmpty(phones))
                 filter = filter.Or(U => U.PhoneNumber == phones);
             if (!string.IsNullOrEmpty(NameEn))
@@ -58,7 +58,7 @@ namespace ITI.Sauce.Repository
                 filter.Or(d => d.registerDate <= registerDate);
 
             if (filter == oldFiler)
-                filter = null;
+                filter = filter = null;
             var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize
                 );
             var result = query.Select(i => new UsersViewModel
@@ -187,5 +187,24 @@ namespace ITI.Sauce.Repository
 
         public async Task<IdentityResult> ConfirmEmail(string Id, string token) =>
              await userManger.ConfirmEmailAsync(await userManger.FindByIdAsync(Id), token);
+
+
+
+        public async Task<IdentityResult> Update(UsersViewModel result)
+        {
+            var filter = PredicateBuilder.New<Users>();
+            filter = filter.Or(p => p.Id == result.ID);
+            var last = GetByID(filter);
+            last.NameEN = result.NameEN;
+            last.NameAR = result.NameAR;
+            last.UserName = result.Email;
+            last.PhoneNumber = result.phone;
+           
+
+            return await userManger.UpdateAsync(last);
+        }
+
     }
+
+
 }

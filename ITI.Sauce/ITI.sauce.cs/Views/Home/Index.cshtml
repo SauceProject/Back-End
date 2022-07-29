@@ -256,7 +256,15 @@
         <div class="stat-card three" style="margin-right:30px;">
             <h3><i class="fa-solid fa-chart-line"></i></h3>
             <p>@ViewBag.OrderCount</p>
-            <a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">Orders</a>
+            @if(this.User.HasClaim(c => c.Value=="Vendor"))
+                {
+                    <a asp-action="GetOrders" asp-controller="Vendor" asp-route-vendorID="@userId">Orders</a>
+                }
+                else
+                {
+                    <a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">Orders</a>
+                } 
+
         </div> 
         <div class="stat-card four">
             <h3><i class="fa-solid fa-chart-line"></i></h3>             
