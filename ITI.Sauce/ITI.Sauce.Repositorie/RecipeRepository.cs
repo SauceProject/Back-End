@@ -15,12 +15,12 @@ namespace ITI.Sauce.Repository
     {
         RatingRepository rateRepo;
         private readonly IngredientRepository ingredientRepository;
-        private readonly Recipe_IngredientRepository recipe_IngredientRepository;
-        public RecipeRepository(DBContext _Context, RatingRepository _rateRepo, IngredientRepository _ingredientRepository , Recipe_IngredientRepository _recipe_IngredientRepository) : base(_Context)
+        //private readonly Recipe_IngredientRepository recipe_IngredientRepository;
+        public RecipeRepository(DBContext _Context, RatingRepository _rateRepo, IngredientRepository _ingredientRepository ) : base(_Context)
         {
             this.rateRepo = _rateRepo;
            ingredientRepository = _ingredientRepository;
-            recipe_IngredientRepository = _recipe_IngredientRepository;
+            //recipe_IngredientRepository = _recipe_IngredientRepository;
         }
         public IPagedList<RecipeViewModel> Get(
             int ID = 0, string? NameAr = null, string? NameEN = null, string? orderBy = null, string ImageUrl = "", string VideoUrl = "",

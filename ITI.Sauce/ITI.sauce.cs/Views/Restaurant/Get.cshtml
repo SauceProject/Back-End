@@ -57,7 +57,7 @@
     <th>NameAr</th>
     <th>Image</th>
     <th>Recipe</th>
-    <th  scope="col">Status</th>
+   @* <th  scope="col">Status</th>*@
     <th  scope="col">Actions</th>
 
 
@@ -68,7 +68,6 @@
     <input asp-for="@U.Vendor_ID" hidden/>
   <tr>
 	<td>@U.NameEN</td>
-	<td>@U.IsDeleted</td>
 	<td>@U.RegisterDate</td>
 	<td>@U.NameAR</td>
     <td>@U.IsDeleted</td>
@@ -76,15 +75,16 @@
     <td><a asp-action="Get" asp-controller="Recipe" asp-route-RestaurantID="@U.ID" id="Resbtn" id="Resbtn">Recipe</a>
 
 
-       <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
+@*      <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
+*@   <td>
+
 @if (this.User.HasClaim(c => c.Value == "Admin"))
 
                     {
-    <td>@(@U.IsDeleted?"Rejected":"Accepted")</td>
-
+   // <td>@(@U.IsDeleted?"Rejected":"Accepted")</td>
                         @if (@U.IsDeleted == false)
                         {
-                            <a  asp-action="Remove" asp-controller="Restaurant" asp-route-Id="@U.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
+                        <a  asp-action="Remove" asp-controller="Restaurant" asp-route-Id="@U.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
 
                             </a>
                         }

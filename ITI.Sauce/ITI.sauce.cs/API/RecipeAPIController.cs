@@ -85,7 +85,17 @@ namespace ITI.Sauce.MVC.API
 
 
 
+        public ResultViewModel GetByIngerdientAPI(int IngerdientId)
+        {
+            var res = recipe_IngredientRepository.GetRecipe(IngerdientId);
 
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = res
+            };
+        }
 
 
 

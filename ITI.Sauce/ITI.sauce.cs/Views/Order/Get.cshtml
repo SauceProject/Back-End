@@ -75,14 +75,17 @@ var userId = claim.Value;
     <th>NameAR</th>*@
     <th>Register Date</th>
   </tr>
-  <tr>
+
           @foreach(var o in Model)
 {
+            <tr>
+
     <td>@o.ID</td>
    @* <td>@o.OrderDate</td>*@
     <td>@o.OrderDate</td>
+     </tr>
 }
-  </tr>
+ 
   
 </table>
 <div>

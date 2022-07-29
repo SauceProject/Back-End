@@ -11,9 +11,12 @@ namespace ITI.Sauce.Repository
    public class Recipe_IngredientRepository :GeneralRepository<RecipeIngredient>
     {
         private readonly IngredientRepository ingredientRepository;
-        public Recipe_IngredientRepository(DBContext _Context, IngredientRepository _ingredientRepository) : base(_Context)
+        private readonly RecipeRepository recipeRepository;
+
+        public Recipe_IngredientRepository(DBContext _Context, IngredientRepository _ingredientRepository,RecipeRepository _recipeRepository) : base(_Context)
         {
             ingredientRepository = _ingredientRepository;
+            recipeRepository = _recipeRepository;
         }
         public RecipeIngredient Add(int RecipeId, int Ingredient)
         {
@@ -21,6 +24,7 @@ namespace ITI.Sauce.Repository
             {
                 RecipeID = RecipeId,
                IngredientID = Ingredient
+
             };
             return base.Add(RI).Entity;
 
@@ -40,6 +44,18 @@ namespace ITI.Sauce.Repository
             foreach (var item in res)
             {
                 list.Add(ingredientRepository.GetOne(item.IngredientID));
+            }
+            return list;
+
+        }
+
+        public List<RecipeViewModel> GetRecipe(int IngredientID)
+        {
+            List<RecipeViewModel> list = new List<RecipeViewModel>();
+            var res = base.GetList().Where(i => i.IngredientID == IngredientID).ToList();
+            foreach (var item in res)
+            {
+                list.Add(recipeRepository.GetOne(item.RecipeID));
             }
             return list;
 

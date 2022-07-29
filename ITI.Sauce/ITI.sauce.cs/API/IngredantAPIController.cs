@@ -27,7 +27,7 @@ namespace ITI.sauce.MVC.Controllers
             string NameAR = "", string ImageUrl = "", int pageIndex = 1, int pageSize = 20)
         {
             var data =
-                IngrRepo.Get(ID, orderBy, isAscending, NameEN, NameAR, ImageUrl, pageIndex, pageSize);
+                IngrRepo.GetAPI(ID, orderBy, isAscending, NameEN, NameAR, ImageUrl, pageIndex, pageSize);
 
             return new ResultViewModel()
             {
