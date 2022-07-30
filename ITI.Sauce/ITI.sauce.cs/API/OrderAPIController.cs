@@ -32,12 +32,13 @@ namespace ITI.sauce.MVC.Controllers
             orderListRepository = _orderListRepository;
 
         }
+        [HttpGet]
         public ResultViewModel Get(int ID = 0, string orderBy = null, bool isAscending = false,
             string UserId = "", DateTime? registerDate = null, int pageIndex = 1, int pageSize = 20)
 
         {
             var data =
-                ordRepo.Get(ID, orderBy, isAscending, UserId, registerDate, pageIndex, pageSize);
+                ordRepo.GetAPI(ID, orderBy, isAscending, UserId, registerDate, pageIndex, pageSize);
             return new ResultViewModel()
             {
                 Success = true,
@@ -45,6 +46,31 @@ namespace ITI.sauce.MVC.Controllers
                 Data = data
             };
         }
+
+        [HttpGet]
+        public ResultViewModel GetLastOrder(int ID = 0, string orderBy = null, bool isAscending = false,
+            string UserId = "", DateTime? registerDate = null, int pageIndex = 1, int pageSize = 20)
+
+        {
+            var data =
+                ordRepo.GetAPI(ID, orderBy, isAscending, UserId, registerDate, pageIndex, pageSize);
+            int OrderID = 0;
+            foreach(var o in data.Data)
+            {
+                if(o.OrderDate.ToString("MM-dd-yyyy") == DateTime.Now.ToString("MM-dd-yyyy"))
+                {
+                    OrderID = o.ID;
+                }
+            }
+            return new ResultViewModel()
+            {
+                Success = true,
+                Message = "",
+                Data = OrderID
+            };
+        }
+
+
 
         public ResultViewModel GetById(int id)
         {
