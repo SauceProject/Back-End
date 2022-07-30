@@ -66,7 +66,53 @@ namespace ITI.Sauce.Repository
             return result;
         }
 
-       
+        public PaginingViewModel<List<OrderViewModel>> GetAPI(int ID = 0, string orderBy = null
+            , bool isAscending = false, string UserId = "", DateTime? registerDate = null,
+             int pageIndex = 1, int pageSize = 20)
+
+        {
+
+            var filter = PredicateBuilder.New<Order>();
+            var oldFiler = filter;
+            if (ID > 0)
+                filter = filter.Or(o => o.ID == ID);
+
+            if (!string.IsNullOrEmpty(UserId))
+                filter = filter.Or(o => o.UserId.Contains(UserId));
+            if (registerDate != null)
+                filter = filter.Or(o => o.OrderDate.Year == registerDate.Value.Year);
+
+            if (filter == oldFiler)
+                filter = null;
+            var query = base.Get(filter, orderBy, isAscending, pageIndex, pageSize, "orderLists");
+
+
+            var result =
+            query.Select(i => new OrderViewModel
+            {
+                ID = i.ID,
+                UserId = i.UserId,
+
+                IsDeleted = i.IsDeleted,
+                OrderDate = i.OrderDate,
+                orderLists = i.orderLists
+
+            });
+
+            PaginingViewModel<List<OrderViewModel>>
+               finalResult = new PaginingViewModel<List<OrderViewModel>>()
+               {
+                   PageIndex = pageIndex,
+                   PageSize = pageSize,
+                   Count = base.GetList().Count(),
+                   Data = result.ToList()
+               };
+
+
+            return finalResult;
+        }
+
+
 
         public IPagedList<OrderViewModel> Search(int pageIndex = 1, int pageSize = 2)
                    =>
