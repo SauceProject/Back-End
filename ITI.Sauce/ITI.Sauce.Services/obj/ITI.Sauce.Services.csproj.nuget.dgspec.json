@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {}
+    "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {}
   },
   "projects": {
-    "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {
+    "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+        "projectUniqueName": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
         "projectName": "ITI.Sauce.Services",
-        "projectPath": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
-        "packagesPath": "C:\\Users\\ECC\\.nuget\\packages\\",
-        "outputPath": "E:\\2-ITI\\aa\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
+        "projectPath": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+        "packagesPath": "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\",
+        "outputPath": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ECC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ELFAKHORY TECH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
