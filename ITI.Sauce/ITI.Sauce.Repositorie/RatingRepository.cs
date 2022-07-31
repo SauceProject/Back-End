@@ -21,7 +21,7 @@ namespace ITI.Sauce.Repository
         public IPagedList<RatingViewModel> Get(int id = 0,
                     int RatingValue = 0,int? RecipeId=null,
                 string orderby = "", bool isAscending = false, int pageIndex = 1,
-                        int pageSize = 20)
+                        int pageSize = 20 , int RestaurantID = 0)
         {
 
             var filter = PredicateBuilder.New<Rating>();
