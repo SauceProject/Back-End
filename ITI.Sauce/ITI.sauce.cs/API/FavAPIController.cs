@@ -70,33 +70,41 @@ namespace ITI.Sauce.MVC
         }
 
         [HttpPost]
-        [Authorize(Roles = "User")]
+        //[Authorize(Roles = "User")]
 
-        public ResultViewModel Add(FavEditViewModelExtentions model)
+        public ResultViewModel Add([FromBody]FavEditViewModelExtentions model)
         {
-            if (ModelState.IsValid == true)
+            var res = FavRepo.GetList().FirstOrDefault(i => i.Recipe_ID == model.Recipe_ID);
+            if (res == null)
             {
-                FavRepo.Add(model);
-                UnitOfWork.Save();
-                return new ResultViewModel()
+                if (ModelState.IsValid == true)
                 {
-                    Message = "Added Succesfully",
-                    Success = true,
-                    Data = null
-                };
+                    FavRepo.Add(model);
+                    UnitOfWork.Save();
+                    return new ResultViewModel()
+                    {
+                        Message = "Added Succesfully",
+                        Success = true,
+                        Data = true
+                    };
+                }
+                else
+                {
+                    List<string> errors = new List<string>();
+                    foreach (var i in ModelState.Values)
+                        foreach (var error in i.Errors)
+                            errors.Add(error.ErrorMessage);
+                    return new ResultViewModel()
+                    {
+                        Message = "Added Succesfully",
+                        Success = false,
+                        Data = false
+                    };
+                }
             }
             else
             {
-                List<string> errors = new List<string>();
-                foreach (var i in ModelState.Values)
-                    foreach (var error in i.Errors)
-                        errors.Add(error.ErrorMessage);
-                return new ResultViewModel()
-                {
-                    Message = "Added Succesfully",
-                    Success = false,
-                    Data = null
-                };
+                return new ResultViewModel { Data = false, Success = true };
             }
         }
 
@@ -106,34 +114,19 @@ namespace ITI.Sauce.MVC
 
 
 
-        [HttpGet]
-        public ResultViewModel Remove(FavEditViewModelExtentions model, int Fav_ID)
+        [HttpPost]
+        public ResultViewModel Remove([FromBody]FavEditViewModelExtentions model)
         {
-            if (ModelState.IsValid == true)
-            { 
-                var res = FavRepo.Remove(model);
+            var res = FavRepo.Remove(model);
             UnitOfWork.Save();
             return new ResultViewModel()
             {
                 Success = true,
                 Message = "Removed Succesfully",
-                Data = res
+                Data = null
             };
-            }
-            else
-            {
-                List<string> errors = new List<string>();
-                foreach (var i in ModelState.Values)
-                    foreach (var error in i.Errors)
-                        errors.Add(error.ErrorMessage);
-                return new ResultViewModel()
-                {
-                    Message = "Not Removed ",
-                    Success = true,
-                    Data = null
-                };
-            }
-
+ 
+            
         }
 
     }

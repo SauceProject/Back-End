@@ -31,13 +31,14 @@ namespace ITI.Sauce.Repository
 
             if (filter == oldFiler)
                 filter = null;
-            var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize
+            var query = base.Get(filter, orderby, isAscending, pageIndex, pageSize,"Recipe"
                 );
 
             var result =
             query.Select(V => new FavoriteViewModel
             {
                 Fav_ID = V.ID,
+                Recipe_ID=V.Recipe_ID
 
             });
 
@@ -123,8 +124,9 @@ namespace ITI.Sauce.Repository
             var Result = base.GetByID(filterd);
 
             //Result.IsDeleted = true;
+            var res = base.Remove(Result);
 
-            return Result.ToViewModel();
+            return res.Entity.ToViewModel();
         }
     }
 }
