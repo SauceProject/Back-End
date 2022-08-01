@@ -32,7 +32,7 @@ namespace ITI.sauce.MVC.Controllers
 
             return View(data);
         }
-        public IActionResult Search(int pageIndex = 1, int pageSize = 4)
+        public IActionResult Search(int pageIndex = 1, int pageSize = 10)
         {
             var Data = IngrRepo.Search(pageIndex, pageSize);
             return View("Get", Data);

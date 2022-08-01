@@ -264,7 +264,10 @@
                 {
                     <a asp-action="Get" asp-controller="Order" asp-route-vendorID="@userId">Orders</a>
                 } 
-
+                @if(@ViewBag.New = true)
+                {
+                    <span style="color:red; font-size:1.2rem"><i class="fa-solid fa-bell"></i></span>
+                }
         </div> 
         <div class="stat-card four">
             <h3><i class="fa-solid fa-chart-line"></i></h3>             

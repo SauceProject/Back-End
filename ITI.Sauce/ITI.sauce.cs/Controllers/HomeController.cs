@@ -50,6 +50,24 @@ namespace ITI.sauce.MVC.Controllers
             ViewBag.Golden = MemberShipRepo.GetList().FirstOrDefault(i => i.TypeEn == "Golden");
             ViewBag.Free = MemberShipRepo.GetList().FirstOrDefault(i => i.TypeEn == "Free");
 
+            var data =
+                ordRepo.GetList();
+            List<Order> list = new List<Order>();
+            foreach(var i in data)
+            {
+                if(i.OrderDate.ToString("MM-dd-yyyy") == DateTime.Now.ToString("MM-dd-yyyy"))
+                {
+                    list.Add(i);
+
+                }
+                
+            }
+            if (list == null)
+                ViewBag.New = false;
+
+            else
+                ViewBag.New = true;
+
 
 
             if (this.User.HasClaim(c => c.Value == "Vendor"))

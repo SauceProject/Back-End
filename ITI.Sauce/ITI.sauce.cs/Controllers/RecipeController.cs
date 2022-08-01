@@ -93,7 +93,7 @@ namespace ITI.sauce.MVC.Controllers
         }
         //[Authorize(Roles = "Admin,Vendor")]
         [HttpPost]
-        public IActionResult Add(RecipeEditViewModel model , string? returnUrl = null)
+        public IActionResult Add(RecipeEditViewModel model,  string? returnUrl = null)
         {
 
             string? bookUploadUrl = "/Content/Uploads/Recipe/";
@@ -110,7 +110,6 @@ namespace ITI.sauce.MVC.Controllers
 
             model.Image.CopyTo(fs);
             fs.Position = 0;
-
             RecipeRepo.Add(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
