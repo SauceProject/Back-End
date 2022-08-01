@@ -80,11 +80,6 @@ namespace ITI.sauce.MVC.Controllers
 
             return RedirectToAction("Get", new { Vendor_ID = userId });
         }
-
-
-
-
-
         [HttpGet]
         public IActionResult Update(int Id)
         {
@@ -92,15 +87,8 @@ namespace ITI.sauce.MVC.Controllers
                 GetRestaurantNames(ResRepo.GetCRestaurantDropDown());
             ViewBag.Restaurants = Restaurants;
             var Results = ResRepo.GetOne(Id);
-
             return View(Results.ToEditViewModel());
-
         }
-
-
-
-
-
 
         [HttpPost]
         public IActionResult Update(RestaurantEditViewModel model, int ID = 0)
@@ -108,14 +96,7 @@ namespace ITI.sauce.MVC.Controllers
             ResRepo.Update(model);
             UnitOfWork.Save();
             return RedirectToAction("Get");
-
         }
-
-
-
-
-
-
 
         [HttpGet]
         public IActionResult Remove(RestaurantEditViewModel model, int ID)
@@ -138,15 +119,7 @@ namespace ITI.sauce.MVC.Controllers
             ResRepo.AcceptRestaurant(model, ID);
             UnitOfWork.Save();
             return RedirectToAction("Search");
-            // return RedirectToAction("Get");
-
-
-            //if (!this.User.HasClaim(c => c.Value == "Vendor"))
-            //{
-            //    return RedirectToAction("Get", new { Vendor_ID = userId });
-            //}
-            //else
-            //return RedirectToAction("Get");
+            
 
         }
 

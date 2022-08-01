@@ -31,6 +31,7 @@ namespace ITI.Sauce.ViewModels
                 RegisterDate = model.RegisterDate,
                 ImageUrl = model.ImageUrl,
                 VideoUrl = model.VideoUrl,
+                ResturantID = model.RestaurantID,
                 RecipeIngredients = model.Ingredients.Select(d=>new RecipeIngredient { IngredientID = d,Qty = 1,Type=""}).ToList()
 
             };
