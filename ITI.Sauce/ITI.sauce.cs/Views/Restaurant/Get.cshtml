@@ -54,8 +54,8 @@
     <th>Name English</th>
     <th>Name Arabic</th>
     <th>Register Date</th>
-    <th>Deleted?</th>
-    <th>Image</th>
+@*    <th>Deleted?</th>
+*@    <th>Image</th>
     <th>Recipe</th>
    @* <th  scope="col">Status</th>*@
     <th  scope="col">Actions</th>
@@ -70,8 +70,8 @@
 	<td>@U.NameEN</td>
 	<td>@U.NameAR</td>
 	<td>@U.RegisterDate</td>
-    <td>@U.IsDeleted</td>
-    <td> <img src="..@U.ImageUrl" style="width:100px; height:100px;">   </td>
+@*    <td>@U.IsDeleted</td>
+*@    <td> <img src="..@U.ImageUrl" style="width:100px; height:100px;">   </td>
     <td><a asp-action="Get" asp-controller="Recipe" asp-route-RestaurantID="@U.ID" id="Resbtn" id="Resbtn">Recipe</a>
 
 
