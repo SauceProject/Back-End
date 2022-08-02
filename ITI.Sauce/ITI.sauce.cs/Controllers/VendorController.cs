@@ -168,7 +168,7 @@ namespace ITI.sauce.MVC.Controllers
             UnitOfWork.Save();
             return RedirectToAction("Search");
         }
-        public IActionResult GetOrders(string Vendor_ID,int pageIndex=1,int pageSize=20)
+        public IActionResult GetOrders(string vendorID, int pageIndex=1,int pageSize=20)
         {
             //var rest = restaurantRepository.GetAPI(Vendor_ID);
             //var recipeIDS = GetVendorRecipes(rest.Data);
@@ -182,7 +182,7 @@ namespace ITI.sauce.MVC.Controllers
             //            orders.Add(o);
             //    }
             //}
-            var res = vendorRepo.GetOrders(Vendor_ID, pageIndex, pageSize);
+            var res = vendorRepo.GetOrders(vendorID, pageIndex, pageSize);
             return View("GetOrders",res);
         }
         //private List<int> GetVendorRecipes(List<RestaurantViewModel> VendorRestaurants)
