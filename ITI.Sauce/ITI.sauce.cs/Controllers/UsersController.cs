@@ -59,15 +59,15 @@ namespace ITI.sauce.MVC.Controllers
             {
                 var result
                         = await UserRepo.SignUp(model);
-                    if (!result.IsSuccess)
-                    {
-                        ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
-        .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-                        foreach (var error in result.Errors)
-                            ModelState.AddModelError("", error.Description);
-                    }
-                    else
-                    {
+        //            if (!result.IsSuccess)
+        //            {
+        //                ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+        //.Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+        //                foreach (var error in result.Errors)
+        //                    ModelState.AddModelError("", error.Description);
+        //            }
+        //            else
+        //            {
                         if (model.Role == "Vendor")
                         {
                             VendorRepo.Add(new VendorEditViewModel { Id = result.UserId, registerDate = DateTime.Now });
@@ -75,13 +75,13 @@ namespace ITI.sauce.MVC.Controllers
                         }
                     }
                     return RedirectToAction("SignIn", "Users");
-            }
-            else
-            {
-                ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
-                .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
-                return View(model);
-            }
+            //}
+            //else
+            //{
+            //    ViewBag.Roles = RoleRepository.GetDropDownValue().Where(i => i.Text != "Admin")
+            //    .Select(i => new SelectListItem(i.Text, i.Text.ToString())).ToList();
+            //    return View(model);
+            //}
 
         }
 

@@ -29,7 +29,7 @@ namespace ITI.Sauce.ViewModels
         public string? phone { get; set; }
         public string? NameEN { get; set; }
         public string? NameAR { get; set; }
-        public string? Role { get; set; }
+        public string? Role { get; set; } = "Vendor";
         public DateTime registerDate { get; set; }
         public bool IsDelete { get; set; }
 

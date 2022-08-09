@@ -31,7 +31,7 @@ namespace ITI.Sauce.ViewModels
                 NameEN = model.NameEN,
                 NameAR = model.NameAR,
                 Email = model.Email,
-                Role=model.Role,
+                Role= "Vendor",
             };
         }
     }
@@ -54,6 +54,6 @@ namespace ITI.Sauce.ViewModels
         [Required, StringLength(50, MinimumLength = 6)]
         public string? phone { get; set; }
         [Required]
-        public string? Role { get; set; }
+        public string? Role { get; set; } = "Vendor";
     }
 }
