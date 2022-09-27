@@ -22,12 +22,14 @@
 
 
 
+
 #btnA {
-    width: 7%;
+    width: 15%;
     background-color: #143444;
     color: #F6EE99;
     padding: 14px 20px;
-    margin: 8px 0;
+    margin-right: 55px;
+    margin-bottom: 25px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -87,8 +89,12 @@
 
     </form>
     </div>*@
-<h2 style="margin:10px;">Vendor </h2>
+
+<section class="bg-light p-5">
+    <h2 style="margin:10px;" class="pb-2">Vendor </h2>
+    <div class="table-responsive" id="no-more-tables">
 <table>
+    <thead>
   <tr>
    <th>NameEN</th>
     <th>NameAr</th>
@@ -99,16 +105,18 @@
     <th  scope="col">Status</th>
     <th>  Actions  </th>
   </tr>
+  </thead>
+  <tbody>
     @foreach(var V in Model)
 {  
   <tr>
 
-     <td>@V.NameEN</td>
-    <td>@V.NameAR</td>
-    <td>@V.phones</td>
-    <td> @V.Email</td>
-    <td><a asp-action="Get" asp-controller="Restaurant" asp-route-Vendor_ID="@V.ID" id="Resbtn" >Restaurant</a>
-    <td>
+     <td data-title="NameEN">@V.NameEN</td>
+    <td data-title="NameAr">@V.NameAR</td>
+    <td data-title="Phone">@V.phones</td>
+    <td data-title="Email"> @V.Email</td>
+    <td data-title="Restaurants"><a asp-action="Get" asp-controller="Restaurant" asp-route-Vendor_ID="@V.ID" id="Resbtn" >Restaurant</a>
+    <td data-title="Membership">
            @* @if(!(@ViewBag.vendorMemberships ==null))
             {
             <ul style="list-style-type: none;">
@@ -125,8 +133,8 @@
 
        
     </td>
-    <td>@(@V.IsDeleted?"Rejected":"Accepted")</td>
-        <td style="display:flex; margin:5px; text-align:center; margin-left:45px;">
+    <td data-title="Status">@(@V.IsDeleted?"Rejected":"Accepted")</td>
+        <td data-title="Actions " style="display:flex; margin:5px; text-align:center; margin-left:45px;">
              @if(@V.IsDeleted == false){
              <a  asp-action="Remove" asp-controller="Vendor" asp-route-ID="@V.ID" ><i class="fa-solid fa-circle-xmark"style="color:red; margin-right:10px; font-size:25px;"></i>
 
@@ -147,7 +155,10 @@
    
   </tr>
     }
+    </tbody>
 </table>
+</div>
+</section>
 <div>
     @Html.PagedListPager((IPagedList)Model, page => Url.Action("Search", new { pageIndex = page }),
         new X.PagedList.Web.Common.PagedListRenderOptions
@@ -161,6 +172,7 @@
         
     </div>
     <div>
+
     <script>
         $(document).ready(function() {
             $('ul.pagination > li.disabled > a').addClass('page-link');

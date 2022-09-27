@@ -1,7 +1,13 @@
-﻿var sidebar = document.getElementById("side")
+﻿    const sideMenu = document.querySelector("aside");
+    const menuBtn = document.querySelector("#menu-bars");
+    const closeBtn = document.querySelector("#close-btn");
 
-function Menu() {
-    sidebar.classList.toggle("display")
-    document.body.classList.toggle("bodyClass")
+menuBtn.addEventListener('click', () => (
+    sideMenu.style.display = 'bloke';
+    ))
 
-}
+menuBtn.addEventListener('click', () => (
+    sideMenu.style.display = 'none';
+    ))
+
+

@@ -24,11 +24,15 @@
       href="~/Content/lib/font-awesome/css/all.css"
     />
     <link rel="stylesheet" href="~/Content/CSS/vendor.css" />
-
+    
     @RenderSection("StyleSection",false)
 </head>
 <body>
     <aside id="side">
+        <div class="close" id="close-btn" onclick="closeMenu()">
+<i class="fas fa-solid fa-xmark" ></i>
+
+        </div>
         <ul class="mysidebar">
 
             <li>
@@ -80,8 +84,11 @@
     </aside>
 
     <main>
-      <nav>
-        <i style="margin-right:70%;" class="fa-solid fa-bars menu-icn " onclick="Menu()" ></i>
+      <nav class="navbar">
+         
+        <i  class="fa-solid fa-bars menu-icn" id="menu-bars" onclick="openMenu()"></i>
+
+       
     @*    <input type="text" placeholder="Search..." />*@
   @*      <i class="fa-solid fa-bell nav-icn"></i>
         <i class="fa-solid fa-envelope nav-icn"></i>*@
@@ -108,10 +115,30 @@
         
       </nav>
 
-        <section class="mycontainer">
+        <section class="mycon">
             @RenderBody()
         </section>
       </main>
+
+      <script>
+          const sideMenu = document.getElementById("side");
+    const menuBtn = document.querySelector("#menu-bars");
+    const closeBtn = document.getElementById("close-btn");
+
+    function openMenu() {
+        menuBtn.style.display = 'none'
+        sideMenu.style.display = 'block'
+        closeBtn.style.display = 'block'
+    }
+
+
+    function closeMenu() {
+        sideMenu.style.display = 'none'
+        closeBtn.style.display = 'none'
+        menuBtn.style.display = 'block'
+    }
+
+          </script>
       <script src="~/Content/JS/vendor.js"></script>
      
       <script src="~/Content/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>

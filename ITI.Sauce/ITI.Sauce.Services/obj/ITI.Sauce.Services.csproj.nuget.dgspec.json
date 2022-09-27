@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {}
+    "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {}
   },
   "projects": {
-    "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {
+    "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+        "projectUniqueName": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
         "projectName": "ITI.Sauce.Services",
-        "projectPath": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
-        "packagesPath": "C:\\Users\\Bishoy\\.nuget\\packages\\",
-        "outputPath": "D:\\Final Project\\Back-End\\Back-End\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
+        "projectPath": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\ITI.Sauce.Services.csproj",
+        "packagesPath": "C:\\Users\\ELFAKHORY TECH\\.nuget\\packages\\",
+        "outputPath": "D:\\Track .NET\\Final Project\\DBGUT\\ITI.Sauce\\ITI.Sauce.Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Bishoy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ELFAKHORY TECH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.304\\RuntimeIdentifierGraph.json"
         }
       }
     }

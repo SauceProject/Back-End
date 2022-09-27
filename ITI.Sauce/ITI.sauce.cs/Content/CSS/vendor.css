@@ -34,6 +34,9 @@ aside {
     background-color: #143444;
     color: #F6EE99;
     grid-row: 1/-1;
+   
+ 
+
 }
 
 .mysidebar {
@@ -44,6 +47,12 @@ aside {
     .mysidebar a {
         color: #F6EE99;
         text-decoration: none;
+       
+    }
+    @keyframes showMenu{
+        to{
+            left:0;
+        }
     }
 
         .mysidebar a:hover {
@@ -92,6 +101,7 @@ nav {
 .menu-icn {
     cursor: pointer;
     font-size: 1.3rem;
+    display:none;
 }
 
 /*** MAIN SECTION ***/
@@ -111,7 +121,12 @@ main {
     align-items: center;
 }
 
-
+.flexboxAdmin {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    align-items: center;
+}
 .container ul {
     list-style-type: none;
     display: flex;
@@ -171,7 +186,30 @@ li p {
     text-decoration:underline;
     
 }
+.icons i,
+ .icons a {
+    cursor: pointer;
+    margin-left: .5rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    width: 4.5rem;
+    text-align: center;
+    font-size: 1.7rem;
+    color: #143444;
+    border-radius: 50%;
+    background: #eee;
+}
 
+    .icons i:hover,
+  .icons a:hover {
+        color: #fff;
+        background: var(--gold);
+        transform: rotate(360deg);
+        color: #143444;
+    }
+.icons #menu-bars {
+    display: none;
+}
 .one {
     background-color: orange;
 }
@@ -289,24 +327,42 @@ hr {
 .display {
     display: none;
 }
+aside .close {
+    margin-left: 8.5rem;
+    margin-top: 2rem;
+    display: none;
+    cursor: pointer;
+}
 /**Responsive**/
-@media (max-width:900px) {
+@media (max-width:678px) {
     aside {
         display: none;
     }
-
+  /*  .menu-icn {
+        display: inline-block;
+    }
+*/
     body {
         display: grid;
         grid-template-columns: 1fr;
+    
     }
 
+   
+
     .flexbox {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-left: 75px;
+    }
+    .flexboxAdmin {
+        display: grid;
         flex-direction: column;
+        width: 25rem;
     }
 
     .orders {
-        display: flex;
+        display: g;
         flex-direction: column;
     }
 
@@ -314,7 +370,66 @@ hr {
         width: 70%;
     }
 
-    .card {
-        width: 70%
+
+    aside {
+        background-color: #143444;
+        color: #F6EE99;
+        grid-row: 1/-1;
+    }
+ 
+
+
+}
+@media (max-width:670px){
+    aside {
+        position: fixed;
+        left: -100;
+        z-index: 3;
+        display: none;
+        list-style-type: none;
+        margin-top: 1rem;
+        animation: showMenu 400ms ease forwards;
+       
+    }
+    .mycontainer{
+        background-color:black;
+    }
+
+    @keyframes showMenu {
+        to {
+            left: 0;
+        }
+    }
+    .menu-icn {
+        display: inline-block;
+        margin-right: 20rem;
+     
+    }
+        .menu-icn:hover{
+            aside{
+                     display:inline-block;
+                 }
+        }
+        #restaurant-name {
+            font-size: 1rem;
+        }
+   span{
+       font-size:1rem;
+   }
+
+  
+}
+@media (max-width:500px){
+    #restaurant-name {
+        font-size: 1rem;
+       
+      
+     
+    }
+  
+
+    span {
+        font-size: 1rem;
     }
 }
+
